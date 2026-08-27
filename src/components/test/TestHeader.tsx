@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useTestStore } from "@/store/testStore";
+import { BrandLogo } from "@/components/BrandLogo";
 import { Clock, Send, Shield, Maximize2, Minimize2, CheckCircle2 } from "lucide-react";
 import { SectionType } from "@/types";
 
@@ -55,16 +56,16 @@ export const TestHeader: React.FC<TestHeaderProps> = ({ onSubmitClick }) => {
     ).padStart(2, "0")}`;
   };
 
-  // Timer alert thresholds per PRD/03_UI_CONTEXT.md
+  // Timer alert thresholds
   const isBlinking = remainingSeconds <= 300; // <= 5 mins (flashing)
   const isDanger = remainingSeconds <= 600; // <= 10 mins (red)
   const isWarning = remainingSeconds <= 1800; // <= 30 mins (orange)
 
-  let timerColorClass = "bg-white/10 text-white border-white/20";
+  let timerColorClass = "bg-slate-900 text-slate-200 border-slate-800";
   if (isDanger) {
     timerColorClass = "bg-rose-600 text-white border-rose-400 font-black animate-pulse shadow-lg";
   } else if (isWarning) {
-    timerColorClass = "bg-amber-500 text-white border-amber-300 font-bold shadow-md";
+    timerColorClass = "bg-amber-500 text-slate-950 border-amber-300 font-black shadow-md";
   }
 
   // Count answered per section
@@ -77,22 +78,21 @@ export const TestHeader: React.FC<TestHeaderProps> = ({ onSubmitClick }) => {
   };
 
   return (
-    <header className="bg-exam-primary text-white shadow-lg select-none sticky top-0 z-30">
+    <header className="bg-slate-950 text-white shadow-xl select-none sticky top-0 z-30 border-b border-slate-800/80">
       {/* Top Banner */}
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between border-b border-white/15">
-        <div className="flex items-center space-x-3">
-          <div className="w-9 h-9 bg-exam-saffron rounded-lg flex items-center justify-center font-black text-white text-base shadow tracking-wider">
-            NBE
-          </div>
-          <div>
-            <h1 className="font-extrabold text-sm sm:text-base leading-tight truncate max-w-[180px] sm:max-w-md">
+      <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between border-b border-slate-800/60">
+        <div className="flex items-center space-x-4">
+          <BrandLogo size="sm" showSubtitle={false} />
+          <div className="border-l border-slate-800 pl-4 hidden sm:block">
+            <h1 className="font-extrabold text-xs sm:text-sm text-slate-200 leading-tight truncate max-w-[200px] sm:max-w-md">
               {mockTitle || "NBE Junior Assistant CBT Mock"}
             </h1>
-            <p className="text-[11px] text-white/80 flex items-center gap-1.5">
-              <Shield className="w-3 h-3 text-emerald-400 flex-shrink-0" />
-              <span>Official CBT Mode · 200 Qs · +1.00 / −0.25</span>
-              <span className="hidden md:inline text-white/40">|</span>
-              <span className="hidden md:inline text-emerald-300 font-semibold">💾 Auto-saved</span>
+            <p className="text-[11px] text-slate-400 flex items-center gap-1.5 mt-0.5">
+              <span className="text-slate-400 font-medium">200 Qs · 180 Mins · +1.00 / −0.25</span>
+              <span className="text-slate-600">|</span>
+              <span className="text-emerald-400 font-semibold flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Auto-saved
+              </span>
             </p>
           </div>
         </div>
@@ -103,7 +103,7 @@ export const TestHeader: React.FC<TestHeaderProps> = ({ onSubmitClick }) => {
           <button
             type="button"
             onClick={toggleFullscreen}
-            className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition border border-white/10"
+            className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white transition border border-slate-800"
             title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen CBT Exam Mode"}
           >
             {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -124,7 +124,7 @@ export const TestHeader: React.FC<TestHeaderProps> = ({ onSubmitClick }) => {
             type="button"
             onClick={onSubmitClick}
             disabled={isSubmitting}
-            className="flex items-center space-x-1.5 bg-exam-danger hover:bg-red-700 text-white text-xs sm:text-sm font-black px-4 py-2 rounded-xl shadow-md transition transform active:scale-95 disabled:opacity-50"
+            className="flex items-center space-x-1.5 bg-rose-600 hover:bg-rose-500 text-white text-xs sm:text-sm font-black px-4 py-2 rounded-xl shadow-md transition transform active:scale-95 disabled:opacity-50"
           >
             <Send className="w-3.5 h-3.5" />
             <span className="hidden xs:inline">Submit Test</span>
@@ -133,7 +133,7 @@ export const TestHeader: React.FC<TestHeaderProps> = ({ onSubmitClick }) => {
       </div>
 
       {/* Section Tabs Bar */}
-      <div className="bg-exam-primaryHover px-4">
+      <div className="bg-slate-900/90 px-4">
         <div className="max-w-7xl mx-auto flex overflow-x-auto space-x-1.5 py-1.5 text-xs no-scrollbar">
           {(["REASONING", "GA", "QUANT", "ENGLISH"] as SectionType[]).map((sec) => {
             const isActive = currentSection === sec;
@@ -145,18 +145,18 @@ export const TestHeader: React.FC<TestHeaderProps> = ({ onSubmitClick }) => {
                 key={sec}
                 type="button"
                 onClick={() => changeSection(sec)}
-                className={`flex items-center space-x-2 px-3.5 py-2 rounded-lg font-bold transition whitespace-nowrap ${
+                className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-lg font-bold transition whitespace-nowrap ${
                   isActive
-                    ? "bg-white text-exam-primary shadow-sm"
-                    : "text-white/80 hover:bg-white/10 hover:text-white"
+                    ? "bg-blue-600 text-white shadow-sm font-black"
+                    : "text-slate-400 hover:bg-slate-800 hover:text-white"
                 }`}
               >
                 <span>{SECTION_LABELS[sec]}</span>
                 <span
                   className={`px-2 py-0.5 rounded-full text-[10px] font-black font-tabular ${
                     isActive
-                      ? "bg-exam-primary text-white"
-                      : "bg-white/20 text-white"
+                      ? "bg-blue-800 text-white"
+                      : "bg-slate-800 text-slate-300"
                   }`}
                 >
                   {answeredCount}/{totalSec}

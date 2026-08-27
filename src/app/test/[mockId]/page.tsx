@@ -160,8 +160,8 @@ export default function LiveTestPage() {
       <TestHeader onSubmitClick={() => setIsSubmitModalOpen(true)} />
 
       {/* Main Examination Workspace Grid */}
-      <main className="max-w-7xl mx-auto px-4 py-6 w-full flex-1">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <main className="max-w-7xl mx-auto px-4 py-3 w-full flex-1">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Question Display (2 Columns Wide on Desktop) */}
           <div className="lg:col-span-2">
             <QuestionCard />
@@ -175,10 +175,10 @@ export default function LiveTestPage() {
       </main>
 
       {/* CBT Status Bar Footer */}
-      <footer className="bg-white border-t border-exam-border py-2.5 px-4 text-center text-xs text-slate-500 flex items-center justify-between max-w-7xl mx-auto w-full">
-        <span>NBEMS Junior Assistant Computer Based Test</span>
-        <span className="hidden sm:inline">Shortcuts: [1,2,3,4] Options · [N] Next · [P] Prev · [M] Review</span>
-        <span>Secure Local Session</span>
+      <footer className="bg-white border-t border-exam-border py-1.5 px-4 text-center text-[11px] text-slate-500 flex items-center justify-between max-w-7xl mx-auto w-full select-none">
+        <span>NBEMS Junior Assistant CBT</span>
+        <span className="hidden sm:inline text-slate-400">Shortcuts: [1,2,3,4] Options · [N] Save & Next · [P] Prev · [M] Mark · [C] Clear</span>
+        <span className="text-emerald-600 font-semibold">🔒 Protected Session</span>
       </footer>
 
       {/* Confirmation Modal before Submit */}
