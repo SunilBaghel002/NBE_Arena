@@ -3,8 +3,8 @@ import { EXTRACTION_SYSTEM_PROMPT, TEXT_EXTRACTION_USER_PROMPT, REPAIR_JSON_PROM
 
 export class OpenRouterAdapter implements IVisionProvider, ITextProvider {
   public readonly name = "openrouter";
-  public readonly defaultModel = process.env.OPENROUTER_VISION_MODEL || "qwen/qwen-2.5-vl-7b-instruct";
-  public readonly defaultTextModel = process.env.OPENROUTER_TEXT_MODEL || "meta-llama/llama-3.3-70b-instruct";
+  public readonly defaultModel = process.env.OPENROUTER_VISION_MODEL || "openai/gpt-4o-mini";
+  public readonly defaultTextModel = process.env.OPENROUTER_TEXT_MODEL || "openai/gpt-4o-mini";
 
   private getApiKey(): string {
     const key = process.env.OPENROUTER_API_KEY;

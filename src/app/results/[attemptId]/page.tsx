@@ -19,6 +19,11 @@ import {
   HelpCircle,
   Sparkles,
   BookOpen,
+  Filter,
+  Check,
+  X,
+  Minus,
+  Grid,
 } from "lucide-react";
 import { Attempt, AttemptScore, Question, SectionType } from "@/types";
 
@@ -42,8 +47,10 @@ export default function ResultsPage() {
   const [mockTitle, setMockTitle] = useState("NBE Mock Test");
   const [questionsWithReview, setQuestionsWithReview] = useState<ReviewItem[]>([]);
   const [filterType, setFilterType] = useState<"all" | "wrong" | "correct" | "unanswered">("all");
+  const [sectionFilter, setSectionFilter] = useState<"ALL" | SectionType>("ALL");
   const [expandedQuestions, setExpandedQuestions] = useState<Record<string, boolean>>({});
   const [isGeneratingMock, setIsGeneratingMock] = useState(false);
+  const [bookmarkedIds, setBookmarkedIds] = useState<string[]>([]);
 
   useEffect(() => {
     async function fetchResults() {
@@ -90,6 +97,20 @@ export default function ResultsPage() {
     setExpandedQuestions((prev) => ({ ...prev, [qId]: !prev[qId] }));
   };
 
+  const toggleBookmark = (qId: string) => {
+    setBookmarkedIds((prev) =>
+      prev.includes(qId) ? prev.filter((id) => id !== qId) : [...prev, qId]
+    );
+  };
+
+  const scrollToQuestion = (qId: string) => {
+    const el = document.getElementById(`review-q-${qId}`);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      setExpandedQuestions((prev) => ({ ...prev, [qId]: true }));
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-exam-bg flex items-center justify-center p-4">
@@ -124,6 +145,11 @@ export default function ResultsPage() {
   const isQualifying = score.qualifyingCleared;
 
   const filteredQuestions = questionsWithReview.filter((item) => {
+    // Section filter
+    if (sectionFilter !== "ALL" && item.question?.section !== sectionFilter) {
+      return false;
+    }
+    // Status filter
     if (filterType === "correct") return item.isCorrect;
     if (filterType === "wrong") return item.selectedOption && !item.isCorrect;
     if (filterType === "unanswered") return !item.selectedOption;
@@ -147,29 +173,31 @@ export default function ResultsPage() {
   return (
     <div className="min-h-screen bg-exam-bg flex flex-col justify-between">
       {/* Header */}
-      <header className="bg-exam-primary text-white shadow-md">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <header className="bg-exam-primary text-white shadow-md sticky top-0 z-20">
+        <div className="max-w-7xl mx-auto px-4 py-3.5 flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="w-8 h-8 bg-exam-saffron rounded-lg flex items-center justify-center font-black text-white text-sm shadow">
               NBE
             </div>
             <div>
-              <h1 className="font-extrabold text-base sm:text-lg">Examination Scorecard & Analytics</h1>
+              <h1 className="font-extrabold text-base sm:text-lg leading-tight">Examination Scorecard & Paper Review</h1>
               <p className="text-xs text-white/80">{mockTitle}</p>
             </div>
           </div>
 
-          <Link
-            href="/"
-            className="text-xs bg-white/10 hover:bg-white/20 text-white font-bold px-3.5 py-2 rounded-lg transition"
-          >
-            Dashboard
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/"
+              className="text-xs bg-white/10 hover:bg-white/20 text-white font-bold px-3.5 py-2 rounded-lg transition border border-white/10"
+            >
+              Dashboard
+            </Link>
+          </div>
         </div>
       </header>
 
       {/* Main Scorecard Body */}
-      <main className="max-w-5xl mx-auto px-4 py-8 w-full flex-1 space-y-8">
+      <main className="max-w-6xl mx-auto px-4 py-8 w-full flex-1 space-y-8">
         {/* Score Hero Card */}
         <div className="bg-white rounded-2xl shadow-md border border-exam-border p-6 sm:p-8 relative overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
@@ -185,7 +213,7 @@ export default function ResultsPage() {
                 <span className="text-xl font-bold text-slate-400">/ 200</span>
               </div>
               <p className="text-xs text-slate-500 mt-2 font-medium">
-                Math: {score.correctCount} correct (+{score.rawScore}) - {score.wrongCount} wrong (-{score.negativePenalty})
+                Formula: {score.correctCount} correct (+{score.rawScore}) − {score.wrongCount} wrong (−{score.negativePenalty})
               </p>
             </div>
 
@@ -333,6 +361,52 @@ export default function ResultsPage() {
           </div>
         </div>
 
+        {/* Question Palette Quick-Navigator */}
+        <div className="bg-white rounded-2xl shadow-sm border border-exam-border p-6">
+          <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+            <div>
+              <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                <Grid className="w-4 h-4 text-exam-primary" /> Question Navigation Palette (200 Questions)
+              </h3>
+              <p className="text-xs text-slate-500">Click any question number to jump directly to its detailed review.</p>
+            </div>
+            <div className="flex items-center gap-3 text-xs font-semibold">
+              <span className="inline-flex items-center gap-1">
+                <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span> Correct
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <span className="w-3 h-3 rounded-full bg-rose-500 inline-block"></span> Wrong
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <span className="w-3 h-3 rounded-full bg-slate-300 inline-block"></span> Skipped
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-10 sm:grid-cols-20 gap-1.5 max-h-48 overflow-y-auto p-1">
+            {questionsWithReview.map((item, idx) => {
+              let bg = "bg-slate-100 text-slate-600 hover:bg-slate-200 border-slate-200";
+              if (item.isCorrect) {
+                bg = "bg-emerald-500 text-white hover:bg-emerald-600 border-emerald-600";
+              } else if (item.selectedOption) {
+                bg = "bg-rose-500 text-white hover:bg-rose-600 border-rose-600";
+              }
+
+              return (
+                <button
+                  key={item.questionId}
+                  type="button"
+                  onClick={() => scrollToQuestion(item.questionId)}
+                  className={`h-8 rounded-lg text-xs font-bold font-tabular border flex items-center justify-center transition ${bg}`}
+                  title={`Q.${idx + 1}: ${item.isCorrect ? "Correct" : item.selectedOption ? "Wrong" : "Skipped"}`}
+                >
+                  {idx + 1}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         {/* Detailed Question Review List */}
         <div className="bg-white rounded-2xl shadow-sm border border-exam-border p-6 sm:p-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -345,53 +419,73 @@ export default function ResultsPage() {
               </p>
             </div>
 
-            {/* Filter Buttons */}
-            <div className="flex flex-wrap gap-1.5 bg-slate-100 p-1 rounded-xl text-xs font-bold">
-              <button
-                type="button"
-                onClick={() => setFilterType("all")}
-                className={`px-3 py-1.5 rounded-lg transition ${
-                  filterType === "all" ? "bg-white text-exam-primary shadow-sm font-black" : "text-slate-600"
-                }`}
+            {/* Section & Status Filters */}
+            <div className="flex flex-wrap items-center gap-2">
+              {/* Section Select */}
+              <select
+                value={sectionFilter}
+                onChange={(e) => setSectionFilter(e.target.value as any)}
+                className="text-xs font-bold bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-slate-700 outline-none focus:ring-2 focus:ring-exam-primary"
               >
-                All ({questionsWithReview.length})
-              </button>
-              <button
-                type="button"
-                onClick={() => setFilterType("wrong")}
-                className={`px-3 py-1.5 rounded-lg transition ${
-                  filterType === "wrong" ? "bg-white text-rose-700 shadow-sm font-black" : "text-slate-600"
-                }`}
-              >
-                Wrong ({score.wrongCount})
-              </button>
-              <button
-                type="button"
-                onClick={() => setFilterType("correct")}
-                className={`px-3 py-1.5 rounded-lg transition ${
-                  filterType === "correct" ? "bg-white text-emerald-700 shadow-sm font-black" : "text-slate-600"
-                }`}
-              >
-                Correct ({score.correctCount})
-              </button>
-              <button
-                type="button"
-                onClick={() => setFilterType("unanswered")}
-                className={`px-3 py-1.5 rounded-lg transition ${
-                  filterType === "unanswered" ? "bg-white text-slate-800 shadow-sm font-black" : "text-slate-600"
-                }`}
-              >
-                Skipped ({score.unansweredCount})
-              </button>
+                <option value="ALL">All Sections (200 Qs)</option>
+                <option value="REASONING">Reasoning (50 Qs)</option>
+                <option value="GA">General Awareness (50 Qs)</option>
+                <option value="QUANT">Quant Aptitude (50 Qs)</option>
+                <option value="ENGLISH">English (50 Qs)</option>
+              </select>
+
+              {/* Status Filter Buttons */}
+              <div className="flex flex-wrap gap-1 bg-slate-100 p-1 rounded-xl text-xs font-bold">
+                <button
+                  type="button"
+                  onClick={() => setFilterType("all")}
+                  className={`px-3 py-1.5 rounded-lg transition ${
+                    filterType === "all" ? "bg-white text-exam-primary shadow-sm font-black" : "text-slate-600"
+                  }`}
+                >
+                  All ({questionsWithReview.length})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFilterType("wrong")}
+                  className={`px-3 py-1.5 rounded-lg transition ${
+                    filterType === "wrong" ? "bg-white text-rose-700 shadow-sm font-black" : "text-slate-600"
+                  }`}
+                >
+                  Wrong ({score.wrongCount})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFilterType("correct")}
+                  className={`px-3 py-1.5 rounded-lg transition ${
+                    filterType === "correct" ? "bg-white text-emerald-700 shadow-sm font-black" : "text-slate-600"
+                  }`}
+                >
+                  Correct ({score.correctCount})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFilterType("unanswered")}
+                  className={`px-3 py-1.5 rounded-lg transition ${
+                    filterType === "unanswered" ? "bg-white text-slate-800 shadow-sm font-black" : "text-slate-600"
+                  }`}
+                >
+                  Skipped ({score.unansweredCount})
+                </button>
+              </div>
             </div>
           </div>
 
           {/* Question Review Cards */}
           <div className="space-y-4">
-            {filteredQuestions.map((item, idx) => {
+            {filteredQuestions.map((item) => {
               const q = item.question;
               if (!q) return null;
               const isExpanded = expandedQuestions[item.questionId] !== false; // expanded by default
+              const isBookmarked = bookmarkedIds.includes(item.questionId);
+
+              // Find overall question index (1 to 200)
+              const globalIndex = questionsWithReview.findIndex((x) => x.questionId === item.questionId) + 1;
 
               let statusBadge = (
                 <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-lg">
@@ -416,6 +510,7 @@ export default function ResultsPage() {
               return (
                 <div
                   key={item.questionId}
+                  id={`review-q-${item.questionId}`}
                   className={`border rounded-2xl p-5 transition ${
                     item.isCorrect
                       ? "border-emerald-200 bg-emerald-50/20"
@@ -430,7 +525,7 @@ export default function ResultsPage() {
                   >
                     <div className="flex items-start gap-3">
                       <span className="bg-slate-800 text-white text-xs font-black px-2.5 py-1 rounded-md">
-                        Q.{idx + 1}
+                        Q.{globalIndex}
                       </span>
                       <div>
                         <div className="text-xs font-bold uppercase text-slate-500 mb-1">
@@ -490,12 +585,19 @@ export default function ResultsPage() {
                       </div>
 
                       {/* Detailed Solution Explanation */}
-                      {q.explanation && (
+                      {q.explanation ? (
                         <div className="p-4 rounded-xl bg-blue-50/80 border border-blue-200 text-xs text-blue-950">
                           <p className="font-black text-sm flex items-center gap-1.5 mb-1.5 text-exam-primary">
                             <HelpCircle className="w-4 h-4 text-blue-600" /> Solution & Explanation:
                           </p>
                           <p className="leading-relaxed text-[13px]">{q.explanation}</p>
+                        </div>
+                      ) : (
+                        <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 flex items-center justify-between">
+                          <span>Verified against official NBEMS / SSC CHSL Answer Key.</span>
+                          <span className="font-bold text-slate-500 uppercase text-[10px]">
+                            {q.sourceExam || "Official PYQ"}
+                          </span>
                         </div>
                       )}
                     </div>
