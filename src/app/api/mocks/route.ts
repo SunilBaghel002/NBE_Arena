@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { getMocks } from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const mocks = await getMocks();

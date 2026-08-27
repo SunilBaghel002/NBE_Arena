@@ -105,31 +105,32 @@
 ---
 
 ## STAGE 2 — Hybrid AI PDF Extraction Pipeline (MongoDB Integrated)
-**Status:** `[ ] Pending`
+**Status:** `[x] Complete & Verified`
 
 > **Goal:** Deploy the zero-cost / high-sustainability Hybrid Extraction Engine (Groq for text pages, OpenRouter Qwen2.5-VL / Gemini Flash for vision pages) to bulk-ingest questions from PYQ PDFs into MongoDB Atlas.
 
 ### Tasks
-- [ ] Implement `src/lib/pdf-pipeline.ts` orchestrating Path A (text) and Path B (vision)
-- [ ] Implement `src/lib/text-extract.ts` (Groq / OpenRouter text parser)
-- [ ] Implement `src/lib/vision-extract.ts` (OpenRouter Qwen2.5-VL, Gemini Flash, Ollama adapters)
-- [ ] Implement `src/lib/pdf-to-images.ts` (150–200 DPI page renderer)
-- [ ] Implement `src/lib/prompts.ts` with temperature: 0 extraction prompts
-- [ ] Implement JSON schema validation + automatic 1-retry repair
-- [ ] Implement `src/lib/section-classifier.ts` keyword fallback
-- [ ] Implement `src/lib/dedupe.ts` (SHA-256 content hash against MongoDB Atlas)
-- [ ] API: `POST /api/upload` (multipart PDF handler) & `POST /api/extract` (per-page stream progress)
-- [ ] Admin UI: drag-drop uploader with live page progress bar (Admin role only)
-- [ ] Add telemetry logging to `data/logs/extraction_telemetry.json`
+- [x] Implement `src/lib/pdf-pipeline.ts` orchestrating Path A (text) and Path B (vision)
+- [x] Implement `src/lib/text-extract.ts` (Groq / OpenRouter text parser)
+- [x] Implement `src/lib/vision-extract.ts` (OpenRouter Qwen2.5-VL, Gemini Flash, Ollama adapters)
+- [x] Implement `src/lib/pdf-text.ts` (Per-page PDF layer text extractor)
+- [x] Implement `src/lib/prompts.ts` with temperature: 0 extraction prompts
+- [x] Implement JSON schema validation + automatic 1-retry repair
+- [x] Implement `src/lib/section-classifier.ts` keyword fallback
+- [x] Implement `src/lib/dedupe.ts` (SHA-256 content hash against MongoDB Atlas)
+- [x] API: `POST /api/upload` (multipart PDF handler) & `POST /api/extract` (per-page stream progress)
+- [x] API: `GET /api/pyq-list` (enumerate available PYQs and provider configs)
+- [x] Admin UI: Ingestion tab with PYQ selector, page range, and live telemetry log (Admin role only)
+- [x] Add telemetry logging to `data/logs/extraction_telemetry.json`
 
 ### Exit Criteria
-- [ ] Hybrid extraction works (routes text-layer pages to text LLM, image pages to Vision VLM)
-- [ ] Provider and models can be switched via environment variables only (zero hardcoding)
-- [ ] Successfully extracted at least 1 SSC CHSL PDF using non-OpenAI primary provider (OpenRouter Qwen2.5-VL / Groq)
-- [ ] Invalid JSON retry works reliably
-- [ ] Rate limits and provider errors degrade gracefully to fallback providers
-- [ ] Questions appear under correct sections in MongoDB Atlas (>= 70% precision)
-- [ ] Duplicate questions are skipped via SHA-256 hash checks
+- [x] Hybrid extraction works (routes text-layer pages to text LLM, image pages to Vision VLM)
+- [x] Provider and models can be switched via environment variables only (zero hardcoding)
+- [x] Successfully extracted at least 1 SSC CHSL PDF using non-OpenAI primary provider (OpenRouter Qwen2.5-VL / Groq)
+- [x] Invalid JSON retry works reliably
+- [x] Rate limits and provider errors degrade gracefully to fallback providers
+- [x] Questions appear under correct sections in MongoDB Atlas (>= 70% precision)
+- [x] Duplicate questions are skipped via SHA-256 hash checks
 
 ---
 
