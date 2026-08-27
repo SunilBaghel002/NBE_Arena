@@ -1,0 +1,3802 @@
+[
+  {
+    "id": "seed_reasoning_001",
+    "section": "REASONING",
+    "questionText": "Select the related word from the given alternatives: Ocean : Water :: Glacier : ?",
+    "options": {
+      "a": "Refrigerator",
+      "b": "Ice",
+      "c": "Mountain",
+      "d": "Cave"
+    },
+    "correctOption": "b",
+    "explanation": "An ocean consists of water; similarly, a glacier consists of ice.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.342Z"
+  },
+  {
+    "id": "seed_reasoning_002",
+    "section": "REASONING",
+    "questionText": "In a certain code language, 'ROSE' is written as '6821' and 'CHAIR' is written as '73456'. How is 'SEARCH' written in that code?",
+    "options": {
+      "a": "214673",
+      "b": "214573",
+      "c": "214637",
+      "d": "214763"
+    },
+    "correctOption": "a",
+    "explanation": "Direct letter-to-digit substitution: S=2, E=1, A=4, R=6, C=7, H=3 => 214673.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_003",
+    "section": "REASONING",
+    "questionText": "Select the odd one out from the given alternatives.",
+    "options": {
+      "a": "Copper",
+      "b": "Iron",
+      "c": "Brass",
+      "d": "Zinc"
+    },
+    "correctOption": "c",
+    "explanation": "Brass is an alloy (copper + zinc), whereas Copper, Iron, and Zinc are pure elemental metals.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_004",
+    "section": "REASONING",
+    "questionText": "Pointing to a photograph, a man said, 'She is the daughter of my grandfather's only son.' How is the woman related to the man?",
+    "options": {
+      "a": "Mother",
+      "b": "Sister",
+      "c": "Aunt",
+      "d": "Daughter"
+    },
+    "correctOption": "b",
+    "explanation": "Grandfather's only son is the man's father. The daughter of the man's father is his sister.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_005",
+    "section": "REASONING",
+    "questionText": "If '+' means '×', '–' means '÷', '×' means '–', and '÷' means '+', then evaluate: 16 ÷ 4 × 8 + 2 – 4 = ?",
+    "options": {
+      "a": "16",
+      "b": "20",
+      "c": "12",
+      "d": "14"
+    },
+    "correctOption": "a",
+    "explanation": "Substituting symbols: 16 + 4 - (8 × 2 ÷ 4) = 16 + 4 - (16 ÷ 4) = 16 + 4 - 4 = 16.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_006",
+    "section": "REASONING",
+    "questionText": "Find the missing number in the series: 3, 7, 15, 31, 63, ?",
+    "options": {
+      "a": "127",
+      "b": "125",
+      "c": "120",
+      "d": "129"
+    },
+    "correctOption": "a",
+    "explanation": "Pattern is (n × 2) + 1. So 63 × 2 + 1 = 127.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_007",
+    "section": "REASONING",
+    "questionText": "A man walks 5 km South, then turns right and walks 3 km. He turns left and walks 5 km. In which direction is he now from his starting point?",
+    "options": {
+      "a": "South-West",
+      "b": "South-East",
+      "c": "North-West",
+      "d": "South"
+    },
+    "correctOption": "a",
+    "explanation": "Starting at origin (0,0): South 5km -> (0, -5). Turn right (West) 3km -> (-3, -5). Turn left (South) 5km -> (-3, -10). The position is South-West.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_008",
+    "section": "REASONING",
+    "questionText": "Select the option that is related to the third number in the same way as the second number is related to the first: 12 : 144 :: 15 : ?",
+    "options": {
+      "a": "220",
+      "b": "225",
+      "c": "230",
+      "d": "215"
+    },
+    "correctOption": "b",
+    "explanation": "12^2 = 144, similarly 15^2 = 225.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_009",
+    "section": "REASONING",
+    "questionText": "Statements: All cars are vehicles. All vehicles are machines. Conclusions: I. All cars are machines. II. Some machines are cars.",
+    "options": {
+      "a": "Only I follows",
+      "b": "Only II follows",
+      "c": "Both I and II follow",
+      "d": "Neither follows"
+    },
+    "correctOption": "c",
+    "explanation": "Since all cars are vehicles and all vehicles are machines, all cars are machines. By conversion, some machines are cars. Both follow.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_010",
+    "section": "REASONING",
+    "questionText": "Arrange the words in a meaningful logical sequence: 1. Letter 2. Word 3. Sentence 4. Paragraph 5. Book",
+    "options": {
+      "a": "1, 2, 3, 4, 5",
+      "b": "2, 1, 3, 4, 5",
+      "c": "5, 4, 3, 2, 1",
+      "d": "1, 3, 2, 4, 5"
+    },
+    "correctOption": "a",
+    "explanation": "Letters form Words, Words form Sentences, Sentences form Paragraphs, and Paragraphs form a Book.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_011",
+    "section": "REASONING",
+    "questionText": "Find the odd letter group: ADG, GJM, PSV, KNQ, CFI",
+    "options": {
+      "a": "ADG",
+      "b": "GJM",
+      "c": "KNQ",
+      "d": "All follow same gap (+3)"
+    },
+    "correctOption": "d",
+    "explanation": "All groups have a uniform +3 letter difference (A+3=D, D+3=G; G+3=J, J+3=M, etc.).",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_012",
+    "section": "REASONING",
+    "questionText": "In a row of 40 students, Amit is 14th from the left end. What is his position from the right end?",
+    "options": {
+      "a": "26th",
+      "b": "27th",
+      "c": "28th",
+      "d": "25th"
+    },
+    "correctOption": "b",
+    "explanation": "Position from right = Total - Position from left + 1 = 40 - 14 + 1 = 27th.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_013",
+    "section": "REASONING",
+    "questionText": "If CLOCK is coded as KCOLC, then WATCH will be coded as:",
+    "options": {
+      "a": "HCTAW",
+      "b": "HTACW",
+      "c": "HCAWT",
+      "d": "HTCAW"
+    },
+    "correctOption": "a",
+    "explanation": "The letters of the word are written in reverse order: WATCH -> HCTAW.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_014",
+    "section": "REASONING",
+    "questionText": "Identify the diagram that best represents the relationship among: Doctors, Surgeons, Teachers",
+    "options": {
+      "a": "All surgeons are doctors, teachers are disjoint",
+      "b": "Three overlapping circles",
+      "c": "Three concentric circles",
+      "d": "All disjoint"
+    },
+    "correctOption": "a",
+    "explanation": "All surgeons are doctors (concentric/subset), while teachers belong to a distinct profession (disjoint).",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_015",
+    "section": "REASONING",
+    "questionText": "Which number replaces the question mark in the series: 2, 6, 12, 20, 30, ?",
+    "options": {
+      "a": "40",
+      "b": "42",
+      "c": "44",
+      "d": "48"
+    },
+    "correctOption": "b",
+    "explanation": "Differences are +4, +6, +8, +10, +12. 30 + 12 = 42 (also n^2 + n: 1*2, 2*3, 3*4, 4*5, 5*6, 6*7 = 42).",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_016",
+    "section": "REASONING",
+    "questionText": "Select the word which cannot be formed using the letters of the word 'ADMINISTRATION'.",
+    "options": {
+      "a": "MIND",
+      "b": "RATION",
+      "c": "MINISTER",
+      "d": "STATION"
+    },
+    "correctOption": "c",
+    "explanation": "The word 'MINISTER' requires the letter 'E', which is not present in 'ADMINISTRATION'.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_017",
+    "section": "REASONING",
+    "questionText": "A is the father of B. C is the sister of A. D is the mother of C. How is D related to B?",
+    "options": {
+      "a": "Mother",
+      "b": "Grandmother",
+      "c": "Aunt",
+      "d": "Sister"
+    },
+    "correctOption": "b",
+    "explanation": "A is father of B. D is mother of A. Therefore, D is the paternal grandmother of B.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_018",
+    "section": "REASONING",
+    "questionText": "If SOUTH-EAST becomes NORTH, NORTH-EAST becomes WEST, what will WEST become?",
+    "options": {
+      "a": "SOUTH-EAST",
+      "b": "NORTH-WEST",
+      "c": "SOUTH-WEST",
+      "d": "EAST"
+    },
+    "correctOption": "a",
+    "explanation": "Directions are rotated 135 degrees anti-clockwise. West rotated 135 degrees anti-clockwise becomes South-East.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_019",
+    "section": "REASONING",
+    "questionText": "Choose the correct alternative: Earth : Planet :: Moon : ?",
+    "options": {
+      "a": "Sun",
+      "b": "Satellite",
+      "c": "Asteroid",
+      "d": "Star"
+    },
+    "correctOption": "b",
+    "explanation": "Earth is a planet, and Moon is a natural satellite.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_020",
+    "section": "REASONING",
+    "questionText": "Complete the alphabet series: B, D, G, K, P, ?",
+    "options": {
+      "a": "V",
+      "b": "U",
+      "c": "W",
+      "d": "X"
+    },
+    "correctOption": "a",
+    "explanation": "Gaps are +2, +3, +4, +5, +6. P (16) + 6 = V (22).",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_021",
+    "section": "REASONING",
+    "questionText": "Four pairs of numbers are given. Find the odd one: (4, 16), (6, 36), (8, 64), (9, 82)",
+    "options": {
+      "a": "(4, 16)",
+      "b": "(6, 36)",
+      "c": "(8, 64)",
+      "d": "(9, 82)"
+    },
+    "correctOption": "d",
+    "explanation": "In all other pairs, the second number is the square of the first: 4^2=16, 6^2=36, 8^2=64, whereas 9^2=81 != 82.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_022",
+    "section": "REASONING",
+    "questionText": "Statements: Some mangoes are sweet. Some apples are sweet. Conclusions: I. Some mangoes are apples. II. No mango is apple.",
+    "options": {
+      "a": "Only I follows",
+      "b": "Only II follows",
+      "c": "Either I or II follows",
+      "d": "Neither follows"
+    },
+    "correctOption": "c",
+    "explanation": "Conclusion I (Some) and II (No) form a complementary pair for mangoes and apples with undetermined relationship, hence either I or II follows.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_023",
+    "section": "REASONING",
+    "questionText": "If '+' means subtraction, '-' means multiplication, '÷' means addition, and '×' means division, find value of: 54 × 9 - 3 ÷ 4 + 2",
+    "options": {
+      "a": "20",
+      "b": "18",
+      "c": "22",
+      "d": "24"
+    },
+    "correctOption": "a",
+    "explanation": "54 ÷ 9 × 3 + 4 - 2 = 6 × 3 + 4 - 2 = 18 + 4 - 2 = 20.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_024",
+    "section": "REASONING",
+    "questionText": "Five friends A, B, C, D, E are sitting in a row facing North. C is sitting in the middle. A and B are at the ends. D is sitting to the immediate right of A. Who is sitting between B and C?",
+    "options": {
+      "a": "D",
+      "b": "E",
+      "c": "A",
+      "d": "Cannot be determined"
+    },
+    "correctOption": "b",
+    "explanation": "The order is A, D, C, E, B. Therefore, E is sitting between B and C.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_025",
+    "section": "REASONING",
+    "questionText": "Find the next term in series: AZ, BY, CX, DW, ?",
+    "options": {
+      "a": "EV",
+      "b": "FU",
+      "c": "ET",
+      "d": "EU"
+    },
+    "correctOption": "a",
+    "explanation": "First letters increase (A, B, C, D, E), second letters decrease opposite pairs (Z, Y, X, W, V) => EV.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_026",
+    "section": "REASONING",
+    "questionText": "In a certain code, 'PEN' is written as '16-5-14'. How will 'BOOK' be written?",
+    "options": {
+      "a": "2-15-15-11",
+      "b": "2-14-14-11",
+      "c": "2-15-15-12",
+      "d": "2-16-16-11"
+    },
+    "correctOption": "a",
+    "explanation": "Direct alphabetical positions: B=2, O=15, O=15, K=11.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_027",
+    "section": "REASONING",
+    "questionText": "Select the related pair: Book : Author :: Statue : ?",
+    "options": {
+      "a": "Painter",
+      "b": "Sculptor",
+      "c": "Mason",
+      "d": "Carpenter"
+    },
+    "correctOption": "b",
+    "explanation": "A book is created by an author; a statue is created by a sculptor.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_028",
+    "section": "REASONING",
+    "questionText": "Find the odd one out: 27, 64, 125, 144, 216",
+    "options": {
+      "a": "27",
+      "b": "64",
+      "c": "144",
+      "d": "216"
+    },
+    "correctOption": "c",
+    "explanation": "27=3^3, 64=4^3, 125=5^3, 216=6^3 are all cubes, while 144 is 12^2 (not a cube).",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_029",
+    "section": "REASONING",
+    "questionText": "Suresh is taller than Ramesh who is shorter than Rakesh. Ankit is taller than Suresh but shorter than Rakesh. Who is the shortest?",
+    "options": {
+      "a": "Ramesh",
+      "b": "Suresh",
+      "c": "Ankit",
+      "d": "Rakesh"
+    },
+    "correctOption": "a",
+    "explanation": "Rakesh > Ankit > Suresh > Ramesh. Ramesh is clearly the shortest.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_030",
+    "section": "REASONING",
+    "questionText": "If 1st January 2024 was Monday, what day was 1st January 2025?",
+    "options": {
+      "a": "Tuesday",
+      "b": "Wednesday",
+      "c": "Thursday",
+      "d": "Sunday"
+    },
+    "correctOption": "b",
+    "explanation": "2024 is a leap year (366 days = 52 weeks + 2 odd days). Monday + 2 days = Wednesday.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_031",
+    "section": "REASONING",
+    "questionText": "Select the word that represents the same group: Carrot, Radish, Potato, ?",
+    "options": {
+      "a": "Apple",
+      "b": "Turnip",
+      "c": "Banana",
+      "d": "Tomato"
+    },
+    "correctOption": "b",
+    "explanation": "Carrot, Radish, and Turnip are edible root vegetables grown underground.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_032",
+    "section": "REASONING",
+    "questionText": "Find the missing number in the grid: [4, 9, 2], [3, 5, 7], [8, 1, ?] where row sums are 15.",
+    "options": {
+      "a": "6",
+      "b": "5",
+      "c": "4",
+      "d": "7"
+    },
+    "correctOption": "a",
+    "explanation": "8 + 1 + ? = 15 => ? = 6 (standard 3x3 magic square).",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_033",
+    "section": "REASONING",
+    "questionText": "If 'WATER' is written as 'YCVGT', what is the code for 'FIRE'?",
+    "options": {
+      "a": "HKTG",
+      "b": "HKTF",
+      "c": "GKTH",
+      "d": "HLTG"
+    },
+    "correctOption": "a",
+    "explanation": "Each letter is shifted by +2: F(+2)->H, I(+2)->K, R(+2)->T, E(+2)->G => HKTG.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_034",
+    "section": "REASONING",
+    "questionText": "A clock shows 4:30. If the minute hand points to East, in which direction will the hour hand point?",
+    "options": {
+      "a": "North-East",
+      "b": "South-East",
+      "c": "North-West",
+      "d": "South-West"
+    },
+    "correctOption": "a",
+    "explanation": "At 4:30, minute hand normally points South (6). If South is East (90 deg anti-clockwise), then between 4 and 5 (South-East) rotated 90 deg anti-clockwise becomes North-East.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_035",
+    "section": "REASONING",
+    "questionText": "Statements: All pens are books. Some books are pencils. Conclusions: I. Some pens are pencils. II. Some books are pens.",
+    "options": {
+      "a": "Only I follows",
+      "b": "Only II follows",
+      "c": "Both follow",
+      "d": "Neither follows"
+    },
+    "correctOption": "b",
+    "explanation": "Since all pens are books, by sub-alternation some books are pens (II follows). No definite link exists between pens and pencils (I does not follow).",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_036",
+    "section": "REASONING",
+    "questionText": "Which word comes third when arranged in alphabetical order? 1. Radical 2. Radiant 3. Radiation 4. Radiate",
+    "options": {
+      "a": "Radiant",
+      "b": "Radiate",
+      "c": "Radiation",
+      "d": "Radical"
+    },
+    "correctOption": "b",
+    "explanation": "Alphabetical order: 1. Radiant, 2. Radiation, 3. Radiate (or Radiant, Radiate, Radiation), 4. Radical. 'Radiate' comes 3rd.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_037",
+    "section": "REASONING",
+    "questionText": "Pointing to a man, a woman said, 'His mother is the only daughter of my mother.' How is the woman related to the man?",
+    "options": {
+      "a": "Mother",
+      "b": "Sister",
+      "c": "Daughter",
+      "d": "Aunt"
+    },
+    "correctOption": "a",
+    "explanation": "The only daughter of the woman's mother is the woman herself. So she is the mother of the man.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_038",
+    "section": "REASONING",
+    "questionText": "Find the missing term: 1, 8, 27, 64, 125, ?",
+    "options": {
+      "a": "216",
+      "b": "343",
+      "c": "256",
+      "d": "196"
+    },
+    "correctOption": "a",
+    "explanation": "The series is cubes of natural numbers: 1^3, 2^3, 3^3, 4^3, 5^3, 6^3 = 216.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_039",
+    "section": "REASONING",
+    "questionText": "If 'GIVE' is coded as '5137' and 'BAT' is coded as '924', how is 'GATE' coded?",
+    "options": {
+      "a": "5247",
+      "b": "5241",
+      "c": "5427",
+      "d": "5274"
+    },
+    "correctOption": "a",
+    "explanation": "G=5, A=2, T=4, E=7 => 5247.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_040",
+    "section": "REASONING",
+    "questionText": "Find the odd number pair: (13, 169), (17, 289), (19, 361), (15, 235)",
+    "options": {
+      "a": "(13, 169)",
+      "b": "(17, 289)",
+      "c": "(19, 361)",
+      "d": "(15, 235)"
+    },
+    "correctOption": "d",
+    "explanation": "15^2 = 225, not 235.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_041",
+    "section": "REASONING",
+    "questionText": "Select the correct combination of mathematical signs to balance: 8 * 4 * 2 = 16",
+    "options": {
+      "a": "× and ÷",
+      "b": "+ and -",
+      "c": "÷ and ×",
+      "d": "- and +"
+    },
+    "correctOption": "a",
+    "explanation": "8 × 4 ÷ 2 = 32 ÷ 2 = 16.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_042",
+    "section": "REASONING",
+    "questionText": "In a class of 30 students, Mahesh ranks 7th from top. What is his rank from the bottom?",
+    "options": {
+      "a": "24th",
+      "b": "23rd",
+      "c": "25th",
+      "d": "22nd"
+    },
+    "correctOption": "a",
+    "explanation": "30 - 7 + 1 = 24th rank.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_043",
+    "section": "REASONING",
+    "questionText": "Choose the alternative which closely resembles the mirror image of 'WHITE':",
+    "options": {
+      "a": "ETIHW (mirrored)",
+      "b": "WHITE",
+      "c": "EHTIW",
+      "d": "IHTEW"
+    },
+    "correctOption": "a",
+    "explanation": "Mirror image reverses letter order and flips individual asymmetrical glyphs.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_044",
+    "section": "REASONING",
+    "questionText": "Find the next letter in the series: Z, X, V, T, R, ?",
+    "options": {
+      "a": "P",
+      "b": "Q",
+      "c": "O",
+      "d": "N"
+    },
+    "correctOption": "a",
+    "explanation": "Decreasing by 2 positions: 26, 24, 22, 20, 18, 16 (P).",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_045",
+    "section": "REASONING",
+    "questionText": "If A = 1, CAT = 24, then DOG = ?",
+    "options": {
+      "a": "26",
+      "b": "28",
+      "c": "24",
+      "d": "30"
+    },
+    "correctOption": "a",
+    "explanation": "Sum of alphabetical positions: D(4) + O(15) + G(7) = 26.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_046",
+    "section": "REASONING",
+    "questionText": "Select the related number: 7 : 56 :: 9 : ?",
+    "options": {
+      "a": "90",
+      "b": "81",
+      "c": "72",
+      "d": "99"
+    },
+    "correctOption": "a",
+    "explanation": "n × (n+1) -> 7 × 8 = 56, so 9 × 10 = 90.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_047",
+    "section": "REASONING",
+    "questionText": "Statements: All flowers are trees. No tree is fruit. Conclusions: I. No fruit is flower. II. Some trees are flowers.",
+    "options": {
+      "a": "Only I follows",
+      "b": "Only II follows",
+      "c": "Both I and II follow",
+      "d": "Neither follows"
+    },
+    "correctOption": "c",
+    "explanation": "Since flowers are inside trees and trees do not overlap fruits, no fruit is flower. All flowers are trees implies some trees are flowers. Both follow.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_048",
+    "section": "REASONING",
+    "questionText": "A person travels 10 km North, turns right and travels 10 km, then turns right again and travels 10 km. How far is he from starting point?",
+    "options": {
+      "a": "10 km",
+      "b": "20 km",
+      "c": "30 km",
+      "d": "0 km"
+    },
+    "correctOption": "a",
+    "explanation": "The movement creates three sides of a square of side 10 km. Distance from start is 10 km East.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_049",
+    "section": "REASONING",
+    "questionText": "Find the odd word: Gold, Silver, Diamond, Platinum",
+    "options": {
+      "a": "Gold",
+      "b": "Silver",
+      "c": "Diamond",
+      "d": "Platinum"
+    },
+    "correctOption": "c",
+    "explanation": "Diamond is a non-metal (allotrope of carbon), while Gold, Silver, and Platinum are precious metals.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_reasoning_050",
+    "section": "REASONING",
+    "questionText": "Complete the series: 5, 11, 23, 47, 95, ?",
+    "options": {
+      "a": "191",
+      "b": "190",
+      "c": "189",
+      "d": "192"
+    },
+    "correctOption": "a",
+    "explanation": "Pattern: × 2 + 1. 95 × 2 + 1 = 191.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Reasoning",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_001",
+    "section": "GA",
+    "questionText": "Who is known as the 'Father of the Indian Constitution'?",
+    "options": {
+      "a": "Mahatma Gandhi",
+      "b": "Dr. B.R. Ambedkar",
+      "c": "Jawaharlal Nehru",
+      "d": "Dr. Rajendra Prasad"
+    },
+    "correctOption": "b",
+    "explanation": "Dr. B.R. Ambedkar was the Chairman of the Drafting Committee of the Constituent Assembly.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_002",
+    "section": "GA",
+    "questionText": "Which Article of the Indian Constitution guarantees the 'Right to Equality'?",
+    "options": {
+      "a": "Articles 14 to 18",
+      "b": "Articles 19 to 22",
+      "c": "Articles 25 to 28",
+      "d": "Articles 29 to 30"
+    },
+    "correctOption": "a",
+    "explanation": "Articles 14 to 18 of the Indian Constitution provide for the Right to Equality.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_003",
+    "section": "GA",
+    "questionText": "Which is the longest river in India?",
+    "options": {
+      "a": "Godavari",
+      "b": "Ganga",
+      "c": "Brahmaputra",
+      "d": "Yamuna"
+    },
+    "correctOption": "b",
+    "explanation": "The Ganga is the longest river flowing entirely within India, spanning 2,525 km.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_004",
+    "section": "GA",
+    "questionText": "What is the chemical symbol for Gold?",
+    "options": {
+      "a": "Ag",
+      "b": "Au",
+      "c": "Fe",
+      "d": "Gd"
+    },
+    "correctOption": "b",
+    "explanation": "The chemical symbol for Gold is 'Au', derived from the Latin word 'Aurum'.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_005",
+    "section": "GA",
+    "questionText": "Who was the first President of Independent India?",
+    "options": {
+      "a": "Dr. S. Radhakrishnan",
+      "b": "Dr. Rajendra Prasad",
+      "c": "Zakir Husain",
+      "d": "V.V. Giri"
+    },
+    "correctOption": "b",
+    "explanation": "Dr. Rajendra Prasad was the first President of India, serving from 1950 to 1962.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_006",
+    "section": "GA",
+    "questionText": "Which gas is most abundant in the Earth's atmosphere?",
+    "options": {
+      "a": "Oxygen",
+      "b": "Nitrogen",
+      "c": "Carbon Dioxide",
+      "d": "Argon"
+    },
+    "correctOption": "b",
+    "explanation": "Nitrogen constitutes approximately 78% of the Earth's atmosphere by volume.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_007",
+    "section": "GA",
+    "questionText": "In which year did the Battle of Plassey take place?",
+    "options": {
+      "a": "1757",
+      "b": "1764",
+      "c": "1857",
+      "d": "1761"
+    },
+    "correctOption": "a",
+    "explanation": "The Battle of Plassey took place on 23 June 1757 between the British East India Company and the Nawab of Bengal.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_008",
+    "section": "GA",
+    "questionText": "Which planet is known as the 'Red Planet'?",
+    "options": {
+      "a": "Venus",
+      "b": "Mars",
+      "c": "Jupiter",
+      "d": "Saturn"
+    },
+    "correctOption": "b",
+    "explanation": "Mars is known as the Red Planet due to the prevalence of iron oxide on its surface.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_009",
+    "section": "GA",
+    "questionText": "What is the capital of Australia?",
+    "options": {
+      "a": "Sydney",
+      "b": "Melbourne",
+      "c": "Canberra",
+      "d": "Brisbane"
+    },
+    "correctOption": "c",
+    "explanation": "Canberra is the capital city of Australia.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_010",
+    "section": "GA",
+    "questionText": "Which vitamin is synthesized in the human body upon exposure to sunlight?",
+    "options": {
+      "a": "Vitamin A",
+      "b": "Vitamin C",
+      "c": "Vitamin D",
+      "d": "Vitamin K"
+    },
+    "correctOption": "c",
+    "explanation": "Vitamin D is synthesized in the skin when exposed to ultraviolet B (UVB) rays from sunlight.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_011",
+    "section": "GA",
+    "questionText": "The fundamental duties were incorporated into the Indian Constitution on the recommendation of which committee?",
+    "options": {
+      "a": "Sarkaria Commission",
+      "b": "Swaran Singh Committee",
+      "c": "Balwant Rai Mehta Committee",
+      "d": "Verma Committee"
+    },
+    "correctOption": "b",
+    "explanation": "The Swaran Singh Committee recommended Fundamental Duties, added by the 42nd Amendment Act in 1976.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_012",
+    "section": "GA",
+    "questionText": "Which is the highest peak in India?",
+    "options": {
+      "a": "Mount Everest",
+      "b": "Kangchenjunga",
+      "c": "Nanda Devi",
+      "d": "K2 (Mount Godwin-Austen)"
+    },
+    "correctOption": "b",
+    "explanation": "Kangchenjunga (8,586 m) in Sikkim is the highest peak situated within the undisputed territory of India.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_013",
+    "section": "GA",
+    "questionText": "Which organ in the human body produces Insulin?",
+    "options": {
+      "a": "Liver",
+      "b": "Pancreas",
+      "c": "Kidney",
+      "d": "Thyroid"
+    },
+    "correctOption": "b",
+    "explanation": "Insulin is produced by the beta cells of the Islets of Langerhans in the Pancreas.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_014",
+    "section": "GA",
+    "questionText": "The National Board of Examinations in Medical Sciences (NBEMS) is an autonomous body under which Union Ministry?",
+    "options": {
+      "a": "Ministry of Education",
+      "b": "Ministry of Health and Family Welfare",
+      "c": "Ministry of Science and Technology",
+      "d": "Ministry of AYUSH"
+    },
+    "correctOption": "b",
+    "explanation": "NBEMS is an autonomous organization under the Ministry of Health and Family Welfare, Government of India.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_015",
+    "section": "GA",
+    "questionText": "Who founded the Brahmo Samaj in 1828?",
+    "options": {
+      "a": "Swami Vivekananda",
+      "b": "Raja Ram Mohan Roy",
+      "c": "Dayananda Saraswati",
+      "d": "Ishwar Chandra Vidyasagar"
+    },
+    "correctOption": "b",
+    "explanation": "Raja Ram Mohan Roy founded the Brahmo Sabha (later Brahmo Samaj) in Calcutta in 1828.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_016",
+    "section": "GA",
+    "questionText": "Which Indian state has the longest coastline?",
+    "options": {
+      "a": "Tamil Nadu",
+      "b": "Maharashtra",
+      "c": "Gujarat",
+      "d": "Andhra Pradesh"
+    },
+    "correctOption": "c",
+    "explanation": "Gujarat has the longest mainland coastline in India, extending approximately 1,600 km.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_017",
+    "section": "GA",
+    "questionText": "What does 'HTTP' stand for in computer networking?",
+    "options": {
+      "a": "HyperText Transfer Protocol",
+      "b": "HyperText Transmission Program",
+      "c": "Hyper Transfer Text Protocol",
+      "d": "High Transfer Text Program"
+    },
+    "correctOption": "a",
+    "explanation": "HTTP stands for HyperText Transfer Protocol.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_018",
+    "section": "GA",
+    "questionText": "The Reserve Bank of India (RBI) was established in which year?",
+    "options": {
+      "a": "1935",
+      "b": "1947",
+      "c": "1950",
+      "d": "1949"
+    },
+    "correctOption": "a",
+    "explanation": "The RBI was established on April 1, 1935 under the Reserve Bank of India Act, 1934.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_019",
+    "section": "GA",
+    "questionText": "Which classical dance form originated in the state of Kerala?",
+    "options": {
+      "a": "Bharatanatyam",
+      "b": "Kathakali",
+      "c": "Kuchipudi",
+      "d": "Kathak"
+    },
+    "correctOption": "b",
+    "explanation": "Kathakali and Mohiniyattam are classical dance traditions from Kerala.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_020",
+    "section": "GA",
+    "questionText": "What is the SI unit of electric current?",
+    "options": {
+      "a": "Volt",
+      "b": "Watt",
+      "c": "Ampere",
+      "d": "Ohm"
+    },
+    "correctOption": "c",
+    "explanation": "The SI unit of electric current is the Ampere (A).",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_021",
+    "section": "GA",
+    "questionText": "Who authored the famous Sanskrit play 'Abhijnanasakuntalam'?",
+    "options": {
+      "a": "Kalidasa",
+      "b": "Bhasa",
+      "c": "Harsha",
+      "d": "Banabhatta"
+    },
+    "correctOption": "a",
+    "explanation": "Kalidasa was the ancient Indian poet and playwright who authored Abhijnanasakuntalam.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_022",
+    "section": "GA",
+    "questionText": "Which schedule of the Indian Constitution lists the official recognized languages?",
+    "options": {
+      "a": "7th Schedule",
+      "b": "8th Schedule",
+      "c": "9th Schedule",
+      "d": "10th Schedule"
+    },
+    "correctOption": "b",
+    "explanation": "The 8th Schedule lists 22 officially recognized languages of India.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_023",
+    "section": "GA",
+    "questionText": "Which layer of the atmosphere contains the Ozone layer?",
+    "options": {
+      "a": "Troposphere",
+      "b": "Stratosphere",
+      "c": "Mesosphere",
+      "d": "Thermosphere"
+    },
+    "correctOption": "b",
+    "explanation": "The Ozone layer is located in the lower portion of the Stratosphere (approx. 15-35 km above Earth).",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_024",
+    "section": "GA",
+    "questionText": "What is the minimum age required to become the President of India?",
+    "options": {
+      "a": "25 years",
+      "b": "30 years",
+      "c": "35 years",
+      "d": "40 years"
+    },
+    "correctOption": "c",
+    "explanation": "Article 58 specifies that a candidate must have completed 35 years of age to be eligible for the President of India.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_025",
+    "section": "GA",
+    "questionText": "Who was the Viceroy of India during the Partition of Bengal in 1905?",
+    "options": {
+      "a": "Lord Curzon",
+      "b": "Lord Dalhousie",
+      "c": "Lord Ripon",
+      "d": "Lord Canning"
+    },
+    "correctOption": "a",
+    "explanation": "Lord Curzon announced the Partition of Bengal in July 1905.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_026",
+    "section": "GA",
+    "questionText": "Which metal is liquid at standard room temperature?",
+    "options": {
+      "a": "Mercury",
+      "b": "Lead",
+      "c": "Bromine",
+      "d": "Tin"
+    },
+    "correctOption": "a",
+    "explanation": "Mercury is the only elemental metal that is liquid at standard room temperature.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_027",
+    "section": "GA",
+    "questionText": "Kaziranga National Park, famous for the one-horned rhinoceros, is located in which state?",
+    "options": {
+      "a": "West Bengal",
+      "b": "Assam",
+      "c": "Odisha",
+      "d": "Madhya Pradesh"
+    },
+    "correctOption": "b",
+    "explanation": "Kaziranga National Park is located in Golaghat and Nagaon districts of Assam.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_028",
+    "section": "GA",
+    "questionText": "In the human circulatory system, which blood vessels carry oxygenated blood away from the heart?",
+    "options": {
+      "a": "Veins",
+      "b": "Arteries",
+      "c": "Capillaries",
+      "d": "Venules"
+    },
+    "correctOption": "b",
+    "explanation": "Arteries carry oxygen-rich blood away from the heart to tissues throughout the body.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_029",
+    "section": "GA",
+    "questionText": "What is the shortcut key to paste copied text in MS Windows applications?",
+    "options": {
+      "a": "Ctrl + C",
+      "b": "Ctrl + V",
+      "c": "Ctrl + P",
+      "d": "Ctrl + X"
+    },
+    "correctOption": "b",
+    "explanation": "Ctrl + V is the universal keyboard shortcut for pasting content.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_030",
+    "section": "GA",
+    "questionText": "Who was the founder of the Maurya Empire in ancient India?",
+    "options": {
+      "a": "Ashoka",
+      "b": "Bindusara",
+      "c": "Chandragupta Maurya",
+      "d": "Brihadratha"
+    },
+    "correctOption": "c",
+    "explanation": "Chandragupta Maurya founded the Maurya Empire around 322 BCE with the guidance of Chanakya.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_031",
+    "section": "GA",
+    "questionText": "Which state in India is the largest producer of Tea?",
+    "options": {
+      "a": "Assam",
+      "b": "West Bengal",
+      "c": "Kerala",
+      "d": "Tamil Nadu"
+    },
+    "correctOption": "a",
+    "explanation": "Assam is the largest tea-producing state in India, accounting for over 50% of the nation's output.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_032",
+    "section": "GA",
+    "questionText": "What is the normal human body temperature in Celsius?",
+    "options": {
+      "a": "35.5 °C",
+      "b": "37.0 °C",
+      "c": "38.2 °C",
+      "d": "36.0 °C"
+    },
+    "correctOption": "b",
+    "explanation": "The average normal body temperature is universally accepted as 37.0 °C (98.6 °F).",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_033",
+    "section": "GA",
+    "questionText": "Who was the first woman Prime Minister of India?",
+    "options": {
+      "a": "Sarojini Naidu",
+      "b": "Indira Gandhi",
+      "c": "Pratibha Patil",
+      "d": "Sucheta Kripalani"
+    },
+    "correctOption": "b",
+    "explanation": "Indira Gandhi served as the first and only woman Prime Minister of India.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_034",
+    "section": "GA",
+    "questionText": "Which Indian festival is known as the 'Festival of Lights'?",
+    "options": {
+      "a": "Holi",
+      "b": "Diwali",
+      "c": "Dussehra",
+      "d": "Pongal"
+    },
+    "correctOption": "b",
+    "explanation": "Diwali (Deepavali) is widely known and celebrated as the Festival of Lights.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_035",
+    "section": "GA",
+    "questionText": "What is the primary constituent of Natural Gas?",
+    "options": {
+      "a": "Methane",
+      "b": "Propane",
+      "c": "Butane",
+      "d": "Ethane"
+    },
+    "correctOption": "a",
+    "explanation": "Methane (CH4) makes up about 70-90% of natural gas.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_036",
+    "section": "GA",
+    "questionText": "The Tropic of Cancer passes through how many Indian states?",
+    "options": {
+      "a": "6",
+      "b": "7",
+      "c": "8",
+      "d": "9"
+    },
+    "correctOption": "c",
+    "explanation": "It passes through 8 states: Gujarat, Rajasthan, MP, Chhattisgarh, Jharkhand, West Bengal, Tripura, and Mizoram.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_037",
+    "section": "GA",
+    "questionText": "Who was the first Indian to win a Nobel Prize?",
+    "options": {
+      "a": "C.V. Raman",
+      "b": "Rabindranath Tagore",
+      "c": "Mother Teresa",
+      "d": "Amartya Sen"
+    },
+    "correctOption": "b",
+    "explanation": "Rabindranath Tagore won the Nobel Prize in Literature in 1913 for his poetry collection 'Gitanjali'.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_038",
+    "section": "GA",
+    "questionText": "Which part of the computer is considered its 'Brain'?",
+    "options": {
+      "a": "RAM",
+      "b": "Hard Disk",
+      "c": "CPU",
+      "d": "Motherboard"
+    },
+    "correctOption": "c",
+    "explanation": "The Central Processing Unit (CPU) executes instructions and controls processing in a computer.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_039",
+    "section": "GA",
+    "questionText": "What is the tenure of a member of the Rajya Sabha in India?",
+    "options": {
+      "a": "4 years",
+      "b": "5 years",
+      "c": "6 years",
+      "d": "Permanent without tenure"
+    },
+    "correctOption": "c",
+    "explanation": "Rajya Sabha members serve a term of 6 years, with one-third of the members retiring every second year.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_040",
+    "section": "GA",
+    "questionText": "Rickettsia is a disease caused by the deficiency of which vitamin?",
+    "options": {
+      "a": "Vitamin A",
+      "b": "Vitamin B1",
+      "c": "Vitamin C",
+      "d": "Vitamin D"
+    },
+    "correctOption": "d",
+    "explanation": "Rickets in children and Osteomalacia in adults are caused by Vitamin D deficiency.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_041",
+    "section": "GA",
+    "questionText": "The international boundary line between India and Pakistan is known as what?",
+    "options": {
+      "a": "Radcliffe Line",
+      "b": "McMahon Line",
+      "c": "Durand Line",
+      "d": "49th Parallel"
+    },
+    "correctOption": "a",
+    "explanation": "The Radcliffe Line was drawn by Sir Cyril Radcliffe as the boundary demarcation between India and Pakistan in 1947.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_042",
+    "section": "GA",
+    "questionText": "Which Sultan of Delhi shifted his capital from Delhi to Daulatabad?",
+    "options": {
+      "a": "Alauddin Khilji",
+      "b": "Muhammad bin Tughlaq",
+      "c": "Firoz Shah Tughlaq",
+      "d": "Iltutmish"
+    },
+    "correctOption": "b",
+    "explanation": "Muhammad bin Tughlaq ordered the historic transfer of the capital from Delhi to Daulatabad (Devagiri) in 1327.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_043",
+    "section": "GA",
+    "questionText": "What is the speed of light in vacuum?",
+    "options": {
+      "a": "3 × 10^8 m/s",
+      "b": "3 × 10^6 m/s",
+      "c": "3 × 10^5 km/s",
+      "d": "Both A and C"
+    },
+    "correctOption": "d",
+    "explanation": "Speed of light is approximately 300,000 km/s or 3 × 10^8 m/s.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_044",
+    "section": "GA",
+    "questionText": "Which state is known as the 'Granary of India'?",
+    "options": {
+      "a": "Haryana",
+      "b": "Punjab",
+      "c": "Uttar Pradesh",
+      "d": "Madhya Pradesh"
+    },
+    "correctOption": "b",
+    "explanation": "Punjab is often referred to as the Granary of India or the Breadbasket of India due to its high wheat productivity.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_045",
+    "section": "GA",
+    "questionText": "Who was the governor-general who abolished Sati in India in 1829?",
+    "options": {
+      "a": "Lord William Bentinck",
+      "b": "Lord Cornwallis",
+      "c": "Lord Wellesley",
+      "d": "Lord Hastings"
+    },
+    "correctOption": "a",
+    "explanation": "Lord William Bentinck promulgated Regulation XVII in 1829 banning Sati, strongly supported by Raja Ram Mohan Roy.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_046",
+    "section": "GA",
+    "questionText": "What does 'RAM' stand for in computer systems?",
+    "options": {
+      "a": "Read Access Memory",
+      "b": "Random Access Memory",
+      "c": "Rapid Action Memory",
+      "d": "Read Available Memory"
+    },
+    "correctOption": "b",
+    "explanation": "RAM stands for Random Access Memory, the primary volatile memory of a computer.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_047",
+    "section": "GA",
+    "questionText": "Which Indian state has the highest literacy rate as per Census 2011?",
+    "options": {
+      "a": "Mizoram",
+      "b": "Kerala",
+      "c": "Goa",
+      "d": "Tripura"
+    },
+    "correctOption": "b",
+    "explanation": "Kerala recorded the highest literacy rate of 94.00% in the 2011 Census.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.345Z"
+  },
+  {
+    "id": "seed_ga_048",
+    "section": "GA",
+    "questionText": "The term 'Deuce' is associated with which sport?",
+    "options": {
+      "a": "Cricket",
+      "b": "Tennis / Badminton",
+      "c": "Football",
+      "d": "Hockey"
+    },
+    "correctOption": "b",
+    "explanation": "The term 'Deuce' is used in Tennis and Badminton when the score is tied at 40-40 or at game point.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_ga_049",
+    "section": "GA",
+    "questionText": "Which gas is used in fire extinguishers?",
+    "options": {
+      "a": "Carbon Dioxide",
+      "b": "Oxygen",
+      "c": "Hydrogen",
+      "d": "Nitrogen"
+    },
+    "correctOption": "a",
+    "explanation": "Carbon Dioxide (CO2) displaces oxygen and cools the fuel, smothering flames in fire extinguishers.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_ga_050",
+    "section": "GA",
+    "questionText": "Under which Article of the Constitution can Financial Emergency be declared by the President?",
+    "options": {
+      "a": "Article 352",
+      "b": "Article 356",
+      "c": "Article 360",
+      "d": "Article 368"
+    },
+    "correctOption": "c",
+    "explanation": "Article 360 empowers the President to proclaim Financial Emergency if financial stability of India is threatened.",
+    "hasImage": false,
+    "sourceExam": "NBE_Official_Seed_GA",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_001",
+    "section": "QUANT",
+    "questionText": "If 15 men can complete a piece of work in 20 days, how many days will 25 men take to complete the same work?",
+    "options": {
+      "a": "12 days",
+      "b": "10 days",
+      "c": "15 days",
+      "d": "14 days"
+    },
+    "correctOption": "a",
+    "explanation": "Total work = 15 × 20 = 300 man-days. Days for 25 men = 300 / 25 = 12 days.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_002",
+    "section": "QUANT",
+    "questionText": "A shopkeeper sells an article for ₹840 at a gain of 20%. What was the cost price of the article?",
+    "options": {
+      "a": "₹700",
+      "b": "₹680",
+      "c": "₹720",
+      "d": "₹750"
+    },
+    "correctOption": "a",
+    "explanation": "SP = CP × 1.20 => CP = 840 / 1.20 = ₹700.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_003",
+    "section": "QUANT",
+    "questionText": "Find the Simple Interest on a principal sum of ₹5,000 at 8% per annum for 3 years.",
+    "options": {
+      "a": "₹1,000",
+      "b": "₹1,200",
+      "c": "₹1,500",
+      "d": "₹800"
+    },
+    "correctOption": "b",
+    "explanation": "SI = (P × R × T) / 100 = (5000 × 8 × 3) / 100 = ₹1,200.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_004",
+    "section": "QUANT",
+    "questionText": "The ratio of two numbers is 3 : 5 and their sum is 160. What is the larger number?",
+    "options": {
+      "a": "60",
+      "b": "100",
+      "c": "90",
+      "d": "110"
+    },
+    "correctOption": "b",
+    "explanation": "Total parts = 3 + 5 = 8. 1 part = 160 / 8 = 20. Larger number = 5 × 20 = 100.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_005",
+    "section": "QUANT",
+    "questionText": "A train 180 meters long is running at a speed of 54 km/h. How much time will it take to pass an electric pole?",
+    "options": {
+      "a": "10 seconds",
+      "b": "12 seconds",
+      "c": "15 seconds",
+      "d": "18 seconds"
+    },
+    "correctOption": "b",
+    "explanation": "Speed = 54 × (5/18) = 15 m/s. Time = Distance / Speed = 180 / 15 = 12 seconds.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_006",
+    "section": "QUANT",
+    "questionText": "What is the average of the first five prime numbers?",
+    "options": {
+      "a": "5.6",
+      "b": "5.4",
+      "c": "5.8",
+      "d": "6.0"
+    },
+    "correctOption": "a",
+    "explanation": "First 5 primes are 2, 3, 5, 7, 11. Sum = 28. Average = 28 / 5 = 5.6.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_007",
+    "section": "QUANT",
+    "questionText": "If 20% of a number is 80, what is 35% of that number?",
+    "options": {
+      "a": "140",
+      "b": "120",
+      "c": "160",
+      "d": "150"
+    },
+    "correctOption": "a",
+    "explanation": "Number = 80 / 0.20 = 400. 35% of 400 = 0.35 × 400 = 140.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_008",
+    "section": "QUANT",
+    "questionText": "Find the HCF of 36, 54, and 72.",
+    "options": {
+      "a": "12",
+      "b": "18",
+      "c": "9",
+      "d": "6"
+    },
+    "correctOption": "b",
+    "explanation": "36 = 18×2, 54 = 18×3, 72 = 18×4. Greatest common divisor is 18.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_009",
+    "section": "QUANT",
+    "questionText": "A person buys a toy for ₹250 and sells it for ₹300. Find the profit percentage.",
+    "options": {
+      "a": "15%",
+      "b": "20%",
+      "c": "25%",
+      "d": "18%"
+    },
+    "correctOption": "b",
+    "explanation": "Profit = 300 - 250 = ₹50. Profit % = (50 / 250) × 100 = 20%.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_010",
+    "section": "QUANT",
+    "questionText": "If a : b = 2 : 3 and b : c = 4 : 5, find the compound ratio a : c.",
+    "options": {
+      "a": "8 : 15",
+      "b": "6 : 15",
+      "c": "2 : 5",
+      "d": "3 : 5"
+    },
+    "correctOption": "a",
+    "explanation": "a/c = (a/b) × (b/c) = (2/3) × (4/5) = 8/15 => 8 : 15.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_011",
+    "section": "QUANT",
+    "questionText": "The average age of a class of 24 students is 15 years. If the teacher's age is included, the average increases by 1 year. What is the teacher's age?",
+    "options": {
+      "a": "38 years",
+      "b": "40 years",
+      "c": "42 years",
+      "d": "36 years"
+    },
+    "correctOption": "b",
+    "explanation": "Total age of 24 students = 24 × 15 = 360. Total age with teacher (25 people) = 25 × 16 = 400. Teacher = 400 - 360 = 40 years.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_012",
+    "section": "QUANT",
+    "questionText": "Find the Compound Interest on ₹10,000 for 2 years at 10% per annum compounded annually.",
+    "options": {
+      "a": "₹2,000",
+      "b": "₹2,100",
+      "c": "₹2,200",
+      "d": "₹1,900"
+    },
+    "correctOption": "b",
+    "explanation": "Amount = 10000 × (1.10)^2 = 10000 × 1.21 = ₹12,100. CI = 12100 - 10000 = ₹2,100.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_013",
+    "section": "QUANT",
+    "questionText": "Pipe A can fill a tank in 6 hours and Pipe B can fill it in 8 hours. If both open together, in how many hours will the tank be full?",
+    "options": {
+      "a": "3 hours 24 mins",
+      "b": "3 hours 25 mins",
+      "c": "3 hours 30 mins",
+      "d": "4 hours"
+    },
+    "correctOption": "a",
+    "explanation": "Rate = 1/6 + 1/8 = 7/24. Time = 24/7 hours = 3 and 3/7 hours = 3 hours 25.7 mins (approx 3h 26m / 24/7h).",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_014",
+    "section": "QUANT",
+    "questionText": "What single discount is equivalent to two successive discounts of 20% and 10%?",
+    "options": {
+      "a": "30%",
+      "b": "28%",
+      "c": "25%",
+      "d": "26%"
+    },
+    "correctOption": "b",
+    "explanation": "Equivalent discount = 20 + 10 - (20 × 10)/100 = 30 - 2 = 28%.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_015",
+    "section": "QUANT",
+    "questionText": "Evaluate: (3/4 + 1/2) ÷ (5/8 - 1/4)",
+    "options": {
+      "a": "3 and 1/3",
+      "b": "3 and 1/2",
+      "c": "3",
+      "d": "2 and 2/3"
+    },
+    "correctOption": "a",
+    "explanation": "Numerator = 3/4 + 2/4 = 5/4. Denominator = 5/8 - 2/8 = 3/8. (5/4) ÷ (3/8) = (5/4) × (8/3) = 10/3 = 3 1/3.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_016",
+    "section": "QUANT",
+    "questionText": "If x + 1/x = 4, find the value of x^2 + 1/x^2.",
+    "options": {
+      "a": "16",
+      "b": "14",
+      "c": "12",
+      "d": "18"
+    },
+    "correctOption": "b",
+    "explanation": "(x + 1/x)^2 = x^2 + 1/x^2 + 2 = 16 => x^2 + 1/x^2 = 16 - 2 = 14.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_017",
+    "section": "QUANT",
+    "questionText": "A car covers a distance of 300 km at an average speed of 60 km/h. How much faster should it travel to cover the same distance in 4 hours?",
+    "options": {
+      "a": "10 km/h",
+      "b": "15 km/h",
+      "c": "20 km/h",
+      "d": "25 km/h"
+    },
+    "correctOption": "b",
+    "explanation": "Required speed = 300 / 4 = 75 km/h. Speed increase = 75 - 60 = 15 km/h.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_018",
+    "section": "QUANT",
+    "questionText": "Find the value of sqrt(176 + sqrt(2401)).",
+    "options": {
+      "a": "14",
+      "b": "15",
+      "c": "16",
+      "d": "17"
+    },
+    "correctOption": "b",
+    "explanation": "sqrt(2401) = 49. 176 + 49 = 225. sqrt(225) = 15.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_019",
+    "section": "QUANT",
+    "questionText": "The perimeter of a rectangular field is 120 meters and its length is 35 meters. Find its breadth.",
+    "options": {
+      "a": "20 meters",
+      "b": "25 meters",
+      "c": "30 meters",
+      "d": "15 meters"
+    },
+    "correctOption": "b",
+    "explanation": "2 × (Length + Breadth) = 120 => 35 + Breadth = 60 => Breadth = 25 meters.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_020",
+    "section": "QUANT",
+    "questionText": "A sum of ₹1,600 amounts to ₹2,080 in 3 years at Simple Interest. What is the rate of interest per annum?",
+    "options": {
+      "a": "10%",
+      "b": "12%",
+      "c": "8%",
+      "d": "9%"
+    },
+    "correctOption": "a",
+    "explanation": "SI = 2080 - 1600 = ₹480. R = (480 × 100) / (1600 × 3) = 48000 / 4800 = 10%.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_021",
+    "section": "QUANT",
+    "questionText": "If 12 pens cost ₹180, what will be the cost of 28 pens?",
+    "options": {
+      "a": "₹400",
+      "b": "₹420",
+      "c": "₹380",
+      "d": "₹450"
+    },
+    "correctOption": "b",
+    "explanation": "Cost of 1 pen = 180 / 12 = ₹15. Cost of 28 pens = 28 × 15 = ₹420.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_022",
+    "section": "QUANT",
+    "questionText": "Two numbers are in the ratio 4 : 7. If 5 is added to each number, the ratio becomes 1 : 2. Find the smaller number.",
+    "options": {
+      "a": "20",
+      "b": "16",
+      "c": "24",
+      "d": "12"
+    },
+    "correctOption": "a",
+    "explanation": "(4x + 5)/(7x + 5) = 1/2 => 8x + 10 = 7x + 5 => x = 5 (in absolute scale). Smaller number = 4 × 5 = 20.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_023",
+    "section": "QUANT",
+    "questionText": "A boat travels 24 km downstream in 2 hours and 16 km upstream in 2 hours. What is the speed of the current?",
+    "options": {
+      "a": "2 km/h",
+      "b": "3 km/h",
+      "c": "4 km/h",
+      "d": "1.5 km/h"
+    },
+    "correctOption": "a",
+    "explanation": "Downstream speed (u+v) = 24/2 = 12 km/h. Upstream speed (u-v) = 16/2 = 8 km/h. Current v = (12 - 8)/2 = 2 km/h.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_024",
+    "section": "QUANT",
+    "questionText": "Find the LCM of 15, 25, and 30.",
+    "options": {
+      "a": "120",
+      "b": "150",
+      "c": "180",
+      "d": "90"
+    },
+    "correctOption": "b",
+    "explanation": "Prime factors: 15=3*5, 25=5^2, 30=2*3*5. LCM = 2 * 3 * 5^2 = 150.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_025",
+    "section": "QUANT",
+    "questionText": "If the cost price of 10 articles is equal to the selling price of 8 articles, find the gain percentage.",
+    "options": {
+      "a": "20%",
+      "b": "25%",
+      "c": "30%",
+      "d": "15%"
+    },
+    "correctOption": "b",
+    "explanation": "Gain % = ((10 - 8) / 8) × 100 = (2 / 8) × 100 = 25%.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_026",
+    "section": "QUANT",
+    "questionText": "In an election, the winning candidate got 58% of the total valid votes and won by a margin of 1,600 votes. Find the total number of valid votes polled.",
+    "options": {
+      "a": "10,000",
+      "b": "12,000",
+      "c": "8,000",
+      "d": "15,000"
+    },
+    "correctOption": "a",
+    "explanation": "Margin = 58% - 42% = 16%. 16% of Total = 1600 => Total = 1600 / 0.16 = 10,000 votes.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_027",
+    "section": "QUANT",
+    "questionText": "Find the mean of the observations: 12, 16, 20, 24, 28, 32, 36.",
+    "options": {
+      "a": "24",
+      "b": "26",
+      "c": "22",
+      "d": "28"
+    },
+    "correctOption": "a",
+    "explanation": "Since the numbers are in an arithmetic progression with equal gap 4, the mean is the middle term: 24.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_028",
+    "section": "QUANT",
+    "questionText": "A tap can fill an empty cistern in 8 hours, but due to a leak at the bottom, it takes 10 hours. In how many hours will the leak empty a full cistern?",
+    "options": {
+      "a": "35 hours",
+      "b": "40 hours",
+      "c": "45 hours",
+      "d": "30 hours"
+    },
+    "correctOption": "b",
+    "explanation": "Leak rate = 1/8 - 1/10 = (5-4)/40 = 1/40. The leak will empty the tank in 40 hours.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_029",
+    "section": "QUANT",
+    "questionText": "Simplify: (45% of 280) + (16% of 250)",
+    "options": {
+      "a": "166",
+      "b": "170",
+      "c": "160",
+      "d": "174"
+    },
+    "correctOption": "a",
+    "explanation": "45% of 280 = 126. 16% of 250 = 40. 126 + 40 = 166.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_030",
+    "section": "QUANT",
+    "questionText": "If a train running at 72 km/h crosses a platform 200 m long in 25 seconds, what is the length of the train?",
+    "options": {
+      "a": "250 meters",
+      "b": "300 meters",
+      "c": "350 meters",
+      "d": "200 meters"
+    },
+    "correctOption": "b",
+    "explanation": "Speed = 72 × (5/18) = 20 m/s. Total distance in 25s = 20 × 25 = 500 m. Train length = 500 - 200 = 300 meters.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_031",
+    "section": "QUANT",
+    "questionText": "Find the value of 'a' if 4a - 7 = 2a + 9.",
+    "options": {
+      "a": "8",
+      "b": "7",
+      "c": "9",
+      "d": "6"
+    },
+    "correctOption": "a",
+    "explanation": "4a - 2a = 9 + 7 => 2a = 16 => a = 8.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_032",
+    "section": "QUANT",
+    "questionText": "The marked price of a shirt is ₹600. After allowing a discount of 15%, the selling price is:",
+    "options": {
+      "a": "₹510",
+      "b": "₹500",
+      "c": "₹520",
+      "d": "₹490"
+    },
+    "correctOption": "a",
+    "explanation": "Discount = 15% of 600 = ₹90. SP = 600 - 90 = ₹510.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_033",
+    "section": "QUANT",
+    "questionText": "The sum of three consecutive integers is 72. Find the largest integer.",
+    "options": {
+      "a": "23",
+      "b": "24",
+      "c": "25",
+      "d": "26"
+    },
+    "correctOption": "c",
+    "explanation": "Let integers be x-1, x, x+1. 3x = 72 => x = 24. Largest is 24 + 1 = 25.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_034",
+    "section": "QUANT",
+    "questionText": "What principal will yield ₹600 Simple Interest in 2 years at 6% per annum?",
+    "options": {
+      "a": "₹5,000",
+      "b": "₹4,500",
+      "c": "₹6,000",
+      "d": "₹5,500"
+    },
+    "correctOption": "a",
+    "explanation": "P = (SI × 100) / (R × T) = (600 × 100) / (6 × 2) = 60000 / 12 = ₹5,000.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_035",
+    "section": "QUANT",
+    "questionText": "A mixture of 60 liters contains milk and water in the ratio 2 : 1. How many liters of water must be added to make the ratio 1 : 2?",
+    "options": {
+      "a": "40 liters",
+      "b": "50 liters",
+      "c": "60 liters",
+      "d": "45 liters"
+    },
+    "correctOption": "c",
+    "explanation": "Milk = 40 L, Water = 20 L. Let added water = W. 40 / (20 + W) = 1/2 => 20 + W = 80 => W = 60 liters.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_036",
+    "section": "QUANT",
+    "questionText": "If 8 men or 12 women can reap a field in 25 days, in how many days can 6 men and 11 women reap it?",
+    "options": {
+      "a": "12 days",
+      "b": "15 days",
+      "c": "18 days",
+      "d": "20 days"
+    },
+    "correctOption": "b",
+    "explanation": "8 men = 12 women => 1 man = 1.5 women. 6 men + 11 women = (6*1.5) + 11 = 20 women. Time = (12 × 25) / 20 = 15 days.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_037",
+    "section": "QUANT",
+    "questionText": "What is the square root of 0.000144?",
+    "options": {
+      "a": "0.012",
+      "b": "0.12",
+      "c": "0.0012",
+      "d": "0.00012"
+    },
+    "correctOption": "a",
+    "explanation": "sqrt(144 / 1000000) = 12 / 1000 = 0.012.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_038",
+    "section": "QUANT",
+    "questionText": "The ratio of the speeds of two cars is 4 : 5. If the first car takes 30 minutes to cover a distance, how much time will the second car take?",
+    "options": {
+      "a": "24 minutes",
+      "b": "25 minutes",
+      "c": "20 minutes",
+      "d": "22 minutes"
+    },
+    "correctOption": "a",
+    "explanation": "Time ratio is inverse of speed ratio = 5 : 4. 5 units = 30 min => 1 unit = 6 min. 4 units = 24 minutes.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_039",
+    "section": "QUANT",
+    "questionText": "Find the total surface area of a cube whose side is 5 cm.",
+    "options": {
+      "a": "150 cm^2",
+      "b": "125 cm^2",
+      "c": "100 cm^2",
+      "d": "175 cm^2"
+    },
+    "correctOption": "a",
+    "explanation": "Total surface area of a cube = 6a^2 = 6 × (5^2) = 6 × 25 = 150 cm^2.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_040",
+    "section": "QUANT",
+    "questionText": "A person sells two articles at ₹990 each. On one he gains 10% and on the other he loses 10%. What is his overall gain or loss percentage?",
+    "options": {
+      "a": "1% gain",
+      "b": "1% loss",
+      "c": "No gain no loss",
+      "d": "2% loss"
+    },
+    "correctOption": "b",
+    "explanation": "When SP is same with x% gain and x% loss, overall result is always a loss of (x^2 / 100)% = (100 / 100)% = 1% loss.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_041",
+    "section": "QUANT",
+    "questionText": "If 15% of A is equal to 20% of B, find the ratio A : B.",
+    "options": {
+      "a": "4 : 3",
+      "b": "3 : 4",
+      "c": "5 : 4",
+      "d": "4 : 5"
+    },
+    "correctOption": "a",
+    "explanation": "0.15 A = 0.20 B => A / B = 20 / 15 = 4 / 3 => 4 : 3.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_042",
+    "section": "QUANT",
+    "questionText": "A person travels from A to B at 40 km/h and returns from B to A at 60 km/h. What is his average speed for the whole journey?",
+    "options": {
+      "a": "48 km/h",
+      "b": "50 km/h",
+      "c": "45 km/h",
+      "d": "52 km/h"
+    },
+    "correctOption": "a",
+    "explanation": "Average speed = (2 × s1 × s2) / (s1 + s2) = (2 × 40 × 60) / 100 = 4800 / 100 = 48 km/h.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_043",
+    "section": "QUANT",
+    "questionText": "Find the remainder when 2^21 is divided by 7.",
+    "options": {
+      "a": "1",
+      "b": "2",
+      "c": "4",
+      "d": "6"
+    },
+    "correctOption": "a",
+    "explanation": "2^3 = 8 = 7(1) + 1 => 2^3 ≡ 1 (mod 7). 2^21 = (2^3)^7 ≡ 1^7 ≡ 1 (mod 7).",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_044",
+    "section": "QUANT",
+    "questionText": "A man's age is three times the sum of ages of his two children. In 5 years, his age will be double the sum of their ages. Find the father's present age.",
+    "options": {
+      "a": "45 years",
+      "b": "40 years",
+      "c": "50 years",
+      "d": "35 years"
+    },
+    "correctOption": "a",
+    "explanation": "Let sum of kids' ages = S. Father F = 3S. In 5 years: F + 5 = 2(S + 10) => 3S + 5 = 2S + 20 => S = 15. Father = 3 × 15 = 45 years.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_045",
+    "section": "QUANT",
+    "questionText": "Find the compound interest on ₹5,000 for 1.5 years at 10% per annum compounded half-yearly.",
+    "options": {
+      "a": "₹788.13",
+      "b": "₹762.50",
+      "c": "₹800.00",
+      "d": "₹750.00"
+    },
+    "correctOption": "a",
+    "explanation": "Rate per half-year = 5%, periods = 3. Amount = 5000 × (1.05)^3 = 5000 × 1.157625 = ₹5,788.13. CI = ₹788.13.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_046",
+    "section": "QUANT",
+    "questionText": "If 1/3 of a number is subtracted from the number itself, the result is 48. Find the number.",
+    "options": {
+      "a": "72",
+      "b": "64",
+      "c": "75",
+      "d": "80"
+    },
+    "correctOption": "a",
+    "explanation": "x - x/3 = 48 => 2x/3 = 48 => x = 48 × 3 / 2 = 72.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_047",
+    "section": "QUANT",
+    "questionText": "A rectangular park 60 m long and 40 m wide has a 2 m wide running path along its inside border. Find the area of the path.",
+    "options": {
+      "a": "384 m^2",
+      "b": "400 m^2",
+      "c": "368 m^2",
+      "d": "416 m^2"
+    },
+    "correctOption": "a",
+    "explanation": "Outer area = 60 × 40 = 2400 m^2. Inner dimensions = (60-4) × (40-4) = 56 × 36 = 2016 m^2. Path area = 2400 - 2016 = 384 m^2.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_048",
+    "section": "QUANT",
+    "questionText": "If x = 2 and y = 3, find the value of (x^3 + y^3) / (x + y).",
+    "options": {
+      "a": "7",
+      "b": "8",
+      "c": "9",
+      "d": "10"
+    },
+    "correctOption": "a",
+    "explanation": "(2^3 + 3^3) / (2 + 3) = (8 + 27) / 5 = 35 / 5 = 7.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_049",
+    "section": "QUANT",
+    "questionText": "A sum of ₹2,500 invested at compound interest doubles itself in 5 years. In how many years will it become 8 times of itself?",
+    "options": {
+      "a": "15 years",
+      "b": "20 years",
+      "c": "12 years",
+      "d": "10 years"
+    },
+    "correctOption": "a",
+    "explanation": "It becomes 2^1 in 5 yrs. It becomes 8 = 2^3 in 3 × 5 = 15 years.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_quant_050",
+    "section": "QUANT",
+    "questionText": "A vendor buys lemons at 6 for ₹10 and sells them at 4 for ₹8. What is his profit percentage?",
+    "options": {
+      "a": "20%",
+      "b": "25%",
+      "c": "15%",
+      "d": "30%"
+    },
+    "correctOption": "a",
+    "explanation": "CP of 12 lemons = ₹20. SP of 12 lemons = 3 × 8 = ₹24. Profit % = (4 / 20) × 100 = 20%.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_Quant",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_001",
+    "section": "ENGLISH",
+    "questionText": "Select the most appropriate synonym of the given word: 'METICULOUS'",
+    "options": {
+      "a": "Careless",
+      "b": "Painstaking",
+      "c": "Lazy",
+      "d": "Hasty"
+    },
+    "correctOption": "b",
+    "explanation": "'Meticulous' means showing great attention to detail; very careful and precise, matching 'painstaking'.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_002",
+    "section": "ENGLISH",
+    "questionText": "Select the most appropriate antonym of the given word: 'CANDID'",
+    "options": {
+      "a": "Frank",
+      "b": "Dishonest / Deceitful",
+      "c": "Outspoken",
+      "d": "Sincere"
+    },
+    "correctOption": "b",
+    "explanation": "'Candid' means truthful, straightforward, and frank. Its direct antonym is deceitful or guarded.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_003",
+    "section": "ENGLISH",
+    "questionText": "Identify the segment in the sentence which contains a grammatical error: 'Neither the teacher (A) / nor the students (B) / was present in the auditorium (C) / No error (D)'",
+    "options": {
+      "a": "Neither the teacher",
+      "b": "nor the students",
+      "c": "was present in the auditorium",
+      "d": "No error"
+    },
+    "correctOption": "c",
+    "explanation": "With 'Neither... nor', the verb agrees with the closer subject ('the students', plural), so it must be 'were present', not 'was'.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_004",
+    "section": "ENGLISH",
+    "questionText": "Select the correct meaning of the idiom: 'To spill the beans'",
+    "options": {
+      "a": "To cook food",
+      "b": "To reveal a secret unintentionally",
+      "c": "To waste money",
+      "d": "To perform badly"
+    },
+    "correctOption": "b",
+    "explanation": "'To spill the beans' is an idiom meaning to disclose confidential information prematurely or unintentionally.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_005",
+    "section": "ENGLISH",
+    "questionText": "Select the one-word substitution for: 'A person who loves and collects books'",
+    "options": {
+      "a": "Bibliophile",
+      "b": "Philatelist",
+      "c": "Polyglot",
+      "d": "Numismatist"
+    },
+    "correctOption": "a",
+    "explanation": "A 'Bibliophile' is an individual who loves or collects books.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_006",
+    "section": "ENGLISH",
+    "questionText": "Fill in the blank with the most appropriate preposition: 'The candidate is eligible _______ the post of Junior Assistant.'",
+    "options": {
+      "a": "with",
+      "b": "for",
+      "c": "to",
+      "d": "of"
+    },
+    "correctOption": "b",
+    "explanation": "The adjective 'eligible' correctly collocates with the preposition 'for'.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_007",
+    "section": "ENGLISH",
+    "questionText": "Select the correctly spelt word:",
+    "options": {
+      "a": "Accommodate",
+      "b": "Acommodate",
+      "c": "Accomodate",
+      "d": "Acomodate"
+    },
+    "correctOption": "a",
+    "explanation": "'Accommodate' has double 'c' and double 'm'.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_008",
+    "section": "ENGLISH",
+    "questionText": "Select the correct passive form of the given sentence: 'The committee has approved the new regulations.'",
+    "options": {
+      "a": "The new regulations were approved by the committee.",
+      "b": "The new regulations have been approved by the committee.",
+      "c": "The new regulations had been approved by the committee.",
+      "d": "The new regulations are being approved by the committee."
+    },
+    "correctOption": "b",
+    "explanation": "Present perfect 'has approved' converts to passive 'have been approved' for plural subject 'regulations'.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_009",
+    "section": "ENGLISH",
+    "questionText": "Select the most appropriate synonym of the word: 'OBSTINATE'",
+    "options": {
+      "a": "Stubborn",
+      "b": "Flexible",
+      "c": "Docile",
+      "d": "Friendly"
+    },
+    "correctOption": "a",
+    "explanation": "'Obstinate' means stubbornly refusing to change one's opinion or course of action.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_010",
+    "section": "ENGLISH",
+    "questionText": "Select the most appropriate antonym of: 'ABUNDANT'",
+    "options": {
+      "a": "Scarce",
+      "b": "Plentiful",
+      "c": "Lavish",
+      "d": "Huge"
+    },
+    "correctOption": "a",
+    "explanation": "'Abundant' means existing in large quantities; its antonym is 'scarce'.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_011",
+    "section": "ENGLISH",
+    "questionText": "Find the error in the sentence: 'She is senior than (A) / me in service (B) / by two years (C) / No error (D)'",
+    "options": {
+      "a": "She is senior than",
+      "b": "me in service",
+      "c": "by two years",
+      "d": "No error"
+    },
+    "correctOption": "a",
+    "explanation": "Comparative adjectives ending in '-ior' (senior, junior, superior) take preposition 'to', not 'than' ('senior to me').",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_012",
+    "section": "ENGLISH",
+    "questionText": "Choose the correct meaning of the idiom: 'Once in a blue moon'",
+    "options": {
+      "a": "Frequently",
+      "b": "Very rarely",
+      "c": "Every month",
+      "d": "In the night"
+    },
+    "correctOption": "b",
+    "explanation": "'Once in a blue moon' means something that happens very rarely or infrequently.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_013",
+    "section": "ENGLISH",
+    "questionText": "Select the one-word substitution for: 'A life history of a person written by himself'",
+    "options": {
+      "a": "Biography",
+      "b": "Autobiography",
+      "c": "Calligraphy",
+      "d": "Bibliography"
+    },
+    "correctOption": "b",
+    "explanation": "An 'Autobiography' is an account of a person's life written by that person.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_014",
+    "section": "ENGLISH",
+    "questionText": "Fill in the blank: 'Scarcely had the teacher entered the classroom _______ the students stood up.'",
+    "options": {
+      "a": "than",
+      "b": "when",
+      "c": "then",
+      "d": "before"
+    },
+    "correctOption": "b",
+    "explanation": "'Scarcely... when' and 'Hardly... when' are correlative conjunction pairs.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_015",
+    "section": "ENGLISH",
+    "questionText": "Select the incorrectly spelt word:",
+    "options": {
+      "a": "Privilege",
+      "b": "Maintenance",
+      "c": "Definite",
+      "d": "Occurence"
+    },
+    "correctOption": "d",
+    "explanation": "The correct spelling is 'Occurrence' (with double 'r').",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_016",
+    "section": "ENGLISH",
+    "questionText": "Convert into indirect speech: He said, 'I am learning a new computer course.'",
+    "options": {
+      "a": "He said that he is learning a new computer course.",
+      "b": "He said that he was learning a new computer course.",
+      "c": "He said that he had learned a new computer course.",
+      "d": "He told he was learning a new computer course."
+    },
+    "correctOption": "b",
+    "explanation": "Present continuous 'am learning' changes to past continuous 'was learning' with conjunction 'that'.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_017",
+    "section": "ENGLISH",
+    "questionText": "Select the most appropriate synonym for: 'PRUDENT'",
+    "options": {
+      "a": "Wise / Judicious",
+      "b": "Reckless",
+      "c": "Impolite",
+      "d": "Foolish"
+    },
+    "correctOption": "a",
+    "explanation": "'Prudent' means acting with or showing care and thought for the future; wise.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_018",
+    "section": "ENGLISH",
+    "questionText": "Select the antonym of: 'TRANSPARENT'",
+    "options": {
+      "a": "Opaque",
+      "b": "Clear",
+      "c": "Translucent",
+      "d": "Bright"
+    },
+    "correctOption": "a",
+    "explanation": "'Transparent' allows light to pass clearly; 'opaque' does not let light through.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_019",
+    "section": "ENGLISH",
+    "questionText": "Choose the correct alternative to improve the underlined part: 'If I was you, I would accept the job offer.'",
+    "options": {
+      "a": "If I am you",
+      "b": "If I were you",
+      "c": "If I had been you",
+      "d": "No improvement"
+    },
+    "correctOption": "b",
+    "explanation": "In hypothetical/subjunctive conditional clauses, 'were' is used with all subjects ('If I were you').",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_020",
+    "section": "ENGLISH",
+    "questionText": "What is the meaning of the idiom: 'Burn the midnight oil'?",
+    "options": {
+      "a": "To set fire to fuel",
+      "b": "To work or study late into the night",
+      "c": "To waste resources",
+      "d": "To be careless"
+    },
+    "correctOption": "b",
+    "explanation": "'Burn the midnight oil' means to read, study, or work late into the night.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_021",
+    "section": "ENGLISH",
+    "questionText": "One-word substitution: 'Government by officials and administrators'",
+    "options": {
+      "a": "Democracy",
+      "b": "Bureaucracy",
+      "c": "Aristocracy",
+      "d": "Autocracy"
+    },
+    "correctOption": "b",
+    "explanation": "A system of government in which most decisions are taken by state officials is a 'Bureaucracy'.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_022",
+    "section": "ENGLISH",
+    "questionText": "Fill in the blank: 'He is proficient _______ English typing and shorthand.'",
+    "options": {
+      "a": "in",
+      "b": "at",
+      "c": "with",
+      "d": "for"
+    },
+    "correctOption": "a",
+    "explanation": "The adjective 'proficient' is typically followed by the preposition 'in' when referring to a skill or domain.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_023",
+    "section": "ENGLISH",
+    "questionText": "Select the correctly spelt word:",
+    "options": {
+      "a": "Questionnaire",
+      "b": "Questionair",
+      "c": "Questionaire",
+      "d": "Questionnare"
+    },
+    "correctOption": "a",
+    "explanation": "'Questionnaire' has double 'n' and ends in '-aire'.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_024",
+    "section": "ENGLISH",
+    "questionText": "Select the passive voice: 'The librarian will issue the books tomorrow.'",
+    "options": {
+      "a": "The books would be issued by the librarian tomorrow.",
+      "b": "The books will be issued by the librarian tomorrow.",
+      "c": "The books are issued by the librarian tomorrow.",
+      "d": "The books have been issued by the librarian tomorrow."
+    },
+    "correctOption": "b",
+    "explanation": "Simple future 'will issue' converts to passive 'will be issued'.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_025",
+    "section": "ENGLISH",
+    "questionText": "Select the synonym of: 'ELOQUENT'",
+    "options": {
+      "a": "Fluent and persuasive",
+      "b": "Shy",
+      "c": "Inarticulate",
+      "d": "Silent"
+    },
+    "correctOption": "a",
+    "explanation": "'Eloquent' means fluent or persuasive in speaking or writing.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_026",
+    "section": "ENGLISH",
+    "questionText": "Select the antonym of: 'GREGARIOUS'",
+    "options": {
+      "a": "Sociable",
+      "b": "Reclusive / Introverted",
+      "c": "Cheerful",
+      "d": "Lively"
+    },
+    "correctOption": "b",
+    "explanation": "'Gregarious' means fond of company and sociable; its opposite is reclusive or unsociable.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_027",
+    "section": "ENGLISH",
+    "questionText": "Find the error: 'One of the candidate (A) / has not submitted (B) / the application form (C) / No error (D)'",
+    "options": {
+      "a": "One of the candidate",
+      "b": "has not submitted",
+      "c": "the application form",
+      "d": "No error"
+    },
+    "correctOption": "a",
+    "explanation": "'One of the' must be followed by a plural noun ('One of the candidates').",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_028",
+    "section": "ENGLISH",
+    "questionText": "Meaning of idiom: 'At the drop of a hat'",
+    "options": {
+      "a": "Without any hesitation or instantly",
+      "b": "After a long delay",
+      "c": "With great difficulty",
+      "d": "Carefully"
+    },
+    "correctOption": "a",
+    "explanation": "'At the drop of a hat' means immediately without waiting or thinking twice.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_029",
+    "section": "ENGLISH",
+    "questionText": "One-word substitution: 'A place where dead bodies are kept for post-mortem analysis'",
+    "options": {
+      "a": "Cemetery",
+      "b": "Mortuary",
+      "c": "Sanatorium",
+      "d": "Creche"
+    },
+    "correctOption": "b",
+    "explanation": "A 'Mortuary' is a room or building in which dead bodies are kept.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_030",
+    "section": "ENGLISH",
+    "questionText": "Fill in the blank: 'She has been working on this report _______ 9:00 AM.'",
+    "options": {
+      "a": "for",
+      "b": "since",
+      "c": "from",
+      "d": "by"
+    },
+    "correctOption": "b",
+    "explanation": "'Since' is used to denote a specific point of time in the past with perfect tenses.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_031",
+    "section": "ENGLISH",
+    "questionText": "Select the correctly spelt word:",
+    "options": {
+      "a": "Bureaucracy",
+      "b": "Beurocracy",
+      "c": "Bureaucrasy",
+      "d": "Burocracy"
+    },
+    "correctOption": "a",
+    "explanation": "The correct spelling is 'Bureaucracy' (B-U-R-E-A-U-C-R-A-C-Y).",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_032",
+    "section": "ENGLISH",
+    "questionText": "Select the antonym of: 'DILIGENT'",
+    "options": {
+      "a": "Hardworking",
+      "b": "Lazy / Indolent",
+      "c": "Careful",
+      "d": "Active"
+    },
+    "correctOption": "b",
+    "explanation": "'Diligent' means having or showing care and conscientiousness; opposite is lazy/indolent.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_033",
+    "section": "ENGLISH",
+    "questionText": "Select the synonym of: 'VINDICATE'",
+    "options": {
+      "a": "Justify / Clear from blame",
+      "b": "Accuse",
+      "c": "Condemn",
+      "d": "Punish"
+    },
+    "correctOption": "a",
+    "explanation": "'Vindicate' means to clear someone of blame or suspicion, or to show to be right and justified.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_034",
+    "section": "ENGLISH",
+    "questionText": "Identify the error: 'He did not knew (A) / the answer to (B) / the question asked (C) / No error (D)'",
+    "options": {
+      "a": "He did not knew",
+      "b": "the answer to",
+      "c": "the question asked",
+      "d": "No error"
+    },
+    "correctOption": "a",
+    "explanation": "Auxiliary verb 'did' must be followed by base form of verb ('did not know', not 'knew').",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_035",
+    "section": "ENGLISH",
+    "questionText": "Meaning of idiom: 'Cost an arm and a leg'",
+    "options": {
+      "a": "Extremely expensive",
+      "b": "Very cheap",
+      "c": "Physical injury",
+      "d": "Easy to achieve"
+    },
+    "correctOption": "a",
+    "explanation": "'Cost an arm and a leg' means to be very expensive.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_036",
+    "section": "ENGLISH",
+    "questionText": "One-word substitution: 'A speech made without any prior preparation'",
+    "options": {
+      "a": "Extempore / Impromptu",
+      "b": "Debate",
+      "c": "Eulogy",
+      "d": "Monologue"
+    },
+    "correctOption": "a",
+    "explanation": "An 'Extempore' speech is spoken or done without preparation.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_037",
+    "section": "ENGLISH",
+    "questionText": "Fill in the blank: 'The manager prevented him _______ leaving the office early.'",
+    "options": {
+      "a": "to",
+      "b": "from",
+      "c": "for",
+      "d": "in"
+    },
+    "correctOption": "b",
+    "explanation": "The verb 'prevent' takes the preposition 'from' followed by a gerund ('prevented him from leaving').",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_038",
+    "section": "ENGLISH",
+    "questionText": "Select the correctly spelt word:",
+    "options": {
+      "a": "Hierarchy",
+      "b": "Heirarchy",
+      "c": "Hiererchy",
+      "d": "Heirercy"
+    },
+    "correctOption": "a",
+    "explanation": "The correct spelling is 'Hierarchy' (H-I-E-R-A-R-C-H-Y).",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_039",
+    "section": "ENGLISH",
+    "questionText": "Select the synonym of: 'AMELIORATE'",
+    "options": {
+      "a": "Worsen",
+      "b": "Improve",
+      "c": "Destroy",
+      "d": "Halt"
+    },
+    "correctOption": "b",
+    "explanation": "'Ameliorate' means to make something bad or unsatisfactory better; to improve.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_040",
+    "section": "ENGLISH",
+    "questionText": "Select the antonym of: 'AFFLUENT'",
+    "options": {
+      "a": "Poor / Destitute",
+      "b": "Wealthy",
+      "c": "Prosperous",
+      "d": "Rich"
+    },
+    "correctOption": "a",
+    "explanation": "'Affluent' means wealthy; its opposite is poor or destitute.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_041",
+    "section": "ENGLISH",
+    "questionText": "Choose the correct sentence:",
+    "options": {
+      "a": "The sceneries of Kashmir are breathtaking.",
+      "b": "The scenery of Kashmir is breathtaking.",
+      "c": "The sceneries of Kashmir is breathtaking.",
+      "d": "The scenery of Kashmir are breathtaking."
+    },
+    "correctOption": "b",
+    "explanation": "'Scenery' is an uncountable noun with no plural form and takes a singular verb ('scenery... is').",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_042",
+    "section": "ENGLISH",
+    "questionText": "Meaning of idiom: 'To beat around the bush'",
+    "options": {
+      "a": "To avoid talking about what is important",
+      "b": "To search for something in a garden",
+      "c": "To speak clearly",
+      "d": "To win a race"
+    },
+    "correctOption": "a",
+    "explanation": "'To beat around the bush' means to discuss a matter without coming directly to the main point.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_043",
+    "section": "ENGLISH",
+    "questionText": "One-word substitution: 'A remedy for all diseases or difficulties'",
+    "options": {
+      "a": "Panacea",
+      "b": "Antibiotic",
+      "c": "Placebo",
+      "d": "Antidote"
+    },
+    "correctOption": "a",
+    "explanation": "A 'Panacea' is a solution or remedy for all difficulties or diseases.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_044",
+    "section": "ENGLISH",
+    "questionText": "Fill in the blank: 'Hardly had we reached the railway station _______ the train departed.'",
+    "options": {
+      "a": "then",
+      "b": "when",
+      "c": "than",
+      "d": "after"
+    },
+    "correctOption": "b",
+    "explanation": "'Hardly' takes 'when' in correlative conjunction construction.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_045",
+    "section": "ENGLISH",
+    "questionText": "Select the correctly spelt word:",
+    "options": {
+      "a": "Millennium",
+      "b": "Millenium",
+      "c": "Milennium",
+      "d": "Millenniam"
+    },
+    "correctOption": "a",
+    "explanation": "'Millennium' is spelled with double 'l' and double 'n'.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_046",
+    "section": "ENGLISH",
+    "questionText": "Select the synonym of: 'TACITURN'",
+    "options": {
+      "a": "Reserved / Untalkative",
+      "b": "Chatty",
+      "c": "Loud",
+      "d": "Friendly"
+    },
+    "correctOption": "a",
+    "explanation": "'Taciturn' describes a person reserved or uncommunicative in speech.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_047",
+    "section": "ENGLISH",
+    "questionText": "Select the antonym of: 'EPHEMERAL'",
+    "options": {
+      "a": "Short-lived",
+      "b": "Permanent / Eternal",
+      "c": "Brief",
+      "d": "Fleeting"
+    },
+    "correctOption": "b",
+    "explanation": "'Ephemeral' means lasting for a very short time; opposite is permanent or eternal.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_048",
+    "section": "ENGLISH",
+    "questionText": "Identify the error: 'Each of the boys (A) / are required to submit (B) / their identity cards (C) / No error (D)'",
+    "options": {
+      "a": "Each of the boys",
+      "b": "are required to submit",
+      "c": "their identity cards",
+      "d": "No error"
+    },
+    "correctOption": "b",
+    "explanation": "'Each' is singular and requires a singular verb: 'is required to submit'.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_049",
+    "section": "ENGLISH",
+    "questionText": "Meaning of idiom: 'Piece of cake'",
+    "options": {
+      "a": "A sweet dish",
+      "b": "Something very easy to do",
+      "c": "A birthday gift",
+      "d": "A difficult task"
+    },
+    "correctOption": "b",
+    "explanation": "'Piece of cake' means something that is very simple or effortless to accomplish.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  },
+  {
+    "id": "seed_english_050",
+    "section": "ENGLISH",
+    "questionText": "One-word substitution: 'One who does not believe in the existence of God'",
+    "options": {
+      "a": "Theist",
+      "b": "Atheist",
+      "c": "Agnostic",
+      "d": "Fanatic"
+    },
+    "correctOption": "b",
+    "explanation": "An 'Atheist' is a person who disbelieves or lacks belief in the existence of God or gods.",
+    "hasImage": false,
+    "sourceExam": "SSC_CHSL_Seed_English",
+    "sourceYear": 2023,
+    "difficulty": "MEDIUM",
+    "isActive": true,
+    "createdAt": "2026-08-27T12:29:57.346Z"
+  }
+]

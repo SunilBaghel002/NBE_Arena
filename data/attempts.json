@@ -1,0 +1,77 @@
+[
+  {
+    "id": "att_test_1",
+    "mockId": "mock_1787834306492_63i4b",
+    "startedAt": "2026-08-27T12:18:50.681Z",
+    "submittedAt": "2026-08-27T12:38:50.681Z",
+    "timeTakenSeconds": 1200,
+    "answers": [
+      {
+        "questionId": "seed_reasoning_002",
+        "selectedOption": "a",
+        "status": "answered",
+        "timeSpentSeconds": 30
+      },
+      {
+        "questionId": "seed_reasoning_026",
+        "selectedOption": "c",
+        "status": "answered",
+        "timeSpentSeconds": 45
+      }
+    ],
+    "score": {
+      "totalQuestions": 200,
+      "correctCount": 1,
+      "wrongCount": 1,
+      "unansweredCount": 198,
+      "rawScore": 1,
+      "negativePenalty": 0.25,
+      "netScore": 0.75,
+      "accuracyPercentage": 50,
+      "qualifyingCleared": false,
+      "targetScore": 150,
+      "bySection": {
+        "REASONING": {
+          "section": "REASONING",
+          "total": 50,
+          "correct": 1,
+          "wrong": 1,
+          "unanswered": 48,
+          "netScore": 0.75,
+          "accuracyPercentage": 50,
+          "timeSpentSeconds": 75
+        },
+        "GA": {
+          "section": "GA",
+          "total": 50,
+          "correct": 0,
+          "wrong": 0,
+          "unanswered": 50,
+          "netScore": 0,
+          "accuracyPercentage": 0,
+          "timeSpentSeconds": 0
+        },
+        "QUANT": {
+          "section": "QUANT",
+          "total": 50,
+          "correct": 0,
+          "wrong": 0,
+          "unanswered": 50,
+          "netScore": 0,
+          "accuracyPercentage": 0,
+          "timeSpentSeconds": 0
+        },
+        "ENGLISH": {
+          "section": "ENGLISH",
+          "total": 50,
+          "correct": 0,
+          "wrong": 0,
+          "unanswered": 50,
+          "netScore": 0,
+          "accuracyPercentage": 0,
+          "timeSpentSeconds": 0
+        }
+      }
+    }
+  }
+]

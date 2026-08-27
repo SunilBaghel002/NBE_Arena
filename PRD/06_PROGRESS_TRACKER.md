@@ -19,15 +19,15 @@
 ---
 
 ## STAGE 0 — Bootstrap
-**Status:** `[ ] Not Started | [ ] In Progress | [ ] Done`
+**Status:** `[x] Done`
 
 ### Tasks
-- [ ] Create Next.js 14 TS app (`nbe-arena`)
-- [ ] Install Tailwind, shadcn/ui, zod, zustand, lucide-react
-- [ ] Setup folder structure per Architecture.md
-- [ ] Add `.env.local.example`
-- [ ] Add README with run instructions
-- [ ] Verify `npm run dev` works
+- [x] Create Next.js 14 TS app (`nbe-arena`)
+- [x] Install Tailwind, shadcn/ui, zod, zustand, lucide-react
+- [x] Setup folder structure per Architecture.md
+- [x] Add `.env.local.example`
+- [x] Add README with run instructions
+- [x] Verify `npm run dev` works
 
 ### Exit Criteria
 - Blank app loads at localhost:3000
@@ -35,39 +35,38 @@
 ---
 
 ## STAGE 1 — Foundation + Manual Question Bank + Test UI
-**Status:** `[ ] Not Started | [ ] In Progress | [ ] Done`
+**Status:** `[x] Done`
 
 > **Why first?** Even before OCR works, candidate can practice if we seed 200 questions manually / via simple JSON.
 
 ### Tasks
-- [ ] Define TypeScript types (`Question`, `MockTest`, `Attempt`)
-- [ ] Create `data/seed-questions.json` with at least:
+- [x] Define TypeScript types (`Question`, `MockTest`, `Attempt`)
+- [x] Create `data/seed-questions.json` with at least:
   - 50 Reasoning
   - 50 GA
   - 50 Quant
   - 50 English
-  (Can be copied from a few known PYQs typed/imported lightly)
-- [ ] Build DB layer (JSON read/write OR Prisma SQLite)
-- [ ] API: `GET /api/bank-stats`
-- [ ] API: `POST /api/generate-mock`
-- [ ] API: `GET /api/mock/[mockId]` (hide correctOption)
-- [ ] API: `POST /api/submit`
-- [ ] API: `GET /api/results/[attemptId]`
-- [ ] Zustand `testStore`
-- [ ] UI: Lobby page
-- [ ] UI: Live Test page (timer, palette, sections, navigation)
-- [ ] UI: Submit confirmation modal
-- [ ] UI: Results page (score, section breakdown, wrong answers)
-- [ ] localStorage persistence for in-progress attempt
-- [ ] Auto-submit on timer = 0
+- [x] Build DB layer (JSON read/write local-first)
+- [x] API: `GET /api/bank-stats`
+- [x] API: `POST /api/generate-mock`
+- [x] API: `GET /api/mock/[mockId]` (hide correctOption)
+- [x] API: `POST /api/submit`
+- [x] API: `GET /api/results/[attemptId]`
+- [x] Zustand `testStore`
+- [x] UI: Lobby page
+- [x] UI: Live Test page (timer, palette, sections, navigation)
+- [x] UI: Submit confirmation modal
+- [x] UI: Results page (score, section breakdown, wrong answers)
+- [x] localStorage persistence for in-progress attempt
+- [x] Auto-submit on timer = 0
 
 ### Exit Criteria
-- [ ] Can generate a 200-question mock from seed bank
-- [ ] Can attempt full test with 180-min timer
-- [ ] Can submit and see score out of 200
-- [ ] Section scores show correctly
-- [ ] Refresh mid-test does not wipe answers
-- [ ] scoring uses -0.25 correctly
+- [x] Can generate a 200-question mock from seed bank
+- [x] Can attempt full test with 180-min timer
+- [x] Can submit and see score out of 200
+- [x] Section scores show correctly
+- [x] Refresh mid-test does not wipe answers
+- [x] Scoring uses -0.25 correctly
 
 ### Demo Script
 1. Open `/`
