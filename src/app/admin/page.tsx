@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { Navbar } from "@/components/Navbar";
+import { AdminSkeleton } from "@/components/ui/AdminSkeleton";
 import {
   Database,
   ArrowLeft,
@@ -356,12 +358,12 @@ export default function AdminPage() {
 
   if (status === "loading" || loading) {
     return (
-      <div className="min-h-screen bg-exam-bg flex items-center justify-center p-4">
-        <div className="bg-white p-8 rounded-2xl shadow-sm border border-exam-border text-center max-w-sm w-full">
-          <Loader2 className="w-10 h-10 text-exam-primary animate-spin mx-auto mb-3" />
-          <h2 className="font-bold text-base text-slate-800">Loading Admin Dashboard</h2>
-          <p className="text-xs text-slate-500 mt-1">Connecting to MongoDB Atlas...</p>
-        </div>
+      <div className="min-h-screen bg-exam-bg flex flex-col justify-between">
+        <Navbar />
+        <AdminSkeleton />
+        <footer className="bg-white border-t border-exam-border py-4 text-center text-xs text-slate-400">
+          NBE Arena — Administrator Control Panel
+        </footer>
       </div>
     );
   }
@@ -388,29 +390,8 @@ export default function AdminPage() {
 
   return (
     <div className="min-h-screen bg-exam-bg flex flex-col justify-between">
-      {/* Header */}
-      <header className="bg-exam-primary text-white shadow-md sticky top-0 z-20">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-exam-saffron rounded flex items-center justify-center font-black text-white text-sm">
-              NBE
-            </div>
-            <div>
-              <h1 className="font-bold text-base sm:text-lg">Admin Management & AI Pipeline</h1>
-              <p className="text-xs text-white/80">Candidate Progress · Credentials · Hybrid Ingestion</p>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-3">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 text-xs bg-white/10 hover:bg-white/20 text-white font-bold px-3.5 py-2 rounded-lg transition"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" /> Back to Dashboard
-            </Link>
-          </div>
-        </div>
-      </header>
+      {/* Universal Top Navbar */}
+      <Navbar />
 
       {/* Main Container */}
       <main className="max-w-7xl mx-auto px-4 py-8 w-full flex-1 space-y-6">

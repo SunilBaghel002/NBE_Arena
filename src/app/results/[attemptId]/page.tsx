@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import { Navbar } from "@/components/Navbar";
 import {
   Award,
   CheckCircle2,
@@ -172,29 +173,8 @@ export default function ResultsPage() {
 
   return (
     <div className="min-h-screen bg-exam-bg flex flex-col justify-between">
-      {/* Header */}
-      <header className="bg-exam-primary text-white shadow-md sticky top-0 z-20">
-        <div className="max-w-7xl mx-auto px-4 py-3.5 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-exam-saffron rounded-lg flex items-center justify-center font-black text-white text-sm shadow">
-              NBE
-            </div>
-            <div>
-              <h1 className="font-extrabold text-base sm:text-lg leading-tight">Examination Scorecard & Paper Review</h1>
-              <p className="text-xs text-white/80">{mockTitle}</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <Link
-              href="/"
-              className="text-xs bg-white/10 hover:bg-white/20 text-white font-bold px-3.5 py-2 rounded-lg transition border border-white/10"
-            >
-              Dashboard
-            </Link>
-          </div>
-        </div>
-      </header>
+      {/* Universal Top Navbar */}
+      <Navbar />
 
       {/* Main Scorecard Body */}
       <main className="max-w-6xl mx-auto px-4 py-8 w-full flex-1 space-y-8">
@@ -534,6 +514,17 @@ export default function ResultsPage() {
                         <h4 className="text-sm sm:text-base font-semibold text-slate-900 leading-snug">
                           {q.questionText}
                         </h4>
+
+                        {/* Question Figure / Diagram Image */}
+                        {q.imagePath ? (
+                          <div className="my-3 p-3 bg-slate-50 rounded-xl border border-slate-200 inline-block">
+                            <img
+                              src={q.imagePath}
+                              alt="Question Diagram"
+                              className="max-h-56 w-auto object-contain rounded-lg bg-white p-1"
+                            />
+                          </div>
+                        ) : null}
                       </div>
                     </div>
 
@@ -554,6 +545,8 @@ export default function ResultsPage() {
                         {(["a", "b", "c", "d"] as const).map((optKey) => {
                           const isUserAnswer = item.selectedOption === optKey;
                           const isCorrectAnswer = q.correctOption === optKey;
+                          const optText = q.options[optKey];
+                          const isImageOption = optText && (optText.startsWith("http://") || optText.startsWith("https://") || optText.startsWith("/uploads/"));
 
                           let optStyle = "border-slate-200 bg-white text-slate-700";
                           if (isCorrectAnswer) {
@@ -568,14 +561,22 @@ export default function ResultsPage() {
                               className={`p-3.5 rounded-xl border flex items-start gap-2.5 ${optStyle}`}
                             >
                               <span className="uppercase font-black">({optKey})</span>
-                              <span className="flex-1 leading-relaxed">{q.options[optKey]}</span>
+                              {isImageOption ? (
+                                <img
+                                  src={optText}
+                                  alt={`Option ${optKey.toUpperCase()}`}
+                                  className="max-h-20 w-auto object-contain rounded border border-slate-200 bg-white p-1"
+                                />
+                              ) : (
+                                <span className="flex-1 leading-relaxed">{optText}</span>
+                              )}
                               {isCorrectAnswer && (
-                                <span className="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded-full font-bold">
+                                <span className="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded-full font-bold flex-shrink-0">
                                   Correct Key
                                 </span>
                               )}
                               {isUserAnswer && !isCorrectAnswer && (
-                                <span className="text-[10px] bg-rose-600 text-white px-2 py-0.5 rounded-full font-bold">
+                                <span className="text-[10px] bg-rose-600 text-white px-2 py-0.5 rounded-full font-bold flex-shrink-0">
                                   Your Choice
                                 </span>
                               )}

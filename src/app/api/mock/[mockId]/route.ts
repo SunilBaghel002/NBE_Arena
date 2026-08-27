@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
-import { getMockById, getQuestions } from "@/lib/db";
+import { getMockById, getQuestionsByIds } from "@/lib/db";
 import { HydratedMockTest, HydratedQuestion } from "@/types";
+
+export const dynamic = "force-dynamic";
 
 export async function GET(
   req: Request,
@@ -14,17 +16,18 @@ export async function GET(
       return NextResponse.json({ error: "Mock test not found" }, { status: 404 });
     }
 
-    const allQuestions = await getQuestions();
-    const questionMap = new Map(allQuestions.map((q) => [q.id, q]));
-
-    const hydratedQuestions: Record<string, HydratedQuestion> = {};
-
     const allIds = [
       ...mock.sections.REASONING,
       ...mock.sections.GA,
       ...mock.sections.QUANT,
       ...mock.sections.ENGLISH,
     ];
+
+    // High-speed targeted query for only the 200 questions in this mock test
+    const questions = await getQuestionsByIds(allIds);
+    const questionMap = new Map(questions.map((q) => [q.id, q]));
+
+    const hydratedQuestions: Record<string, HydratedQuestion> = {};
 
     for (const qId of allIds) {
       const q = questionMap.get(qId);

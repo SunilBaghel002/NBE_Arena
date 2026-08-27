@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAttemptById, getMockById, getQuestions } from "@/lib/db";
+import { getAttemptById, getMockById, getQuestionsByIds } from "@/lib/db";
 import { Question, AnswerState } from "@/types";
 
 export const dynamic = "force-dynamic";
@@ -17,11 +17,6 @@ export async function GET(
     }
 
     const mock = await getMockById(attempt.mockId);
-    const allQuestions = await getQuestions();
-    const questionMap = new Map<string, Question>(allQuestions.map((q) => [q.id, q]));
-    const answerMap = new Map<string, AnswerState>(
-      attempt.answers.map((a) => [a.questionId, a])
-    );
 
     // Get all 200 question IDs from the mock test in order
     const mockQuestionIds = mock
@@ -32,6 +27,13 @@ export async function GET(
           ...mock.sections.ENGLISH,
         ]
       : attempt.answers.map((a) => a.questionId);
+
+    // High-speed targeted query for the exact 200 questions in this attempt
+    const questions = await getQuestionsByIds(mockQuestionIds);
+    const questionMap = new Map<string, Question>(questions.map((q) => [q.id, q]));
+    const answerMap = new Map<string, AnswerState>(
+      attempt.answers.map((a) => [a.questionId, a])
+    );
 
     // Attach full question details (including correctOption & explanation) for all 200 questions
     const questionsWithReview = mockQuestionIds.map((qId) => {

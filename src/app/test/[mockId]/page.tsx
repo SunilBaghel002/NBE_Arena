@@ -8,7 +8,8 @@ import { QuestionCard } from "@/components/test/QuestionCard";
 import { QuestionPalette } from "@/components/test/QuestionPalette";
 import { SubmitModal } from "@/components/test/SubmitModal";
 import { HydratedMockTest } from "@/types";
-import { Loader2, AlertTriangle, ArrowLeft } from "lucide-react";
+import { TestSkeleton } from "@/components/ui/TestSkeleton";
+import { AlertTriangle, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 export default function LiveTestPage() {
@@ -132,15 +133,7 @@ export default function LiveTestPage() {
   }, [isInitialized, remainingSeconds, handleSubmit]);
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen bg-exam-bg flex flex-col items-center justify-center p-4">
-        <div className="bg-white p-8 rounded-2xl shadow-md border border-exam-border text-center max-w-sm w-full">
-          <Loader2 className="w-10 h-10 text-exam-primary animate-spin mx-auto mb-4" />
-          <h2 className="font-bold text-lg text-slate-800 mb-1">Loading CBT Examination</h2>
-          <p className="text-xs text-slate-500">Preparing 200 Questions across 4 Sections...</p>
-        </div>
-      </div>
-    );
+    return <TestSkeleton />;
   }
 
   if (loadError) {
@@ -167,8 +160,8 @@ export default function LiveTestPage() {
       <TestHeader onSubmitClick={() => setIsSubmitModalOpen(true)} />
 
       {/* Main Examination Workspace Grid */}
-      <main className="max-w-7xl mx-auto px-4 py-6 w-full flex-1">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <main className="max-w-7xl mx-auto px-4 py-3 w-full flex-1">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Question Display (2 Columns Wide on Desktop) */}
           <div className="lg:col-span-2">
             <QuestionCard />
@@ -182,10 +175,10 @@ export default function LiveTestPage() {
       </main>
 
       {/* CBT Status Bar Footer */}
-      <footer className="bg-white border-t border-exam-border py-2.5 px-4 text-center text-xs text-slate-500 flex items-center justify-between max-w-7xl mx-auto w-full">
-        <span>NBEMS Junior Assistant Computer Based Test</span>
-        <span className="hidden sm:inline">Shortcuts: [1,2,3,4] Options · [N] Next · [P] Prev · [M] Review</span>
-        <span>Secure Local Session</span>
+      <footer className="bg-white border-t border-exam-border py-1.5 px-4 text-center text-[11px] text-slate-500 flex items-center justify-between max-w-7xl mx-auto w-full select-none">
+        <span>NBEMS Junior Assistant CBT</span>
+        <span className="hidden sm:inline text-slate-400">Shortcuts: [1,2,3,4] Options · [N] Save & Next · [P] Prev · [M] Mark · [C] Clear</span>
+        <span className="text-emerald-600 font-semibold">🔒 Protected Session</span>
       </footer>
 
       {/* Confirmation Modal before Submit */}

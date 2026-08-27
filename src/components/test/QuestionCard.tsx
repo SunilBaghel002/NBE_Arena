@@ -62,11 +62,11 @@ export const QuestionCard: React.FC = () => {
   const optionKeys: OptionKey[] = ["a", "b", "c", "d"];
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-exam-border flex flex-col justify-between min-h-[580px] overflow-hidden">
-      {/* Question Top Subheader */}
-      <div className="p-4 sm:p-5 border-b border-exam-border flex items-center justify-between bg-slate-50/80">
+    <div className="bg-white rounded-2xl shadow-sm border border-exam-border flex flex-col justify-between h-[calc(100vh-135px)] overflow-hidden">
+      {/* 1. Fixed Question Subheader */}
+      <div className="flex-shrink-0 p-4 sm:p-4.5 border-b border-exam-border flex items-center justify-between bg-slate-50/90 select-none">
         <div className="flex items-center space-x-2.5">
-          <span className="bg-exam-primary text-white text-xs font-black px-3 py-1 rounded-md shadow-sm tracking-wide">
+          <span className="bg-slate-900 text-white text-xs font-black px-3 py-1 rounded-md shadow-xs tracking-wide">
             Q. {currentIndex + 1}
           </span>
           <span className="text-xs text-slate-600 font-bold uppercase tracking-wider">
@@ -84,29 +84,40 @@ export const QuestionCard: React.FC = () => {
         </div>
       </div>
 
-      {/* Question Content & Options Body */}
-      <div className="p-6 sm:p-8 flex-1 flex flex-col justify-start">
-        {/* Question Text (17px / 1.6 line height for effortless readability) */}
-        <div className="text-[17px] sm:text-[18px] text-slate-900 font-medium leading-[1.65] mb-6 whitespace-pre-line tracking-tight select-text">
+      {/* 2. Scrollable Question Content & Options Body */}
+      <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6">
+        {/* Question Text (17px / 1.65 line height for effortless readability) */}
+        <div className="text-[17px] sm:text-[18px] text-slate-900 font-medium leading-[1.65] whitespace-pre-line tracking-tight select-text">
           {question.questionText}
         </div>
 
-        {/* Optional Figure / Diagram Placeholder */}
-        {question.hasImage && (
-          <div className="mb-6 p-4 rounded-xl bg-slate-100 border border-slate-300 text-center text-xs text-slate-600 flex flex-col items-center justify-center gap-1.5">
-            <ImageIcon className="w-6 h-6 text-slate-400" />
-            <p className="font-semibold">Figure / Diagram Question</p>
-            <p className="text-[11px] text-slate-500">Refer to original diagram or question stem.</p>
+        {/* Question Figure / Diagram Image */}
+        {question.imagePath ? (
+          <div className="my-4 p-3 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col items-center justify-center">
+            <img
+              src={question.imagePath}
+              alt="Question Diagram"
+              className="max-h-72 w-auto object-contain rounded-xl shadow-xs bg-white p-2"
+              loading="eager"
+            />
+            <span className="text-[11px] text-slate-500 font-semibold mt-2">Figure / Question Diagram</span>
           </div>
-        )}
+        ) : question.hasImage ? (
+          <div className="p-4 rounded-xl bg-blue-50/60 border border-blue-200 text-center text-xs text-blue-900 flex flex-col items-center justify-center gap-1.5">
+            <ImageIcon className="w-6 h-6 text-blue-600" />
+            <p className="font-bold text-slate-800">Visual / Diagram Question</p>
+            <p className="text-[11px] text-slate-500">Pattern & non-verbal reasoning</p>
+          </div>
+        ) : null}
 
         {/* Options List */}
-        <div className="space-y-3 mt-1">
+        <div className="space-y-3 pt-2">
           {optionKeys.map((key, index) => {
             const optText = question.options[key];
             if (!optText) return null;
 
             const isSelected = selectedOption === key;
+            const isImageOption = optText.startsWith("http://") || optText.startsWith("https://") || optText.startsWith("/uploads/");
 
             return (
               <label
@@ -114,7 +125,7 @@ export const QuestionCard: React.FC = () => {
                 onClick={() => selectOption(key)}
                 className={`flex items-start space-x-3.5 p-4 rounded-xl border-2 cursor-pointer transition-all duration-150 select-none ${
                   isSelected
-                    ? "border-exam-primary bg-blue-50/70 text-slate-900 shadow-sm"
+                    ? "border-blue-600 bg-blue-50/70 text-slate-900 shadow-sm"
                     : "border-slate-200 hover:border-slate-300 hover:bg-slate-50/70 text-slate-700"
                 }`}
               >
@@ -122,27 +133,35 @@ export const QuestionCard: React.FC = () => {
                 <div
                   className={`mt-0.5 w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors ${
                     isSelected
-                      ? "border-exam-primary bg-exam-primary"
+                      ? "border-blue-600 bg-blue-600"
                       : "border-slate-400 bg-white"
                   }`}
                 >
                   {isSelected && <div className="w-2 h-2 rounded-full bg-white" />}
                 </div>
 
-                {/* Option Identifier and Text */}
+                {/* Option Identifier and Text / Image */}
                 <div className="flex-1 flex items-start gap-2.5">
                   <span
                     className={`font-black text-sm uppercase px-1.5 py-0.5 rounded ${
                       isSelected
-                        ? "bg-exam-primary text-white"
+                        ? "bg-blue-600 text-white"
                         : "bg-slate-100 text-slate-800"
                     }`}
                   >
                     {key.toUpperCase()}
                   </span>
-                  <span className="text-[15px] sm:text-[16px] leading-relaxed pt-0.5">
-                    {optText}
-                  </span>
+                  {isImageOption ? (
+                    <img
+                      src={optText}
+                      alt={`Option ${key.toUpperCase()}`}
+                      className="max-h-24 w-auto object-contain rounded-lg border border-slate-200 bg-white p-1"
+                    />
+                  ) : (
+                    <span className="text-[15px] sm:text-[16px] leading-relaxed pt-0.5">
+                      {optText}
+                    </span>
+                  )}
                 </div>
 
                 {/* Key Hint Badge */}
@@ -155,14 +174,14 @@ export const QuestionCard: React.FC = () => {
         </div>
       </div>
 
-      {/* Footer Controls */}
-      <div className="p-4 sm:p-5 border-t border-exam-border bg-slate-50/80 flex flex-wrap items-center justify-between gap-3">
+      {/* 3. Fixed / Sticky Footer Controls on Bottom */}
+      <div className="flex-shrink-0 p-4 sm:p-4.5 border-t border-exam-border bg-slate-50/95 backdrop-blur-xs flex flex-wrap items-center justify-between gap-3 select-none">
         {/* Left Actions: Previous & Clear */}
         <div className="flex items-center space-x-2">
           <button
             type="button"
             onClick={prevQuestion}
-            className="flex items-center space-x-1 px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-xs sm:text-sm font-semibold text-slate-700 transition active:scale-98"
+            className="flex items-center space-x-1 px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-xs sm:text-sm font-semibold text-slate-700 transition active:scale-98 shadow-xs"
           >
             <ChevronLeft className="w-4 h-4" />
             <span>Previous [P]</span>
@@ -172,7 +191,7 @@ export const QuestionCard: React.FC = () => {
             type="button"
             onClick={clearResponse}
             disabled={!selectedOption}
-            className="flex items-center space-x-1 px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-xs sm:text-sm font-semibold text-slate-700 transition disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex items-center space-x-1 px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-xs sm:text-sm font-semibold text-slate-700 transition disabled:opacity-40 disabled:cursor-not-allowed shadow-xs"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Clear</span>
@@ -184,7 +203,7 @@ export const QuestionCard: React.FC = () => {
           <button
             type="button"
             onClick={markForReview}
-            className="flex items-center space-x-1.5 px-4 py-2.5 rounded-xl bg-exam-purple hover:bg-purple-800 text-white text-xs sm:text-sm font-bold transition shadow-sm active:scale-98"
+            className="flex items-center space-x-1.5 px-4 py-2.5 rounded-xl bg-purple-700 hover:bg-purple-800 text-white text-xs sm:text-sm font-bold transition shadow-sm active:scale-98"
           >
             <BookmarkCheck className="w-4 h-4" />
             <span>Mark for Review [M]</span>
@@ -193,7 +212,7 @@ export const QuestionCard: React.FC = () => {
           <button
             type="button"
             onClick={saveAndNext}
-            className="flex items-center space-x-1.5 px-5 py-2.5 rounded-xl bg-exam-success hover:bg-emerald-700 text-white text-xs sm:text-sm font-black transition shadow-md hover:shadow-lg active:scale-98"
+            className="flex items-center space-x-1.5 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-black transition shadow-md hover:shadow-lg active:scale-98"
           >
             <span>Save & Next [N]</span>
             <ChevronRight className="w-4 h-4" />
