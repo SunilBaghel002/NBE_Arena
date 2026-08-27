@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
 import {
   BookOpen,
   Award,
@@ -16,12 +17,18 @@ import {
   AlertCircle,
   Loader2,
   Play,
-  RotateCcw,
+  LogOut,
+  UserCheck,
+  TrendingUp,
+  Target,
+  FileCheck,
 } from "lucide-react";
 import { BankStats, MockTest, Attempt } from "@/types";
 
-export default function LobbyPage() {
+export default function StudentDashboard() {
   const router = useRouter();
+  const { data: session, status } = useSession();
+
   const [bankStats, setBankStats] = useState<BankStats | null>(null);
   const [mocks, setMocks] = useState<MockTest[]>([]);
   const [attempts, setAttempts] = useState<(Attempt & { mockTitle?: string })[]>([]);
@@ -29,9 +36,17 @@ export default function LobbyPage() {
   const [generating, setGenerating] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  // Fetch bank stats, mocks, and past attempts
+  // If unauthenticated, redirect to /login
   useEffect(() => {
-    async function loadLobbyData() {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, [status, router]);
+
+  // Load Dashboard Data
+  useEffect(() => {
+    async function loadDashboardData() {
+      if (status !== "authenticated") return;
       try {
         setLoading(true);
         const [statsRes, mocksRes, attemptsRes] = await Promise.all([
@@ -55,14 +70,14 @@ export default function LobbyPage() {
           setAttempts(aData.attempts || []);
         }
       } catch (err) {
-        console.error("Error loading lobby data:", err);
+        console.error("Error loading dashboard data:", err);
       } finally {
         setLoading(false);
       }
     }
 
-    loadLobbyData();
-  }, []);
+    loadDashboardData();
+  }, [status]);
 
   const canGenerateMock = Boolean(
     bankStats &&
@@ -88,7 +103,8 @@ export default function LobbyPage() {
       }
 
       const data = await res.json();
-      router.push(`/test/${data.mockId}`);
+      // Routes to mandatory Pre-Exam Instructions page
+      router.push(`/test/${data.mockId}/instructions`);
     } catch (err) {
       setErrorMsg(err instanceof Error ? err.message : "Error generating mock test");
       setGenerating(false);
@@ -101,9 +117,55 @@ export default function LobbyPage() {
     return `${m}m ${s}s`;
   };
 
+  // Calculate Candidate Performance Summary
+  const attemptsWithScores = attempts.filter((a) => a.score);
+  const totalCompleted = attemptsWithScores.length;
+
+  const averageScore =
+    totalCompleted > 0
+      ? Number(
+          (
+            attemptsWithScores.reduce((acc, curr) => acc + (curr.score?.netScore || 0), 0) /
+            totalCompleted
+          ).toFixed(2)
+        )
+      : 0;
+
+  const highestScore =
+    totalCompleted > 0
+      ? Math.max(...attemptsWithScores.map((a) => a.score?.netScore || 0))
+      : 0;
+
+  const averageAccuracy =
+    totalCompleted > 0
+      ? Number(
+          (
+            attemptsWithScores.reduce(
+              (acc, curr) => acc + (curr.score?.accuracyPercentage || 0),
+              0
+            ) / totalCompleted
+          ).toFixed(1)
+        )
+      : 0;
+
+  if (status === "loading" || loading) {
+    return (
+      <div className="min-h-screen bg-exam-bg flex items-center justify-center p-4">
+        <div className="bg-white p-8 rounded-2xl shadow-sm border border-exam-border text-center max-w-sm w-full">
+          <Loader2 className="w-10 h-10 text-exam-primary animate-spin mx-auto mb-3" />
+          <h2 className="font-bold text-base text-slate-800">Loading Student Dashboard</h2>
+          <p className="text-xs text-slate-500 mt-1">Connecting to MongoDB Atlas...</p>
+        </div>
+      </div>
+    );
+  }
+
+  const userRole = (session?.user as unknown as { role?: string })?.role || "student";
+  const userName = session?.user?.name || "Candidate";
+
   return (
     <main className="min-h-screen bg-exam-bg flex flex-col justify-between">
-      {/* Top CBT Portal Header */}
+      {/* Top Portal Header */}
       <header className="bg-exam-primary text-white shadow-md sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-3">
@@ -111,101 +173,73 @@ export default function LobbyPage() {
               NBE
             </div>
             <div>
-              <h1 className="font-bold text-lg leading-none">NBE ARENA</h1>
+              <h1 className="font-bold text-base sm:text-lg leading-none">NBE ARENA</h1>
               <p className="text-xs text-white/80">NBEMS Junior Assistant CBT Platform</p>
             </div>
           </div>
 
-          <nav className="flex items-center space-x-4">
-            <Link
-              href="/admin"
-              className="text-xs bg-white/10 hover:bg-white/20 text-white font-semibold px-3.5 py-2 rounded-lg transition border border-white/20 flex items-center gap-1.5"
-            >
-              <Database className="w-3.5 h-3.5" />
-              <span>Admin & Question Bank</span>
-            </Link>
+          <nav className="flex items-center space-x-3 sm:space-x-4">
+            {userRole === "admin" && (
+              <Link
+                href="/admin"
+                className="text-xs bg-white/10 hover:bg-white/20 text-white font-semibold px-3 py-1.5 rounded-lg transition border border-white/20 flex items-center gap-1"
+              >
+                <Database className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Admin Panel</span>
+              </Link>
+            )}
+
+            <div className="flex items-center space-x-2 border-l border-white/20 pl-3 sm:pl-4">
+              <div className="text-right hidden sm:block">
+                <span className="text-xs font-bold block leading-none">{userName}</span>
+                <span className="text-[10px] text-white/70 uppercase font-semibold">{userRole}</span>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => signOut({ callbackUrl: "/login" })}
+                className="p-1.5 rounded-lg bg-white/10 hover:bg-rose-600/80 text-white transition"
+                title="Sign Out"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
+            </div>
           </nav>
         </div>
       </header>
 
       {/* Main Container */}
       <div className="max-w-5xl mx-auto px-4 py-8 flex-1 w-full space-y-8">
-        {/* Hero Card */}
-        <div className="bg-white rounded-2xl shadow-md border border-exam-border p-6 sm:p-10 text-center">
-          <div className="inline-flex items-center gap-2 bg-blue-50 text-exam-primary px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4 border border-blue-200">
-            <ShieldCheck className="w-4 h-4 text-exam-primary" /> Official CBT Pattern Simulation
-          </div>
-
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-exam-text tracking-tight mb-2">
-            NBE Junior Assistant Full-Length Mock Test
-          </h2>
-          <p className="text-sm sm:text-base text-exam-muted max-w-2xl mx-auto mb-8 font-medium">
-            200 Questions · 180 Minutes (3 Hours) · 4 Sections × 50 · +1 Correct, -0.25 Negative Marking
-          </p>
-
-          {/* Exam Specs Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 max-w-3xl mx-auto mb-8 text-left">
-            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-              <div className="flex items-center gap-1.5 text-exam-primary mb-1">
-                <BookOpen className="w-4 h-4" />
-                <span className="text-[11px] font-bold uppercase text-slate-500">Total Questions</span>
+        {/* Welcome & Exam Hero Banner */}
+        <div className="bg-white rounded-2xl shadow-md border border-exam-border p-6 sm:p-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6 mb-6">
+            <div>
+              <div className="inline-flex items-center gap-1.5 bg-blue-50 text-exam-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 border border-blue-200">
+                <UserCheck className="w-3.5 h-3.5" /> Candidate Portal · {userName}
               </div>
-              <p className="text-xl font-black text-slate-900">200 Qs</p>
-              <p className="text-[11px] text-slate-500 mt-0.5">50 × 4 Sections</p>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                NBE Junior Assistant Examination Series
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                200 Questions · 180 Minutes · 4 Sections × 50 · Marking: +1.00 Correct, -0.25 Wrong
+              </p>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-              <div className="flex items-center gap-1.5 text-exam-saffron mb-1">
-                <Clock className="w-4 h-4" />
-                <span className="text-[11px] font-bold uppercase text-slate-500">Duration</span>
-              </div>
-              <p className="text-xl font-black text-slate-900">180 Min</p>
-              <p className="text-[11px] text-slate-500 mt-0.5">3.0 Hours continuous</p>
-            </div>
-
-            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-              <div className="flex items-center gap-1.5 text-exam-danger mb-1">
-                <span className="font-black text-sm">±</span>
-                <span className="text-[11px] font-bold uppercase text-slate-500">Negative Penalty</span>
-              </div>
-              <p className="text-xl font-black text-exam-danger">-0.25</p>
-              <p className="text-[11px] text-slate-500 mt-0.5">+1.00 for Correct</p>
-            </div>
-
-            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-              <div className="flex items-center gap-1.5 text-exam-success mb-1">
-                <Award className="w-4 h-4" />
-                <span className="text-[11px] font-bold uppercase text-slate-500">Target Score</span>
-              </div>
-              <p className="text-xl font-black text-exam-success">150 / 200</p>
-              <p className="text-[11px] text-slate-500 mt-0.5">75% Net Benchmark</p>
-            </div>
-          </div>
-
-          {/* Error Banner */}
-          {errorMsg && (
-            <div className="max-w-md mx-auto mb-4 p-3 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-700 font-semibold flex items-center gap-2">
-              <AlertCircle className="w-4 h-4" />
-              <span>{errorMsg}</span>
-            </div>
-          )}
-
-          {/* Primary Action Button */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            {/* Primary Action Button */}
             <button
               type="button"
               onClick={handleGenerateMock}
               disabled={generating || !canGenerateMock}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-exam-primary hover:bg-exam-primaryHover text-white font-black text-base px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition transform active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="inline-flex items-center justify-center gap-2 bg-exam-primary hover:bg-exam-primaryHover text-white font-black text-sm px-6 py-3.5 rounded-xl shadow-md hover:shadow-lg transition transform active:scale-95 disabled:opacity-50"
             >
               {generating ? (
                 <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  <span>Assembling 200 Questions...</span>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>Generating Mock...</span>
                 </>
               ) : (
                 <>
-                  <PlusCircle className="w-5 h-5" />
+                  <PlusCircle className="w-4 h-4" />
                   <span>Generate New Mock Test</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
@@ -213,72 +247,98 @@ export default function LobbyPage() {
             </button>
           </div>
 
-          {!canGenerateMock && bankStats && (
-            <p className="text-xs text-rose-600 font-semibold mt-3">
-              ⚠️ Need at least 50 questions in each section to generate a mock test.
-            </p>
-          )}
-        </div>
-
-        {/* Question Bank Status Bar */}
-        {bankStats && (
-          <div className="bg-white rounded-xl shadow-sm border border-exam-border p-5">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                <Database className="w-3.5 h-3.5 text-exam-primary" /> Question Repository Pool
-              </h3>
-              <span className="text-xs font-semibold text-slate-600">
-                Total Available: <strong>{bankStats.total} Questions</strong>
-              </span>
+          {/* Candidate Performance Summary Metrics */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+              <span className="text-[11px] font-bold uppercase text-slate-500 block">Tests Completed</span>
+              <span className="text-2xl font-black text-slate-900">{totalCompleted}</span>
+              <span className="text-[11px] text-slate-500 block mt-0.5">Attempted sessions</span>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-              <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
-                <span className="text-[11px] font-bold text-slate-600 block">Reasoning</span>
-                <span className="text-lg font-black text-exam-primary">
-                  {bankStats.activeBySection.REASONING} / 50
-                </span>
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+              <span className="text-[11px] font-bold uppercase text-slate-500 block">Average Net Score</span>
+              <div className="flex items-baseline gap-1">
+                <span className="text-2xl font-black text-exam-primary">{averageScore}</span>
+                <span className="text-xs text-slate-400 font-bold">/ 200</span>
               </div>
-              <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
-                <span className="text-[11px] font-bold text-slate-600 block">General Awareness</span>
-                <span className="text-lg font-black text-exam-primary">
-                  {bankStats.activeBySection.GA} / 50
-                </span>
-              </div>
-              <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
-                <span className="text-[11px] font-bold text-slate-600 block">Quant Aptitude</span>
-                <span className="text-lg font-black text-exam-primary">
-                  {bankStats.activeBySection.QUANT} / 50
-                </span>
-              </div>
-              <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
-                <span className="text-[11px] font-bold text-slate-600 block">English</span>
-                <span className="text-lg font-black text-exam-primary">
-                  {bankStats.activeBySection.ENGLISH} / 50
-                </span>
-              </div>
+              <span className="text-[11px] text-slate-500 block mt-0.5">Target: 150 Qualifying</span>
+            </div>
+
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+              <span className="text-[11px] font-bold uppercase text-slate-500 block">Highest Net Score</span>
+              <span className="text-2xl font-black text-emerald-700">{highestScore}</span>
+              <span className="text-[11px] text-emerald-800 font-semibold block mt-0.5">Personal best</span>
+            </div>
+
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+              <span className="text-[11px] font-bold uppercase text-slate-500 block">Average Accuracy</span>
+              <span className="text-2xl font-black text-slate-900">{averageAccuracy}%</span>
+              <span className="text-[11px] text-slate-500 block mt-0.5">Correct vs Attempted</span>
             </div>
           </div>
-        )}
+        </div>
 
-        {/* Previous Attempts & Available Mocks */}
+        {/* Available Mock Papers & Personal Attempt History */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Recent Attempts */}
-          <div className="bg-white rounded-xl shadow-sm border border-exam-border p-5 flex flex-col justify-between">
+          {/* Available Mock Papers (Clicking routes to Pre-Exam Instructions) */}
+          <div className="bg-white rounded-xl shadow-sm border border-exam-border p-6 flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between mb-3 border-b pb-2">
-                <h3 className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                  <History className="w-4 h-4 text-exam-primary" /> Recent Test Attempts
+              <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+                <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                  <Play className="w-4 h-4 text-exam-primary" /> Available Mock Papers
+                </h3>
+                <span className="text-xs text-slate-500 font-semibold">{mocks.length} papers</span>
+              </div>
+
+              {mocks.length === 0 ? (
+                <div className="text-center py-10 text-xs text-slate-400">
+                  No mock papers generated yet. Click &quot;Generate New Mock Test&quot; above to create one.
+                </div>
+              ) : (
+                <div className="space-y-3 max-h-80 overflow-y-auto pr-1">
+                  {mocks.map((mock) => (
+                    <div
+                      key={mock.id}
+                      className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 flex items-center justify-between transition"
+                    >
+                      <div>
+                        <p className="font-bold text-sm text-slate-800">{mock.title}</p>
+                        <p className="text-xs text-slate-500 mt-0.5">
+                          200 Qs · 180 Mins · 4 Sections × 50
+                        </p>
+                      </div>
+
+                      {/* Routes to Pre-Exam Rules / Instructions page */}
+                      <Link
+                        href={`/test/${mock.id}/instructions`}
+                        className="flex items-center gap-1.5 bg-exam-primary hover:bg-exam-primaryHover text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-sm transition"
+                      >
+                        <Play className="w-3.5 h-3.5" />
+                        <span>Start Mock</span>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Personal Attempt History */}
+          <div className="bg-white rounded-xl shadow-sm border border-exam-border p-6 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+                <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                  <History className="w-4 h-4 text-exam-primary" /> Your Attempt History
                 </h3>
                 <span className="text-xs text-slate-500 font-semibold">{attempts.length} attempts</span>
               </div>
 
               {attempts.length === 0 ? (
-                <div className="text-center py-8 text-xs text-slate-400">
-                  No attempts recorded yet. Click &quot;Generate New Mock Test&quot; to start your first session.
+                <div className="text-center py-10 text-xs text-slate-400">
+                  You have not attempted any tests yet. Click &quot;Start Mock&quot; to begin your first practice session.
                 </div>
               ) : (
-                <div className="space-y-2.5 max-h-72 overflow-y-auto pr-1">
+                <div className="space-y-3 max-h-80 overflow-y-auto pr-1">
                   {attempts.map((att) => {
                     const score = att.score;
                     if (!score) return null;
@@ -286,15 +346,15 @@ export default function LobbyPage() {
                     return (
                       <div
                         key={att.id}
-                        className="p-3 rounded-lg border border-slate-200 bg-slate-50/50 hover:bg-slate-50 flex items-center justify-between transition"
+                        className="p-3.5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 flex items-center justify-between transition"
                       >
                         <div>
-                          <p className="font-bold text-xs text-slate-800 truncate max-w-[180px]">
+                          <p className="font-bold text-xs sm:text-sm text-slate-800 truncate max-w-[160px] sm:max-w-[200px]">
                             {att.mockTitle || "NBE Full Mock"}
                           </p>
-                          <p className="text-[10px] text-slate-500">
+                          <p className="text-[11px] text-slate-500 mt-0.5">
                             {new Date(att.submittedAt || att.startedAt).toLocaleDateString()} · Time:{" "}
-                            {formatSeconds(att.timeTakenSeconds)}
+                            {formatSeconds(att.timeTakenSeconds)} · Accuracy: {score.accuracyPercentage}%
                           </p>
                         </div>
 
@@ -316,10 +376,10 @@ export default function LobbyPage() {
 
                           <Link
                             href={`/results/${att.id}`}
-                            className="p-1.5 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition"
+                            className="p-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition"
                             title="View Scorecard"
                           >
-                            <ArrowRight className="w-3.5 h-3.5" />
+                            <ArrowRight className="w-4 h-4" />
                           </Link>
                         </div>
                       </div>
@@ -329,54 +389,12 @@ export default function LobbyPage() {
               )}
             </div>
           </div>
-
-          {/* Generated Mocks Ready to Attempt */}
-          <div className="bg-white rounded-xl shadow-sm border border-exam-border p-5 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-3 border-b pb-2">
-                <h3 className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                  <Play className="w-4 h-4 text-exam-primary" /> Generated Mock Papers
-                </h3>
-                <span className="text-xs text-slate-500 font-semibold">{mocks.length} papers</span>
-              </div>
-
-              {mocks.length === 0 ? (
-                <div className="text-center py-8 text-xs text-slate-400">
-                  No mock papers generated yet. Click &quot;Generate New Mock Test&quot; above to create one.
-                </div>
-              ) : (
-                <div className="space-y-2.5 max-h-72 overflow-y-auto pr-1">
-                  {mocks.map((mock, idx) => (
-                    <div
-                      key={mock.id}
-                      className="p-3 rounded-lg border border-slate-200 bg-slate-50/50 hover:bg-slate-50 flex items-center justify-between transition"
-                    >
-                      <div>
-                        <p className="font-bold text-xs text-slate-800">{mock.title}</p>
-                        <p className="text-[10px] text-slate-500">
-                          200 Questions · 180 Minutes · Created {new Date(mock.createdAt).toLocaleDateString()}
-                        </p>
-                      </div>
-
-                      <Link
-                        href={`/test/${mock.id}`}
-                        className="flex items-center gap-1 bg-exam-primary hover:bg-exam-primaryHover text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition"
-                      >
-                        <Play className="w-3 h-3" />
-                        <span>Start</span>
-                      </Link>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
         </div>
       </div>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-exam-border py-4 text-center text-xs text-exam-muted">
-        NBE Arena — National Board of Examinations in Medical Sciences CBT Mock Platform
+      <footer className="bg-white border-t border-exam-border py-4 text-center text-xs text-slate-400">
+        NBE Arena — National Board of Examinations in Medical Sciences CBT Simulation Platform
       </footer>
     </main>
   );

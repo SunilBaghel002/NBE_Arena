@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { getAttemptById, getMockById, getQuestions } from "@/lib/db";
-import { Question } from "@/types";
+import { Question, AnswerState } from "@/types";
+
+export const dynamic = "force-dynamic";
 
 export async function GET(
   req: Request,
@@ -17,17 +19,35 @@ export async function GET(
     const mock = await getMockById(attempt.mockId);
     const allQuestions = await getQuestions();
     const questionMap = new Map<string, Question>(allQuestions.map((q) => [q.id, q]));
+    const answerMap = new Map<string, AnswerState>(
+      attempt.answers.map((a) => [a.questionId, a])
+    );
 
-    // Attach full question details (including correctOption & explanation)
-    const questionsWithReview = attempt.answers.map((ans) => {
-      const q = questionMap.get(ans.questionId);
+    // Get all 200 question IDs from the mock test in order
+    const mockQuestionIds = mock
+      ? [
+          ...mock.sections.REASONING,
+          ...mock.sections.GA,
+          ...mock.sections.QUANT,
+          ...mock.sections.ENGLISH,
+        ]
+      : attempt.answers.map((a) => a.questionId);
+
+    // Attach full question details (including correctOption & explanation) for all 200 questions
+    const questionsWithReview = mockQuestionIds.map((qId) => {
+      const q = questionMap.get(qId);
+      const ans = answerMap.get(qId);
+      const selectedOption = ans?.selectedOption || null;
+      const status = ans?.status || "not_visited";
+      const isCorrect = q && selectedOption ? selectedOption === q.correctOption : false;
+
       return {
-        questionId: ans.questionId,
-        selectedOption: ans.selectedOption,
-        status: ans.status,
-        timeSpentSeconds: ans.timeSpentSeconds || 0,
+        questionId: qId,
+        selectedOption,
+        status,
+        timeSpentSeconds: ans?.timeSpentSeconds || 0,
         question: q || null,
-        isCorrect: q ? ans.selectedOption === q.correctOption : false,
+        isCorrect,
       };
     });
 

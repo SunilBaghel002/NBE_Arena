@@ -66,41 +66,41 @@
 ---
 
 ## STAGE 1.5 — Cloud Database, NextAuth, Student Dashboards & Pre-Exam Rules
-**Status:** `[ ] In Progress`
+**Status:** `[x] Done`
 
 > **Goal:** Migrate from local JSON to MongoDB Atlas, add NextAuth credentials authentication for candidate friends, build personalized student dashboards, and enforce pre-exam instructions review before CBT countdown begins.
 
 ### Tasks
-- [ ] Install `mongoose`, `next-auth`, `bcryptjs`, `@types/bcryptjs`
-- [ ] Setup MongoDB Atlas singleton connection in `src/lib/mongodb.ts`
-- [ ] Create Mongoose models in `src/models/`:
+- [x] Install `mongoose`, `next-auth`, `bcryptjs`, `@types/bcryptjs`
+- [x] Setup MongoDB Atlas singleton connection in `src/lib/mongodb.ts`
+- [x] Create Mongoose models in `src/models/`:
   - `User.ts` (username, passwordHash, name, role)
   - `Question.ts` (section, questionText, options, correctOption, explanation, isActive)
   - `MockTest.ts` (title, sections, totalQuestions, timeLimitMinutes)
   - `Attempt.ts` (userId, mockId, answers, score, timeTakenSeconds)
-- [ ] Seed default users (`admin` and `student` accounts) and import 200 seed questions into MongoDB Atlas
-- [ ] Configure NextAuth.js Credentials Provider with JWT session in `src/lib/auth.ts`
-- [ ] Create Login Screen (`/login`)
-- [ ] Create Pre-Exam Rules & Instructions Page (`/test/[mockId]/instructions`):
+- [x] Seed default users (`admin` and `student` accounts) and import 200 seed questions into MongoDB Atlas
+- [x] Configure NextAuth.js Credentials Provider with JWT session in `src/lib/auth.ts`
+- [x] Create Login Screen (`/login`)
+- [x] Create Pre-Exam Rules & Instructions Page (`/test/[mockId]/instructions`):
   - 200 Qs, 180 Mins, 4 Sections × 50, +1 / -0.25 scheme
   - Mandatory disclaimer checkbox: *"I have read and understood the instructions"*
   - "Begin Test" button enabled only after checkbox checked
-- [ ] Update Live Test Page (`/test/[mockId]`): 180-min timer commences only when "Begin Test" is clicked
-- [ ] Create Student Dashboard (`/`):
+- [x] Update Live Test Page (`/test/[mockId]`): 180-min timer commences only when "Begin Test" is clicked
+- [x] Create Student Dashboard (`/`):
   - User greeting & role badge
   - Personal test attempts history & progress
   - Average score, accuracy %, and qualifying target status
   - Available mock cards with "Start Mock" (routes to instructions)
-- [ ] Protect `/admin` route with role check (`role === "admin"`)
-- [ ] Update API routes to authenticate with `getServerSession` and filter attempts by `userId`
+- [x] Protect `/admin` route with role check (`role === "admin"`)
+- [x] Update API routes to authenticate with `getServerSession` and filter attempts by `userId`
 
 ### Exit Criteria
-- [ ] User can log in with Credentials
-- [ ] Data persists to MongoDB Atlas
-- [ ] Clicking "Start Mock" routes to `/test/[mockId]/instructions`
-- [ ] Timer does not start until candidate checks disclaimer and clicks "Begin Test"
-- [ ] Student dashboard displays candidate-specific attempts and scores
-- [ ] Non-admin cannot access `/admin`
+- [x] User can log in with Credentials
+- [x] Data persists to MongoDB Atlas
+- [x] Clicking "Start Mock" routes to `/test/[mockId]/instructions`
+- [x] Timer does not start until candidate checks disclaimer and clicks "Begin Test"
+- [x] Student dashboard displays candidate-specific attempts and scores
+- [x] Non-admin cannot access `/admin`
 
 ---
 

@@ -2,22 +2,35 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import {
   Database,
   ArrowLeft,
-  BookOpen,
   CheckCircle2,
-  FileText,
   RefreshCw,
   Layers,
   Shield,
-  HelpCircle,
+  ShieldAlert,
+  Loader2,
 } from "lucide-react";
 import { BankStats } from "@/types";
 
 export default function AdminPage() {
+  const router = useRouter();
+  const { data: session, status } = useSession();
+
   const [stats, setStats] = useState<BankStats | null>(null);
   const [loading, setLoading] = useState(true);
+
+  // Authentication & Role verification
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, [status, router]);
+
+  const userRole = (session?.user as unknown as { role?: string })?.role || "student";
 
   const fetchStats = async () => {
     try {
@@ -35,8 +48,47 @@ export default function AdminPage() {
   };
 
   useEffect(() => {
-    fetchStats();
-  }, []);
+    if (status === "authenticated" && userRole === "admin") {
+      fetchStats();
+    } else {
+      setLoading(false);
+    }
+  }, [status, userRole]);
+
+  if (status === "loading" || (status === "authenticated" && userRole === "admin" && loading)) {
+    return (
+      <div className="min-h-screen bg-exam-bg flex items-center justify-center p-4">
+        <div className="bg-white p-8 rounded-2xl shadow-sm border border-exam-border text-center max-w-sm w-full">
+          <Loader2 className="w-10 h-10 text-exam-primary animate-spin mx-auto mb-3" />
+          <h2 className="font-bold text-base text-slate-800">Verifying Admin Access</h2>
+          <p className="text-xs text-slate-500 mt-1">Connecting to repository...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Access Denied for Students
+  if (userRole !== "admin") {
+    return (
+      <div className="min-h-screen bg-exam-bg flex items-center justify-center p-4">
+        <div className="bg-white p-8 rounded-2xl shadow-md border border-rose-200 text-center max-w-md w-full">
+          <div className="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-4 text-rose-600">
+            <ShieldAlert className="w-6 h-6" />
+          </div>
+          <h2 className="font-bold text-xl text-slate-900 mb-2">Access Restricted</h2>
+          <p className="text-sm text-slate-600 mb-6">
+            You are signed in as <strong>{session?.user?.name || "Student"}</strong> ({userRole}). Administrator permissions are required to access the PDF extraction pipeline and question repository management.
+          </p>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 bg-exam-primary text-white font-bold text-sm px-6 py-2.5 rounded-xl hover:bg-exam-primaryHover transition"
+          >
+            <ArrowLeft className="w-4 h-4" /> Return to Student Dashboard
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-exam-bg flex flex-col justify-between">
@@ -49,7 +101,7 @@ export default function AdminPage() {
             </div>
             <div>
               <h1 className="font-bold text-base sm:text-lg">Question Bank & Administration</h1>
-              <p className="text-xs text-white/80">Question Repository Management</p>
+              <p className="text-xs text-white/80">MongoDB Atlas Repository Management (Admin: {session?.user?.name})</p>
             </div>
           </div>
 
@@ -57,7 +109,7 @@ export default function AdminPage() {
             href="/"
             className="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition"
           >
-            <ArrowLeft className="w-3.5 h-3.5" /> Back to Lobby
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to Dashboard
           </Link>
         </div>
       </header>
@@ -68,7 +120,7 @@ export default function AdminPage() {
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
-              <Database className="w-5 h-5 text-exam-primary" /> Question Repository Pool
+              <Database className="w-5 h-5 text-exam-primary" /> Question Repository Pool (MongoDB Atlas)
             </h2>
             <p className="text-xs text-slate-500">
               Structured database of questions available for dynamic NBE mock generation.
@@ -170,7 +222,7 @@ export default function AdminPage() {
           <div>
             <h4 className="font-bold text-sm mb-1">Vision LLM PDF Extraction Pipeline (Stage 2)</h4>
             <p className="leading-relaxed">
-              Stage 1 operates seamlessly with 200 verified seed questions across all 4 sections. In Stage 2, the multimodal Vision LLM drag-drop uploader will be activated on this page to ingest PDFs from <code>/data/pyq</code> directly into this question pool.
+              Stage 1.5 operates with 200 seed questions synchronized with MongoDB Atlas. In Stage 2, the multimodal Vision LLM drag-drop uploader will be enabled on this page to ingest PDFs from <code>/data/pyq</code> directly into this MongoDB Atlas question repository.
             </p>
           </div>
         </div>

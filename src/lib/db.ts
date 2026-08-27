@@ -1,71 +1,83 @@
 import fs from "fs";
 import path from "path";
+import { connectToDatabase } from "./mongodb";
+import { QuestionModel } from "@/models/Question";
+import { MockTestModel } from "@/models/MockTest";
+import { AttemptModel } from "@/models/Attempt";
 import { Question, MockTest, Attempt, BankStats, SectionType } from "@/types";
 
-const DATA_DIR = path.join(process.cwd(), "data");
-const QUESTIONS_FILE = path.join(DATA_DIR, "questions.json");
-const SEED_QUESTIONS_FILE = path.join(DATA_DIR, "seed-questions.json");
-const MOCKS_FILE = path.join(DATA_DIR, "mocks.json");
-const ATTEMPTS_FILE = path.join(DATA_DIR, "attempts.json");
-
-function ensureDataFiles() {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-  }
-
-  if (!fs.existsSync(QUESTIONS_FILE)) {
-    if (fs.existsSync(SEED_QUESTIONS_FILE)) {
-      const seedData = fs.readFileSync(SEED_QUESTIONS_FILE, "utf-8");
-      fs.writeFileSync(QUESTIONS_FILE, seedData, "utf-8");
-    } else {
-      fs.writeFileSync(QUESTIONS_FILE, JSON.stringify([], null, 2), "utf-8");
+// Auto-seed questions into MongoDB if collection is empty
+async function ensureSeedQuestions() {
+  await connectToDatabase();
+  const count = await QuestionModel.countDocuments();
+  if (count === 0) {
+    const seedPath = path.join(process.cwd(), "data", "seed-questions.json");
+    if (fs.existsSync(seedPath)) {
+      try {
+        const raw = fs.readFileSync(seedPath, "utf-8");
+        const seedQuestions: Question[] = JSON.parse(raw);
+        if (seedQuestions.length > 0) {
+          await QuestionModel.insertMany(seedQuestions, { ordered: false }).catch(() => {});
+          console.log(`Auto-seeded ${seedQuestions.length} questions to MongoDB Atlas.`);
+        }
+      } catch (err) {
+        console.error("Error seeding questions into MongoDB:", err);
+      }
     }
-  }
-
-  if (!fs.existsSync(MOCKS_FILE)) {
-    fs.writeFileSync(MOCKS_FILE, JSON.stringify([], null, 2), "utf-8");
-  }
-
-  if (!fs.existsSync(ATTEMPTS_FILE)) {
-    fs.writeFileSync(ATTEMPTS_FILE, JSON.stringify([], null, 2), "utf-8");
   }
 }
 
 // ----------------- QUESTIONS -----------------
 
 export async function getQuestions(): Promise<Question[]> {
-  ensureDataFiles();
   try {
-    const raw = fs.readFileSync(QUESTIONS_FILE, "utf-8");
-    const questions: Question[] = JSON.parse(raw);
-    return questions;
+    await connectToDatabase();
+    await ensureSeedQuestions();
+    const docs = await QuestionModel.find({}).lean();
+    return docs.map((doc) => ({
+      id: doc.id,
+      section: doc.section as SectionType,
+      questionText: doc.questionText,
+      options: doc.options,
+      correctOption: doc.correctOption as Question["correctOption"],
+      explanation: doc.explanation,
+      hasImage: doc.hasImage,
+      imagePath: doc.imagePath,
+      sourceExam: doc.sourceExam,
+      sourceYear: doc.sourceYear,
+      difficulty: doc.difficulty as Question["difficulty"],
+      isActive: doc.isActive,
+      createdAt: doc.createdAt?.toISOString?.() || new Date().toISOString(),
+    }));
   } catch (error) {
-    console.error("Error reading questions.json:", error);
+    console.error("MongoDB getQuestions error, falling back to seed file:", error);
+    const seedPath = path.join(process.cwd(), "data", "seed-questions.json");
+    if (fs.existsSync(seedPath)) {
+      return JSON.parse(fs.readFileSync(seedPath, "utf-8"));
+    }
     return [];
   }
 }
 
 export async function saveQuestions(questions: Question[]): Promise<void> {
-  ensureDataFiles();
-  fs.writeFileSync(QUESTIONS_FILE, JSON.stringify(questions, null, 2), "utf-8");
+  await connectToDatabase();
+  for (const q of questions) {
+    await QuestionModel.findOneAndUpdate({ id: q.id }, q, { upsert: true });
+  }
 }
 
 export async function appendQuestions(newQuestions: Question[]): Promise<{ added: number; total: number }> {
-  ensureDataFiles();
-  const existing = await getQuestions();
-  const existingMap = new Map(existing.map((q) => [q.id, q]));
-
+  await connectToDatabase();
   let added = 0;
   for (const q of newQuestions) {
-    if (!existingMap.has(q.id)) {
-      existingMap.set(q.id, q);
+    const existing = await QuestionModel.findOne({ id: q.id });
+    if (!existing) {
+      await QuestionModel.create(q);
       added++;
     }
   }
-
-  const updated = Array.from(existingMap.values());
-  await saveQuestions(updated);
-  return { added, total: updated.length };
+  const total = await QuestionModel.countDocuments();
+  return { added, total };
 }
 
 export async function getBankStats(): Promise<BankStats> {
@@ -117,59 +129,104 @@ export async function getBankStats(): Promise<BankStats> {
 // ----------------- MOCKS -----------------
 
 export async function getMocks(): Promise<MockTest[]> {
-  ensureDataFiles();
   try {
-    const raw = fs.readFileSync(MOCKS_FILE, "utf-8");
-    return JSON.parse(raw);
+    await connectToDatabase();
+    const docs = await MockTestModel.find({}).sort({ createdAt: -1 }).lean();
+    return docs.map((doc) => ({
+      id: doc.id,
+      title: doc.title,
+      createdAt: doc.createdAt?.toISOString?.() || new Date().toISOString(),
+      timeLimitMinutes: doc.timeLimitMinutes || 180,
+      totalQuestions: doc.totalQuestions || 200,
+      sections: {
+        REASONING: doc.sections?.REASONING || [],
+        GA: doc.sections?.GA || [],
+        QUANT: doc.sections?.QUANT || [],
+        ENGLISH: doc.sections?.ENGLISH || [],
+      },
+    }));
   } catch (error) {
-    console.error("Error reading mocks.json:", error);
+    console.error("MongoDB getMocks error:", error);
     return [];
   }
 }
 
 export async function getMockById(mockId: string): Promise<MockTest | null> {
-  const mocks = await getMocks();
-  return mocks.find((m) => m.id === mockId) || null;
+  try {
+    await connectToDatabase();
+    const doc = await MockTestModel.findOne({ id: mockId }).lean();
+    if (!doc) return null;
+    return {
+      id: doc.id,
+      title: doc.title,
+      createdAt: doc.createdAt?.toISOString?.() || new Date().toISOString(),
+      timeLimitMinutes: doc.timeLimitMinutes || 180,
+      totalQuestions: doc.totalQuestions || 200,
+      sections: {
+        REASONING: doc.sections?.REASONING || [],
+        GA: doc.sections?.GA || [],
+        QUANT: doc.sections?.QUANT || [],
+        ENGLISH: doc.sections?.ENGLISH || [],
+      },
+    };
+  } catch (error) {
+    console.error("MongoDB getMockById error:", error);
+    return null;
+  }
 }
 
 export async function saveMock(mock: MockTest): Promise<void> {
-  ensureDataFiles();
-  const mocks = await getMocks();
-  const index = mocks.findIndex((m) => m.id === mock.id);
-  if (index >= 0) {
-    mocks[index] = mock;
-  } else {
-    mocks.unshift(mock); // newest first
-  }
-  fs.writeFileSync(MOCKS_FILE, JSON.stringify(mocks, null, 2), "utf-8");
+  await connectToDatabase();
+  await MockTestModel.findOneAndUpdate({ id: mock.id }, mock, { upsert: true });
 }
 
 // ----------------- ATTEMPTS -----------------
 
-export async function getAttempts(): Promise<Attempt[]> {
-  ensureDataFiles();
+export async function getAttempts(userId?: string): Promise<Attempt[]> {
   try {
-    const raw = fs.readFileSync(ATTEMPTS_FILE, "utf-8");
-    return JSON.parse(raw);
+    await connectToDatabase();
+    const query = userId ? { userId } : {};
+    const docs = await AttemptModel.find(query).sort({ createdAt: -1 }).lean();
+    return docs.map((doc) => ({
+      id: doc.id,
+      userId: doc.userId,
+      userName: doc.userName,
+      mockId: doc.mockId,
+      startedAt: doc.startedAt?.toISOString?.() || new Date().toISOString(),
+      submittedAt: doc.submittedAt?.toISOString?.() || undefined,
+      timeTakenSeconds: doc.timeTakenSeconds,
+      answers: doc.answers as Attempt["answers"],
+      score: doc.score,
+    }));
   } catch (error) {
-    console.error("Error reading attempts.json:", error);
+    console.error("MongoDB getAttempts error:", error);
     return [];
   }
 }
 
 export async function getAttemptById(attemptId: string): Promise<Attempt | null> {
-  const attempts = await getAttempts();
-  return attempts.find((a) => a.id === attemptId) || null;
+  try {
+    await connectToDatabase();
+    const doc = await AttemptModel.findOne({ id: attemptId }).lean();
+    if (!doc) return null;
+    return {
+      id: doc.id,
+      userId: doc.userId,
+      userName: doc.userName,
+      mockId: doc.mockId,
+      startedAt: doc.startedAt?.toISOString?.() || new Date().toISOString(),
+      submittedAt: doc.submittedAt?.toISOString?.() || undefined,
+      timeTakenSeconds: doc.timeTakenSeconds,
+      answers: doc.answers as Attempt["answers"],
+      score: doc.score,
+    };
+  } catch (error) {
+    console.error("MongoDB getAttemptById error:", error);
+    return null;
+  }
 }
 
 export async function saveAttempt(attempt: Attempt): Promise<void> {
-  ensureDataFiles();
-  const attempts = await getAttempts();
-  const index = attempts.findIndex((a) => a.id === attempt.id);
-  if (index >= 0) {
-    attempts[index] = attempt;
-  } else {
-    attempts.unshift(attempt); // newest first
-  }
-  fs.writeFileSync(ATTEMPTS_FILE, JSON.stringify(attempts, null, 2), "utf-8");
+  await connectToDatabase();
+  await AttemptModel.findOneAndUpdate({ id: attempt.id }, attempt, { upsert: true });
 }

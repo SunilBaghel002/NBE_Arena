@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { z } from "zod";
 import { getMockById, getQuestions, saveAttempt } from "@/lib/db";
 import { calculateAttemptScore } from "@/lib/scoring";
@@ -20,6 +22,10 @@ const SubmitSchema = z.object({
 
 export async function POST(req: Request) {
   try {
+    const session = await getServerSession(authOptions);
+    const userId = session?.user ? (session.user as unknown as { id: string }).id : undefined;
+    const userName = session?.user?.name || "Candidate";
+
     const rawBody = await req.json();
     const parsed = SubmitSchema.safeParse(rawBody);
 
@@ -56,7 +62,10 @@ export async function POST(req: Request) {
 
     const attempt: Attempt = {
       id: attemptId,
+      userId,
+      userName,
       mockId,
+      mockTitle: mock.title,
       startedAt: new Date(Date.now() - timeTakenSeconds * 1000).toISOString(),
       submittedAt: new Date().toISOString(),
       timeTakenSeconds,
