@@ -34,7 +34,9 @@ All platform mock tests and evaluation engines must adhere strictly to the offic
 2. **Authentication & Multi-Candidate Dashboards:** NextAuth.js (Auth.js) Credentials Provider with role-based access (`admin` vs `student`). Each candidate has an isolated personal dashboard tracking test history, score progression, and accuracy. Test attempts store `userId`.
 3. **Admin Route Protection:** Only authenticated users with `role: "admin"` can access `/admin` for PDF uploads and question repository management.
 4. **Mandatory Pre-Exam Instructions Flow:** Clicking "Start Mock" must route the candidate to `/test/[mockId]/instructions`. The 180-minute countdown timer must NEVER begin until the candidate reads the rules, checks *"I have read and understood the instructions"*, and clicks **"Begin Test"**.
-5. **Vision LLM Multimodal Extraction:** Plain Tesseract OCR is strictly forbidden as the primary extraction mechanism. Use Vision LLMs (OpenAI GPT-4o / Claude 3.5 Sonnet / Gemini 1.5 Flash) with high-DPI page rendering.
+5. **Hybrid AI Extraction Strategy:** Plain Tesseract OCR is strictly forbidden as the primary extraction mechanism. We use a zero-cost / high-sustainability hybrid strategy:
+   - **Path A (Text-layer pages):** Direct text extraction + fast Groq text LLM (`llama-3.3-70b-versatile`).
+   - **Path B (Image / Scanned pages):** High-DPI page rendering (150–200 DPI) + Multimodal Vision VLM (**OpenRouter Qwen2.5-VL** primary, **Google Gemini 2.0 Flash** fallback, or **Ollama** offline).
 6. **Cheating Prevention (Hidden Answer Keys):** Never deliver `correctOption` in client-side state during an active test session (`/test/[mockId]`). Reveal answer keys only upon post-submission scorecard retrieval (`/results/[attemptId]`).
 7. **Exact Negative Marking:** Ensure negative penalty calculations (`-0.25`) are applied across total scores and section-wise breakdowns.
 8. **In-Flight State Persistence:** Mid-test page refreshes must seamlessly restore candidate answers and remaining timer state from `localStorage`.
@@ -52,7 +54,7 @@ All platform mock tests and evaluation engines must adhere strictly to the offic
 ## 5. Build Order & Milestones
 - **Stage 0: Bootstrap** — Next.js 14, TypeScript strict, Tailwind CSS, color tokens, layout, and environment configuration.
 - **Stage 1: Foundation + Seed Bank + Live CBT UI + MongoDB Atlas + NextAuth** — MongoDB Atlas integration with Mongoose, NextAuth Credentials authentication, pre-exam rules screen, 200+ seed question bank, mock generator, 180-min CBT exam interface, personal student dashboard, and negative-marking result analytics.
-- **Stage 2: Vision LLM PDF Extraction Pipeline** — PDF-to-image conversion, Vision LLM structured JSON ingestion, section classification, deduplication, and Admin UI uploader (restricted to `admin` role).
+- **Stage 2: Hybrid AI PDF Extraction Pipeline** — PDF-to-image conversion, Vision LLM structured JSON ingestion (OpenRouter Qwen2.5-VL / Gemini Flash), Groq text parser, section classification, deduplication, and Admin UI uploader (restricted to `admin` role).
 - **Stage 3: Full Mock Engine & Candidate Readiness** — Generate 6–10 unique full-length mocks from the aggregated PYQ bank, paper review mode, and error hardening.
 - **Stage 4: Polish & Production Hardening** — Vercel deployment verification, performance optimization, and candidate handoff.
 
@@ -62,9 +64,9 @@ All platform mock tests and evaluation engines must adhere strictly to the offic
 Adhere strictly to [05_CODE_STANDARDS.md](file:///c:/Users/lenovo/OneDrive/Desktop/Extra/NBE_Arena/PRD/05_CODE_STANDARDS.md):
 - Next.js 14 App Router with React Server Components by default; `'use client'` only where interactive state is required.
 - Mongoose singleton connection pattern in `src/lib/mongodb.ts`.
-- Mongoose schema models: `User`, `Question`, `MockTest`, `Attempt`.
-- TypeScript in `strict` mode with zero `any` types.
-- Zod schema validation for all API inputs and mutations.
+- Zero hardcoded model names (all models read from environment).
+- All AI providers placed behind adapter interfaces.
+- Extraction requests set to `temperature: 0` with strict JSON validation and 1-shot retry.
 - CBT monospace tabular numerals (`font-tabular`) for zero-jitter timer display.
 
 ---
@@ -73,8 +75,8 @@ Adhere strictly to [05_CODE_STANDARDS.md](file:///c:/Users/lenovo/OneDrive/Deskt
 Follow [02_ARCHITECTURE.md](file:///c:/Users/lenovo/OneDrive/Desktop/Extra/NBE_Arena/PRD/02_ARCHITECTURE.md):
 - **Database:** MongoDB Atlas via Mongoose ODM.
 - **Auth:** NextAuth.js Credentials Provider with JWT sessions.
+- **Extraction Adapters:** `src/lib/pdf-pipeline.ts`, `src/lib/vision-extract.ts`, `src/lib/text-extract.ts`.
 - **API Endpoints:** `/api/auth/[...nextauth]`, `/api/upload`, `/api/extract`, `/api/generate-mock`, `/api/mock/[mockId]`, `/api/submit`, `/api/results/[attemptId]`, `/api/bank-stats`, `/api/attempts/user`.
-- **Security:** Passwords hashed with `bcryptjs`, Vision LLM API keys server-side only, RBAC middleware protecting `/admin`.
 
 ---
 
@@ -91,8 +93,10 @@ Follow [03_UI_CONTEXT.md](file:///c:/Users/lenovo/OneDrive/Desktop/Extra/NBE_Are
 ---
 
 ## 9. AI Extraction Pointer
-Follow [04_AI_WORKFLOW.md](file:///c:/Users/lenovo/OneDrive/Desktop/Extra/NBE_Arena/PRD/04_AI_WORKFLOW.md) and [08_SOURCE_PRIORITY.md](file:///c:/Users/lenovo/OneDrive/Desktop/Extra/NBE_Arena/PRD/08_SOURCE_PRIORITY.md):
-- **Provider Priority:** OpenAI `gpt-4o` $\to$ Anthropic `claude-3-5-sonnet` $\to$ Google `gemini-1.5-flash`.
+Follow [04_AI_WORKFLOW.md](file:///c:/Users/lenovo/OneDrive/Desktop/Extra/NBE_Arena/PRD/04_AI_WORKFLOW.md) and [09_VISION_PROVIDERS.md](file:///c:/Users/lenovo/OneDrive/Desktop/Extra/NBE_Arena/PRD/09_VISION_PROVIDERS.md):
+- **Path A (Text Pages):** Groq `llama-3.3-70b-versatile` / `llama-3.1-8b-instant`.
+- **Path B (Image / Scanned Pages):** OpenRouter `qwen/qwen-2.5-vl-7b-instruct` (Primary) $\to$ Google Gemini `gemini-2.0-flash` (Fallback) $\to$ Ollama `qwen2.5-vl:7b` (Offline).
+- **Groq Rule:** Groq is allowed for text-layer pages ONLY (not primary for vision image extraction).
 - **DPI Rendering:** 150–200 DPI PNG per page.
 - **Deduplication:** SHA-256 normalized hash deduplication.
 
@@ -102,5 +106,5 @@ Follow [04_AI_WORKFLOW.md](file:///c:/Users/lenovo/OneDrive/Desktop/Extra/NBE_Ar
 1. **Restate Goals:** Before writing code for any stage, restate the stage goal, task breakdown, and exit criteria.
 2. **Execute Clean Vertical Slices:** Implement functional, end-to-end features rather than disconnected partial stubs.
 3. **Verify Exit Criteria:** After every stage, provide an explicit checklist verifying every pass/fail criterion.
-4. **Scope Control:** Align with MongoDB Atlas, NextAuth, and Pre-Exam Instructions specifications.
+4. **Scope Control:** Align with MongoDB Atlas, NextAuth, Hybrid AI Strategy, and Pre-Exam Instructions specifications.
 5. **No False Claims of Completion:** Never claim a task or stage is complete unless tests, builds, and user flows have been verified against active running code.

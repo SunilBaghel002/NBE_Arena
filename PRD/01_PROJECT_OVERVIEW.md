@@ -15,7 +15,7 @@ However, the syllabus and pattern are nearly identical to:
 - DSSSB LDC / Junior Assistant
 - SSC Selection Post (Matric / Higher Secondary)
 
-**Solution:** Build a cloud-hosted (Vercel + MongoDB Atlas) CBT platform that extracts questions from these exam PDFs using Vision LLM, stores them in a MongoDB repository, authenticates candidates via NextAuth, provides personal dashboards with progress analytics, enforces pre-exam CBT instruction screens, and generates unlimited NBE-format mock tests (200 Qs, 50 per section, 180 min timer).
+**Solution:** Build a cloud-hosted (Vercel + MongoDB Atlas) CBT platform that ingests questions from these exam PDFs using a **Hybrid AI Extraction Engine** (Groq for text-layer pages, OpenRouter Qwen2.5-VL / Gemini Flash for vision pages), authenticates candidates via NextAuth, provides personal dashboards with progress analytics, enforces pre-exam CBT instruction screens, and generates unlimited authentic NBE-format mock tests (200 Qs, 50 per section, 180 min timer).
 
 ---
 
@@ -28,8 +28,8 @@ However, the syllabus and pattern are nearly identical to:
 | Pre-Exam Rules Screen | Mandatory disclaimer & rules review before CBT timer begins |
 | Cloud Database Persistence | MongoDB Atlas via Mongoose storing questions, mocks, attempts, and users |
 | Authentication & Personal Dashboards | NextAuth Credentials login; student dashboard showing personal test attempts & progress |
-| Role-Based Admin Protection | Only users with `role: "admin"` can access `/admin` for PDF uploads |
-| PDF ingestion pipeline | Upload SSC/DSSSB PYQ PDFs → Vision LLM auto-extract to structured MongoDB questions |
+| Role-Based Admin Protection | Only users with `role: "admin"` can access `/admin` for PDF uploads and user management |
+| Hybrid PDF Ingestion Pipeline | Fast text parsing (Groq) for text-layer pages + Vision VLM (OpenRouter Qwen2.5-VL / Gemini Flash) for image/scanned pages |
 | Exam-hall UI simulation | Palette, mark-for-review, section tabs, auto-submit, local storage persistence |
 | Post-test analytics | Score /200 with -0.25 negative marking, section breakdown, wrong-answer review, 150 benchmark |
 
@@ -41,7 +41,7 @@ However, the syllabus and pattern are nearly identical to:
 - **Deployment:** Vercel cloud deployment + MongoDB Atlas.
 - **Access Control:**
   - `student`: Access to personal dashboard, mock generator, test hall, scorecards, and solution reviews.
-  - `admin`: Full student access plus `/admin` panel to upload PDFs and manage question repositories.
+  - `admin`: Full student access plus `/admin` panel to upload PDFs, manage candidate credentials, and track progress.
 - **Device:** Desktop / laptop browser (exam is computer-based).
 
 ---
@@ -61,10 +61,10 @@ However, the syllabus and pattern are nearly identical to:
 - "Begin Test" button remains disabled until checkbox is checked.
 - 180-minute CBT countdown timer begins ONLY after clicking "Begin Test".
 
-### 4.3 PDF Ingestion Engine
-- Accept multi-page PYQ PDFs (SSC CHSL, MTS, DSSSB, NBE 2015).
-- High-DPI page rendering to PNG images.
-- Multimodal Vision LLM extraction (GPT-4o / Claude 3.5 Sonnet / Gemini 1.5 Flash).
+### 4.3 Hybrid PDF Ingestion Engine
+- Two-path architecture for bulk, zero-cost, highly sustainable extraction:
+  - **Path A (Text-layer pages):** Direct text extraction + fast Groq text LLM (`llama-3.3-70b-versatile`).
+  - **Path B (Image / Scanned pages):** High-DPI page rendering (150–200 DPI) + Multimodal Vision VLM (**OpenRouter Qwen2.5-VL** primary, **Google Gemini 2.0 Flash** fallback, or **Ollama** offline).
 - Auto-classify into 4 sections, deduplicate with SHA-256, and persist in MongoDB Atlas.
 
 ### 4.4 Mock Test Generator
@@ -88,6 +88,8 @@ However, the syllabus and pattern are nearly identical to:
 
 ### 4.7 Admin Panel (Admin Role Only)
 - Protected by NextAuth middleware (restricted to `role: "admin"`).
+- Candidate progress tracking mini-dashboard.
+- Candidate credentials editor (change username, name, password).
 - Drag-drop PDF uploader, extraction progress tracking, and question repository statistics.
 
 ---
@@ -122,10 +124,11 @@ However, the syllabus and pattern are nearly identical to:
 | Layer | Choice |
 |-------|--------|
 | Frontend | Next.js 14 (App Router) + TypeScript + Tailwind CSS |
-| UI Components | shadcn/ui style components + Lucide Icons |
+| UI Components | shadcn/ui style components + Lucide Icons + Google Inter/JetBrains Mono |
 | Database | MongoDB Atlas via Mongoose ODM (`MONGODB_URI`) |
 | Authentication | NextAuth.js (Auth.js) Credentials Provider + JWT sessions |
-| PDF → Image | `pdfjs-dist` / `pdf2image` / Canvas rendering |
-| Vision LLM | OpenAI GPT-4o / Anthropic Claude 3.5 Sonnet / Google Gemini 1.5 Flash |
+| PDF → Image | `pdfjs-dist` / `pdf2image` / Canvas rendering (150–200 DPI) |
+| Vision VLM (Path B) | OpenRouter (`qwen/qwen-2.5-vl-7b-instruct`) / Google Gemini (`gemini-2.0-flash`) / Ollama (`qwen2.5-vl:7b`) |
+| Text LLM (Path A) | Groq (`llama-3.3-70b-versatile` / `llama-3.1-8b-instant`) |
 | State Management | Zustand store for live CBT session + LocalStorage persistence |
 | Hosting | Vercel (`npm run build`) |

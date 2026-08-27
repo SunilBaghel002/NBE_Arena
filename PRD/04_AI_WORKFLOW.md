@@ -1,244 +1,217 @@
 # AI WORKFLOW.md
-## Vision LLM Extraction & Classification Workflow
+## Hybrid Extraction & Vision LLM Pipeline Specification
 
 ---
 
-## 1. Purpose
+## 1. Purpose & Strategy
 
-This document defines exactly how the AI agent (and the app) must use Vision LLMs to convert raw exam PDFs into clean, section-tagged questions for the NBE mock engine.
+This document defines the **Hybrid Extraction Pipeline** for converting SSC CHSL, SSC MTS, DSSSB, and official NBE 2015 PYQ PDFs into clean, section-classified MCQs in MongoDB Atlas.
 
-**Plain OCR (Tesseract alone) is FORBIDDEN as primary extractor.**
-Use Vision LLM multimodal understanding.
+### Hybrid Strategy Overview
+To eliminate dependency on expensive proprietary APIs (e.g. standard paid OpenAI/Claude quotas) and ensure zero-cost / high-sustainability bulk extraction, we enforce a **two-path hybrid extraction engine**:
+
+1. **Path A (Text-Layer PDF Pages):**
+   - For PDFs containing extractable text layers, extract raw text directly.
+   - Send raw structured text to fast, ultra-cheap/free text LLMs (**Groq** `llama-3.3-70b-versatile` / `llama-3.1-8b-instant` or OpenRouter text models).
+2. **Path B (Scanned / Image Pages & Mathematical Stems):**
+   - Render page to high-DPI image (150–200 DPI).
+   - Send image to Multimodal Vision VLM (**OpenRouter Qwen2.5-VL** primary, **Google Gemini 2.0 Flash** fallback, or **Ollama Qwen2.5-VL** offline).
+
+> [!IMPORTANT]
+> **Groq Scope Restriction:**
+> - **Groq is allowed for TEXT pages ONLY.**
+> - **Groq is NOT used as primary for image vision extraction.**
+> - All image vision extraction routes through OpenRouter Qwen2.5-VL / Gemini Flash / Ollama.
 
 ---
 
 ## 2. Supported Input PDFs
 
-| Exam | Why allowed |
-|------|-------------|
-| SSC CHSL Tier-1 PYQ | Exact 4-section pattern |
-| SSC CGL Tier-1 PYQ | Same sections; filter hard Quant |
-| SSC MTS PYQ | Slightly easier; good volume |
-| DSSSB LDC / Junior Assistant / Grade IV | Often 200-Q pattern; closest twin |
-| SSC Selection Post (Matric/HS) | Syllabus aligned |
-
-**Avoid:** SSC CGL Tier-2, Bank PO mains, CAT — wrong difficulty/pattern.
+| Exam Source | Why Supported | Typical Format |
+|-------------|---------------|----------------|
+| SSC CHSL Tier-1 PYQ (2023/2022) | Exact 4-section pattern (25x4 or 50x4) | Text-layer + image figures |
+| SSC MTS PYQ | High volume, clean arithmetic | Text-layer + scanned |
+| DSSSB LDC / Junior Assistant | 200 Questions, exact syllabus twin | Scanned + text |
+| NBE Junior Assistant 2015 Official | Benchmark paper | Scanned PDF |
+| SSC Selection Post (Higher Secondary) | Direct syllabus match | Text-layer |
 
 ---
 
-## 3. End-to-End AI Pipeline
-PDF file
-→ validate (is PDF, size < 50MB, pages < 100)
-→ render pages to PNG (150–200 DPI, grayscale OK)
-→ for each page:
-→ build Vision prompt (system + user)
-→ call Vision LLM
-→ parse JSON response
-→ validate schema
-→ classify/confirm section
-→ normalize options (a,b,c,d)
-→ detect answer key if present
-→ dedupe against existing bank
-→ insert new questions
-→ return extraction report
+## 3. Provider Priority & Configuration
 
-text
+### 3.1 Vision VLM Provider Priority (Path B)
 
+| Priority | Provider | Recommended Model | Free / Cheap Tier Benefit |
+|----------|----------|-------------------|---------------------------|
+| **1 (Primary)** | **OpenRouter** | `qwen/qwen-2.5-vl-7b-instruct` or `openai/gpt-4o-mini` | State-of-the-art vision at ultra-low/free cost |
+| **2 (Fallback)**| **Google Gemini** | `gemini-2.0-flash` | Generous daily free tier quota (15 RPM / 1500 RPD) |
+| **3 (Offline)** | **Ollama** | `qwen2.5-vl:7b` | 100% free, runs entirely offline locally |
+
+### 3.2 Text LLM Provider Priority (Path A - Text Pages Only)
+
+| Priority | Provider | Recommended Model | Notes |
+|----------|----------|-------------------|-------|
+| **1 (Primary)** | **Groq** | `llama-3.3-70b-versatile` / `llama-3.1-8b-instant` | Instantaneous (500+ tok/s), free tier |
+| **2 (Fallback)**| **OpenRouter** | `meta-llama/llama-3.3-70b-instruct` | Fast secondary text parser |
 
 ---
 
-## 4. Page Rendering Rules
+## 4. Environment Configuration
 
-- DPI: **150 minimum**, 200 preferred
-- Format: PNG
-- If page is double-column, still send full page (LLM handles layout)
-- Skip pure blank pages
-- Do not crop aggressively — keep question numbers visible
+All providers and models must be **100% environment-driven** (zero hardcoded strings in code):
 
----
+```env
+# ==========================================
+# VISION PROVIDER CONFIGURATION (Path B - Images)
+# ==========================================
+# Options: 'openrouter' | 'gemini' | 'ollama' | 'openai'
+VISION_PROVIDER=openrouter
 
-## 5. Vision LLM Provider Priority
+# OpenRouter Configuration (Primary Vision)
+OPENROUTER_API_KEY=sk-or-v1-...
+OPENROUTER_VISION_MODEL=qwen/qwen-2.5-vl-7b-instruct
+OPENROUTER_FALLBACK_MODEL=openai/gpt-4o-mini
 
-| Priority | Provider | Model | Notes |
-|----------|----------|-------|-------|
-| 1 | OpenAI | `gpt-4o` | Best JSON reliability |
-| 2 | Anthropic | `claude-3-5-sonnet` | Excellent long pages |
-| 3 | Google | `gemini-1.5-flash` | Cheap + fast fallback |
+# Google Gemini Configuration (Fallback Vision)
+GEMINI_API_KEY=AIzaSy...
+GEMINI_VISION_MODEL=gemini-2.0-flash
 
-Implement provider via env:
-VISION_PROVIDER=openai
-OPENAI_API_KEY=...
+# Ollama Local Configuration (Offline Vision)
+OLLAMA_BASE_URL=http://localhost:11434
+OLLAMA_VISION_MODEL=qwen2.5-vl:7b
 
-or ANTHROPIC_API_KEY / GOOGLE_API_KEY
-text
-
-
----
-
-## 6. Master Extraction Prompt
-
-### System Message
-You are a precise exam-paper digitizer for Indian competitive exams (SSC, DSSSB).
-Extract every multiple-choice question from the page image.
-
-OUTPUT RULES:
-
-Return ONLY a JSON array. No markdown fences. No prose.
-Each item must match the schema exactly.
-If you cannot read a question confidently, omit it.
-If options are missing, omit the question.
-correctOption may be null if answer key not visible on this page.
-Use section values exactly: REASONING, GA, QUANT, ENGLISH
-Convert math to plain text (example: x^2, 3/4, sqrt(16), pi*r^2)
-Keep original option order.
-text
-
-
-### User Message (per page)
-Extract all MCQs from this exam page.
-
-Schema:
-[{
-"section": "REASONING"|"GA"|"QUANT"|"ENGLISH",
-"questionText": string,
-"options": {"a":string,"b":string,"c":string,"d":string},
-"correctOption": "a"|"b"|"c"|"d"|null,
-"hasImage": boolean,
-"confidence": "high"|"medium"|"low"
-}]
-
-Section guide:
-
-REASONING: analogies, series, coding, blood relation, direction, syllogism, non-verbal, puzzles
-GA: history, geography, polity, economy, science, current affairs, static GK
-QUANT: arithmetic, percentage, ratio, SI/CI, profit loss, time work, speed, averages, elementary algebra
-ENGLISH: grammar, vocab, RC, error spotting, cloze, idioms, voice, narration
-Flag hasImage=true if question depends on a figure/diagram.
-
-text
-
+# ==========================================
+# TEXT PROVIDER CONFIGURATION (Path A - Text Pages Only)
+# ==========================================
+# Options: 'groq' | 'openrouter' | 'ollama'
+TEXT_PROVIDER=groq
+GROQ_API_KEY=gsk_...
+GROQ_TEXT_MODEL=llama-3.3-70b-versatile
+```
 
 ---
 
-## 7. Answer Key Handling
+## 5. End-to-End Hybrid Pipeline Flow
 
-Many PYQ PDFs have separate answer key pages.
-
-**Strategy A (preferred):**
-- During extraction, if page looks like answer key (patterns like `1-b 2-a 3-c`), parse into map `{questionNumber: option}`
-- Store temporarily keyed by source PDF
-- After all pages, merge keys onto questions missing `correctOption`
-
-**Strategy B:**
-- Allow questions with `correctOption: null` into bank
-- On results screen, mark "Answer key unavailable" for those
-- Admin can manually set later (optional enhancement)
-
-**Minimum viable:** Strategy B is acceptable for v1 if Strategy A is complex.
-
----
-
-## 8. Section Classifier Fallback
-
-If LLM returns wrong/missing section, apply keyword heuristic:
-REASONING keywords: analogy, series, coding, brother, mother, direction, north, syllogism, odd one out, mirror, water image, venn
-GA keywords: capital, river, constitution, article, who among, invented, festival, currency, census, cabinet
-QUANT keywords: percent, profit, loss, interest, average, ratio, train, boat, work, days, speed, fraction, algebra
-ENGLISH keywords: synonym, antonym, error, underlined, passage, idiom, improve the sentence, fill in the blank, voice, narration
-
-text
-
-
-Score keyword hits; assign max scoring section. If tie, keep LLM label or mark `GA` as last resort.
-
----
-
-## 9. Deduplication Logic
-normalize(text) = lowercase → remove punctuation → collapse spaces
-hash = sha256(normalize(questionText) + normalize(options.a+b+c+d))
-
-if hash exists in bank → skip (duplicate)
-if levenshtein similarity > 0.92 with existing → skip (near-duplicate)
-else insert
-
-text
-
-
----
-
-## 10. Quant Filtering (NBE-specific)
-
-NBE syllabus: *"not on complicated arithmetical computation"* and focuses on arithmetic + basic algebra.
-
-During insert:
-if section == QUANT and matches(advanced_geometry_or_trigo_regex):
-tag difficulty = HARD
-optionally set isActive = false for first version
-
-text
-
-
-Keywords to soft-flag:
-`sin, cos, tan, cot, sec, cosec, height and distance, triangle ABC, circle radius chord, coordinate geometry`
-
-Do **not** delete arithmetic word problems.
+```text
+Uploaded PDF (/admin)
+       │
+       ▼
+[Page Layer Detector (pdf-pipeline.ts)]
+       ├── If text layer density > 200 characters AND no complex diagrams ────────┐
+       │                                                                         ▼
+       │                                                          [Path A: Text Parser (text-extract.ts)]
+       │                                                          - Extract raw page text
+       │                                                          - Prompt Groq / Text LLM (temp = 0)
+       │                                                          - Parse JSON questions
+       │                                                                         │
+       ▼                                                                         │
+[Path B: Vision VLM (vision-extract.ts)]                                         │
+- Render page to PNG (150–200 DPI)                                               │
+- Base64 encode image                                                            │
+- Call OpenRouter (Qwen2.5-VL) / Gemini Flash                                   │
+- Parse JSON questions                                                           │
+       │                                                                         │
+       └───────────────────────────────┬─────────────────────────────────────────┘
+                                       │
+                                       ▼
+                     [Section Classifier Fallback]
+                     - Validate REASONING | GA | QUANT | ENGLISH
+                     - Keyword scoring heuristic if section ambiguous
+                                       │
+                                       ▼
+                     [NBE Quant Filter & Normalizer]
+                     - Soft-filter heavy advanced geometry / trigonometry
+                     - Normalize options (a, b, c, d)
+                                       │
+                                       ▼
+                     [SHA-256 Deduplication Engine]
+                     - Hash normalized question + options text
+                     - Skip duplicate if already exists in MongoDB
+                                       │
+                                       ▼
+                     [MongoDB Atlas Insertion (Question.ts)]
+                     - Persist active questions
+                     - Log extraction telemetry (provider, latencyMs, status)
+```
 
 ---
 
-## 11. Error Handling & Retries
+## 6. Master Extraction Prompts (Temperature = 0)
 
-| Error | Action |
-|-------|--------|
-| LLM rate limit | Wait 5s, retry up to 3 times |
-| Invalid JSON | Re-prompt once: "Return valid JSON only" |
-| Empty array on content page | Retry with higher detail prompt once |
-| Provider outage | Switch to fallback provider if configured |
-| Corrupt PDF | Return user-friendly error; do not crash server |
+### 6.1 Vision Extraction Prompt (Path B)
 
-Log every page result:
-{ pdfId, page, status, questionsFound, latencyMs, error? }
+**System Message:**
+```text
+You are an expert Indian competitive exam question extractor (SSC CHSL, MTS, DSSSB, NBE).
+Extract ALL multiple-choice questions from the provided page image.
 
-text
+STRICT OUTPUT RULES:
+1. Return ONLY a valid JSON array. No markdown formatting, no backticks, no prose.
+2. Each item must strictly follow the JSON schema.
+3. Sections must be one of: "REASONING", "GA", "QUANT", "ENGLISH".
+4. If the answer key is visible on page, set correctOption to "a", "b", "c", or "d". If not visible, set null.
+5. If a question depends on a diagram or image you cannot describe in text, set hasImage to true.
+6. Convert mathematical notation to clean plain text (e.g., x^2, 3/4, sqrt(16)).
+```
 
-
----
-
-## 12. Cost Control
-
-- Prefer Gemini Flash or GPT-4o-mini **only if quality acceptable**; default GPT-4o for accuracy
-- Don't re-extract already processed pdfId
-- Allow "extract pages 1–5 only" debug mode for testing
-- Show estimated pages × cost warning in admin (optional)
-
----
-
-## 13. Quality Gate Before Mock Generation
-
-A mock may be generated only if:
-count(REASONING, isActive) >= 50
-count(GA, isActive) >= 50
-count(QUANT, isActive) >= 50
-count(ENGLISH, isActive) >= 50
-
-text
-
-
-Optional stricter gate for better mocks:
-questions with correctOption != null >= 80% of bank
-
-text
-
+**JSON Schema:**
+```json
+[
+  {
+    "section": "REASONING" | "GA" | "QUANT" | "ENGLISH",
+    "questionText": "Full question text including options stems",
+    "options": {
+      "a": "Option A text",
+      "b": "Option B text",
+      "c": "Option C text",
+      "d": "Option D text"
+    },
+    "correctOption": "a" | "b" | "c" | "d" | null,
+    "explanation": "Brief explanation if provided",
+    "hasImage": false,
+    "confidence": "high" | "medium" | "low"
+  }
+]
+```
 
 ---
 
-## 14. AI Agent Implementation Notes (For Anti-Gravity IDE)
+## 7. Section Classifier Fallback
 
-When implementing:
-1. Create `src/lib/vision-extract.ts` with provider adapters
-2. Create `src/lib/pdf-to-images.ts`
-3. Create `src/lib/section-classifier.ts`
-4. Create `src/lib/dedupe.ts`
-5. Wire `POST /api/extract` to run pipeline async-ish with progress
-6. NEVER call Vision LLM from client components
-7. Store raw LLM responses in `/data/logs/` for debugging first 2 PDFs
-8. Write a script `npm run extract:sample` for CLI testing one PDF
+If the LLM returns an empty or invalid section, the pipeline applies a keyword heuristic scorer:
+
+* **REASONING:** `analogy, series, coding, decoding, brother, sister, direction, north, south, syllogism, odd one out, mirror image, water image, paper folding, venn`
+* **GA:** `constitution, article, amendment, dynasty, emperor, river, capital, national park, festival, census, who among, hormone, vitamin, president, treaty`
+* **QUANT:** `percentage, profit, loss, discount, compound interest, simple interest, ratio, proportion, time and work, train, speed, boat, average, fraction, arithmetic`
+* **ENGLISH:** `synonym, antonym, correctly spelt, error spotting, underlined, idiom, phrase, one word substitute, passive voice, indirect speech, cloze test`
+
+---
+
+## 8. Deduplication Logic
+
+```text
+normalizedText = lowercase(trim(strip_punctuation(questionText)))
+normalizedOpts = lowercase(trim(options.a + options.b + options.c + options.d))
+contentHash    = sha256(normalizedText + "::" + normalizedOpts)
+
+if Question.exists({ contentHash }) -> SKIP (Duplicate)
+else -> INSERT into MongoDB Atlas
+```
+
+---
+
+## 9. Quant Syllabus Filtering (NBE Specific)
+
+Per official NBEMS syllabus (*"arithmetic computation and basic algebra only"*):
+- Soft-flag advanced geometry and high trigonometry: `\b(sin|cos|tan|cot|sec|cosec)\b`, `\btriangle ABC\b`, `\bcyclic quadrilateral\b`, `\bchord of circle\b`.
+- Tag difficulty as `"HARD"` or set `isActive: false` so basic arithmetic dominates mock generation.
+
+---
+
+## 10. Fault Tolerance, Retries & Logging
+
+1. **Strict JSON Parsing:** Parse with `JSON.parse()`. If malformed JSON is received, clean backticks/markdown fences and retry once with temperature 0.
+2. **Rate Limit Handling:** On HTTP 429 / 402, automatically fall back to the secondary provider (e.g. OpenRouter $\to$ Gemini Flash).
+3. **Telemetry Logging:** Log every page extraction event into `data/logs/extraction_telemetry.json` with:
+   `{ timestamp, pdfName, pageNumber, provider, model, durationMs, questionsExtracted, success }`

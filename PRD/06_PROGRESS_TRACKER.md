@@ -104,22 +104,32 @@
 
 ---
 
-## STAGE 2 — Vision LLM PDF Extraction Pipeline (MongoDB Integrated)
+## STAGE 2 — Hybrid AI PDF Extraction Pipeline (MongoDB Integrated)
 **Status:** `[ ] Pending`
 
+> **Goal:** Deploy the zero-cost / high-sustainability Hybrid Extraction Engine (Groq for text pages, OpenRouter Qwen2.5-VL / Gemini Flash for vision pages) to bulk-ingest questions from PYQ PDFs into MongoDB Atlas.
+
 ### Tasks
-- [ ] Implement `pdf-to-images` utility
-- [ ] Implement `vision-extract.ts` with provider switch (OpenAI / Claude / Gemini)
-- [ ] Extraction prompts in `src/lib/prompts.ts`
-- [ ] JSON schema validation and section classifier fallback
-- [ ] SHA-256 deduplication against MongoDB Question collection
-- [ ] API: `POST /api/upload` & `POST /api/extract`
-- [ ] Admin UI: drag-drop uploader with live extraction progress (Admin role only)
+- [ ] Implement `src/lib/pdf-pipeline.ts` orchestrating Path A (text) and Path B (vision)
+- [ ] Implement `src/lib/text-extract.ts` (Groq / OpenRouter text parser)
+- [ ] Implement `src/lib/vision-extract.ts` (OpenRouter Qwen2.5-VL, Gemini Flash, Ollama adapters)
+- [ ] Implement `src/lib/pdf-to-images.ts` (150–200 DPI page renderer)
+- [ ] Implement `src/lib/prompts.ts` with temperature: 0 extraction prompts
+- [ ] Implement JSON schema validation + automatic 1-retry repair
+- [ ] Implement `src/lib/section-classifier.ts` keyword fallback
+- [ ] Implement `src/lib/dedupe.ts` (SHA-256 content hash against MongoDB Atlas)
+- [ ] API: `POST /api/upload` (multipart PDF handler) & `POST /api/extract` (per-page stream progress)
+- [ ] Admin UI: drag-drop uploader with live page progress bar (Admin role only)
+- [ ] Add telemetry logging to `data/logs/extraction_telemetry.json`
 
 ### Exit Criteria
-- [ ] Upload 1 real SSC CHSL PDF
-- [ ] Extract ≥ 40 usable questions directly into MongoDB Atlas
-- [ ] Correct section tagging and deduplication
+- [ ] Hybrid extraction works (routes text-layer pages to text LLM, image pages to Vision VLM)
+- [ ] Provider and models can be switched via environment variables only (zero hardcoding)
+- [ ] Successfully extracted at least 1 SSC CHSL PDF using non-OpenAI primary provider (OpenRouter Qwen2.5-VL / Groq)
+- [ ] Invalid JSON retry works reliably
+- [ ] Rate limits and provider errors degrade gracefully to fallback providers
+- [ ] Questions appear under correct sections in MongoDB Atlas (>= 70% precision)
+- [ ] Duplicate questions are skipped via SHA-256 hash checks
 
 ---
 

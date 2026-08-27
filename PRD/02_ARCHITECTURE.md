@@ -21,19 +21,19 @@
 │  API Routes:                                                                           │
 │  - /api/auth/[...nextauth]         - /api/generate-mock       - /api/bank-stats        │
 │  - /api/mock/[mockId]              - /api/submit              - /api/results/[id]      │
-│  - /api/attempts/user              - /api/upload (Admin)      - /api/extract (Admin)   │
+│  - /api/attempts/user              - /api/admin/users         - /api/extract (Admin)   │
 └─────────────────────────────────────────────┬──────────────────────────────────────────┘
                                               │
                      ┌────────────────────────┴────────────────────────┐
                      ▼                                                 ▼
         ┌───────────────────────────┐                    ┌───────────────────────────┐
-        │       MONGODB ATLAS       │                    │      VISION LLM API       │
-        │   (Mongoose ODM Cloud)    │                    │  GPT-4o / Claude / Gemini │
-        │  - Users (admin/student)  │                    │                           │
-        │  - Questions (200+ pool)  │                    │  High-DPI PDF Page Image  │
-        │  - MockTests (200Q specs) │                    │  Extraction Pipeline      │
-        │  - Attempts (with userId) │                    └───────────────────────────┘
-        └───────────────────────────┘
+        │       MONGODB ATLAS       │                    │  HYBRID EXTRACTION ENGINE │
+        │   (Mongoose ODM Cloud)    │                    │                           │
+        │  - Users (admin/student)  │                    │ Path A: Text Parser (Groq)│
+        │  - Questions (200+ pool)  │                    │ Path B: Vision VLM        │
+        │  - MockTests (200Q specs) │                    │  (OpenRouter Qwen2.5-VL   │
+        │  - Attempts (with userId) │                    │   / Gemini Flash / Ollama)│
+        └───────────────────────────┘                    └───────────────────────────┘
 ```
 
 ---
@@ -50,7 +50,7 @@ nbe-arena/
 │   │   ├── login/
 │   │   │   └── page.tsx          # Credentials Login Page
 │   │   ├── admin/
-│   │   │   └── page.tsx          # PDF upload + bank stats (Admin role protected)
+│   │   │   └── page.tsx          # PDF upload + bank stats + candidate tracker (Admin)
 │   │   ├── test/
 │   │   │   └── [mockId]/
 │   │   │       ├── instructions/
@@ -62,8 +62,10 @@ nbe-arena/
 │   │   └── api/
 │   │       ├── auth/
 │   │       │   └── [...nextauth]/route.ts  # NextAuth handler (Credentials)
+│   │       ├── admin/
+│   │       │   └── users/route.ts          # Candidate management & credentials editor
 │   │       ├── upload/route.ts
-│   │       ├── extract/route.ts
+│   │       ├── extract/route.ts            # Hybrid PDF extraction route
 │   │       ├── generate-mock/route.ts
 │   │       ├── mock/[mockId]/route.ts
 │   │       ├── submit/route.ts
@@ -89,13 +91,17 @@ nbe-arena/
 │   │   │   └── QuestionReviewList.tsx
 │   │   └── admin/
 │   │       ├── PdfUploader.tsx
-│   │       └── BankStatsCards.tsx
+│   │       └── CandidateProgressTracker.tsx
 │   ├── lib/
 │   │   ├── mongodb.ts            # Mongoose singleton connection pool
 │   │   ├── auth.ts               # NextAuth configuration options
+│   │   ├── pdf-pipeline.ts       # Orchestrator for Hybrid Extraction
+│   │   ├── pdf-to-images.ts      # High-DPI Page Renderer (150-200 DPI)
+│   │   ├── text-extract.ts       # Path A: Text-layer direct extraction (Groq)
+│   │   ├── vision-extract.ts     # Path B: Vision VLM Adapter (OpenRouter / Gemini / Ollama)
 │   │   ├── mock-generator.ts     # 50x4 random sampler
 │   │   ├── scoring.ts            # -0.25 negative marking engine
-│   │   ├── vision-extract.ts     # Vision LLM adapter
+│   │   ├── dedupe.ts             # SHA-256 deduplication
 │   │   └── section-classifier.ts # Heuristic fallback
 │   ├── models/                   # Mongoose ODM Models
 │   │   ├── User.ts               # User schema (username, password, role)
@@ -109,16 +115,50 @@ nbe-arena/
 ├── data/
 │   ├── seed-questions.json       # 200 authentic bootstrap questions
 │   └── pyq/                      # Past year exam source PDFs
-├── .env.local                    # MONGODB_URI, NEXTAUTH_SECRET, API Keys
+├── .env.local                    # MONGODB_URI, NEXTAUTH_SECRET, Provider API Keys
 ├── package.json
 └── README.md
 ```
 
 ---
 
-## 3. Data Models (Mongoose & TypeScript)
+## 3. Hybrid AI Pipeline Architecture
 
-### 3.1 User Model
+```text
+[PDF Upload] ──> [pdf-pipeline.ts]
+                      │
+        ┌─────────────┴─────────────┐
+        ▼                           ▼
+[Text-Layer Detected?]      [Scanned / Complex Page?]
+        │                           │
+        ▼ (Path A)                  ▼ (Path B)
+ [text-extract.ts]          [pdf-to-images.ts] ──> [vision-extract.ts]
+ (Groq Llama 3.3)                                  (OpenRouter Qwen2.5-VL / Gemini Flash)
+        │                                                   │
+        └─────────────────────┬─────────────────────────────┘
+                              ▼
+                   [section-classifier.ts]
+                              ▼
+                     [dedupe.ts (SHA-256)]
+                              ▼
+                   [MongoDB Atlas Upsert]
+```
+
+### 3.1 Vision Provider Adapter Pattern (`src/lib/vision-extract.ts`)
+An extensible interface that delegates image-based MCQ extraction to the configured provider:
+- `OpenRouterAdapter`: Calls OpenRouter API targeting `qwen/qwen-2.5-vl-7b-instruct` or fallback models with explicit `max_tokens`.
+- `GeminiAdapter`: Calls Google Gemini 2.0 Flash with inline image parts.
+- `OllamaAdapter`: Calls local Ollama vision endpoint (`/api/generate` or `/api/chat`).
+
+### 3.2 Text Parser Adapter (`src/lib/text-extract.ts`)
+- `GroqTextAdapter`: Direct high-speed text parser using Groq's `llama-3.3-70b-versatile` / `llama-3.1-8b-instant`.
+- `OpenRouterTextAdapter`: Secondary text parsing fallback.
+
+---
+
+## 4. Data Models (Mongoose & TypeScript)
+
+### 4.1 User Model
 ```typescript
 interface User {
   id: string;
@@ -130,7 +170,7 @@ interface User {
 }
 ```
 
-### 3.2 Question Model
+### 4.2 Question Model
 ```typescript
 interface Question {
   id: string;                    // unique slug or uuid
@@ -142,7 +182,7 @@ interface Question {
     c: string;
     d: string;
   };
-  correctOption: "a" | "b" | "c" | "d";
+  correctOption: "a" | "b" | "c" | "d" | null;
   explanation?: string;
   hasImage: boolean;
   imagePath?: string;
@@ -154,7 +194,7 @@ interface Question {
 }
 ```
 
-### 3.3 MockTest Model
+### 4.3 MockTest Model
 ```typescript
 interface MockTest {
   id: string;
@@ -171,11 +211,12 @@ interface MockTest {
 }
 ```
 
-### 3.4 Attempt Model (Linked to `userId`)
+### 4.4 Attempt Model (Linked to `userId`)
 ```typescript
 interface Attempt {
   id: string;
   userId: string;                // References User._id
+  userName?: string;
   mockId: string;                // References MockTest.id
   startedAt: string;
   submittedAt?: string;
@@ -186,69 +227,16 @@ interface Attempt {
     status: "answered" | "marked" | "answered_marked" | "not_visited" | "unanswered";
     timeSpentSeconds?: number;
   }[];
-  score?: {
-    totalQuestions: number;      // 200
-    correctCount: number;
-    wrongCount: number;
-    unansweredCount: number;
-    rawScore: number;            // +1 per correct
-    negativePenalty: number;     // 0.25 * wrongCount
-    netScore: number;            // rawScore - negativePenalty
-    accuracyPercentage: number;
-    qualifyingCleared: boolean;  // netScore >= 150
-    targetScore: 150;
-    bySection: Record<string, SectionScore>;
-  };
+  score?: AttemptScore;
 }
 ```
 
 ---
 
-## 4. Authentication & RBAC Flow
+## 5. Environment Configuration
 
-```text
-Unauthenticated User → Navigates to app → Redirected to /login
-                    ↓
-Candidate enters username + password → NextAuth verifies bcrypt hash
-                    ↓
-Session JWT created with { id, username, name, role }
-                    ↓
-Role = "student" → Access / (Dashboard), /test/..., /results/...
-Role = "admin"   → Access Dashboard + /admin (PDF extraction pipeline)
-```
-
----
-
-## 5. Pre-Exam Rules & Live Test State Flow
-
-```text
-[Student Dashboard]
-        │
-        ▼ (Clicks "Start Mock")
-[/test/[mockId]/instructions]
-  - Displays: 200 Qs, 180 Mins, 4 Sections x 50, +1 / -0.25 Marking Scheme
-  - Checkbox: [x] "I have read and understood the instructions"
-  - "Begin Test" button enabled ONLY after checkbox checked
-        │
-        ▼ (Clicks "Begin Test")
-[/test/[mockId]]
-  - 180-Minute Countdown Timer STARTS (10800s)
-  - Questions hydrated (correctOption HIDDEN)
-  - Palette active (Answered / Unanswered / Marked / Not Visited)
-  - LocalStorage auto-persistence on every click
-        │
-        ▼ (Manual Submit or Timer Zero)
-[/results/[attemptId]]
-  - Calculates Net Score = Correct - (Wrong * 0.25)
-  - Scorecard Hero + 150 Qualifying Target status
-  - Full Question-by-Question Solution & Answer Key Review
-```
-
----
-
-## 6. Environment Configuration (Cloud Ready)
 ```env
-# MongoDB Atlas Connection URI
+# MongoDB Atlas Database
 MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/nbe_arena?retryWrites=true&w=majority
 MONGO_URL=mongodb+srv://user:pass@cluster.mongodb.net/nbe_arena?retryWrites=true&w=majority
 
@@ -256,9 +244,20 @@ MONGO_URL=mongodb+srv://user:pass@cluster.mongodb.net/nbe_arena?retryWrites=true
 NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=a_very_secure_random_jwt_secret_key_32_chars
 
-# Vision LLM Provider Configuration
-VISION_PROVIDER=openai
-OPENAI_API_KEY=sk-...
-ANTHROPIC_API_KEY=
-GOOGLE_API_KEY=
+# Vision Provider Configuration (Path B)
+VISION_PROVIDER=openrouter
+OPENROUTER_API_KEY=sk-or-v1-...
+OPENROUTER_VISION_MODEL=qwen/qwen-2.5-vl-7b-instruct
+OPENROUTER_FALLBACK_MODEL=openai/gpt-4o-mini
+
+GEMINI_API_KEY=AIzaSy...
+GEMINI_VISION_MODEL=gemini-2.0-flash
+
+OLLAMA_BASE_URL=http://localhost:11434
+OLLAMA_VISION_MODEL=qwen2.5-vl:7b
+
+# Text Provider Configuration (Path A - Text Pages Only)
+TEXT_PROVIDER=groq
+GROQ_API_KEY=gsk_...
+GROQ_TEXT_MODEL=llama-3.3-70b-versatile
 ```
