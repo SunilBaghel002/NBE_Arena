@@ -1,0 +1,2603 @@
+[
+  {
+    "id": "att_1787834972611_que2p",
+    "mockId": "mock_1787834971329_ry58f",
+    "startedAt": "2026-08-27T12:49:33.198Z",
+    "submittedAt": "2026-08-27T12:49:38.198Z",
+    "timeTakenSeconds": 5,
+    "answers": [
+      {
+        "questionId": "seed_reasoning_011",
+        "selectedOption": null,
+        "status": "unanswered",
+        "timeSpentSeconds": 5
+      },
+      {
+        "questionId": "seed_reasoning_033",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_022",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_019",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_023",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_040",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_027",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_038",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_008",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_041",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_007",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_049",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_044",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_012",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_013",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_018",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_016",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_009",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_004",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_039",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_010",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_034",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_025",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_003",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_045",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_021",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_015",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_046",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_030",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_035",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_005",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_050",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_043",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_037",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_042",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_036",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_014",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_006",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_017",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_031",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_002",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_028",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_001",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_026",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_048",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_029",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_032",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_024",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_047",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_020",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_016",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_050",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_013",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_003",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_044",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_005",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_020",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_042",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_004",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_035",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_008",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_043",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_024",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_030",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_025",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_034",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_026",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_018",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_009",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_002",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_027",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_011",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_023",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_021",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_006",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_017",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_015",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_033",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_040",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_014",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_039",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_010",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_045",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_028",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_007",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_022",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_036",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_001",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_012",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_041",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_047",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_032",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_049",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_046",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_029",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_038",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_048",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_037",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_019",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_031",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_044",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_011",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_015",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_036",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_048",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_019",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_003",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_027",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_030",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_046",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_034",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_040",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_032",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_049",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_041",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_026",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_047",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_025",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_037",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_022",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_005",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_028",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_043",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_024",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_004",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_017",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_018",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_039",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_023",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_031",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_006",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_029",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_033",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_014",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_035",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_013",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_021",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_001",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_050",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_009",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_007",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_042",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_038",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_045",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_016",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_002",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_020",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_010",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_012",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_008",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_046",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_015",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_017",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_003",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_007",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_014",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_037",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_035",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_045",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_010",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_033",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_002",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_032",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_021",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_031",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_008",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_038",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_042",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_029",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_028",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_006",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_030",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_011",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_016",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_041",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_027",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_012",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_004",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_034",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_043",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_049",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_023",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_025",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_050",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_044",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_009",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_020",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_005",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_022",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_019",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_024",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_013",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_039",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_040",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_001",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_047",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_018",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_048",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_036",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_026",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      }
+    ],
+    "score": {
+      "totalQuestions": 200,
+      "correctCount": 0,
+      "wrongCount": 0,
+      "unansweredCount": 200,
+      "rawScore": 0,
+      "negativePenalty": 0,
+      "netScore": 0,
+      "accuracyPercentage": 0,
+      "qualifyingCleared": false,
+      "targetScore": 150,
+      "bySection": {
+        "REASONING": {
+          "section": "REASONING",
+          "total": 50,
+          "correct": 0,
+          "wrong": 0,
+          "unanswered": 50,
+          "netScore": 0,
+          "accuracyPercentage": 0,
+          "timeSpentSeconds": 5
+        },
+        "GA": {
+          "section": "GA",
+          "total": 50,
+          "correct": 0,
+          "wrong": 0,
+          "unanswered": 50,
+          "netScore": 0,
+          "accuracyPercentage": 0,
+          "timeSpentSeconds": 0
+        },
+        "QUANT": {
+          "section": "QUANT",
+          "total": 50,
+          "correct": 0,
+          "wrong": 0,
+          "unanswered": 50,
+          "netScore": 0,
+          "accuracyPercentage": 0,
+          "timeSpentSeconds": 0
+        },
+        "ENGLISH": {
+          "section": "ENGLISH",
+          "total": 50,
+          "correct": 0,
+          "wrong": 0,
+          "unanswered": 50,
+          "netScore": 0,
+          "accuracyPercentage": 0,
+          "timeSpentSeconds": 0
+        }
+      }
+    }
+  },
+  {
+    "id": "att_1787834486380_rzkdh",
+    "mockId": "mock_1787834483913_tbb4x",
+    "startedAt": "2026-08-27T12:41:27.259Z",
+    "submittedAt": "2026-08-27T12:43:33.259Z",
+    "timeTakenSeconds": 126,
+    "answers": [
+      {
+        "questionId": "seed_reasoning_001",
+        "selectedOption": "b",
+        "status": "answered",
+        "timeSpentSeconds": 10
+      },
+      {
+        "questionId": "seed_reasoning_050",
+        "selectedOption": "a",
+        "status": "answered",
+        "timeSpentSeconds": 28
+      },
+      {
+        "questionId": "seed_reasoning_023",
+        "selectedOption": null,
+        "status": "unanswered",
+        "timeSpentSeconds": 9
+      },
+      {
+        "questionId": "seed_reasoning_024",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_047",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_020",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_049",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_013",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_030",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_045",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_011",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_008",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_007",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_021",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_038",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_018",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_014",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_005",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_022",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_040",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_041",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_026",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_004",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_002",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_010",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_016",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_048",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_034",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_006",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_027",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_017",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_032",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_037",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_012",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_029",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_028",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_036",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_043",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_042",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_031",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_015",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_033",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_044",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_009",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_039",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_025",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_035",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_003",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_046",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_reasoning_019",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_048",
+        "selectedOption": "c",
+        "status": "answered",
+        "timeSpentSeconds": 12
+      },
+      {
+        "questionId": "seed_ga_010",
+        "selectedOption": null,
+        "status": "unanswered",
+        "timeSpentSeconds": 6
+      },
+      {
+        "questionId": "seed_ga_012",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_033",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_021",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_015",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_044",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_042",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_040",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_038",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_020",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_032",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_034",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_011",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_016",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_017",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_050",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_023",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_013",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_018",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_039",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_025",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_041",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_035",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_007",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_037",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_002",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_031",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_004",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_022",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_009",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_003",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_024",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_019",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_029",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_008",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_043",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_030",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_027",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_014",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_045",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_047",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_046",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_006",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_028",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_049",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_036",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_005",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_026",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_ga_001",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_019",
+        "selectedOption": "c",
+        "status": "answered",
+        "timeSpentSeconds": 61
+      },
+      {
+        "questionId": "seed_quant_006",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_050",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_032",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_040",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_041",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_034",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_026",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_009",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_049",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_013",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_024",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_046",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_038",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_035",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_021",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_028",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_029",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_007",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_039",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_016",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_044",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_005",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_022",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_002",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_011",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_015",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_018",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_023",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_033",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_027",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_045",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_008",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_010",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_012",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_047",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_042",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_003",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_043",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_037",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_031",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_017",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_020",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_036",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_048",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_014",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_001",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_004",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_025",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_quant_030",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_047",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_046",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_008",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_014",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_009",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_040",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_024",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_027",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_006",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_011",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_048",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_038",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_013",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_001",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_033",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_023",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_050",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_021",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_017",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_049",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_022",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_004",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_012",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_007",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_032",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_003",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_039",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_005",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_031",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_028",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_018",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_016",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_035",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_002",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_010",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_044",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_036",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_019",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_042",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_043",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_037",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_034",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_026",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_045",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_020",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_041",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_030",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_029",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_025",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      },
+      {
+        "questionId": "seed_english_015",
+        "selectedOption": null,
+        "status": "not_visited",
+        "timeSpentSeconds": 0
+      }
+    ],
+    "score": {
+      "totalQuestions": 200,
+      "correctCount": 2,
+      "wrongCount": 2,
+      "unansweredCount": 196,
+      "rawScore": 2,
+      "negativePenalty": 0.5,
+      "netScore": 1.5,
+      "accuracyPercentage": 50,
+      "qualifyingCleared": false,
+      "targetScore": 150,
+      "bySection": {
+        "REASONING": {
+          "section": "REASONING",
+          "total": 50,
+          "correct": 2,
+          "wrong": 0,
+          "unanswered": 48,
+          "netScore": 2,
+          "accuracyPercentage": 100,
+          "timeSpentSeconds": 47
+        },
+        "GA": {
+          "section": "GA",
+          "total": 50,
+          "correct": 0,
+          "wrong": 1,
+          "unanswered": 49,
+          "netScore": -0.25,
+          "accuracyPercentage": 0,
+          "timeSpentSeconds": 18
+        },
+        "QUANT": {
+          "section": "QUANT",
+          "total": 50,
+          "correct": 0,
+          "wrong": 1,
+          "unanswered": 49,
+          "netScore": -0.25,
+          "accuracyPercentage": 0,
+          "timeSpentSeconds": 61
+        },
+        "ENGLISH": {
+          "section": "ENGLISH",
+          "total": 50,
+          "correct": 0,
+          "wrong": 0,
+          "unanswered": 50,
+          "netScore": 0,
+          "accuracyPercentage": 0,
+          "timeSpentSeconds": 0
+        }
+      }
+    }
+  },
+  {
+    "id": "att_test_1",
+    "mockId": "mock_1787834306492_63i4b",
+    "startedAt": "2026-08-27T12:18:50.681Z",
+    "submittedAt": "2026-08-27T12:38:50.681Z",
+    "timeTakenSeconds": 1200,
+    "answers": [
+      {
+        "questionId": "seed_reasoning_002",
+        "selectedOption": "a",
+        "status": "answered",
+        "timeSpentSeconds": 30
+      },
+      {
+        "questionId": "seed_reasoning_026",
+        "selectedOption": "c",
+        "status": "answered",
+        "timeSpentSeconds": 45
+      }
+    ],
+    "score": {
+      "totalQuestions": 200,
+      "correctCount": 1,
+      "wrongCount": 1,
+      "unansweredCount": 198,
+      "rawScore": 1,
+      "negativePenalty": 0.25,
+      "netScore": 0.75,
+      "accuracyPercentage": 50,
+      "qualifyingCleared": false,
+      "targetScore": 150,
+      "bySection": {
+        "REASONING": {
+          "section": "REASONING",
+          "total": 50,
+          "correct": 1,
+          "wrong": 1,
+          "unanswered": 48,
+          "netScore": 0.75,
+          "accuracyPercentage": 50,
+          "timeSpentSeconds": 75
+        },
+        "GA": {
+          "section": "GA",
+          "total": 50,
+          "correct": 0,
+          "wrong": 0,
+          "unanswered": 50,
+          "netScore": 0,
+          "accuracyPercentage": 0,
+          "timeSpentSeconds": 0
+        },
+        "QUANT": {
+          "section": "QUANT",
+          "total": 50,
+          "correct": 0,
+          "wrong": 0,
+          "unanswered": 50,
+          "netScore": 0,
+          "accuracyPercentage": 0,
+          "timeSpentSeconds": 0
+        },
+        "ENGLISH": {
+          "section": "ENGLISH",
+          "total": 50,
+          "correct": 0,
+          "wrong": 0,
+          "unanswered": 50,
+          "netScore": 0,
+          "accuracyPercentage": 0,
+          "timeSpentSeconds": 0
+        }
+      }
+    }
+  }
+]

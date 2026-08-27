@@ -9,6 +9,16 @@ export interface QuestionOptions {
 
 export type OptionKey = "a" | "b" | "c" | "d";
 
+export type UserRole = "admin" | "student";
+
+export interface User {
+  id: string;
+  username: string;
+  name: string;
+  role: UserRole;
+  createdAt: string;
+}
+
 export interface Question {
   id: string; // uuid or unique string
   section: SectionType;
@@ -80,7 +90,10 @@ export interface AttemptScore {
 
 export interface Attempt {
   id: string;
+  userId?: string; // Links attempt to candidate user account
+  userName?: string;
   mockId: string;
+  mockTitle?: string;
   startedAt: string;
   submittedAt?: string;
   timeTakenSeconds: number;
