@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useTestStore } from "@/store/testStore";
-import { Clock, Send, Shield, AlertTriangle } from "lucide-react";
+import { Clock, Send, Shield, Maximize2, Minimize2, CheckCircle2 } from "lucide-react";
 import { SectionType } from "@/types";
 
 interface TestHeaderProps {
@@ -26,6 +26,24 @@ export const TestHeader: React.FC<TestHeaderProps> = ({ onSubmitClick }) => {
     changeSection,
     isSubmitting,
   } = useTestStore();
+
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(Boolean(document.fullscreenElement));
+    };
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
+  }, []);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  };
 
   // Format timer as HH:MM:SS
   const formatTime = (totalSeconds: number) => {
@@ -70,15 +88,27 @@ export const TestHeader: React.FC<TestHeaderProps> = ({ onSubmitClick }) => {
             <h1 className="font-extrabold text-sm sm:text-base leading-tight truncate max-w-[180px] sm:max-w-md">
               {mockTitle || "NBE Junior Assistant CBT Mock"}
             </h1>
-            <p className="text-[11px] text-white/80 flex items-center gap-1">
+            <p className="text-[11px] text-white/80 flex items-center gap-1.5">
               <Shield className="w-3 h-3 text-emerald-400 flex-shrink-0" />
-              <span>Official CBT Mode · 200 Questions · +1.00 / -0.25</span>
+              <span>Official CBT Mode · 200 Qs · +1.00 / −0.25</span>
+              <span className="hidden md:inline text-white/40">|</span>
+              <span className="hidden md:inline text-emerald-300 font-semibold">💾 Auto-saved</span>
             </p>
           </div>
         </div>
 
-        {/* Right Header Area: Timer + Submit */}
-        <div className="flex items-center space-x-3">
+        {/* Right Header Area: Fullscreen + Timer + Submit */}
+        <div className="flex items-center space-x-2.5 sm:space-x-3">
+          {/* Fullscreen Toggle */}
+          <button
+            type="button"
+            onClick={toggleFullscreen}
+            className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition border border-white/10"
+            title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen CBT Exam Mode"}
+          >
+            {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+          </button>
+
           {/* 180-min Countdown Timer */}
           <div
             className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl border font-tabular text-sm sm:text-base tracking-wider font-black shadow-sm transition-colors ${timerColorClass}`}

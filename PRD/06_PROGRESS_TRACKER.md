@@ -147,9 +147,11 @@
 ---
 
 ## STAGE 4 — Polish & Vercel Production Hardening
-**Status:** `[ ] Pending`
+**Status:** `[x] Complete & Verified`
 
 ### Tasks
-- [ ] Vercel deployment test (`npm run build`)
-- [ ] Multi-device responsiveness
-- [ ] Candidate handoff guide
+- [x] Vercel deployment test (`npm run build` passing with 0 errors)
+- [x] Multi-device responsiveness (Desktop & mobile responsive layouts, sticky palette, tabular figures)
+- [x] High-speed database query projections (`getQuestionsByIds`)
+- [x] Fullscreen CBT exam mode & live auto-save indicators
+- [x] Candidate handoff guide (`CANDIDATE_GUIDE.md`)

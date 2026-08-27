@@ -59,6 +59,31 @@ export async function getQuestions(): Promise<Question[]> {
   }
 }
 
+export async function getQuestionsByIds(ids: string[]): Promise<Question[]> {
+  try {
+    await connectToDatabase();
+    const docs = await QuestionModel.find({ id: { $in: ids } }).lean();
+    return docs.map((doc) => ({
+      id: doc.id,
+      section: doc.section as SectionType,
+      questionText: doc.questionText,
+      options: doc.options,
+      correctOption: doc.correctOption as Question["correctOption"],
+      explanation: doc.explanation,
+      hasImage: doc.hasImage,
+      imagePath: doc.imagePath,
+      sourceExam: doc.sourceExam,
+      sourceYear: doc.sourceYear,
+      difficulty: doc.difficulty as Question["difficulty"],
+      isActive: doc.isActive,
+      createdAt: doc.createdAt?.toISOString?.() || new Date().toISOString(),
+    }));
+  } catch (error) {
+    console.error("MongoDB getQuestionsByIds error:", error);
+    return [];
+  }
+}
+
 export async function saveQuestions(questions: Question[]): Promise<void> {
   await connectToDatabase();
   for (const q of questions) {
@@ -81,7 +106,23 @@ export async function appendQuestions(newQuestions: Question[]): Promise<{ added
 }
 
 export async function getBankStats(): Promise<BankStats> {
-  const questions = await getQuestions();
+  await connectToDatabase();
+  await ensureSeedQuestions();
+
+  // Optimized aggregation for fast bank statistics
+  const [countsBySection, activeBySectionRaw, sourcesRaw, totalDocs] = await Promise.all([
+    QuestionModel.aggregate([
+      { $group: { _id: "$section", count: { $sum: 1 } } },
+    ]),
+    QuestionModel.aggregate([
+      { $match: { isActive: true } },
+      { $group: { _id: "$section", count: { $sum: 1 } } },
+    ]),
+    QuestionModel.aggregate([
+      { $group: { _id: "$sourceExam", count: { $sum: 1 } } },
+    ]),
+    QuestionModel.countDocuments(),
+  ]);
 
   const bySection: Record<SectionType, number> = {
     REASONING: 0,
@@ -97,28 +138,27 @@ export async function getBankStats(): Promise<BankStats> {
     ENGLISH: 0,
   };
 
-  const sourceMap = new Map<string, number>();
-
-  for (const q of questions) {
-    if (bySection[q.section] !== undefined) {
-      bySection[q.section]++;
-      if (q.isActive) {
-        activeBySection[q.section]++;
-      }
+  for (const item of countsBySection) {
+    if (bySection[item._id as SectionType] !== undefined) {
+      bySection[item._id as SectionType] = item.count;
     }
-    const src = q.sourceExam || "Unknown";
-    sourceMap.set(src, (sourceMap.get(src) || 0) + 1);
   }
 
-  const sources = Array.from(sourceMap.entries()).map(([sourceExam, count]) => ({
-    sourceExam,
-    count,
+  for (const item of activeBySectionRaw) {
+    if (activeBySection[item._id as SectionType] !== undefined) {
+      activeBySection[item._id as SectionType] = item.count;
+    }
+  }
+
+  const sources = sourcesRaw.map((s) => ({
+    sourceExam: s._id || "Official PYQ",
+    count: s.count,
   }));
 
   const activeTotal = Object.values(activeBySection).reduce((a, b) => a + b, 0);
 
   return {
-    total: questions.length,
+    total: totalDocs,
     bySection,
     activeTotal,
     activeBySection,
