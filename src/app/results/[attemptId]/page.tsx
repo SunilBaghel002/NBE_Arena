@@ -514,6 +514,17 @@ export default function ResultsPage() {
                         <h4 className="text-sm sm:text-base font-semibold text-slate-900 leading-snug">
                           {q.questionText}
                         </h4>
+
+                        {/* Question Figure / Diagram Image */}
+                        {q.imagePath ? (
+                          <div className="my-3 p-3 bg-slate-50 rounded-xl border border-slate-200 inline-block">
+                            <img
+                              src={q.imagePath}
+                              alt="Question Diagram"
+                              className="max-h-56 w-auto object-contain rounded-lg bg-white p-1"
+                            />
+                          </div>
+                        ) : null}
                       </div>
                     </div>
 
@@ -534,6 +545,8 @@ export default function ResultsPage() {
                         {(["a", "b", "c", "d"] as const).map((optKey) => {
                           const isUserAnswer = item.selectedOption === optKey;
                           const isCorrectAnswer = q.correctOption === optKey;
+                          const optText = q.options[optKey];
+                          const isImageOption = optText && (optText.startsWith("http://") || optText.startsWith("https://") || optText.startsWith("/uploads/"));
 
                           let optStyle = "border-slate-200 bg-white text-slate-700";
                           if (isCorrectAnswer) {
@@ -548,14 +561,22 @@ export default function ResultsPage() {
                               className={`p-3.5 rounded-xl border flex items-start gap-2.5 ${optStyle}`}
                             >
                               <span className="uppercase font-black">({optKey})</span>
-                              <span className="flex-1 leading-relaxed">{q.options[optKey]}</span>
+                              {isImageOption ? (
+                                <img
+                                  src={optText}
+                                  alt={`Option ${optKey.toUpperCase()}`}
+                                  className="max-h-20 w-auto object-contain rounded border border-slate-200 bg-white p-1"
+                                />
+                              ) : (
+                                <span className="flex-1 leading-relaxed">{optText}</span>
+                              )}
                               {isCorrectAnswer && (
-                                <span className="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded-full font-bold">
+                                <span className="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded-full font-bold flex-shrink-0">
                                   Correct Key
                                 </span>
                               )}
                               {isUserAnswer && !isCorrectAnswer && (
-                                <span className="text-[10px] bg-rose-600 text-white px-2 py-0.5 rounded-full font-bold">
+                                <span className="text-[10px] bg-rose-600 text-white px-2 py-0.5 rounded-full font-bold flex-shrink-0">
                                   Your Choice
                                 </span>
                               )}

@@ -91,14 +91,24 @@ export const QuestionCard: React.FC = () => {
           {question.questionText}
         </div>
 
-        {/* Optional Figure / Diagram Placeholder */}
-        {question.hasImage && (
-          <div className="p-4 rounded-xl bg-slate-100 border border-slate-300 text-center text-xs text-slate-600 flex flex-col items-center justify-center gap-1.5">
-            <ImageIcon className="w-6 h-6 text-slate-400" />
-            <p className="font-semibold">Figure / Diagram Question</p>
-            <p className="text-[11px] text-slate-500">Refer to original diagram or question stem.</p>
+        {/* Question Figure / Diagram Image */}
+        {question.imagePath ? (
+          <div className="my-4 p-3 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col items-center justify-center">
+            <img
+              src={question.imagePath}
+              alt="Question Diagram"
+              className="max-h-72 w-auto object-contain rounded-xl shadow-xs bg-white p-2"
+              loading="eager"
+            />
+            <span className="text-[11px] text-slate-500 font-semibold mt-2">Figure / Question Diagram</span>
           </div>
-        )}
+        ) : question.hasImage ? (
+          <div className="p-4 rounded-xl bg-blue-50/60 border border-blue-200 text-center text-xs text-blue-900 flex flex-col items-center justify-center gap-1.5">
+            <ImageIcon className="w-6 h-6 text-blue-600" />
+            <p className="font-bold text-slate-800">Visual / Diagram Question</p>
+            <p className="text-[11px] text-slate-500">Pattern & non-verbal reasoning</p>
+          </div>
+        ) : null}
 
         {/* Options List */}
         <div className="space-y-3 pt-2">
@@ -107,6 +117,7 @@ export const QuestionCard: React.FC = () => {
             if (!optText) return null;
 
             const isSelected = selectedOption === key;
+            const isImageOption = optText.startsWith("http://") || optText.startsWith("https://") || optText.startsWith("/uploads/");
 
             return (
               <label
@@ -129,7 +140,7 @@ export const QuestionCard: React.FC = () => {
                   {isSelected && <div className="w-2 h-2 rounded-full bg-white" />}
                 </div>
 
-                {/* Option Identifier and Text */}
+                {/* Option Identifier and Text / Image */}
                 <div className="flex-1 flex items-start gap-2.5">
                   <span
                     className={`font-black text-sm uppercase px-1.5 py-0.5 rounded ${
@@ -140,9 +151,17 @@ export const QuestionCard: React.FC = () => {
                   >
                     {key.toUpperCase()}
                   </span>
-                  <span className="text-[15px] sm:text-[16px] leading-relaxed pt-0.5">
-                    {optText}
-                  </span>
+                  {isImageOption ? (
+                    <img
+                      src={optText}
+                      alt={`Option ${key.toUpperCase()}`}
+                      className="max-h-24 w-auto object-contain rounded-lg border border-slate-200 bg-white p-1"
+                    />
+                  ) : (
+                    <span className="text-[15px] sm:text-[16px] leading-relaxed pt-0.5">
+                      {optText}
+                    </span>
+                  )}
                 </div>
 
                 {/* Key Hint Badge */}
