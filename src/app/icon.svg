@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A8A" />
+      <stop offset="50%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#1E293B" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="50%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#1D4ED8" stop-opacity="0.1" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <!-- Background Shield with Shadow -->
+  <path d="M256 32L416 96V240C416 348 348 444 256 480C164 444 96 348 96 240V96L256 32Z" 
+        fill="url(#shieldGrad)" 
+        stroke="url(#goldGrad)" 
+        stroke-width="12" 
+        stroke-linejoin="round"
+        filter="url(#shadow)" />
+
+  <!-- Inner Subtle Accent Shield -->
+  <path d="M256 56L392 110V234C392 328 334 412 256 446C178 412 120 328 120 234V110L256 56Z" 
+        fill="url(#glowGrad)" 
+        opacity="0.35" />
+
+  <!-- Central Emblem: Medical Staff / Torch & Academic Wings -->
+  <!-- Torch / Central Pillar -->
+  <path d="M246 160H266V330H246V160Z" fill="url(#goldGrad)" rx="4" />
+  
+  <!-- Flame / Torch Crown -->
+  <path d="M256 120C244 140 236 150 256 170C276 150 268 140 256 120Z" fill="#EF4444" />
+  <path d="M256 130C248 142 244 148 256 160C268 148 264 142 256 130Z" fill="url(#goldGrad)" />
+
+  <!-- Academic / Excellence Star -->
+  <polygon points="256,180 263,198 282,198 267,209 273,227 256,216 239,227 245,209 230,198 249,198" 
+           fill="url(#goldGrad)" />
+
+  <!-- Symmetrical Laurel / Wings -->
+  <path d="M190 230C180 270 200 310 240 330C220 310 210 280 215 250C198 248 192 238 190 230Z" fill="url(#goldGrad)" />
+  <path d="M322 230C332 270 312 310 272 330C292 310 302 280 297 250C314 248 320 238 322 230Z" fill="url(#goldGrad)" />
+
+  <!-- Lower NBE Banner Ribbon -->
+  <path d="M160 370H352L336 410H176L160 370Z" fill="url(#goldGrad)" rx="4" />
+  <text x="256" y="398" 
+        font-family="system-ui, -apple-system, sans-serif" 
+        font-size="28" 
+        font-weight="900" 
+        fill="#0F172A" 
+        text-anchor="middle" 
+        letter-spacing="4">NBE</text>
+</svg>
