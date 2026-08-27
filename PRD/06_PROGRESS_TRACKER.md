@@ -135,14 +135,14 @@
 ---
 
 ## STAGE 3 — Multi-Candidate Mock Engine Quality & Hardening
-**Status:** `[ ] Pending`
+**Status:** `[x] Complete & Verified`
 
 ### Tasks
-- [ ] Enforce 50-per-section gate in MongoDB
-- [ ] Generate 6–10 unique mocks
-- [ ] Personal candidate progress tracking charts
-- [ ] Paper review mode
-- [ ] Test on multi-user scenarios
+- [x] Enforce 50-per-section gate in MongoDB (Reasoning, GA, Quant, English >= 50)
+- [x] Generate 6–10 unique mocks (6 full mocks generated with 200 questions each in MongoDB Atlas)
+- [x] Personal candidate progress tracking charts (Net score trajectory, 150 benchmark line, and sectional mastery cards)
+- [x] Paper review mode (Section & status filters, question palette jump grid, official answer keys, and step-by-step explanations)
+- [x] Test on multi-user scenarios (Isolated student lobbies for candidates Karishma & Prachii, Admin candidate progress monitoring and credentials editor)
 
 ---
 

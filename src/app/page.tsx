@@ -22,8 +22,12 @@ import {
   TrendingUp,
   Target,
   FileCheck,
+  BarChart2,
+  Sparkles,
+  Zap,
+  Search,
 } from "lucide-react";
-import { BankStats, MockTest, Attempt } from "@/types";
+import { BankStats, MockTest, Attempt, SectionType } from "@/types";
 
 export default function StudentDashboard() {
   const router = useRouter();
@@ -35,6 +39,7 @@ export default function StudentDashboard() {
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [mockSearch, setMockSearch] = useState("");
 
   // If unauthenticated, redirect to /login
   useEffect(() => {
@@ -148,6 +153,37 @@ export default function StudentDashboard() {
         )
       : 0;
 
+  // Section historical accuracy averages
+  const sectionAverages: Record<SectionType, { avgNet: number; accuracy: number }> = {
+    REASONING: { avgNet: 0, accuracy: 0 },
+    GA: { avgNet: 0, accuracy: 0 },
+    QUANT: { avgNet: 0, accuracy: 0 },
+    ENGLISH: { avgNet: 0, accuracy: 0 },
+  };
+
+  if (totalCompleted > 0) {
+    for (const secKey of ["REASONING", "GA", "QUANT", "ENGLISH"] as SectionType[]) {
+      let sumNet = 0;
+      let sumAcc = 0;
+      for (const a of attemptsWithScores) {
+        const s = a.score?.bySection?.[secKey];
+        if (s) {
+          sumNet += s.netScore || 0;
+          sumAcc += s.accuracyPercentage || 0;
+        }
+      }
+      sectionAverages[secKey] = {
+        avgNet: Number((sumNet / totalCompleted).toFixed(1)),
+        accuracy: Number((sumAcc / totalCompleted).toFixed(1)),
+      };
+    }
+  }
+
+  // Filtered Mocks
+  const filteredMocks = mocks.filter((m) =>
+    m.title.toLowerCase().includes(mockSearch.toLowerCase())
+  );
+
   if (status === "loading" || loading) {
     return (
       <div className="min-h-screen bg-exam-bg flex items-center justify-center p-4">
@@ -209,7 +245,7 @@ export default function StudentDashboard() {
       </header>
 
       {/* Main Container */}
-      <div className="max-w-5xl mx-auto px-4 py-8 flex-1 w-full space-y-8">
+      <div className="max-w-6xl mx-auto px-4 py-8 flex-1 w-full space-y-8">
         {/* Welcome & Exam Hero Banner */}
         <div className="bg-white rounded-2xl shadow-md border border-exam-border p-6 sm:p-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6 mb-6">
@@ -221,7 +257,7 @@ export default function StudentDashboard() {
                 NBE Junior Assistant Examination Series
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                200 Questions · 180 Minutes · 4 Sections × 50 · Marking: +1.00 Correct, -0.25 Wrong
+                200 Questions · 180 Minutes · 4 Sections × 50 · Marking: +1.00 Correct, −0.25 Wrong
               </p>
             </div>
 
@@ -278,10 +314,96 @@ export default function StudentDashboard() {
           </div>
         </div>
 
+        {/* Visual Progress & Section Strength Analysis (if candidate has attempted tests) */}
+        {totalCompleted > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Score Trajectory Chart */}
+            <div className="bg-white rounded-2xl shadow-sm border border-exam-border p-6">
+              <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+                <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                  <TrendingUp className="w-4 h-4 text-exam-primary" /> Net Score Trajectory
+                </h3>
+                <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                  Target: 150/200
+                </span>
+              </div>
+
+              {/* Trajectory Bar Visualizer */}
+              <div className="space-y-3 pt-2">
+                {attemptsWithScores.slice(0, 5).map((att, idx) => {
+                  const s = att.score?.netScore || 0;
+                  const pct = Math.min(100, Math.max(0, (s / 200) * 100));
+                  const isQual = s >= 150;
+
+                  return (
+                    <div key={att.id} className="space-y-1">
+                      <div className="flex justify-between text-xs font-semibold text-slate-700">
+                        <span className="truncate max-w-[180px]">{att.mockTitle || `Attempt #${idx + 1}`}</span>
+                        <span className="font-bold font-tabular">
+                          {s} / 200 marks ({pct.toFixed(0)}%)
+                        </span>
+                      </div>
+                      <div className="h-3.5 bg-slate-100 rounded-full overflow-hidden relative">
+                        {/* 150 benchmark line at 75% */}
+                        <div
+                          className="absolute top-0 bottom-0 w-0.5 bg-rose-400 z-10"
+                          style={{ left: "75%" }}
+                          title="150 Marks Target Benchmark"
+                        />
+                        <div
+                          className={`h-full rounded-full transition-all duration-500 ${
+                            isQual ? "bg-emerald-500" : "bg-exam-primary"
+                          }`}
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Sectional Strengths */}
+            <div className="bg-white rounded-2xl shadow-sm border border-exam-border p-6">
+              <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+                <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                  <BarChart2 className="w-4 h-4 text-exam-primary" /> Sectional Mastery & Accuracy
+                </h3>
+                <span className="text-xs text-slate-500 font-medium">50 Qs per section</span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 pt-1">
+                {(
+                  [
+                    { key: "REASONING", name: "Reasoning", color: "blue" },
+                    { key: "GA", name: "General Awareness", color: "amber" },
+                    { key: "QUANT", name: "Quantitative", color: "emerald" },
+                    { key: "ENGLISH", name: "English", color: "purple" },
+                  ] as const
+                ).map((sec) => {
+                  const data = sectionAverages[sec.key];
+                  return (
+                    <div key={sec.key} className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                      <span className="text-xs font-bold text-slate-700 block">{sec.name}</span>
+                      <div className="flex items-baseline gap-1 mt-1 font-tabular">
+                        <span className="text-xl font-black text-slate-900">{data.avgNet}</span>
+                        <span className="text-[10px] text-slate-400 font-bold">/ 50 avg</span>
+                      </div>
+                      <span className="text-[11px] text-slate-500 block mt-0.5 font-medium">
+                        Accuracy: {data.accuracy}%
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Available Mock Papers & Personal Attempt History */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Available Mock Papers (Clicking routes to Pre-Exam Instructions) */}
-          <div className="bg-white rounded-xl shadow-sm border border-exam-border p-6 flex flex-col justify-between">
+          <div className="bg-white rounded-2xl shadow-sm border border-exam-border p-6 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
                 <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
@@ -290,13 +412,27 @@ export default function StudentDashboard() {
                 <span className="text-xs text-slate-500 font-semibold">{mocks.length} papers</span>
               </div>
 
-              {mocks.length === 0 ? (
+              {/* Search filter for mocks */}
+              {mocks.length > 4 && (
+                <div className="relative mb-3">
+                  <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
+                  <input
+                    type="text"
+                    value={mockSearch}
+                    onChange={(e) => setMockSearch(e.target.value)}
+                    placeholder="Search mock paper..."
+                    className="w-full text-xs pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:ring-1 focus:ring-exam-primary"
+                  />
+                </div>
+              )}
+
+              {filteredMocks.length === 0 ? (
                 <div className="text-center py-10 text-xs text-slate-400">
-                  No mock papers generated yet. Click &quot;Generate New Mock Test&quot; above to create one.
+                  No mock papers found. Click &quot;Generate New Mock Test&quot; above to create one.
                 </div>
               ) : (
-                <div className="space-y-3 max-h-80 overflow-y-auto pr-1">
-                  {mocks.map((mock) => (
+                <div className="space-y-3 max-h-96 overflow-y-auto pr-1">
+                  {filteredMocks.map((mock) => (
                     <div
                       key={mock.id}
                       className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 flex items-center justify-between transition"
@@ -324,7 +460,7 @@ export default function StudentDashboard() {
           </div>
 
           {/* Personal Attempt History */}
-          <div className="bg-white rounded-xl shadow-sm border border-exam-border p-6 flex flex-col justify-between">
+          <div className="bg-white rounded-2xl shadow-sm border border-exam-border p-6 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
                 <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
@@ -338,7 +474,7 @@ export default function StudentDashboard() {
                   You have not attempted any tests yet. Click &quot;Start Mock&quot; to begin your first practice session.
                 </div>
               ) : (
-                <div className="space-y-3 max-h-80 overflow-y-auto pr-1">
+                <div className="space-y-3 max-h-96 overflow-y-auto pr-1">
                   {attempts.map((att) => {
                     const score = att.score;
                     if (!score) return null;
@@ -360,7 +496,7 @@ export default function StudentDashboard() {
 
                         <div className="flex items-center space-x-3">
                           <div className="text-right">
-                            <span className="text-base font-black text-slate-900 block leading-tight">
+                            <span className="text-base font-black text-slate-900 block leading-tight font-tabular">
                               {score.netScore} / 200
                             </span>
                             <span
@@ -377,7 +513,7 @@ export default function StudentDashboard() {
                           <Link
                             href={`/results/${att.id}`}
                             className="p-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition"
-                            title="View Scorecard"
+                            title="View Scorecard & Review"
                           >
                             <ArrowRight className="w-4 h-4" />
                           </Link>
