@@ -335,6 +335,17 @@ export const useTestStore = create<TestStoreState>((set, get) => ({
 
       const parsed = JSON.parse(raw);
       if (parsed && parsed.mockId === mockId && parsed.answers) {
+        // Verify that cached attempt belongs to the active question set
+        const currentQuestions = get().questions;
+        const parsedAnswerIds = Object.keys(parsed.answers || {});
+        const hasMatchingQuestions = parsedAnswerIds.some(id => Boolean(currentQuestions[id]));
+
+        if (!hasMatchingQuestions) {
+          console.info("Cached attempt question IDs do not match updated mock test. Starting fresh session.");
+          localStorage.removeItem(`nbe_attempt_${mockId}`);
+          return false;
+        }
+
         set({
           attemptId: parsed.attemptId || get().attemptId,
           currentSection: parsed.currentSection || "REASONING",
