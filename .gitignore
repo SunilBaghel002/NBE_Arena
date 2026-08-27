@@ -23,9 +23,13 @@ yarn-error.log*
 data/logs/
 scripts/
 
-# Uploads & DB
+# PYQ & PDF Files (Keep local only, never commit credentials/raw papers)
+data/pyq/
 public/uploads/*
 !public/uploads/.gitkeep
+*.pdf
+
+# DB & Local Data
 data/*.db
 data/nbe.db*
 
