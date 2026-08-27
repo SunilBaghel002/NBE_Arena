@@ -2,7 +2,8 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 import { SectionType, OptionKey } from "@/types";
 
 export interface IQuestionDocument extends Document {
-  id: string; // custom stable id (e.g. seed_reasoning_001)
+  id: string; // custom stable id (e.g. seed_reasoning_001 or ext_178783...)
+  contentHash?: string; // SHA-256 hash for deduplication
   section: SectionType;
   questionText: string;
   options: {
@@ -30,6 +31,11 @@ const QuestionSchema = new Schema<IQuestionDocument>(
       required: true,
       unique: true,
       index: true,
+    },
+    contentHash: {
+      type: String,
+      index: true,
+      sparse: true,
     },
     section: {
       type: String,

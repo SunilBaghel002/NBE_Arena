@@ -42,21 +42,16 @@ export default function LoginPage() {
     }
   };
 
-  const handleQuickFill = (u: string, p: string) => {
-    setUsername(u);
-    setPassword(p);
-  };
-
   return (
     <main className="min-h-screen bg-exam-bg flex flex-col justify-between p-4">
       {/* CBT Portal Header */}
       <header className="max-w-7xl mx-auto w-full py-4 flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <div className="w-9 h-9 bg-exam-saffron rounded flex items-center justify-center font-black text-white text-lg tracking-wider shadow">
+          <div className="w-9 h-9 bg-exam-saffron rounded-lg flex items-center justify-center font-black text-white text-base tracking-wider shadow">
             NBE
           </div>
           <div>
-            <h1 className="font-bold text-lg leading-none text-exam-primary">NBE ARENA</h1>
+            <h1 className="font-extrabold text-lg leading-none text-exam-primary">NBE ARENA</h1>
             <p className="text-xs text-slate-500">NBEMS Junior Assistant Examination Portal</p>
           </div>
         </div>
@@ -70,7 +65,7 @@ export default function LoginPage() {
             <div className="w-12 h-12 bg-white/10 rounded-2xl mx-auto flex items-center justify-center mb-3 border border-white/20">
               <ShieldCheck className="w-6 h-6 text-emerald-400" />
             </div>
-            <h2 className="text-xl font-bold">Candidate Sign In</h2>
+            <h2 className="text-xl font-black tracking-tight">Candidate Sign In</h2>
             <p className="text-xs text-white/80 mt-1">
               Access your personalized CBT mock tests & analytics
             </p>
@@ -95,10 +90,10 @@ export default function LoginPage() {
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="e.g. sunil or candidate1"
+                  placeholder="Enter your username"
                   autoComplete="username"
                   required
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-exam-primary focus:border-transparent transition"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-exam-primary focus:border-transparent transition font-medium"
                 />
               </div>
             </div>
@@ -124,7 +119,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full mt-2 py-3 rounded-xl bg-exam-primary hover:bg-exam-primaryHover text-white font-bold text-sm shadow-md transition transform active:scale-98 flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full mt-2 py-3.5 rounded-xl bg-exam-primary hover:bg-exam-primaryHover text-white font-black text-sm shadow-md transition transform active:scale-98 flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {loading ? (
                 <>
@@ -138,34 +133,6 @@ export default function LoginPage() {
                 </>
               )}
             </button>
-
-            {/* Quick Demo Credentials */}
-            <div className="mt-6 pt-4 border-t border-slate-100">
-              <p className="text-[11px] font-bold uppercase text-slate-400 text-center mb-2.5">
-                Quick Candidate Profiles
-              </p>
-              <div className="grid grid-cols-2 gap-2 text-xs">
-                <button
-                  type="button"
-                  onClick={() => handleQuickFill("sunil", "nbe2026")}
-                  className="p-2.5 rounded-lg border border-slate-200 bg-slate-50 hover:bg-blue-50 hover:border-blue-200 text-left transition"
-                >
-                  <p className="font-bold text-slate-800">Sunil Baghel</p>
-                  <p className="text-[10px] text-slate-500 font-mono">sunil / nbe2026</p>
-                  <span className="text-[9px] bg-blue-100 text-blue-800 font-bold px-1 rounded">Admin</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => handleQuickFill("candidate1", "nbe2026")}
-                  className="p-2.5 rounded-lg border border-slate-200 bg-slate-50 hover:bg-blue-50 hover:border-blue-200 text-left transition"
-                >
-                  <p className="font-bold text-slate-800">Candidate 1</p>
-                  <p className="text-[10px] text-slate-500 font-mono">candidate1 / nbe2026</p>
-                  <span className="text-[9px] bg-slate-200 text-slate-700 font-bold px-1 rounded">Student</span>
-                </button>
-              </div>
-            </div>
           </form>
         </div>
       </div>

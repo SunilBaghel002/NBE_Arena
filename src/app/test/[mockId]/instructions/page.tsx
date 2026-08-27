@@ -16,6 +16,7 @@ import {
   Loader2,
   FileText,
   HelpCircle,
+  Sparkles,
 } from "lucide-react";
 import { HydratedMockTest } from "@/types";
 
@@ -62,8 +63,8 @@ export default function InstructionsPage() {
       <div className="min-h-screen bg-exam-bg flex items-center justify-center p-4">
         <div className="bg-white p-8 rounded-2xl shadow-sm border border-exam-border text-center max-w-sm w-full">
           <Loader2 className="w-10 h-10 text-exam-primary animate-spin mx-auto mb-3" />
-          <h2 className="font-bold text-base text-slate-800">Loading Examination Instructions</h2>
-          <p className="text-xs text-slate-500 mt-1">Preparing official NBEMS guidelines...</p>
+          <h2 className="font-bold text-base text-slate-800">Loading Examination Guidelines</h2>
+          <p className="text-xs text-slate-500 mt-1">Preparing official NBEMS rules...</p>
         </div>
       </div>
     );
@@ -93,18 +94,18 @@ export default function InstructionsPage() {
       <header className="bg-exam-primary text-white shadow-md sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-exam-saffron rounded flex items-center justify-center font-black text-white text-sm">
+            <div className="w-8 h-8 bg-exam-saffron rounded-lg flex items-center justify-center font-black text-white text-sm tracking-wider shadow">
               NBE
             </div>
             <div>
-              <h1 className="font-bold text-base sm:text-lg">Pre-Examination Instructions</h1>
+              <h1 className="font-extrabold text-base sm:text-lg">Pre-Examination Instructions</h1>
               <p className="text-xs text-white/80">{mock.title}</p>
             </div>
           </div>
 
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition"
+            className="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition"
           >
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Dashboard
           </Link>
@@ -115,38 +116,38 @@ export default function InstructionsPage() {
       <div className="max-w-4xl mx-auto px-4 py-8 flex-1 w-full space-y-6">
         {/* Exam Structure Hero Box */}
         <div className="bg-white rounded-2xl shadow-sm border border-exam-border p-6 sm:p-8">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-exam-primary mb-3">
-            <ShieldCheck className="w-4 h-4" /> National Board of Examinations in Medical Sciences
+          <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-exam-primary mb-3">
+            <ShieldCheck className="w-4 h-4 text-emerald-600" /> National Board of Examinations in Medical Sciences
           </div>
 
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-2">
-            Junior Assistant CBT Examination Instructions
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mb-2">
+            Junior Assistant CBT Examination Rules
           </h2>
-          <p className="text-sm text-slate-600 mb-6">
-            Please read the following instructions carefully before commencing the test. The 180-minute timer will start only when you click <strong>&quot;Begin Test&quot;</strong>.
+          <p className="text-sm text-slate-600 mb-6 leading-relaxed">
+            Please read the instructions carefully before commencing the test. The 180-minute countdown timer will commence only after you review the instructions, check the declaration box, and click <strong>&quot;Begin Test&quot;</strong>.
           </p>
 
           {/* Quick Metrics Bar */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 mb-8">
-            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
               <span className="text-[11px] font-bold uppercase text-slate-500 block">Total Questions</span>
               <span className="text-2xl font-black text-slate-900">200 Qs</span>
               <span className="text-[11px] text-slate-500 block mt-0.5">50 × 4 Sections</span>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
               <span className="text-[11px] font-bold uppercase text-slate-500 block">Total Duration</span>
               <span className="text-2xl font-black text-slate-900">180 Mins</span>
               <span className="text-[11px] text-slate-500 block mt-0.5">3.0 Hours Continuous</span>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
               <span className="text-[11px] font-bold uppercase text-slate-500 block">Marking Scheme</span>
               <span className="text-2xl font-black text-exam-danger">-0.25</span>
               <span className="text-[11px] text-emerald-700 font-bold block mt-0.5">+1.00 for Correct</span>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
               <span className="text-[11px] font-bold uppercase text-slate-500 block">Qualifying Target</span>
               <span className="text-2xl font-black text-exam-success">150 / 200</span>
               <span className="text-[11px] text-slate-500 block mt-0.5">75% Net Benchmark</span>
@@ -155,8 +156,8 @@ export default function InstructionsPage() {
 
           {/* Section Distribution Table */}
           <div className="mb-6">
-            <h3 className="font-bold text-sm text-slate-800 mb-3 flex items-center gap-1.5">
-              <BookOpen className="w-4 h-4 text-exam-primary" /> Section Distribution & Syllabus Focus
+            <h3 className="font-bold text-sm text-slate-900 mb-3 flex items-center gap-1.5">
+              <BookOpen className="w-4 h-4 text-exam-primary" /> Section Distribution & Marks Allocation
             </h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs border border-slate-200 rounded-xl overflow-hidden">
@@ -168,67 +169,67 @@ export default function InstructionsPage() {
                     <th className="p-3 text-center">Max Marks</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200">
+                <tbody className="divide-y divide-slate-200 font-medium text-slate-800">
                   <tr className="hover:bg-slate-50">
                     <td className="p-3 font-bold text-exam-primary">Section I</td>
-                    <td className="p-3 font-semibold text-slate-800">General Intelligence & Reasoning</td>
+                    <td className="p-3 font-bold">General Intelligence & Reasoning</td>
                     <td className="p-3 text-center font-bold">50</td>
                     <td className="p-3 text-center font-bold">50</td>
                   </tr>
                   <tr className="hover:bg-slate-50">
                     <td className="p-3 font-bold text-exam-primary">Section II</td>
-                    <td className="p-3 font-semibold text-slate-800">General Awareness (Polity, History, Science, GK)</td>
+                    <td className="p-3 font-bold">General Awareness (History, Polity, Science, GK)</td>
                     <td className="p-3 text-center font-bold">50</td>
                     <td className="p-3 text-center font-bold">50</td>
                   </tr>
                   <tr className="hover:bg-slate-50">
                     <td className="p-3 font-bold text-exam-primary">Section III</td>
-                    <td className="p-3 font-semibold text-slate-800">Quantitative Aptitude (Arithmetic & Basic Algebra)</td>
+                    <td className="p-3 font-bold">Quantitative Aptitude (Arithmetic & Basic Algebra)</td>
                     <td className="p-3 text-center font-bold">50</td>
                     <td className="p-3 text-center font-bold">50</td>
                   </tr>
                   <tr className="hover:bg-slate-50">
                     <td className="p-3 font-bold text-exam-primary">Section IV</td>
-                    <td className="p-3 font-semibold text-slate-800">English Comprehension & Grammar</td>
+                    <td className="p-3 font-bold">English Comprehension & Grammar</td>
                     <td className="p-3 text-center font-bold">50</td>
                     <td className="p-3 text-center font-bold">50</td>
                   </tr>
-                  <tr className="bg-slate-50/80 font-black text-slate-900">
+                  <tr className="bg-slate-50/90 font-black text-slate-900">
                     <td className="p-3" colSpan={2}>Total Paper</td>
-                    <td className="p-3 text-center text-sm">200 Questions</td>
-                    <td className="p-3 text-center text-sm">200 Marks</td>
+                    <td className="p-3 text-center text-sm font-black">200 Questions</td>
+                    <td className="p-3 text-center text-sm font-black">200 Marks</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
 
-          {/* CBT Question Palette Color Legend Instructions */}
-          <div className="mb-8 p-5 bg-slate-50 rounded-xl border border-slate-200">
+          {/* CBT Question Palette Color Legend Guide */}
+          <div className="mb-8 p-5 bg-slate-50/80 rounded-xl border border-slate-200">
             <h3 className="font-bold text-sm text-slate-800 mb-3 flex items-center gap-1.5">
               <HelpCircle className="w-4 h-4 text-exam-primary" /> Question Palette Status Guide
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
               <div className="flex items-center gap-2.5">
-                <span className="w-6 h-6 rounded-md bg-exam-answered text-white font-bold flex items-center justify-center text-[10px]">
+                <span className="w-6 h-6 rounded-lg bg-exam-answered text-white font-black flex items-center justify-center text-[10px]">
                   1
                 </span>
                 <span><strong>Green:</strong> You have answered the question.</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="w-6 h-6 rounded-md bg-exam-unanswered text-white font-bold flex items-center justify-center text-[10px]">
+                <span className="w-6 h-6 rounded-lg bg-exam-unanswered text-white font-black flex items-center justify-center text-[10px]">
                   2
                 </span>
                 <span><strong>Red:</strong> Visited but not yet answered.</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="w-6 h-6 rounded-md bg-exam-marked text-white font-bold flex items-center justify-center text-[10px]">
+                <span className="w-6 h-6 rounded-lg bg-exam-marked text-white font-black flex items-center justify-center text-[10px]">
                   3
                 </span>
-                <span><strong>Purple:</strong> Marked for review without answer.</span>
+                <span><strong>Purple:</strong> Marked for review without answering.</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="w-6 h-6 rounded-md bg-slate-200 text-slate-700 font-bold flex items-center justify-center text-[10px]">
+                <span className="w-6 h-6 rounded-lg bg-slate-200 text-slate-700 font-black flex items-center justify-center text-[10px]">
                   4
                 </span>
                 <span><strong>Grey:</strong> You have not visited the question yet.</span>
@@ -237,15 +238,15 @@ export default function InstructionsPage() {
           </div>
 
           {/* Mandatory Declaration Checkbox */}
-          <div className="p-5 rounded-xl bg-blue-50/70 border-2 border-blue-200">
-            <label className="flex items-start space-x-3 cursor-pointer select-none">
+          <div className="p-5 rounded-2xl bg-blue-50/80 border-2 border-blue-200 shadow-xs">
+            <label className="flex items-start space-x-3.5 cursor-pointer select-none">
               <input
                 type="checkbox"
                 checked={isAgreed}
                 onChange={(e) => setIsAgreed(e.target.checked)}
-                className="mt-1 w-5 h-5 rounded text-exam-primary focus:ring-exam-primary cursor-pointer"
+                className="mt-1 w-5 h-5 rounded-md text-exam-primary focus:ring-exam-primary cursor-pointer"
               />
-              <span className="text-xs sm:text-sm text-slate-800 font-semibold leading-relaxed">
+              <span className="text-xs sm:text-sm text-slate-900 font-bold leading-relaxed">
                 I have read, understood, and agreed to all the rules, time limit (180 minutes), section distribution (200 questions), and negative marking scheme (+1.00 / -0.25) of the NBEMS Junior Assistant Examination. I declare that I am ready to begin.
               </span>
             </label>
@@ -255,7 +256,7 @@ export default function InstructionsPage() {
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
             <Link
               href="/"
-              className="px-5 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-sm font-semibold transition"
+              className="px-5 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-sm font-semibold transition"
             >
               Cancel & Return to Dashboard
             </Link>
@@ -264,7 +265,11 @@ export default function InstructionsPage() {
               type="button"
               onClick={handleBeginTest}
               disabled={!isAgreed}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-exam-success hover:bg-emerald-700 text-white font-black text-base px-8 py-3 rounded-xl shadow-lg transition transform active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-exam-success"
+              className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 text-white font-black text-base px-8 py-3.5 rounded-xl shadow-lg transition transform active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed ${
+                isAgreed
+                  ? "bg-exam-success hover:bg-emerald-700 shadow-emerald-500/20"
+                  : "bg-slate-400"
+              }`}
             >
               <span>Begin Test (Start 180-Min Timer)</span>
               <ArrowRight className="w-5 h-5" />
