@@ -1,6 +1,5 @@
 import fs from "fs";
-// @ts-ignore
-import { PDFParse } from "pdf-parse";
+import { extractText } from "unpdf";
 
 export interface PdfPageText {
   pageNumber: number;
@@ -17,23 +16,23 @@ export interface PdfTextExtractionResult {
 export async function extractTextFromPdfBuffer(
   buffer: Buffer
 ): Promise<PdfTextExtractionResult> {
-  const parser = new PDFParse({ data: buffer });
-  const result = await parser.getText();
+  const uint8 = new Uint8Array(buffer);
+  const { totalPages, text } = await extractText(uint8);
 
-  const totalPages = result.total || (result.pages ? result.pages.length : 1);
-  const pages: PdfPageText[] = (result.pages || []).map((p: any, idx: number) => {
-    const rawText = p.text || "";
+  const pageTexts: string[] = Array.isArray(text) ? text : [String(text || "")];
+  const pages: PdfPageText[] = pageTexts.map((rawPageText: string, idx: number) => {
+    const cleaned = (rawPageText || "").trim();
     return {
       pageNumber: idx + 1,
-      text: rawText.trim(),
-      charCount: rawText.trim().length,
+      text: cleaned,
+      charCount: cleaned.length,
     };
   });
 
   return {
-    totalPages,
+    totalPages: totalPages || pages.length,
     pages,
-    fullText: result.text || "",
+    fullText: pages.map((p) => p.text).join("\n\n"),
   };
 }
 
