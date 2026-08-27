@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Navbar } from "@/components/Navbar";
+import { AdminSkeleton } from "@/components/ui/AdminSkeleton";
 import {
   Database,
   ArrowLeft,
@@ -357,12 +358,12 @@ export default function AdminPage() {
 
   if (status === "loading" || loading) {
     return (
-      <div className="min-h-screen bg-exam-bg flex items-center justify-center p-4">
-        <div className="bg-white p-8 rounded-2xl shadow-sm border border-exam-border text-center max-w-sm w-full">
-          <Loader2 className="w-10 h-10 text-exam-primary animate-spin mx-auto mb-3" />
-          <h2 className="font-bold text-base text-slate-800">Loading Admin Dashboard</h2>
-          <p className="text-xs text-slate-500 mt-1">Connecting to MongoDB Atlas...</p>
-        </div>
+      <div className="min-h-screen bg-exam-bg flex flex-col justify-between">
+        <Navbar />
+        <AdminSkeleton />
+        <footer className="bg-white border-t border-exam-border py-4 text-center text-xs text-slate-400">
+          NBE Arena — Administrator Control Panel
+        </footer>
       </div>
     );
   }

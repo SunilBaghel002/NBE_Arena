@@ -8,7 +8,8 @@ import { QuestionCard } from "@/components/test/QuestionCard";
 import { QuestionPalette } from "@/components/test/QuestionPalette";
 import { SubmitModal } from "@/components/test/SubmitModal";
 import { HydratedMockTest } from "@/types";
-import { Loader2, AlertTriangle, ArrowLeft } from "lucide-react";
+import { TestSkeleton } from "@/components/ui/TestSkeleton";
+import { AlertTriangle, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 export default function LiveTestPage() {
@@ -132,15 +133,7 @@ export default function LiveTestPage() {
   }, [isInitialized, remainingSeconds, handleSubmit]);
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen bg-exam-bg flex flex-col items-center justify-center p-4">
-        <div className="bg-white p-8 rounded-2xl shadow-md border border-exam-border text-center max-w-sm w-full">
-          <Loader2 className="w-10 h-10 text-exam-primary animate-spin mx-auto mb-4" />
-          <h2 className="font-bold text-lg text-slate-800 mb-1">Loading CBT Examination</h2>
-          <p className="text-xs text-slate-500">Preparing 200 Questions across 4 Sections...</p>
-        </div>
-      </div>
-    );
+    return <TestSkeleton />;
   }
 
   if (loadError) {
