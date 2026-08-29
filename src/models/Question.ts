@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
-import { SectionType, OptionKey } from "@/types";
+import { SectionType, OptionKey, AnswerConfidence, FigureKind } from "@/types";
 
 export interface IQuestionDocument extends Document {
   id: string; // custom stable id (e.g. seed_reasoning_001 or ext_178783...)
@@ -13,11 +13,20 @@ export interface IQuestionDocument extends Document {
     d: string;
   };
   correctOption: OptionKey | null;
+  answerConfidence?: AnswerConfidence;
   explanation?: string;
   hasImage: boolean;
   imagePath?: string;
+  optionImages?: { a: string; b: string; c: string; d: string };
+  optionsAreImages?: boolean;
+  stemIsFigureOnly?: boolean;
+  figureCount?: number;
+  figureKind?: FigureKind;
+  topic?: string;
   sourceExam: string;
   sourceYear?: number;
+  sourcePage?: number;
+  sourceQuestionNumber?: number;
   difficulty?: "EASY" | "MEDIUM" | "HARD";
   isActive: boolean;
   createdAt: Date;
@@ -58,6 +67,12 @@ const QuestionSchema = new Schema<IQuestionDocument>(
       enum: ["a", "b", "c", "d", null],
       default: null,
     },
+    answerConfidence: {
+      type: String,
+      enum: ["high", "medium", "none"],
+      default: "none",
+      index: true,
+    },
     explanation: {
       type: String,
       default: "",
@@ -65,10 +80,42 @@ const QuestionSchema = new Schema<IQuestionDocument>(
     hasImage: {
       type: Boolean,
       default: false,
+      index: true,
     },
     imagePath: {
       type: String,
       default: "",
+    },
+    // Non-verbal reasoning options are pictures. Kept separate from `options` so
+    // the text fields stay usable for search and dedupe.
+    optionImages: {
+      a: { type: String, default: "" },
+      b: { type: String, default: "" },
+      c: { type: String, default: "" },
+      d: { type: String, default: "" },
+    },
+    optionsAreImages: {
+      type: Boolean,
+      default: false,
+    },
+    stemIsFigureOnly: {
+      type: Boolean,
+      default: false,
+    },
+    figureCount: {
+      type: Number,
+      default: 0,
+    },
+    figureKind: {
+      type: String,
+      enum: ["table", "chart", "diagram", ""],
+      default: "",
+      index: true,
+    },
+    topic: {
+      type: String,
+      default: "",
+      index: true,
     },
     sourceExam: {
       type: String,
@@ -78,6 +125,13 @@ const QuestionSchema = new Schema<IQuestionDocument>(
     sourceYear: {
       type: Number,
       default: 2023,
+    },
+    // Provenance: which PDF page and printed question number this came from.
+    sourcePage: {
+      type: Number,
+    },
+    sourceQuestionNumber: {
+      type: Number,
     },
     difficulty: {
       type: String,

@@ -512,16 +512,16 @@ export default function ResultsPage() {
                           {q.section} SECTION
                         </div>
                         <h4 className="text-sm sm:text-base font-semibold text-slate-900 leading-snug">
-                          {q.questionText}
+                          {q.stemIsFigureOnly || q.questionText === "[figure]" ? "" : q.questionText}
                         </h4>
 
-                        {/* Question Figure / Diagram Image */}
+                        {/* Question Figure / Diagram / Match Table */}
                         {q.imagePath ? (
                           <div className="my-3 p-3 bg-slate-50 rounded-xl border border-slate-200 inline-block">
                             <img
                               src={q.imagePath}
                               alt="Question Diagram"
-                              className="max-h-56 w-auto object-contain rounded-lg bg-white p-1"
+                              className="max-h-80 w-auto object-contain rounded-lg bg-white p-1"
                             />
                           </div>
                         ) : null}
@@ -546,7 +546,11 @@ export default function ResultsPage() {
                           const isUserAnswer = item.selectedOption === optKey;
                           const isCorrectAnswer = q.correctOption === optKey;
                           const optText = q.options[optKey];
-                          const isImageOption = optText && (optText.startsWith("http://") || optText.startsWith("https://") || optText.startsWith("/uploads/"));
+                          const optImageUrl =
+                            q.optionImages?.[optKey] ||
+                            (optText && (optText.startsWith("http://") || optText.startsWith("https://") || optText.startsWith("/uploads/"))
+                              ? optText
+                              : "");
 
                           let optStyle = "border-slate-200 bg-white text-slate-700";
                           if (isCorrectAnswer) {
@@ -561,11 +565,11 @@ export default function ResultsPage() {
                               className={`p-3.5 rounded-xl border flex items-start gap-2.5 ${optStyle}`}
                             >
                               <span className="uppercase font-black">({optKey})</span>
-                              {isImageOption ? (
+                              {optImageUrl ? (
                                 <img
-                                  src={optText}
+                                  src={optImageUrl}
                                   alt={`Option ${optKey.toUpperCase()}`}
-                                  className="max-h-20 w-auto object-contain rounded border border-slate-200 bg-white p-1"
+                                  className="max-h-28 w-auto object-contain rounded border border-slate-200 bg-white p-1"
                                 />
                               ) : (
                                 <span className="flex-1 leading-relaxed">{optText}</span>

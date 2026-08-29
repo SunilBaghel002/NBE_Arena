@@ -61,6 +61,18 @@ export const QuestionCard: React.FC = () => {
 
   const optionKeys: OptionKey[] = ["a", "b", "c", "d"];
 
+  // A picture-only question has no stem sentence — the extractor stores the
+  // placeholder "[figure]" so the field stays required. Never show it verbatim.
+  const stemIsFigureOnly = question.stemIsFigureOnly || question.questionText === "[figure]";
+  const optionFigures = question.optionImages;
+  const hasOptionFigures = optionKeys.some((k) => optionFigures?.[k]);
+  const figureLabel =
+    question.figureKind === "table"
+      ? "Table"
+      : question.figureKind === "chart"
+        ? "Graph / Chart"
+        : "Figure / Question Diagram";
+
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-exam-border flex flex-col justify-between h-[calc(100vh-135px)] overflow-hidden">
       {/* 1. Fixed Question Subheader */}
@@ -87,22 +99,26 @@ export const QuestionCard: React.FC = () => {
       {/* 2. Scrollable Question Content & Options Body */}
       <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6">
         {/* Question Text (17px / 1.65 line height for effortless readability) */}
-        <div className="text-[17px] sm:text-[18px] text-slate-900 font-medium leading-[1.65] whitespace-pre-line tracking-tight select-text">
-          {question.questionText}
-        </div>
+        {!stemIsFigureOnly && (
+          <div className="text-[17px] sm:text-[18px] text-slate-900 font-medium leading-[1.65] whitespace-pre-line tracking-tight select-text">
+            {question.questionText}
+          </div>
+        )}
 
-        {/* Question Figure / Diagram Image */}
+        {/* Question Figure / Diagram / Match Table */}
         {question.imagePath ? (
           <div className="my-4 p-3 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col items-center justify-center">
             <img
               src={question.imagePath}
-              alt="Question Diagram"
-              className="max-h-72 w-auto object-contain rounded-xl shadow-xs bg-white p-2"
+              alt={figureLabel}
+              // Match tables and bar graphs are tall; the body scrolls, so give
+              // them the room to stay legible instead of shrinking them to fit.
+              className="max-h-[26rem] w-auto object-contain rounded-xl shadow-xs bg-white p-2"
               loading="eager"
             />
-            <span className="text-[11px] text-slate-500 font-semibold mt-2">Figure / Question Diagram</span>
+            <span className="text-[11px] text-slate-500 font-semibold mt-2">{figureLabel}</span>
           </div>
-        ) : question.hasImage ? (
+        ) : question.hasImage && !hasOptionFigures ? (
           <div className="p-4 rounded-xl bg-blue-50/60 border border-blue-200 text-center text-xs text-blue-900 flex flex-col items-center justify-center gap-1.5">
             <ImageIcon className="w-6 h-6 text-blue-600" />
             <p className="font-bold text-slate-800">Visual / Diagram Question</p>
@@ -114,10 +130,17 @@ export const QuestionCard: React.FC = () => {
         <div className="space-y-3 pt-2">
           {optionKeys.map((key, index) => {
             const optText = question.options[key];
-            if (!optText) return null;
+            const optImage = optionFigures?.[key] || "";
+            if (!optText && !optImage) return null;
 
             const isSelected = selectedOption === key;
-            const isImageOption = optText.startsWith("http://") || optText.startsWith("https://") || optText.startsWith("/uploads/");
+            // Figure options store their URL in `optionImages`; older records put
+            // it straight into the text field, so honour both shapes.
+            const imageSrc =
+              optImage ||
+              (optText.startsWith("http://") || optText.startsWith("https://") || optText.startsWith("/uploads/")
+                ? optText
+                : "");
 
             return (
               <label
@@ -151,11 +174,11 @@ export const QuestionCard: React.FC = () => {
                   >
                     {key.toUpperCase()}
                   </span>
-                  {isImageOption ? (
+                  {imageSrc ? (
                     <img
-                      src={optText}
+                      src={imageSrc}
                       alt={`Option ${key.toUpperCase()}`}
-                      className="max-h-24 w-auto object-contain rounded-lg border border-slate-200 bg-white p-1"
+                      className="max-h-32 w-auto object-contain rounded-lg border border-slate-200 bg-white p-1"
                     />
                   ) : (
                     <span className="text-[15px] sm:text-[16px] leading-relaxed pt-0.5">
