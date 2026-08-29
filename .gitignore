@@ -11,6 +11,7 @@ coverage/
 out/
 build/
 dist/
+*.tsbuildinfo
 
 # Environment files
 .env*.local
@@ -32,9 +33,15 @@ public/uploads/*
 # DB & Local Data
 data/*.db
 data/nbe.db*
+backups/
 
 # OS / Editor
 .DS_Store
 *.pem
 .vscode/
 .idea/
+.claude/
+
+# Extraction scratch output
+tmp_*.log
+tmp_*/

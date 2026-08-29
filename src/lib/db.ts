@@ -29,26 +29,47 @@ async function ensureSeedQuestions() {
 
 // ----------------- QUESTIONS -----------------
 
+const EMPTY_OPTIONS = { a: "", b: "", c: "", d: "" };
+
+/**
+ * Single Mongo -> Question mapper. Figure fields have to be carried through here
+ * or the CBT screen silently falls back to text-only rendering and non-verbal
+ * questions become unanswerable.
+ */
+function toQuestion(doc: Record<string, any>): Question {
+  return {
+    id: doc.id,
+    contentHash: doc.contentHash,
+    section: doc.section as SectionType,
+    questionText: doc.questionText,
+    options: doc.options,
+    correctOption: doc.correctOption as Question["correctOption"],
+    answerConfidence: doc.answerConfidence as Question["answerConfidence"],
+    explanation: doc.explanation,
+    hasImage: doc.hasImage,
+    imagePath: doc.imagePath,
+    optionImages: doc.optionImages ? { ...EMPTY_OPTIONS, ...doc.optionImages } : undefined,
+    optionsAreImages: doc.optionsAreImages,
+    stemIsFigureOnly: doc.stemIsFigureOnly,
+    figureCount: doc.figureCount,
+    figureKind: doc.figureKind as Question["figureKind"],
+    topic: doc.topic,
+    sourceExam: doc.sourceExam,
+    sourceYear: doc.sourceYear,
+    sourcePage: doc.sourcePage,
+    sourceQuestionNumber: doc.sourceQuestionNumber,
+    difficulty: doc.difficulty as Question["difficulty"],
+    isActive: doc.isActive,
+    createdAt: doc.createdAt?.toISOString?.() || new Date().toISOString(),
+  };
+}
+
 export async function getQuestions(): Promise<Question[]> {
   try {
     await connectToDatabase();
     await ensureSeedQuestions();
     const docs = await QuestionModel.find({}).lean();
-    return docs.map((doc) => ({
-      id: doc.id,
-      section: doc.section as SectionType,
-      questionText: doc.questionText,
-      options: doc.options,
-      correctOption: doc.correctOption as Question["correctOption"],
-      explanation: doc.explanation,
-      hasImage: doc.hasImage,
-      imagePath: doc.imagePath,
-      sourceExam: doc.sourceExam,
-      sourceYear: doc.sourceYear,
-      difficulty: doc.difficulty as Question["difficulty"],
-      isActive: doc.isActive,
-      createdAt: doc.createdAt?.toISOString?.() || new Date().toISOString(),
-    }));
+    return docs.map(toQuestion);
   } catch (error) {
     console.error("MongoDB getQuestions error, falling back to seed file:", error);
     const seedPath = path.join(process.cwd(), "data", "seed-questions.json");
@@ -63,21 +84,7 @@ export async function getQuestionsByIds(ids: string[]): Promise<Question[]> {
   try {
     await connectToDatabase();
     const docs = await QuestionModel.find({ id: { $in: ids } }).lean();
-    return docs.map((doc) => ({
-      id: doc.id,
-      section: doc.section as SectionType,
-      questionText: doc.questionText,
-      options: doc.options,
-      correctOption: doc.correctOption as Question["correctOption"],
-      explanation: doc.explanation,
-      hasImage: doc.hasImage,
-      imagePath: doc.imagePath,
-      sourceExam: doc.sourceExam,
-      sourceYear: doc.sourceYear,
-      difficulty: doc.difficulty as Question["difficulty"],
-      isActive: doc.isActive,
-      createdAt: doc.createdAt?.toISOString?.() || new Date().toISOString(),
-    }));
+    return docs.map(toQuestion);
   } catch (error) {
     console.error("MongoDB getQuestionsByIds error:", error);
     return [];

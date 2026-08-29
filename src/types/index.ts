@@ -9,6 +9,12 @@ export interface QuestionOptions {
 
 export type OptionKey = "a" | "b" | "c" | "d";
 
+/** What a question's artwork actually is, for blueprint quotas and UI hints. */
+export type FigureKind = "table" | "chart" | "diagram" | "";
+
+/** How the answer key was obtained — geometry recovery is not infallible. */
+export type AnswerConfidence = "high" | "medium" | "none";
+
 export type UserRole = "admin" | "student";
 
 export interface User {
@@ -21,15 +27,33 @@ export interface User {
 
 export interface Question {
   id: string; // uuid or unique string
+  contentHash?: string;
   section: SectionType;
   questionText: string;
   options: QuestionOptions;
   correctOption: OptionKey | null;
+  answerConfidence?: AnswerConfidence;
   explanation?: string;
   hasImage: boolean;
+  /** Stem artwork: diagram, match-table or graph printed above the options. */
   imagePath?: string;
+  /**
+   * Per-option artwork. Non-verbal reasoning options are pictures, not text, so
+   * these carry the actual answer choices — `options.a` then holds the same URL
+   * as a fallback for callers that only read text.
+   */
+  optionImages?: QuestionOptions;
+  optionsAreImages?: boolean;
+  /** True when the question is a picture with no readable stem text at all. */
+  stemIsFigureOnly?: boolean;
+  figureCount?: number;
+  figureKind?: FigureKind;
+  topic?: string;
   sourceExam: string; // e.g. "SSC_CHSL_2023_Tier1", "NBE_2015"
   sourceYear?: number;
+  /** Provenance back to the PDF, so any figure can be checked against print. */
+  sourcePage?: number;
+  sourceQuestionNumber?: number;
   difficulty?: "EASY" | "MEDIUM" | "HARD";
   isActive: boolean;
   createdAt: string;
