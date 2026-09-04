@@ -123,6 +123,156 @@ export interface Attempt {
   timeTakenSeconds: number;
   answers: AnswerState[];
   score?: AttemptScore;
+  aiAnalysis?: DeepAIAnalysis;
+}
+
+export interface TopicPerformance {
+  topicKey: string;
+  topicLabel: string;
+  section: SectionType;
+  total: number;
+  correct: number;
+  wrong: number;
+  skipped: number;
+  accuracyPercentage: number;
+  wrongQuestionNumbers: number[];
+  status: "CRITICAL_WEAKNESS" | "NEEDS_WORK" | "MODERATE" | "STRONG";
+  actionAdvice: string;
+}
+
+export interface SectionTopicAnalysis {
+  section: SectionType;
+  sectionLabel: string;
+  totalQuestions: number;
+  totalWrong: number;
+  totalCorrect: number;
+  totalSkipped: number;
+  topicsToWorkOn: TopicPerformance[];
+  allTopics: TopicPerformance[];
+}
+
+export interface MockTopicAnalysis {
+  bySection: Record<SectionType, SectionTopicAnalysis>;
+  overallWeakTopics: TopicPerformance[];
+}
+
+export interface PaletteItem {
+  questionId: string;
+  questionNumber: number; // 1 to 200
+  section: SectionType;
+  topic?: string;
+  topicLabel?: string;
+  status: QuestionStatus;
+  selectedOption: OptionKey | null;
+  isCorrect: boolean;
+  timeSpentSeconds: number;
+}
+
+export interface DeepAIAnalysis {
+  generatedAt: string;
+  provider: string;
+  model: string;
+  executiveSummary: string;
+  overallScoreDiagnostic: {
+    currentStatus: string;
+    gapTo150Target: number;
+    scoreLeakCauses: string[];
+  };
+  sectionWiseAnalysis: {
+    reasoning: {
+      strengthAreas: string[];
+      mistakePatterns: string[];
+      actionPlan: string[];
+    };
+    quant: {
+      strengthAreas: string[];
+      mistakePatterns: string[];
+      actionPlan: string[];
+    };
+    ga: {
+      strengthAreas: string[];
+      mistakePatterns: string[];
+      actionPlan: string[];
+    };
+    english: {
+      strengthAreas: string[];
+      mistakePatterns: string[];
+      actionPlan: string[];
+    };
+  };
+  timeManagementReview: {
+    timeTraps: string[];
+    recommendedTimeAllocation: string;
+  };
+  negativeMarkingStrategy: {
+    marksLostToWildGuesses: number;
+    accuracyTargetAdvice: string;
+  };
+  howItWorksForYou?: {
+    section: string;
+    title: string;
+    mistakeBreakdown: string;
+    realTimeExecutionRule: string;
+    expectedMarkJump: string;
+  }[];
+  actionableStudyRoadmap: {
+    phase: string;
+    focus: string;
+    tasks: string[];
+  }[];
+}
+
+export interface MultiMockAIAnalysis {
+  generatedAt: string;
+  provider: string;
+  model: string;
+  candidateName: string;
+  totalMocksAnalyzed: number;
+  scoreTrajectorySummary: string;
+  netScoreProgression: { mockTitle: string; netScore: number; accuracy: number; penalty: number }[];
+  longitudinalStrengths: string[];
+  chronicWeaknesses: {
+    section: SectionType;
+    pattern: string;
+    severity: "HIGH" | "MEDIUM" | "CRITICAL";
+    remedy: string;
+  }[];
+  reasoningDeepDive: {
+    status: string;
+    observedErrors: string[];
+    stepByStepImprovement: string[];
+  };
+  mathematicsDeepDive: {
+    status: string;
+    observedErrors: string[];
+    stepByStepImprovement: string[];
+  };
+  howItWorksForYou?: {
+    section: string;
+    title: string;
+    mistakeBreakdown: string;
+    realTimeExecutionRule: string;
+    expectedMarkJump: string;
+  }[];
+  timeAllocationCritique: {
+    detectedImbalance: string;
+    idealStrategy: string;
+  };
+  examCountdownSchedule?: {
+    daysRemaining: number;
+    examDate: string;
+    milestones: {
+      date: string;
+      title: string;
+      objective: string;
+      isMockDay?: boolean;
+    }[];
+  };
+  personalizedMasterPlan: {
+    weekOrDay: string;
+    goal: string;
+    dailyActionItems: string[];
+  }[];
 }
 
 export interface BankStats {

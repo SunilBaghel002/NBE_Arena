@@ -11,6 +11,7 @@ export interface IAttemptDocument extends Document {
   timeTakenSeconds: number;
   answers: AnswerState[];
   score?: AttemptScore;
+  aiAnalysis?: any;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -60,6 +61,9 @@ const AttemptSchema = new Schema<IAttemptDocument>(
       },
     ],
     score: {
+      type: Schema.Types.Mixed,
+    },
+    aiAnalysis: {
       type: Schema.Types.Mixed,
     },
   },

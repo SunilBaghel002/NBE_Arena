@@ -4,6 +4,7 @@ import { connectToDatabase } from "./mongodb";
 import { QuestionModel } from "@/models/Question";
 import { MockTestModel } from "@/models/MockTest";
 import { AttemptModel } from "@/models/Attempt";
+import { UserModel } from "@/models/User";
 import { Question, MockTest, Attempt, BankStats, SectionType } from "@/types";
 
 // Auto-seed questions into MongoDB if collection is empty
@@ -244,6 +245,7 @@ export async function getAttempts(userId?: string): Promise<Attempt[]> {
       timeTakenSeconds: doc.timeTakenSeconds,
       answers: doc.answers as Attempt["answers"],
       score: doc.score,
+      aiAnalysis: doc.aiAnalysis,
     }));
   } catch (error) {
     console.error("MongoDB getAttempts error:", error);
@@ -266,6 +268,7 @@ export async function getAttemptById(attemptId: string): Promise<Attempt | null>
       timeTakenSeconds: doc.timeTakenSeconds,
       answers: doc.answers as Attempt["answers"],
       score: doc.score,
+      aiAnalysis: doc.aiAnalysis,
     };
   } catch (error) {
     console.error("MongoDB getAttemptById error:", error);
@@ -276,4 +279,41 @@ export async function getAttemptById(attemptId: string): Promise<Attempt | null>
 export async function saveAttempt(attempt: Attempt): Promise<void> {
   await connectToDatabase();
   await AttemptModel.findOneAndUpdate({ id: attempt.id }, attempt, { upsert: true });
+}
+
+export async function saveAttemptAiAnalysis(attemptId: string, aiAnalysis: any): Promise<void> {
+  await connectToDatabase();
+  await AttemptModel.findOneAndUpdate(
+    { id: attemptId },
+    { $set: { aiAnalysis } },
+    { upsert: false }
+  );
+}
+
+export async function getUserAiReport(userId?: string): Promise<any | null> {
+  if (!userId) return null;
+  try {
+    await connectToDatabase();
+    // Try find by _id or id
+    const doc = await UserModel.findOne({
+      $or: [{ _id: userId }, { id: userId }],
+    }).lean();
+    return doc?.aiReport || null;
+  } catch (error) {
+    console.error("MongoDB getUserAiReport error:", error);
+    return null;
+  }
+}
+
+export async function saveUserAiReport(userId: string, aiReport: any): Promise<void> {
+  if (!userId) return;
+  try {
+    await connectToDatabase();
+    await UserModel.findOneAndUpdate(
+      { $or: [{ _id: userId }, { id: userId }] },
+      { $set: { aiReport } }
+    );
+  } catch (error) {
+    console.error("MongoDB saveUserAiReport error:", error);
+  }
 }

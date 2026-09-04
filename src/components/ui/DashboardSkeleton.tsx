@@ -2,7 +2,7 @@ import React from "react";
 
 export const DashboardSkeleton: React.FC = () => {
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 w-full space-y-8 animate-pulse">
+    <div className="max-w-[1700px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-8 space-y-8 animate-pulse">
       {/* Hero Skeleton */}
       <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-6 shadow-sm">
         <div className="flex flex-col sm:flex-row justify-between gap-4 border-b border-slate-100 pb-6">

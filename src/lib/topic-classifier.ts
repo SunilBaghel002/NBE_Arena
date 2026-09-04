@@ -1,4 +1,11 @@
-import { Question, SectionType } from "@/types";
+import {
+  Question,
+  SectionType,
+  AnswerState,
+  TopicPerformance,
+  SectionTopicAnalysis,
+  MockTopicAnalysis,
+} from "@/types";
 
 /**
  * TOPIC TAXONOMY & MOCK BLUEPRINT
@@ -403,4 +410,244 @@ export function groupByTopic(questions: Question[]): Map<string, Question[]> {
     else groups.set(key, [q]);
   }
   return groups;
+}
+
+/**
+ * Human-readable label for any topic key.
+ */
+export function getTopicLabel(topicKey: string, section?: SectionType): string {
+  if (topicKey === OTHER_TOPIC) return "Applied Concepts & Mixed Questions";
+
+  if (section && SECTION_BLUEPRINTS[section]) {
+    const found = SECTION_BLUEPRINTS[section].find((t) => t.key === topicKey);
+    if (found) return found.label;
+  }
+
+  for (const list of Object.values(SECTION_BLUEPRINTS)) {
+    const found = list.find((t) => t.key === topicKey);
+    if (found) return found.label;
+  }
+
+  return topicKey.replace(/_/g, " ");
+}
+
+/**
+ * High-yield CBT revision advice per topic for NBEMS Junior Assistant.
+ */
+export const TOPIC_ACTION_ADVICE: Record<string, string> = {
+  // QUANT (Mathematics)
+  PERCENT_PROFIT_LOSS:
+    "Master percentage multipliers (e.g. 20% profit = 1.2x CP) and successive discount formulas. Avoid setting up algebraic x variables.",
+  RATIO_AVERAGE:
+    "Use unit-value unitary method for ratios and age problems; use net deviation method for averages instead of calculating large sums.",
+  NUMBER_SYSTEM:
+    "Revise divisibility rules (7, 11, 13, 19), prime factorization for HCF/LCM remainder models, and strict BODMAS calculation order.",
+  TIME_WORK_DISTANCE:
+    "Take LCM of days as total units of work to calculate individual daily efficiencies. For trains and boats, use relative speed formulas.",
+  DATA_INTERPRETATION:
+    "Practice column addition shortcuts and percentage approximations. Never perform manual 4-digit long divisions during the CBT.",
+  ALGEBRA_MENSURATION:
+    "Memorize standard formula sheets for cylinder/cone/sphere surface area & volume, plus standard polynomial identities.",
+  INTEREST:
+    "Use fractional interest rates. For 2-year CI − SI difference, use D = P(r/100)². For 3-year, use D = P(r/100)² × (3 + r/100).",
+
+  // REASONING
+  NON_VERBAL_FIGURES:
+    "Track one element at a time (e.g. corner dot, arrowhead) through rotational increments (+45°, +90°). Eliminate wrong options immediately.",
+  ANALOGY_CLASSIFICATION:
+    "Check number patterns (squares ± 1, cubes, prime numbers) and alphabetical skip values before guessing semantic relations.",
+  CODING_DECODING:
+    "Write the A=1..Z=26 rank table and reverse letter pairs (A-Z, B-Y) on your rough sheet first. Check for cross-pattern shifts.",
+  SERIES:
+    "Write consecutive term differences. If differences aren't constant, calculate the second difference or check alternate series.",
+  SYLLOGISM:
+    "Draw standard minimal Venn diagrams. Remember: never assume unstated conclusions or convert 'Some' into 'All'.",
+  DIRECTION_SENSE:
+    "Sketch a quick directional compass (N, S, E, W) with distance annotations. Use Pythagoras theorem for diagonal displacement.",
+  MATH_OPERATIONS:
+    "Test option signs systematically starting from division and multiplication first (BODMAS), verifying if LHS equals RHS.",
+  BLOOD_RELATION:
+    "Draw family trees using generational levels (+ for male, - for female, = for married couples) to avoid mental mix-ups.",
+
+  // GENERAL AWARENESS
+  SCIENCE:
+    "Revise human vitamins & deficiency diseases, SI units, basic chemical formulas (Baking soda, Bleaching powder), and Newton's laws.",
+  HISTORY_CULTURE:
+    "Revise Delhi Sultanate/Mughal chronology, 1857 revolt centers & leaders, and classical dance forms with their native states.",
+  POLITY:
+    "Review Articles 14 to 32 (Fundamental Rights), Writs, President/Governor executive powers, and key constitutional amendments.",
+  CURRENT_STATIC:
+    "Revise national sports awards, major appointments from the last 6 months, flagship government welfare schemes, and national parks.",
+  GEOGRAPHY:
+    "Review major Indian river origins & tributaries (Ganga, Godavari, Brahmaputra), mountain passes, and biosphere reserves.",
+  ECONOMY:
+    "Revise RBI monetary policy tools (Repo rate, Reverse Repo, CRR, SLR), inflation indices (CPI vs WPI), and budget terms.",
+
+  // ENGLISH
+  READING_COMPREHENSION:
+    "Read question stems before reading the passage to locate exact keywords rapidly without reading the text twice.",
+  ERROR_IMPROVEMENT:
+    "Look for Subject-Verb Agreement, singular/plural noun mismatch, misplaced modifiers, and fixed preposition usage.",
+  VOCABULARY:
+    "Focus on high-frequency SSC/NBEMS words, antonym-synonym roots, and prefix/suffix meanings. Eliminate extreme words.",
+  CLOZE:
+    "Read the complete passage first to grasp overall context and tense before picking option words for the blanks.",
+  IDIOMS:
+    "Review standard idioms and phrasal verbs from previous papers. Understand figurative context rather than literal meaning.",
+  VOICE_SPEECH:
+    "Active/Passive retains original tense (adds 'be' + V3). Direct/Indirect shifts present tenses to past tenses.",
+
+  OTHER:
+    "Review fundamental concepts and practice timed section drills to strengthen speed and eliminate careless calculation mistakes.",
+};
+
+export function getTopicAdvice(topicKey: string, section?: SectionType): string {
+  if (TOPIC_ACTION_ADVICE[topicKey]) {
+    return TOPIC_ACTION_ADVICE[topicKey];
+  }
+  return TOPIC_ACTION_ADVICE.OTHER;
+}
+
+const SECTION_DISPLAY_NAMES: Record<SectionType, string> = {
+  REASONING: "General Intelligence & Reasoning",
+  GA: "General Awareness",
+  QUANT: "Quantitative Aptitude (Mathematics)",
+  ENGLISH: "English Comprehension",
+};
+
+/**
+ * Analyzes candidate's 200 questions into section-wise and topic-wise performance,
+ * explicitly identifying weak topics (where wrong answers occurred).
+ */
+export function analyzeAttemptTopics(
+  questions: Question[],
+  answers: AnswerState[],
+  orderedQuestionIds?: string[]
+): MockTopicAnalysis {
+  const answerMap = new Map<string, AnswerState>(answers.map((a) => [a.questionId, a]));
+  const questionMap = new Map<string, Question>(questions.map((q) => [q.id, q]));
+
+  // Canonical 1-indexed question numbers
+  const idToNumber = new Map<string, number>();
+  if (orderedQuestionIds && orderedQuestionIds.length > 0) {
+    orderedQuestionIds.forEach((id, idx) => idToNumber.set(id, idx + 1));
+  } else {
+    questions.forEach((q, idx) => idToNumber.set(q.id, idx + 1));
+  }
+
+  const sections: SectionType[] = ["REASONING", "GA", "QUANT", "ENGLISH"];
+  const bySection: Partial<Record<SectionType, SectionTopicAnalysis>> = {};
+  const allWeakTopicsList: TopicPerformance[] = [];
+
+  for (const sec of sections) {
+    // Collect questions in this section
+    const secQuestions = questions.filter((q) => q.section === sec);
+    const topicBuckets = new Map<
+      string,
+      {
+        total: number;
+        correct: number;
+        wrong: number;
+        skipped: number;
+        wrongNumbers: number[];
+      }
+    >();
+
+    let secTotalWrong = 0;
+    let secTotalCorrect = 0;
+    let secTotalSkipped = 0;
+
+    for (const q of secQuestions) {
+      const topicKey = classifyTopic(q);
+      if (!topicBuckets.has(topicKey)) {
+        topicBuckets.set(topicKey, { total: 0, correct: 0, wrong: 0, skipped: 0, wrongNumbers: [] });
+      }
+      const b = topicBuckets.get(topicKey)!;
+      b.total += 1;
+
+      const ans = answerMap.get(q.id);
+      const selected = ans?.selectedOption || null;
+      const qNum = idToNumber.get(q.id) || 1;
+
+      if (!selected) {
+        b.skipped += 1;
+        secTotalSkipped += 1;
+      } else if (selected === q.correctOption) {
+        b.correct += 1;
+        secTotalCorrect += 1;
+      } else {
+        b.wrong += 1;
+        b.wrongNumbers.push(qNum);
+        secTotalWrong += 1;
+      }
+    }
+
+    const topicPerfList: TopicPerformance[] = [];
+
+    for (const [key, b] of topicBuckets.entries()) {
+      const attempted = b.correct + b.wrong;
+      const accuracy = attempted > 0 ? Math.round((b.correct / attempted) * 100) : 0;
+
+      let status: TopicPerformance["status"] = "STRONG";
+      if (b.wrong >= 2) {
+        status = "CRITICAL_WEAKNESS";
+      } else if (b.wrong === 1) {
+        status = "NEEDS_WORK";
+      } else if (b.wrong === 0 && b.skipped > 0) {
+        status = "MODERATE";
+      }
+
+      const item: TopicPerformance = {
+        topicKey: key,
+        topicLabel: getTopicLabel(key, sec),
+        section: sec,
+        total: b.total,
+        correct: b.correct,
+        wrong: b.wrong,
+        skipped: b.skipped,
+        accuracyPercentage: accuracy,
+        wrongQuestionNumbers: b.wrongNumbers.sort((a, b) => a - b),
+        status,
+        actionAdvice: getTopicAdvice(key, sec),
+      };
+
+      topicPerfList.push(item);
+      if (b.wrong > 0) {
+        allWeakTopicsList.push(item);
+      }
+    }
+
+    // Topics to work on: wrong > 0, sorted by most wrong answers descending, then lowest accuracy
+    const topicsToWorkOn = topicPerfList
+      .filter((t) => t.wrong > 0)
+      .sort((a, b) => b.wrong - a.wrong || a.accuracyPercentage - b.accuracyPercentage);
+
+    // All topics: weak first, then others
+    const allTopicsSorted = [...topicPerfList].sort((a, b) => {
+      if (a.wrong > 0 && b.wrong === 0) return -1;
+      if (b.wrong > 0 && a.wrong === 0) return 1;
+      return b.wrong - a.wrong || a.accuracyPercentage - b.accuracyPercentage;
+    });
+
+    bySection[sec] = {
+      section: sec,
+      sectionLabel: SECTION_DISPLAY_NAMES[sec],
+      totalQuestions: secQuestions.length,
+      totalWrong: secTotalWrong,
+      totalCorrect: secTotalCorrect,
+      totalSkipped: secTotalSkipped,
+      topicsToWorkOn,
+      allTopics: allTopicsSorted,
+    };
+  }
+
+  // Overall top weak topics across all sections
+  const overallWeakTopics = allWeakTopicsList.sort(
+    (a, b) => b.wrong - a.wrong || a.accuracyPercentage - b.accuracyPercentage
+  );
+
+  return {
+    bySection: bySection as Record<SectionType, SectionTopicAnalysis>,
+    overallWeakTopics,
+  };
 }
