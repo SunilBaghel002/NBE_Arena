@@ -6,6 +6,7 @@ export interface IUserDocument extends Document {
   passwordHash: string;
   name: string;
   role: UserRole;
+  aiReport?: any;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -33,6 +34,9 @@ const UserSchema = new Schema<IUserDocument>(
       enum: ["admin", "student"],
       default: "student",
       required: true,
+    },
+    aiReport: {
+      type: Schema.Types.Mixed,
     },
   },
   {

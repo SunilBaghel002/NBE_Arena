@@ -18,6 +18,12 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
     lg: "w-12 h-12",
   };
 
+  const pixelSizes = {
+    sm: 32,
+    md: 40,
+    lg: 48,
+  };
+
   const titleSizes = {
     sm: "text-base",
     md: "text-lg",
@@ -34,9 +40,17 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
     <div className="flex items-center gap-3 select-none group">
       {/* Emblem SVG with Glow */}
       <div
+        style={{ width: pixelSizes[size], height: pixelSizes[size], minWidth: pixelSizes[size], minHeight: pixelSizes[size] }}
         className={`${iconSizes[size]} relative flex-shrink-0 transition transform group-hover:scale-105 duration-200`}
       >
-        <svg viewBox="0 0 512 512" fill="none" className="w-full h-full drop-shadow-md">
+        <svg
+          viewBox="0 0 512 512"
+          width={pixelSizes[size]}
+          height={pixelSizes[size]}
+          fill="none"
+          style={{ width: "100%", height: "100%", display: "block" }}
+          className="w-full h-full drop-shadow-md"
+        >
           <defs>
             <linearGradient id="shieldNav" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#1E3A8A" />

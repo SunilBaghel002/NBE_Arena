@@ -28,6 +28,7 @@ import {
   Zap,
   Search,
 } from "lucide-react";
+import { MultiMockReportCard } from "@/components/MultiMockReportCard";
 import { BankStats, MockTest, Attempt, SectionType } from "@/types";
 
 export default function StudentDashboard() {
@@ -196,7 +197,7 @@ export default function StudentDashboard() {
       {status === "loading" || loading ? (
         <DashboardSkeleton />
       ) : (
-        <main className="max-w-6xl mx-auto px-4 py-8 flex-1 w-full space-y-8 animate-in fade-in duration-200">
+        <main className="max-w-[1700px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-8 flex-1 space-y-8 animate-in fade-in duration-200">
           {/* Welcome & Exam Hero Banner */}
           <div className="bg-white rounded-2xl shadow-sm border border-exam-border p-6 sm:p-8">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6 mb-6">
@@ -264,6 +265,9 @@ export default function StudentDashboard() {
               </div>
             </div>
           </div>
+
+          {/* AI Candidate Multi-Mock Diagnostic Report (Studies all completed attempts) */}
+          <MultiMockReportCard candidateName={userName} totalAttempts={totalCompleted} />
 
           {/* Visual Progress & Section Strength Analysis */}
           {totalCompleted > 0 && (
