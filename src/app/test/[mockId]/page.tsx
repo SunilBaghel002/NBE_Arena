@@ -144,10 +144,10 @@ export default function LiveTestPage() {
           <h2 className="font-bold text-xl text-slate-800 mb-2">Unable to Load Mock</h2>
           <p className="text-sm text-slate-600 mb-6">{loadError}</p>
           <Link
-            href="/"
+            href="/dashboard"
             className="inline-flex items-center gap-2 bg-exam-primary text-white font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-exam-primaryHover transition"
           >
-            <ArrowLeft className="w-4 h-4" /> Back to Lobby
+            <ArrowLeft className="w-4 h-4" /> Back to Dashboard
           </Link>
         </div>
       </div>

@@ -29,6 +29,11 @@ const config: Config = {
           current: "#2980B9",
         },
       },
+      fontFamily: {
+        sans: ["'Plus Jakarta Sans'", "Inter", "system-ui", "-apple-system", "sans-serif"],
+        heading: ["'Outfit'", "'Plus Jakarta Sans'", "sans-serif"],
+        mono: ["'JetBrains Mono'", "monospace"],
+      },
     },
   },
   plugins: [],

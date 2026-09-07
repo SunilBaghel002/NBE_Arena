@@ -73,7 +73,7 @@ export default function InstructionsPage() {
             <h2 className="font-bold text-xl text-slate-800 mb-2">Examination Error</h2>
             <p className="text-sm text-slate-600 mb-6">{error || "Could not retrieve mock test"}</p>
             <Link
-              href="/"
+              href="/dashboard"
               className="inline-flex items-center gap-2 bg-exam-primary text-white font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-exam-primaryHover transition"
             >
               <ArrowLeft className="w-4 h-4" /> Return to Dashboard
@@ -224,7 +224,7 @@ export default function InstructionsPage() {
             {/* Begin Test CTA Button */}
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
               <Link
-                href="/"
+                href="/dashboard"
                 className="px-5 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-sm font-semibold transition"
               >
                 Cancel & Return to Dashboard

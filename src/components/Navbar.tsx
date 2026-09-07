@@ -35,9 +35,9 @@ export const Navbar: React.FC = () => {
   const navLinks = [
     {
       label: "Dashboard",
-      href: "/",
+      href: "/dashboard",
       icon: LayoutDashboard,
-      active: pathname === "/",
+      active: pathname === "/dashboard",
     },
     ...(userRole === "admin"
       ? [

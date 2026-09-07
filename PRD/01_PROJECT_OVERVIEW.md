@@ -26,23 +26,29 @@ However, the syllabus and pattern are nearly identical to:
 | Generate authentic NBE-format mocks | 200 Qs = 50 Reasoning + 50 GA + 50 Quant + 50 English |
 | Exact exam timer | 180-minute countdown starting only after pre-exam instructions confirmation |
 | Pre-Exam Rules Screen | Mandatory disclaimer & rules review before CBT timer begins |
-| Cloud Database Persistence | MongoDB Atlas via Mongoose storing questions, mocks, attempts, and users |
+| Cloud Database Persistence | MongoDB Atlas via Mongoose storing questions, mocks, attempts, users, and login sessions |
 | Authentication & Personal Dashboards | NextAuth Credentials login; student dashboard showing personal test attempts & progress |
-| Role-Based Admin Protection | Only users with `role: "admin"` can access `/admin` for PDF uploads and user management |
+| Role-Based Admin Protection | Only users with `role: "admin"` can access `/admin` and `/admin/activity` |
 | Hybrid PDF Ingestion Pipeline | Fast text parsing (Groq) for text-layer pages + Vision VLM (OpenRouter Qwen2.5-VL / Gemini Flash) for image/scanned pages |
 | Exam-hall UI simulation | Palette, mark-for-review, section tabs, auto-submit, local storage persistence |
 | Post-test analytics | Score /200 with -0.25 negative marking, section breakdown, wrong-answer review, 150 benchmark |
+| **Phase 2: Public Landing Page** | High-converting marketing landing at `/` with hero, 6-card feature grid, trust strip, pricing preview, and demo modal; auto-redirects logged-in users to `/dashboard` |
+| **Phase 2: Advanced Student Analytics** | Comprehensive 11-module dashboard (KPIs, trajectory with toggles, radar + bar sectional mastery, strength/weakness, time analytics, negative marking leakage, heatmap, trend, countdown, audit, recent attempts) |
+| **Phase 2: SaaS-Grade UI Polish** | Cohesive Tailwind design token palette, typography scale, elevated cards, skeleton loaders, zebra tables, colorblind-safe chart palette, and responsive design for B2B founder demos |
+| **Phase 2: Admin Activity & Session Tracking** | Granular tracking of user sessions (`LoginSession` model: IP, device, duration, location, heartbeat ping) and `/admin/activity` live dashboard with active user count |
 
 ---
 
 ## 3. Target User & Deployment
 
-- **Primary Users:** Multiple candidate friends preparing together for NBE Junior Assistant exam.
-- **Deployment:** Vercel cloud deployment + MongoDB Atlas.
+- **Primary Users (Phase 1 & 2):**
+  - Controlled group of 5 known users: 2 sisters, 1 friend, founder, 1 test user, plus automated examination panel demo bot.
+  - B2B coaching institute owners / directors (small/mid Indian coaching institutes for SSC, NBE, DSSSB, State exams) during founder-led sales demos.
+- **Deployment:** Vercel cloud deployment (`https://nbe-arena.vercel.app/`) + MongoDB Atlas.
 - **Access Control:**
-  - `student`: Access to personal dashboard, mock generator, test hall, scorecards, and solution reviews.
-  - `admin`: Full student access plus `/admin` panel to upload PDFs, manage candidate credentials, and track progress.
-- **Device:** Desktop / laptop browser (exam is computer-based).
+  - `student`: Access to personal dashboard (`/dashboard`), mock generator, test hall, scorecards, and solution reviews. Auto-redirected to `/dashboard` from `/`.
+  - `admin`: Full student access plus `/admin` (uploader, credentials, telemetry) and `/admin/activity` (per-user session audit, active users).
+- **Device:** Desktop / laptop browser (exam is computer-based; landing and dashboard are fully responsive).
 
 ---
 
@@ -51,7 +57,7 @@ However, the syllabus and pattern are nearly identical to:
 ### 4.1 Authentication & Multi-Candidate Dashboards
 - NextAuth.js Credentials Provider with secure password hashing (`bcryptjs`).
 - User roles: `admin` and `student`.
-- Student Dashboard: Displays personalized past test attempts, net scores, accuracy %, average time taken, and available mocks.
+- Student Dashboard (relocated to `/dashboard` in Phase 2): Displays personalized past test attempts, net scores, accuracy %, average time taken, and available mocks.
 - `Attempt` records linked via `userId`.
 
 ### 4.2 Pre-Exam Rules & Instructions Screen
@@ -94,13 +100,73 @@ However, the syllabus and pattern are nearly identical to:
 
 ---
 
+## 4.8 Phase 2: Public Landing Page (`/`)
+- Route: `/` (unauthenticated public showcase).
+- Behavior:
+  - Unauthenticated visitors see the full marketing landing page.
+  - Authenticated candidates auto-redirect directly to `/dashboard`.
+  - Top-right CTA: "Sign In" navigating to `/login`.
+- Key Sections:
+  1. Sticky Top Navigation: Brand logo, anchor navigation (Features, How It Works, Analytics, Pricing, Contact), Sign In CTA button.
+  2. Hero Section: Headline ("The White-Label CBT Engine Built for Real Exam Halls"), sub-headline, primary CTA ("Request Demo"), secondary CTA ("Watch 60-sec Preview"), product mockup illustration.
+  3. Trust Strip: Target exams (NBE, SSC CHSL/CGL/MTS, DSSSB, State exams).
+  4. Feature Grid (6 Cards): Real CBT Exam Simulator, PDF / Scanned Paper Ingestion, Images & Tables Handling, Negative Marking Analytics, AI Multi-Mock Performance Mentor, White-Label Ready for Institutes.
+  5. How It Works (3 Steps): Upload PYQ PDFs $\to$ Auto-generate NBE-style mocks $\to$ CBT Test & AI Diagnosis.
+  6. Analytics Preview: Interactive preview of dashboard charts & AI strategic reports.
+  7. Target Audiences ("Who It's For"): SSC coaching institutes, DSSSB coaching centres, niche exam startups, YouTube educators.
+  8. Pricing Tiers: Pilot, SaaS Starter, SaaS Pro, Custom Enterprise.
+  9. Contact Section & Modal: Inbound lead capture form (Name, Institute, Email, WhatsApp, Message) / Book Demo Call.
+  10. Footer: Brand, contact email, "Built in India", social links, copyright.
+- Meta / SEO: OpenGraph tags, favicon, viewport optimization, page title: *"NBE Arena — White-Label CBT & AI Mentor Engine"*.
+
+---
+
+## 4.9 Phase 2: Advanced Student Dashboard (`/dashboard`)
+- Route: `/dashboard` (protected session required).
+- Modules:
+  - **A. Enhanced KPI Row:** Tests Completed, Average Net Score, Highest Net Score, Average Accuracy, Total Time Practiced (hours), Attempts vs Target Gap (marks delta from 150 benchmark).
+  - **B. Score Trajectory:** Line chart with 150 qualifying reference line; toggle for Last 5 / Last 10 / All attempts.
+  - **C. Sectional Mastery & Accuracy:** 4-section radar chart + horizontal bar breakdown; auto-highlights best section (green) and weakest section (red).
+  - **D. Strength & Weakness Panel:** Auto-computed top 2 and bottom 2 sections, wrong-answer rate, and unattempted rate.
+  - **E. Time Analytics:** Average time per section (bar chart), average time per question (seconds), and flagged overrun section.
+  - **F. Negative Marking Leakage Card:** Total marks lost to negative penalties across all attempts; stacked bar chart of correct vs wrong vs unattempted.
+  - **G. Topic/Chapter Heatmap:** Accuracy by topic/chapter if question metadata allows (gracefully omitted if tags absent).
+  - **H. Improvement Trend:** Rolling 3-attempt average vs previous 3-attempt average delta badge ("Improving ↑", "Plateau →", "Declining ↓").
+  - **I. Countdown / Goal Widget:** Days to exam countdown, customizable target exam date, and target score goal.
+  - **J. Multi-Mock Strategic AI Audit:** Prominently featured AI diagnostic generator.
+  - **K. Recent Attempts Table:** Zebra-striped table with Mock ID, Date, Net Score, Accuracy, Time Taken, and View Scorecard button.
+  - **Empty State:** Friendly onboarding card for candidates with 0 attempts ("Take your first mock to unlock analytics").
+
+---
+
+## 4.10 Phase 2: SaaS-Grade UI & Design System
+- Unified Tailwind design token palette (`brand-primary`, `brand-accent`, `surface`, `surface-alt`, `border`, `muted`, `success`, `warning`, `danger`, and colorblind-safe chart palette).
+- Standardized typography scale (display, h1, h2, body, small).
+- Modern card architecture: `rounded-2xl`, subtle borders, soft shadows, uppercase eyebrow labels ("CANDIDATE PORTAL", "PERFORMANCE TELEMETRY").
+- Skeleton loading states and rich empty states with icons.
+- Toast notifications for user actions (login success, mock generated, report ready).
+- Header refinement: Cleaner spacing, avatar dropdown with Profile and Sign out.
+
+---
+
+## 4.11 Phase 2: User Login & Activity Tracking (`/admin/activity`)
+- Track exact usage of the 5 controlled users (sisters, friend, founder, test user, demo bot):
+  - `LoginSession` Mongoose model capturing userId, username, loginAt, logoutAt, sessionDurationSeconds, ipAddress, userAgent, device type, approxLocation, pagesVisited, lastActivityAt.
+  - Client heartbeat ping every 60 seconds (`/api/session/ping`).
+  - Auto-inactivity closure after 30 minutes of idle time.
+  - Admin Activity Route (`/admin/activity`): Overall stats, per-user summary table, latest 50 sessions timeline, user/date filters, CSV export.
+  - Admin Overview Card on `/admin`: Active users right now (heartbeat $\le 5$ mins).
+
+---
+
 ## 5. Out of Scope (Do NOT Build)
 
-- Payment gateways / commercial billing subscriptions
-- Mobile native apps (desktop/laptop browser is the CBT target)
-- Live multiplayer head-to-head racing
-- Hindi language translation
-- Automatic diagram problem solving for image-only non-verbal questions
+- Public self-serve user registration / signups (Candidate pool is strictly controlled: 5 known users + demo bot managed via `/admin`).
+- Payment gateways / commercial billing subscriptions (Tiers on landing page are marketing placeholders for B2B demo conversations).
+- Mobile native apps (desktop/laptop browser is the CBT target; responsive web view is sufficient).
+- Live multiplayer head-to-head racing.
+- Hindi language translation.
+- Automatic diagram problem solving for image-only non-verbal questions.
 
 ---
 
@@ -127,6 +193,8 @@ However, the syllabus and pattern are nearly identical to:
 | UI Components | shadcn/ui style components + Lucide Icons + Google Inter/JetBrains Mono |
 | Database | MongoDB Atlas via Mongoose ODM (`MONGODB_URI`) |
 | Authentication | NextAuth.js (Auth.js) Credentials Provider + JWT sessions |
+| Activity Tracking | Custom `LoginSession` model + 60s client heartbeat ping |
+| Charts & Visuals | Recharts (Responsive, token-based colorblind-safe palette) |
 | PDF → Image | `pdfjs-dist` / `pdf2image` / Canvas rendering (150–200 DPI) |
 | Vision VLM (Path B) | OpenRouter (`qwen/qwen-2.5-vl-7b-instruct`) / Google Gemini (`gemini-2.0-flash`) / Ollama (`qwen2.5-vl:7b`) |
 | Text LLM (Path A) | Groq (`llama-3.3-70b-versatile` / `llama-3.1-8b-instant`) |

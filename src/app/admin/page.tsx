@@ -378,7 +378,7 @@ export default function AdminPage() {
             You do not have administrative privileges to view this portal.
           </p>
           <Link
-            href="/"
+            href="/dashboard"
             className="inline-flex items-center gap-2 bg-exam-primary text-white font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-exam-primaryHover transition"
           >
             <ArrowLeft className="w-4 h-4" /> Return to Student Dashboard

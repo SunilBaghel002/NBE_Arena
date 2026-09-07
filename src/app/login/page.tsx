@@ -34,7 +34,7 @@ export default function LoginPage() {
         setError(res?.error || "Invalid username or password");
         setLoading(false);
       } else {
-        router.push("/");
+        router.push("/dashboard");
         router.refresh();
       }
     } catch (err) {
@@ -52,7 +52,7 @@ export default function LoginPage() {
       {/* CBT Portal Header (Light Mode) */}
       <header className="max-w-7xl mx-auto w-full py-4 flex items-center justify-between z-10">
         <div className="bg-slate-900 px-4 py-2 rounded-2xl shadow-sm">
-          <BrandLogo size="md" />
+          <BrandLogo size="md" href="/" />
         </div>
       </header>
 
