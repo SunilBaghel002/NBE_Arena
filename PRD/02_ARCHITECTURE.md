@@ -5,35 +5,47 @@
 
 ## 1. High-Level Architecture
 ```text
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                                     CANDIDATE BROWSER                                  │
-│ ┌──────────────┐ ┌──────────────────────┐ ┌───────────────────┐ ┌────────────────────┐ │
-│ │ Login Screen │ │  Student Dashboard   │ │ Pre-Exam Rules    │ │ Live CBT Test Hall │ │
-│ │  (/login)    │ │   (Past Attempts)    │ │ (/test/.../rules) │ │  (200Q / 180min)   │ │
-│ └──────┬───────┘ └──────────┬───────────┘ └─────────┬─────────┘ └─────────┬──────────┘ │
-└────────┼────────────────────┼───────────────────────┼─────────────────────┼────────────┘
-         │                    │                       │                     │
-         ▼                    ▼                       ▼                     ▼
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                                  NEXT.JS 14 APP ROUTER                                 │
-│  NextAuth.js (Credentials + JWT)  │  Zod Schema Validation  │  Zustand + LocalStorage  │
-│                                                                                        │
-│  API Routes:                                                                           │
-│  - /api/auth/[...nextauth]         - /api/generate-mock       - /api/bank-stats        │
-│  - /api/mock/[mockId]              - /api/submit              - /api/results/[id]      │
-│  - /api/attempts/user              - /api/admin/users         - /api/extract (Admin)   │
-└─────────────────────────────────────────────┬──────────────────────────────────────────┘
-                                              │
-                     ┌────────────────────────┴────────────────────────┐
-                     ▼                                                 ▼
-        ┌───────────────────────────┐                    ┌───────────────────────────┐
-        │       MONGODB ATLAS       │                    │  HYBRID EXTRACTION ENGINE │
-        │   (Mongoose ODM Cloud)    │                    │                           │
-        │  - Users (admin/student)  │                    │ Path A: Text Parser (Groq)│
-        │  - Questions (200+ pool)  │                    │ Path B: Vision VLM        │
-        │  - MockTests (200Q specs) │                    │  (OpenRouter Qwen2.5-VL   │
-        │  - Attempts (with userId) │                    │   / Gemini Flash / Ollama)│
-        └───────────────────────────┘                    └───────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                            BROWSER CLIENT                                              │
+│ ┌────────────────┐ ┌──────────────┐ ┌────────────────────┐ ┌───────────────────┐ ┌───────────────────┐ │
+│ │ Public Landing │ │ Login Screen │ │ Student Dashboard  │ │ Pre-Exam Rules    │ │ Live CBT Hall     │ │
+│ │     (/)        │ │   (/login)   │ │   (/dashboard)     │ │ (/test/.../rules) │ │ (200Q / 180min)   │ │
+│ └───────┬────────┘ └──────┬───────┘ └─────────┬──────────┘ └─────────┬─────────┘ └─────────┬─────────┘ │
+│         │                 │                   │                      │                     │           │
+│         │                 │                   ▼                      │                     │           │
+│         │                 │         ┌───────────────────┐            │                     │           │
+│         │                 │         │ Heartbeat (60s)   │            │                     │           │
+│         │                 │         │ (/api/session/...)│            │                     │           │
+│         │                 │         └─────────┬─────────┘            │                     │           │
+│         │                 │                   │                      │                     │           │
+│         │                 │ ┌─────────────────┴──────────────────┐   │                     │           │
+│         │                 │ │ Admin Activity (/admin/activity)   │   │                     │           │
+│         │                 │ └─────────────────┬──────────────────┘   │                     │           │
+└─────────┼─────────────────┼───────────────────┼──────────────────────┼─────────────────────┼───────────┘
+          │                 │                   │                      │                     │
+          ▼                 ▼                   ▼                      ▼                     ▼
+┌────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                         NEXT.JS 14 APP ROUTER                                          │
+│  NextAuth.js (Credentials + JWT)  │  Zod Schema Validation  │  Zustand + LocalStorage  │  Recharts     │
+│                                                                                                        │
+│  API Routes:                                                                                           │
+│  - /api/auth/[...nextauth]         - /api/generate-mock       - /api/bank-stats                        │
+│  - /api/mock/[mockId]              - /api/submit              - /api/results/[id]                      │
+│  - /api/attempts/user              - /api/admin/users         - /api/extract (Admin)                   │
+│  - /api/session/ping (Heartbeat)   - /api/session/logout      - /api/admin/activity (Admin Only)       │
+└───────────────────────────────────────────────────┬────────────────────────────────────────────────────┘
+                                                    │
+                           ┌────────────────────────┴────────────────────────┐
+                           ▼                                                 ▼
+              ┌───────────────────────────┐                    ┌───────────────────────────┐
+              │       MONGODB ATLAS       │                    │  HYBRID EXTRACTION ENGINE │
+              │   (Mongoose ODM Cloud)    │                    │                           │
+              │  - Users (admin/student)  │                    │ Path A: Text Parser (Groq)│
+              │  - Questions (200+ pool)  │                    │ Path B: Vision VLM        │
+              │  - MockTests (200Q specs) │                    │  (OpenRouter Qwen2.5-VL   │
+              │  - Attempts (with userId) │                    │   / Gemini Flash / Ollama)│
+              │  - LoginSessions (audits) │                    │                           │
+              └───────────────────────────┘                    └───────────────────────────┘
 ```
 
 ---
@@ -42,15 +54,20 @@
 ```text
 nbe-arena/
 ├── public/
+│   ├── og-image.png              # OpenGraph social share card
 │   └── uploads/                  # Temporary PDF page image render directory
 ├── src/
 │   ├── app/
-│   │   ├── layout.tsx            # Root layout with SessionProvider
-│   │   ├── page.tsx              # Student Dashboard / Personalized Lobby
+│   │   ├── layout.tsx            # Root layout with SessionProvider & Global Toaster
+│   │   ├── page.tsx              # Public Landing Page (Redirects to /dashboard if logged in)
+│   │   ├── dashboard/
+│   │   │   └── page.tsx          # Advanced Student Dashboard (11 Analytics Modules)
 │   │   ├── login/
 │   │   │   └── page.tsx          # Credentials Login Page
 │   │   ├── admin/
-│   │   │   └── page.tsx          # PDF upload + bank stats + candidate tracker (Admin)
+│   │   │   ├── page.tsx          # Ingestion + Bank stats + Active Now card
+│   │   │   └── activity/
+│   │   │       └── page.tsx      # User Session Audit & Tracking Dashboard (Admin only)
 │   │   ├── test/
 │   │   │   └── [mockId]/
 │   │   │       ├── instructions/
@@ -61,9 +78,13 @@ nbe-arena/
 │   │   │       └── page.tsx      # Scorecard + Wrong Answer Solution Review
 │   │   └── api/
 │   │       ├── auth/
-│   │       │   └── [...nextauth]/route.ts  # NextAuth handler (Credentials)
+│   │       │   └── [...nextauth]/route.ts  # NextAuth handler (Credentials + session tracking)
+│   │       ├── session/
+│   │       │   ├── ping/route.ts           # 60s client heartbeat & breadcrumb logger
+│   │       │   └── logout/route.ts         # Explicit logout session closer
 │   │       ├── admin/
-│   │       │   └── users/route.ts          # Candidate management & credentials editor
+│   │       │   ├── users/route.ts          # Candidate management & credentials editor
+│   │       │   └── activity/route.ts       # Admin session audit feed & stats
 │   │       ├── upload/route.ts
 │   │       ├── extract/route.ts            # Hybrid PDF extraction route
 │   │       ├── generate-mock/route.ts
@@ -74,12 +95,39 @@ nbe-arena/
 │   │       └── attempts/
 │   │           └── route.ts      # User-specific test history
 │   ├── components/
+│   │   ├── landing/              # Public Marketing Landing Page Components
+│   │   │   ├── LandingNavbar.tsx
+│   │   │   ├── HeroSection.tsx
+│   │   │   ├── TrustStrip.tsx
+│   │   │   ├── FeatureGrid.tsx
+│   │   │   ├── HowItWorks.tsx
+│   │   │   ├── AnalyticsPreview.tsx
+│   │   │   ├── TargetAudience.tsx
+│   │   │   ├── PricingTiers.tsx
+│   │   │   ├── ContactModal.tsx
+│   │   │   └── LandingFooter.tsx
+│   │   ├── dashboard/            # Student Dashboard Components
+│   │   │   ├── EnhancedKpiRow.tsx
+│   │   │   ├── ScoreTrajectoryChart.tsx
+│   │   │   ├── SectionalMasteryCharts.tsx
+│   │   │   ├── StrengthWeaknessPanel.tsx
+│   │   │   ├── TimeAnalyticsChart.tsx
+│   │   │   ├── NegativeMarkingLeakageCard.tsx
+│   │   │   ├── TopicHeatmap.tsx
+│   │   │   ├── ImprovementTrendBadge.tsx
+│   │   │   ├── CountdownGoalWidget.tsx
+│   │   │   ├── AvailableMocks.tsx
+│   │   │   ├── RecentAttemptsTable.tsx
+│   │   │   └── DashboardEmptyState.tsx
+│   │   ├── admin/
+│   │   │   ├── PdfUploader.tsx
+│   │   │   ├── CandidateProgressTracker.tsx
+│   │   │   └── activity/
+│   │   │       ├── ActiveUsersCard.tsx
+│   │   │       ├── UserSessionTable.tsx
+│   │   │       └── SessionTimeline.tsx
 │   │   ├── auth/
 │   │   │   └── LoginForm.tsx
-│   │   ├── dashboard/
-│   │   │   ├── AttemptHistory.tsx
-│   │   │   ├── PerformanceChart.tsx
-│   │   │   └── AvailableMocks.tsx
 │   │   ├── test/
 │   │   │   ├── TestHeader.tsx
 │   │   │   ├── QuestionCard.tsx
@@ -89,12 +137,17 @@ nbe-arena/
 │   │   │   ├── ScoreHero.tsx
 │   │   │   ├── SectionBreakdown.tsx
 │   │   │   └── QuestionReviewList.tsx
-│   │   └── admin/
-│   │       ├── PdfUploader.tsx
-│   │       └── CandidateProgressTracker.tsx
+│   │   └── ui/                   # SaaS Design Tokens & UI Elements
+│   │       ├── Button.tsx
+│   │       ├── Card.tsx
+│   │       ├── Skeleton.tsx
+│   │       ├── Badge.tsx
+│   │       └── Toast.tsx
 │   ├── lib/
 │   │   ├── mongodb.ts            # Mongoose singleton connection pool
 │   │   ├── auth.ts               # NextAuth configuration options
+│   │   ├── session-tracker.ts    # Session creation, heartbeat & inactivity closer
+│   │   ├── analytics-helpers.ts  # Pre-computation of metrics (strengths, leakage, rolling avg)
 │   │   ├── pdf-pipeline.ts       # Orchestrator for Hybrid Extraction
 │   │   ├── pdf-to-images.ts      # High-DPI Page Renderer (150-200 DPI)
 │   │   ├── text-extract.ts       # Path A: Text-layer direct extraction (Groq)
@@ -107,11 +160,13 @@ nbe-arena/
 │   │   ├── User.ts               # User schema (username, password, role)
 │   │   ├── Question.ts           # Question schema
 │   │   ├── MockTest.ts           # MockTest schema
-│   │   └── Attempt.ts            # Attempt schema with userId
+│   │   ├── Attempt.ts            # Attempt schema with userId
+│   │   └── LoginSession.ts       # Session tracking & audit schema
 │   ├── store/
 │   │   └── testStore.ts          # Zustand store for live test session
 │   └── types/
 │       └── index.ts              # Shared TypeScript definitions
+│       └── analytics.ts          # Dashboard & Tracking interfaces
 ├── data/
 │   ├── seed-questions.json       # 200 authentic bootstrap questions
 │   └── pyq/                      # Past year exam source PDFs
@@ -231,9 +286,114 @@ interface Attempt {
 }
 ```
 
+### 4.5 LoginSession Model (Audit & Activity Tracking)
+```typescript
+interface LoginSession {
+  id: string;                    // unique session id / MongoDB _id
+  userId: string;                // References User._id
+  username: string;              // Cached username
+  loginAt: Date;                 // Session start timestamp
+  logoutAt?: Date;               // Explicit logout timestamp (if triggered)
+  sessionDurationSeconds: number;// Duration calculated on logout or inactivity
+  ipAddress?: string;            // Client IP extracted from x-forwarded-for or headers
+  userAgent?: string;            // Raw User-Agent string
+  device: "Desktop" | "Mobile" | "Tablet" | "Unknown"; // Parsed device classification
+  approxLocation?: string | null;// City, Country (best-effort GeoIP, or null)
+  pagesVisited?: string[];       // Lightweight page breadcrumbs (e.g. ["/dashboard", "/test/mock-1"])
+  lastActivityAt: Date;          // Updated every 60s via client heartbeat ping
+  createdAt: Date;
+}
+```
+
 ---
 
-## 5. Environment Configuration
+## 5. Analytics Data-Fetch Architecture (`/dashboard`)
+
+The Phase 2 Advanced Dashboard follows a **Server-Orchestrated, Client-Rendered** architecture to guarantee fast initial loads with zero API waterfalls:
+
+```text
+[User Request: /dashboard]
+          │
+          ▼
+[React Server Component: src/app/dashboard/page.tsx]
+  ├── Authenticate session via getServerSession(authOptions)
+  │     └── If no session -> redirect("/login")
+  ├── Direct MongoDB Mongoose Query (Lean):
+  │     ├── Attempt.find({ userId: session.user.id }).sort({ submittedAt: 1 }).lean()
+  │     └── Question / Mock metadata (as needed)
+  ├── Server-Side Aggregation & Analytics Pre-Computation:
+  │     ├── KPI totals (completed, average, best, accuracy, total practice hours, gap from 150)
+  │     ├── Trajectory points with rolling averages (Last 5, 10, All)
+  │     ├── Sectional mastery (Radar coordinates + Horizontal bar accuracies)
+  │     ├── Strengths (Top 2 sections) & Weaknesses (Bottom 2 sections + error rates)
+  │     ├── Time analytics (Time per section, time per question, overrun detection)
+  │     ├── Negative marking leakage (Total marks lost, stacked bar correct/wrong/unattempted)
+  │     └── Target countdown & Exam date goal
+  └── Render Page Frame & Inject Pre-Calculated Data Props into Client Chart Components:
+        ├── <EnhancedKpiRow initialData={...} />
+        ├── <ScoreTrajectoryChart initialData={...} />
+        ├── <SectionalMasteryCharts initialData={...} />
+        ├── <StrengthWeaknessPanel initialData={...} />
+        ├── <TimeAnalyticsChart initialData={...} />
+        ├── <NegativeMarkingLeakageCard initialData={...} />
+        └── <RecentAttemptsTable attempts={...} />
+```
+
+### Key Principles:
+1. **Zero Client Waterfalls:** All historical attempt aggregation is calculated on the server in a single database roundtrip.
+2. **Recharts in Client Leaves:** Only chart containers are marked `'use client'`, keeping JavaScript bundles minimal.
+3. **Empty State Guard:** When `attempts.length === 0`, server gracefully renders `<DashboardEmptyState />` without invoking chart computations.
+
+---
+
+## 6. Session Lifecycle & Activity Heartbeat Architecture
+
+To track usage of the 5 controlled users (sisters, friend, founder, test user, demo bot):
+
+```text
+       USER LOGS IN (/login)
+                 │
+                 ▼
+  [NextAuth Credentials Handler]
+  - Verifies bcrypt password
+  - Creates LoginSession document in MongoDB Atlas
+  - Stores sessionId in JWT / session token
+                 │
+                 ▼
+       ACTIVE BROWSER SESSION
+  [Client Component: SessionHeartbeatProvider]
+  - Fires every 60 seconds to POST /api/session/ping
+  - Sends: { sessionId, currentPage }
+  - Server updates: lastActivityAt = new Date(), pushes currentPage to pagesVisited
+                 │
+        ┌────────┴────────┐
+        ▼                 ▼
+[EXPLICIT LOGOUT]   [INACTIVITY TIMEOUT]
+- User clicks "Sign Out" - No ping received for > 30 minutes
+- POST /api/session/logout - Background cleanup / admin query computes:
+- Server sets:             sessionDurationSeconds = (lastActivityAt - loginAt)
+  logoutAt = now           logoutAt = lastActivityAt
+  sessionDurationSeconds   Session marked closed
+```
+
+### Endpoints:
+- `POST /api/session/ping`: Authenticated heartbeat; debounced/rate-limited; updates `lastActivityAt`.
+- `POST /api/session/logout`: Closes active session; updates `logoutAt` and duration.
+- `GET /api/admin/activity`: Protected (Admin only); fetches overall metrics, per-user summary table, and latest 50 sessions timeline.
+
+---
+
+## 7. Public Landing Page Routing Architecture (`/`)
+
+- `src/app/page.tsx` is an unauthenticated Server Component.
+- On incoming request, check `getServerSession(authOptions)`:
+  - **Authenticated:** Call `redirect("/dashboard")` immediately with zero client flicker.
+  - **Unauthenticated:** Render the full SaaS marketing landing page (Hero, Feature Grid, Trust Strip, How It Works, Analytics Preview, Target Audience, Pricing, Contact Modal, Footer).
+- Links to `/login` for candidates ready to sign in.
+
+---
+
+## 8. Environment Configuration
 
 ```env
 # MongoDB Atlas Database

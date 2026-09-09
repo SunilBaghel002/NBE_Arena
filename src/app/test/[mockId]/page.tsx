@@ -7,6 +7,8 @@ import { TestHeader } from "@/components/test/TestHeader";
 import { QuestionCard } from "@/components/test/QuestionCard";
 import { QuestionPalette } from "@/components/test/QuestionPalette";
 import { SubmitModal } from "@/components/test/SubmitModal";
+import { InstructionsModal } from "@/components/test/InstructionsModal";
+import { QuestionPaperModal } from "@/components/test/QuestionPaperModal";
 import { HydratedMockTest } from "@/types";
 import { TestSkeleton } from "@/components/ui/TestSkeleton";
 import { AlertTriangle, ArrowLeft } from "lucide-react";
@@ -32,7 +34,12 @@ export default function LiveTestPage() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
+
+  // Modals state
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
+  const [isInstructionsModalOpen, setIsInstructionsModalOpen] = useState(false);
+  const [isQuestionPaperModalOpen, setIsQuestionPaperModalOpen] = useState(false);
+
   const autoSubmittedRef = useRef(false);
 
   // 1. Fetch Mock Data & Initialize
@@ -139,15 +146,15 @@ export default function LiveTestPage() {
   if (loadError) {
     return (
       <div className="min-h-screen bg-exam-bg flex flex-col items-center justify-center p-4">
-        <div className="bg-white p-8 rounded-2xl shadow-md border border-exam-border text-center max-w-md w-full">
+        <div className="bg-white p-8 rounded-3xl shadow-card border border-slate-200 text-center max-w-md w-full">
           <AlertTriangle className="w-12 h-12 text-rose-500 mx-auto mb-4" />
-          <h2 className="font-bold text-xl text-slate-800 mb-2">Unable to Load Mock</h2>
+          <h2 className="font-bold text-xl text-slate-900 mb-2">Unable to Load Mock</h2>
           <p className="text-sm text-slate-600 mb-6">{loadError}</p>
           <Link
-            href="/"
-            className="inline-flex items-center gap-2 bg-exam-primary text-white font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-exam-primaryHover transition"
+            href="/dashboard"
+            className="inline-flex items-center gap-2 bg-exam-primary text-white font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-exam-primaryHover transition shadow-xs"
           >
-            <ArrowLeft className="w-4 h-4" /> Back to Lobby
+            <ArrowLeft className="w-4 h-4" /> Back to Dashboard
           </Link>
         </div>
       </div>
@@ -155,30 +162,41 @@ export default function LiveTestPage() {
   }
 
   return (
-    <div className="min-h-screen bg-exam-bg flex flex-col justify-between">
-      {/* CBT Fixed Header with Timer */}
-      <TestHeader onSubmitClick={() => setIsSubmitModalOpen(true)} />
+    <div className="h-screen max-h-screen overflow-hidden bg-exam-bg flex flex-col justify-between select-none">
+      {/* Universal Light CBT Header with Digital Countdown Timer */}
+      <TestHeader
+        onSubmitClick={() => setIsSubmitModalOpen(true)}
+        onInstructionsClick={() => setIsInstructionsModalOpen(true)}
+        onQuestionPaperClick={() => setIsQuestionPaperModalOpen(true)}
+      />
 
-      {/* Main Examination Workspace Grid */}
-      <main className="max-w-7xl mx-auto px-4 py-3 w-full flex-1">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          {/* Question Display (2 Columns Wide on Desktop) */}
-          <div className="lg:col-span-2">
+      {/* Main Examination Workspace: Locked 100vh viewport without page scroll */}
+      <main className="max-w-[1700px] w-full mx-auto px-3 sm:px-5 lg:px-8 py-2.5 flex-1 min-h-0 overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 h-full items-stretch">
+          {/* Question Display & Options (9 Columns on XL Desktop) */}
+          <div className="lg:col-span-8 xl:col-span-9 h-full min-h-0 flex flex-col">
             <QuestionCard />
           </div>
 
-          {/* Question Status Palette (1 Column Wide on Desktop) */}
-          <div className="lg:col-span-1">
+          {/* Question Status Palette & Candidate Console (3 Columns on XL Desktop) */}
+          <div className="lg:col-span-4 xl:col-span-3 h-full min-h-0 flex flex-col">
             <QuestionPalette />
           </div>
         </div>
       </main>
 
-      {/* CBT Status Bar Footer */}
-      <footer className="bg-white border-t border-exam-border py-1.5 px-4 text-center text-[11px] text-slate-500 flex items-center justify-between max-w-7xl mx-auto w-full select-none">
-        <span>NBEMS Junior Assistant CBT</span>
-        <span className="hidden sm:inline text-slate-400">Shortcuts: [1,2,3,4] Options · [N] Save & Next · [P] Prev · [M] Mark · [C] Clear</span>
-        <span className="text-emerald-600 font-semibold">🔒 Protected Session</span>
+      {/* CBT Status Bar Footer (Slim 1-line SaaS Theme) */}
+      <footer className="flex-shrink-0 bg-white border-t border-slate-200 py-1.5 px-3 sm:px-5 lg:px-8 text-[11px] text-slate-500 flex flex-wrap items-center justify-between gap-2 max-w-[1700px] mx-auto w-full">
+        <span className="font-bold text-slate-700">
+          NBEMS Junior Assistant CBT Examination 2024 · Standardized Simulation Engine
+        </span>
+        <span className="hidden md:inline text-slate-400 font-mono">
+          Shortcuts: [1,2,3,4] Options · [N] Save & Next · [P] Prev · [M] Mark · [C] Clear
+        </span>
+        <span className="text-emerald-700 font-semibold flex items-center gap-1.5 font-mono">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span>Encrypted CBT Session · Server Latency: 14ms</span>
+        </span>
       </footer>
 
       {/* Confirmation Modal before Submit */}
@@ -186,6 +204,18 @@ export default function LiveTestPage() {
         isOpen={isSubmitModalOpen}
         onClose={() => setIsSubmitModalOpen(false)}
         onConfirm={handleSubmit}
+      />
+
+      {/* In-Test Instructions Modal */}
+      <InstructionsModal
+        isOpen={isInstructionsModalOpen}
+        onClose={() => setIsInstructionsModalOpen(false)}
+      />
+
+      {/* Question Paper Overview Modal */}
+      <QuestionPaperModal
+        isOpen={isQuestionPaperModalOpen}
+        onClose={() => setIsQuestionPaperModalOpen(false)}
       />
     </div>
   );

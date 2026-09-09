@@ -5,12 +5,16 @@ interface BrandLogoProps {
   size?: "sm" | "md" | "lg";
   showSubtitle?: boolean;
   clickable?: boolean;
+  href?: string;
+  theme?: "dark" | "light";
 }
 
 export const BrandLogo: React.FC<BrandLogoProps> = ({
   size = "md",
   showSubtitle = true,
   clickable = true,
+  href = "/dashboard",
+  theme = "light",
 }) => {
   const iconSizes = {
     sm: "w-8 h-8",
@@ -103,15 +107,29 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       {/* Typography */}
       <div>
         <div className="flex items-center gap-1.5 leading-none">
-          <span className={`font-black tracking-tight text-white ${titleSizes[size]}`}>
-            NBE <span className="text-amber-400">ARENA</span>
+          <span
+            className={`font-black tracking-tight ${
+              theme === "light" ? "text-slate-900" : "text-white"
+            } ${titleSizes[size]}`}
+          >
+            NBE <span className={theme === "light" ? "text-amber-600" : "text-amber-400"}>ARENA</span>
           </span>
-          <span className="text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-amber-400/20 text-amber-300 border border-amber-400/30">
+          <span
+            className={`text-[9px] font-black uppercase px-1.5 py-0.5 rounded border ${
+              theme === "light"
+                ? "bg-amber-100 text-amber-800 border-amber-300"
+                : "bg-amber-400/20 text-amber-300 border-amber-400/30"
+            }`}
+          >
             CBT
           </span>
         </div>
         {showSubtitle && (
-          <p className={`text-slate-400 font-medium mt-1 leading-none ${subtitleSizes[size]}`}>
+          <p
+            className={`font-medium mt-1 leading-none ${
+              theme === "light" ? "text-slate-500" : "text-slate-400"
+            } ${subtitleSizes[size]}`}
+          >
             NBEMS Jr. Assistant Simulation
           </p>
         )}
@@ -120,7 +138,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   );
 
   if (clickable) {
-    return <Link href="/">{content}</Link>;
+    return <Link href={href}>{content}</Link>;
   }
 
   return content;

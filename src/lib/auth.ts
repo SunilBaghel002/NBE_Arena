@@ -4,8 +4,11 @@ import bcrypt from "bcryptjs";
 import { connectToDatabase } from "./mongodb";
 import { UserModel } from "@/models/User";
 
+let defaultUsersEnsured = false;
+
 // Auto-seed default candidate accounts if User collection is empty
 export async function ensureDefaultUsers() {
+  if (defaultUsersEnsured) return;
   await connectToDatabase();
   const userCount = await UserModel.countDocuments();
 
@@ -44,6 +47,7 @@ export async function ensureDefaultUsers() {
     await UserModel.insertMany(defaultUsers);
     console.log("Initialized default candidate accounts in MongoDB Atlas.");
   }
+  defaultUsersEnsured = true;
 }
 
 export const authOptions: NextAuthOptions = {
@@ -72,7 +76,7 @@ export const authOptions: NextAuthOptions = {
         await ensureDefaultUsers();
 
         const cleanUsername = credentials.username.trim().toLowerCase();
-        const user = await UserModel.findOne({ username: cleanUsername });
+        const user = await UserModel.findOne({ username: cleanUsername }).lean();
 
         if (!user) {
           throw new Error("Invalid username or password");

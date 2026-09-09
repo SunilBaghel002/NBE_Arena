@@ -132,12 +132,41 @@ export async function POST(req: Request) {
 
 ---
 
-## 8. Definition of Clean Code
+## 8. Phase 2 Engineering Standards (Analytics, Data Fetching & Security)
+
+1. **Recharts & Token Palette Compliance:**
+   - All analytics charts (Trajectory, Radar, Sectional Bar, Time Breakdown, Stacked Leakage) must use `recharts`.
+   - Never hardcode arbitrary hex colors in chart components. Always consume the token-based colorblind-safe chart palette defined in `03_UI_CONTEXT.md` (Chart 1 `#2563EB`, Chart 2 `#059669`, Chart 3 `#D97706`, Chart 4 `#7C3AED`, Chart 5 `#DC2626`, Chart 6 `#0D9488`).
+   - Chart containers must include `ResponsiveContainer` and appropriate `aria-label` attributes for accessibility.
+
+2. **Server Components vs. Client Components Boundary:**
+   - Keep page roots (`src/app/page.tsx`, `src/app/dashboard/page.tsx`, `src/app/admin/activity/page.tsx`) as **React Server Components**.
+   - Perform all MongoDB Atlas queries directly on the server using `.lean()` for high performance.
+   - Pre-compute aggregated analytical metrics (rolling averages, section stats, strengths/weaknesses) on the server.
+   - Restrict `'use client'` strictly to interactive leaves (chart renderers, toggle buttons, modals, dropdowns).
+
+3. **Privacy & Sensitive Data Protection:**
+   - **Zero PII Leaks:** Never expose client IP addresses, user agents, or approximate locations to candidate-facing endpoints or components.
+   - Candidate endpoints (such as `/api/attempts/user` or `/dashboard`) must return only the logged-in candidate's own test attempts.
+   - All session audit data (`LoginSession`) is strictly restricted to authenticated users with `role: "admin"`.
+   - Never log or store passwords, raw authorization headers, or precise GPS coordinates.
+
+4. **Heartbeat Rate-Limiting & Debouncing:**
+   - The `/api/session/ping` endpoint must enforce debouncing / rate-limiting (minimum 45 seconds between ping updates per session).
+   - Reject unauthenticated heartbeat pings immediately with HTTP 401.
+   - Heartbeat payload is minimal: `{ sessionId, currentPage }`.
+
+---
+
+## 9. Definition of Clean Code
 
 A stage/PR is clean when:
 1. TypeScript compiles with zero errors (`npm run build`).
 2. MongoDB connection handles disconnects/reconnects cleanly.
-3. NextAuth sessions persist across tabs and protect `/admin` securely.
+3. NextAuth sessions persist across tabs and protect `/admin` and `/admin/activity` securely.
 4. Pre-exam instructions gate ensures the 180-min timer only begins after explicit user confirmation.
 5. Exact negative marking calculation (`-0.25`) verified by automated test assertions.
 6. Extraction pipeline gracefully handles provider fallback and rate limit degradation.
+7. Public landing page at `/` redirects authenticated users to `/dashboard` with zero client flash.
+8. Recharts visual components load cleanly without layout shifts or hydration warnings.
+9. Every user login creates a `LoginSession` record, heartbeats update `lastActivityAt`, and non-admins cannot read session tracking data.

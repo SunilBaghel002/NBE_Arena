@@ -12,10 +12,14 @@
 |-------|------|------|--------|
 | **0** | Bootstrap | Next.js 14 TS app, styling, types, configuration | `[x] Done` |
 | **1** | Foundation + CBT UI | Seed question bank (200Q), mock generator, CBT UI, scoring | `[x] Done` |
-| **1.5**| Cloud DB & Auth & Rules | MongoDB Atlas (Mongoose), NextAuth login, Student Dashboard, Pre-Exam Rules | `[ ] In Progress` |
-| **2** | Vision LLM Pipeline | PDFs extracted into MongoDB Atlas section pools | `[ ] Pending` |
-| **3** | Multi-Candidate Engine | 6+ full mocks generated, personal progress tracking, review mode | `[ ] Pending` |
-| **4** | Vercel Deployment & Polish | Vercel production build, performance, candidate handoff | `[ ] Pending` |
+| **1.5**| Cloud DB & Auth & Rules | MongoDB Atlas (Mongoose), NextAuth login, Student Dashboard, Pre-Exam Rules | `[x] Done` |
+| **2** | Vision LLM Pipeline | PDFs extracted into MongoDB Atlas section pools | `[x] Done` |
+| **3** | Multi-Candidate Engine | 6+ full mocks generated, personal progress tracking, review mode | `[x] Done` |
+| **4** | Vercel Deployment & Polish | Vercel production build, performance, candidate handoff | `[x] Done` |
+| **5** | Public Landing Page | High-converting marketing landing at `/` with auto-redirect for logged-in users | `[x] Complete & Verified` |
+| **6** | Advanced Dashboard Analytics | Comprehensive 11-module analytics overhaul with Recharts & empty states | `[x] Complete & Verified` |
+| **7** | UI/Design System Upgrade | Cohesive Tailwind tokens, typography scale, custom calendar suite, elevated cards | `[x] Complete & Verified` |
+| **8** | Login & Activity Tracking | `LoginSession` model, 60s client heartbeat, admin activity audit feed | `[ ] Pending` |
 
 ---
 
@@ -155,3 +159,211 @@
 - [x] High-speed database query projections (`getQuestionsByIds`)
 - [x] Fullscreen CBT exam mode & live auto-save indicators
 - [x] Candidate handoff guide (`CANDIDATE_GUIDE.md`)
+
+---
+
+## STAGE 5 — Public Landing Page (Marketing Home)
+**Status:** `[x] Complete & Verified`
+
+> **Goal:** Transform the unauthenticated root `/` into a high-converting, SaaS B2B marketing landing page for founder demos and coaching institute prospect presentations, while auto-redirecting authenticated candidates to `/dashboard`.
+
+### Tasks
+- [x] Move existing candidate lobby from `src/app/page.tsx` to `src/app/dashboard/page.tsx`
+- [x] Rebuild `src/app/page.tsx` as an unauthenticated server component:
+  - [x] Session check: auto-redirect authenticated candidates to `/dashboard`
+  - [x] Sticky top navigation with brand logo, section anchors, and "Sign In" button
+  - [x] Hero Section: Headline, sub-headline, primary CTA ("Request Demo"), secondary CTA ("Watch Preview"), product mockup
+  - [x] Trust Strip: Target exams (NBE, SSC CHSL/CGL/MTS, DSSSB, State exams)
+  - [x] Feature Grid: 6 SaaS cards (CBT simulator, Vision ingestion, diagrams/tables, negative marking, AI mentor, white-label)
+  - [x] How It Works: 3-step visual workflow
+  - [x] Analytics Preview: Snapshot of dashboard and AI audit
+  - [x] Who It's For: Coaching institutes, startups, YouTube educators
+  - [x] Pricing Tiers: Pilot, SaaS Starter, SaaS Pro, Custom Enterprise
+  - [x] Contact Section & Modal: Inbound lead capture form ("Book Demo Call")
+  - [x] Footer: Brand, contact email, "Built in India", social links, copyright
+- [x] Add SEO `<meta>` tags, OpenGraph social card (`public/og-image.png`), favicon, and page title
+
+### Files Touched
+- `src/app/page.tsx`
+- `src/app/dashboard/page.tsx`
+- `src/components/landing/LandingView.tsx`
+- `src/components/landing/LandingNavbar.tsx`
+- `src/components/landing/HeroSection.tsx`
+- `src/components/landing/TrustStrip.tsx`
+- `src/components/landing/FeatureGrid.tsx`
+- `src/components/landing/HowItWorks.tsx`
+- `src/components/landing/AnalyticsPreview.tsx`
+- `src/components/landing/TargetAudience.tsx`
+- `src/components/landing/PricingTiers.tsx`
+- `src/components/landing/ContactModal.tsx`
+- `src/components/landing/LandingFooter.tsx`
+- `src/app/api/contact/route.ts`
+- `public/og-image.png`
+
+### Exit Criteria
+- [x] Visiting `/` in logged-out state shows full landing
+- [x] Visiting `/` in logged-in state redirects to `/dashboard`
+- [x] Contact form or CTA works (submits to `/api/contact` with WhatsApp fallback)
+- [x] Mobile + desktop render cleanly
+- [x] Next.js production build succeeds with 0 errors (`npm run build`)
+
+### Demo Script
+1. In an unauthenticated/incognito tab, navigate to `http://localhost:3000/`. Verify all 10 landing sections render cleanly without auth prompts.
+2. Click "Sign In" button in top nav. Verify smooth navigation to `/login`.
+3. Sign in as candidate user. Verify automatic redirect to `/dashboard`.
+4. In the same tab, navigate back to `http://localhost:3000/`. Verify immediate redirect to `/dashboard` with zero flash.
+5. Click "Request Demo" and submit test contact details. Verify submission feedback.
+
+---
+
+## STAGE 6 — Advanced Dashboard Analytics (Analytics Overhaul)
+**Status:** `[x] Complete & Verified`
+
+> **Goal:** Overhaul the candidate `/dashboard` into an executive-grade analytical command center with 11 specialized modules (A through K) powered by Recharts and MongoDB Atlas attempt data.
+
+### Tasks
+- [x] Create `src/lib/analytics-helpers.ts` for server-side metric aggregations
+- [x] Implement Module A: Enhanced KPI Row (`EnhancedKpiRow.tsx` — Tests, avg score, highest, accuracy, practice hours, target gap)
+- [x] Implement Module B: Score Trajectory (`ScoreTrajectoryChart.tsx` — LineChart, 150 ref line, Last 5/10/All toggle)
+- [x] Implement Module C: Sectional Mastery (`SectionalMasteryCharts.tsx` — RadarChart + horizontal BarChart, best green, weakest red)
+- [x] Implement Module D: Strength & Weakness Panel (`StrengthWeaknessPanel.tsx` — Top 2, bottom 2, wrong rate, unattempted rate)
+- [x] Implement Module E: Time Analytics (`TimeAnalyticsChart.tsx` — Time per section, time per question, overrun alert)
+- [x] Implement Module F: Negative Marking Leakage Card (`NegativeMarkingLeakageCard.tsx` — Total penalty marks lost, stacked bar)
+- [x] Implement Module G: Topic Heatmap (`TopicHeatmap.tsx` — Topic accuracy grid; gracefully hides if tags absent)
+- [x] Implement Module H: Improvement Trend (`ImprovementTrendBadge.tsx` — Rolling 3-attempt comparison badge)
+- [x] Implement Module I: Countdown / Goal Widget (`CountdownGoalWidget.tsx` — Exam countdown + customizable target date/score)
+- [x] Integrate Module J: Multi-Mock Strategic Audit Card
+- [x] Implement Module K: Recent Attempts Table (`RecentAttemptsTable.tsx` — Zebra rows, Net score, accuracy, time taken, scorecard CTA)
+- [x] Build Empty State (`DashboardEmptyState.tsx` — Welcoming onboarding state for users with 0 attempts)
+- [x] Build Skeleton Loading Shimmer (`DashboardSkeleton.tsx`)
+
+### Files Touched
+- `src/app/dashboard/page.tsx`
+- `src/components/dashboard/EnhancedKpiRow.tsx`
+- `src/components/dashboard/ScoreTrajectoryChart.tsx`
+- `src/components/dashboard/SectionalMasteryCharts.tsx`
+- `src/components/dashboard/StrengthWeaknessPanel.tsx`
+- `src/components/dashboard/TimeAnalyticsChart.tsx`
+- `src/components/dashboard/NegativeMarkingLeakageCard.tsx`
+- `src/components/dashboard/TopicHeatmap.tsx`
+- `src/components/dashboard/ImprovementTrendBadge.tsx`
+- `src/components/dashboard/CountdownGoalWidget.tsx`
+- `src/components/dashboard/RecentAttemptsTable.tsx`
+- `src/components/dashboard/DashboardEmptyState.tsx`
+- `src/lib/analytics-helpers.ts`
+- `src/types/analytics.ts`
+
+### Exit Criteria
+- [x] All new widgets render with real user data
+- [x] Charts responsive and readable
+- [x] Empty state works for a user with 0 attempts
+- [x] No regression in existing KPI/trajectory/section widgets
+
+### Demo Script
+1. Log in as a candidate with past test attempts. Verify all 11 modules render with accurate calculations from MongoDB Atlas.
+2. Interact with the Score Trajectory toggle (`Last 5` / `Last 10` / `All`) and verify chart points change responsively.
+3. Hover over Sectional Mastery charts and verify the highest scoring section is badged green and lowest is badged red.
+4. Verify Negative Marking Leakage card accurately computes `wrongCount * 0.25` marks lost across attempts.
+5. Create or log in as a fresh user with 0 attempts. Verify `DashboardEmptyState` renders with "Take your first mock" CTA.
+
+---
+
+## STAGE 7 — UI / Design System Upgrade (SaaS-Grade Polish)
+**Status:** `[x] Complete & Verified`
+
+> **Goal:** Elevate visual aesthetics to B2B SaaS founder-demo standards with unified Tailwind tokens, typography scale, elevated cards, skeleton loaders, and responsive polish without breaking existing CBT exam UX.
+
+### Tasks
+- [x] Update `tailwind.config.ts` with complete design token palette (`brand-primary`, `brand-accent`, `surface`, `surface-alt`, `border`, `muted`, `success`, `warning`, `danger`, and colorblind-safe chart palette)
+- [x] Standardize typography scale in `src/app/globals.css` with heading scale and glassmorphism
+- [x] Refactor UI primitives in `src/components/ui/` (`Card.tsx`, `Button.tsx`, `Badge.tsx`, `Toast.tsx`)
+- [x] Custom Calendar Suite & DatePicker (`Calendar.tsx`, `DatePicker.tsx`) with month nav, presets (+30d, +45d, +60d), attempt activity dots, exam countdown flag
+- [x] Upgrade Header/Navbar with candidate avatar initials dropdown (Profile info, Sign out, mobile drawer)
+- [x] Standardize card style: rounded-2xl/3xl, subtle borders, soft shadows, uppercase eyebrow labels
+- [x] Upgrade tables: zebra rows, hover states, sticky header, status badges
+- [x] Add toast notification system for user milestones (`Toast.tsx`, `ToastProvider`, `useToast`)
+- [x] Accessibility spot-check: focus rings, aria-labels on charts, palettes, and dropdowns
+- [x] Verify responsive layout across 1280px, 1440px, 1920px, and mobile (< 1024px)
+
+### Files Touched
+- `tailwind.config.ts`
+- `src/app/globals.css`
+- `src/components/ui/Card.tsx`
+- `src/components/ui/Button.tsx`
+- `src/components/ui/Badge.tsx`
+- `src/components/ui/Toast.tsx`
+- `src/components/ui/Calendar.tsx`
+- `src/components/ui/DatePicker.tsx`
+- `src/components/Navbar.tsx`
+- `src/components/dashboard/CountdownGoalWidget.tsx`
+- `src/components/dashboard/RecentAttemptsTable.tsx`
+- `src/app/dashboard/page.tsx`
+- `src/app/test/[mockId]/instructions/page.tsx`
+- `src/app/book-demo/page.tsx`
+- `src/app/login/page.tsx`
+
+### Exit Criteria
+- [x] Landing, Dashboard, Test UI, Results, Admin all use unified design tokens
+- [x] No visual regressions in test-taking flow
+- [x] Custom calendar suite functions interactively across widgets
+- [x] Accessibility spot-check passes (focus states, labels)
+
+### Demo Script
+1. Navigate across all core screens (Landing, Dashboard, Test Instructions, CBT Hall, Results, Admin). Verify unified fonts, colors, and border radii.
+2. Verify interactive button states (hover, focus rings, active press).
+3. Start a mock test and verify the live CBT exam interface preserves its distraction-free dark layout, palette, and tabular timer numerals without regression.
+4. Test responsiveness by resizing the browser across 1280px, 1440px, 1920px, and mobile viewport (< 1024px).
+
+---
+
+## STAGE 8 — User Login & Activity Tracking + Admin Visibility
+**Status:** `[ ] Pending`
+
+> **Goal:** Track exact usage across the 5 controlled users (sisters, friend, founder, test user, demo bot) with a `LoginSession` model, 60-second client heartbeat, and an administrative activity dashboard at `/admin/activity`.
+
+### Tasks
+- [ ] Create Mongoose `LoginSession` model in `src/models/LoginSession.ts`
+- [ ] Wire NextAuth signIn event to create `LoginSession` (recording userId, username, ipAddress, userAgent, device, approxLocation)
+- [ ] Implement client heartbeat component `src/components/SessionHeartbeat.tsx` (60s interval to `/api/session/ping`)
+- [ ] Build API endpoints:
+  - [ ] `POST /api/session/ping`: Debounced heartbeat update to `lastActivityAt` and `pagesVisited`
+  - [ ] `POST /api/session/logout`: Explicit logout closer calculating `sessionDurationSeconds`
+  - [ ] `GET /api/admin/activity`: Admin-only session statistics and timeline
+- [ ] Build Admin Activity Page `src/app/admin/activity/page.tsx`:
+  - [ ] Overall stats: Logins today, this week, this month, active users now
+  - [ ] Per-user summary table: Username, sessions, time spent, last login, device, IP, location
+  - [ ] Chronological session timeline: Latest 50 sessions
+  - [ ] User and date range filters
+  - [ ] Export CSV button
+- [ ] Add "Active Users Right Now" card on `/admin/page.tsx` with quick link to `/admin/activity`
+- [ ] Enforce RBAC security: Non-admin users attempting to access `/admin/activity` receive HTTP 403 Forbidden
+
+### Files Touched
+- `src/models/LoginSession.ts`
+- `src/lib/session-tracker.ts`
+- `src/lib/auth.ts`
+- `src/components/SessionHeartbeat.tsx`
+- `src/app/api/session/ping/route.ts`
+- `src/app/api/session/logout/route.ts`
+- `src/app/api/admin/activity/route.ts`
+- `src/app/admin/activity/page.tsx`
+- `src/app/admin/page.tsx`
+- `src/components/admin/activity/ActiveUsersCard.tsx`
+- `src/components/admin/activity/UserSessionTable.tsx`
+- `src/components/admin/activity/SessionTimeline.tsx`
+
+### Exit Criteria
+- [ ] Every login creates a LoginSession
+- [ ] Explicit logout closes the session correctly
+- [ ] Inactivity closes session within 30 minutes
+- [ ] Admin can see all 5 users' sessions, durations, devices, IPs, approx location
+- [ ] Non-admin users are blocked from `/admin/activity`
+- [ ] "Active Now" count updates in near real-time
+
+### Demo Script
+1. Log in as candidate user in Chrome. Verify `LoginSession` document is created in MongoDB Atlas.
+2. Open Network tab. Confirm `POST /api/session/ping` fires every 60 seconds with current page.
+3. Click "Sign Out". Verify `POST /api/session/logout` closes the session with total duration.
+4. Log in as `admin`. Open `/admin`. Verify "Active Users Right Now" card displays accurate count.
+5. Navigate to `/admin/activity`. Verify per-user table and session timeline reflect all historical logins.
+6. Attempt to navigate to `/admin/activity` as a non-admin student. Verify access is blocked with 403.

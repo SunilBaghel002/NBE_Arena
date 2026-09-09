@@ -248,7 +248,7 @@ export default function ResultsPage() {
           <h2 className="font-bold text-xl text-slate-800 mb-2">Scorecard Unavailable</h2>
           <p className="text-sm text-slate-600 mb-6">{error || "Attempt record not found"}</p>
           <Link
-            href="/"
+            href="/dashboard"
             className="inline-flex items-center gap-2 bg-exam-primary text-white font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-exam-primaryHover transition"
           >
             Return to Dashboard
@@ -384,7 +384,7 @@ export default function ResultsPage() {
 
             <div className="flex items-center space-x-3">
               <Link
-                href="/"
+                href="/dashboard"
                 className="px-4 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-xs sm:text-sm font-semibold transition"
               >
                 Return to Dashboard
