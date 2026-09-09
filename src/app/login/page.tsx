@@ -48,14 +48,19 @@ export default function LoginPage() {
       });
 
       if (!res || res.error) {
-        setError(res?.error || "Invalid username or password");
+        const errorMsg =
+          res?.error === "CredentialsSignin"
+            ? "Invalid username or password"
+            : res?.error || "Invalid username or password";
+        setError(errorMsg);
         setLoading(false);
       } else {
         router.push("/dashboard");
         router.refresh();
       }
-    } catch (err) {
-      setError("An unexpected error occurred during login. Please try again.");
+    } catch (err: any) {
+      console.error("Login attempt exception:", err);
+      setError(err?.message || "An unexpected error occurred during login. Please try again.");
       setLoading(false);
     }
   };
