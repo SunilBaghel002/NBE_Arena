@@ -64,6 +64,12 @@ export async function ensureDefaultUsers() {
       name: "Candidate 2",
       role: "student",
     },
+    {
+      username: "test",
+      passwordHash: defaultPasswordHash,
+      name: "Test User",
+      role: "student",
+    },
   ];
 
   for (const u of defaultUsers) {
@@ -178,6 +184,17 @@ export const authOptions: NextAuthOptions = {
         (session.user as unknown as { sessionId: string }).sessionId = token.sessionId as string;
       }
       return session;
+    },
+    async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs e.g. "/login"
+      if (url.startsWith("/")) return url;
+      // Allows callback URLs on the same origin
+      try {
+        const u = new URL(url);
+        const b = new URL(baseUrl);
+        if (u.origin === b.origin) return url;
+      } catch {}
+      return "/login";
     },
   },
 };
