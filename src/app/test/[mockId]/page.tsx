@@ -162,7 +162,7 @@ export default function LiveTestPage() {
   }
 
   return (
-    <div className="min-h-screen bg-exam-bg flex flex-col justify-between select-none">
+    <div className="h-screen max-h-screen overflow-hidden bg-exam-bg flex flex-col justify-between select-none">
       {/* Universal Light CBT Header with Digital Countdown Timer */}
       <TestHeader
         onSubmitClick={() => setIsSubmitModalOpen(true)}
@@ -170,27 +170,23 @@ export default function LiveTestPage() {
         onQuestionPaperClick={() => setIsQuestionPaperModalOpen(true)}
       />
 
-      {/* Main Examination Workspace: Full Width matching Dashboard (max-w-[1700px]) */}
-      <main className="max-w-[1700px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-4 flex-1">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+      {/* Main Examination Workspace: Locked 100vh viewport without page scroll */}
+      <main className="max-w-[1700px] w-full mx-auto px-3 sm:px-5 lg:px-8 py-2.5 flex-1 min-h-0 overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 h-full items-stretch">
           {/* Question Display & Options (9 Columns on XL Desktop) */}
-          <div className="lg:col-span-8 xl:col-span-9">
+          <div className="lg:col-span-8 xl:col-span-9 h-full min-h-0 flex flex-col">
             <QuestionCard />
           </div>
 
           {/* Question Status Palette & Candidate Console (3 Columns on XL Desktop) */}
-          <div className="lg:col-span-4 xl:col-span-3">
-            <QuestionPalette
-              onOpenInstructions={() => setIsInstructionsModalOpen(true)}
-              onOpenQuestionPaper={() => setIsQuestionPaperModalOpen(true)}
-              onSubmitClick={() => setIsSubmitModalOpen(true)}
-            />
+          <div className="lg:col-span-4 xl:col-span-3 h-full min-h-0 flex flex-col">
+            <QuestionPalette />
           </div>
         </div>
       </main>
 
-      {/* CBT Status Bar Footer (Matching Clean Light SaaS Theme) */}
-      <footer className="bg-white border-t border-slate-200 py-2.5 px-4 sm:px-6 lg:px-10 text-[11px] text-slate-500 flex flex-wrap items-center justify-between gap-2 max-w-[1700px] mx-auto w-full">
+      {/* CBT Status Bar Footer (Slim 1-line SaaS Theme) */}
+      <footer className="flex-shrink-0 bg-white border-t border-slate-200 py-1.5 px-3 sm:px-5 lg:px-8 text-[11px] text-slate-500 flex flex-wrap items-center justify-between gap-2 max-w-[1700px] mx-auto w-full">
         <span className="font-bold text-slate-700">
           NBEMS Junior Assistant CBT Examination 2024 · Standardized Simulation Engine
         </span>

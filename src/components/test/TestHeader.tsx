@@ -93,11 +93,11 @@ export const TestHeader: React.FC<TestHeaderProps> = ({
   return (
     <header className="bg-white/95 backdrop-blur-md text-slate-900 shadow-xs select-none sticky top-0 z-30 border-b border-slate-200">
       {/* Top Universal Exam Header Banner */}
-      <div className="max-w-[1700px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-2.5 flex items-center justify-between border-b border-slate-100 gap-4">
+      <div className="max-w-[1700px] w-full mx-auto px-3 sm:px-6 lg:px-8 py-2 flex items-center justify-between border-b border-slate-100 gap-3">
         {/* Left: Brand + Examination Specs */}
-        <div className="flex items-center space-x-4">
-          <BrandLogo size="sm" showSubtitle={false} />
-          <div className="border-l border-slate-200 pl-4 hidden sm:block">
+        <div className="flex items-center space-x-3.5">
+          <BrandLogo size="sm" showSubtitle={false} theme="light" />
+          <div className="border-l border-slate-200 pl-3.5 hidden sm:block">
             <div className="flex items-center gap-2">
               <h1 className="font-heading font-extrabold text-xs sm:text-sm text-slate-900 leading-tight truncate max-w-[220px] sm:max-w-md">
                 {mockTitle || "NBE Junior Assistant Full CBT Mock"}
@@ -123,11 +123,11 @@ export const TestHeader: React.FC<TestHeaderProps> = ({
             <button
               type="button"
               onClick={onQuestionPaperClick}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-slate-900 border border-slate-200 text-xs font-bold transition shadow-2xs"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 text-xs font-bold transition shadow-2xs"
               title="View Complete Question Paper"
             >
               <FileText className="w-3.5 h-3.5 text-blue-600" />
-              <span className="hidden md:inline">Question Paper</span>
+              <span>Question Paper</span>
             </button>
           )}
 
@@ -140,7 +140,7 @@ export const TestHeader: React.FC<TestHeaderProps> = ({
               title="Review Examination Instructions"
             >
               <HelpCircle className="w-3.5 h-3.5 text-slate-500" />
-              <span className="hidden md:inline">Instructions</span>
+              <span className="hidden sm:inline">Instructions</span>
             </button>
           )}
 
@@ -148,7 +148,7 @@ export const TestHeader: React.FC<TestHeaderProps> = ({
           <button
             type="button"
             onClick={toggleFullscreen}
-            className="p-2 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition border border-slate-200 shadow-2xs"
+            className="p-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition border border-slate-200 shadow-2xs"
             title={isFullscreen ? "Exit Fullscreen" : "Enter Distraction-Free Fullscreen CBT Mode"}
           >
             {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -156,13 +156,13 @@ export const TestHeader: React.FC<TestHeaderProps> = ({
 
           {/* Official Countdown Timer Pill */}
           <div
-            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl border font-mono text-xs sm:text-sm font-bold shadow-2xs transition-colors select-none ${timerStyles}`}
+            className={`flex items-center space-x-2 px-3 py-1.5 rounded-xl border font-mono text-xs sm:text-sm font-bold shadow-2xs transition-colors select-none ${timerStyles}`}
             aria-live="polite"
             title="Remaining Examination Countdown Timer"
           >
-            <Clock className={`w-4 h-4 ${isDanger ? "text-rose-600" : isWarning ? "text-amber-600" : "text-slate-500"}`} />
+            <Clock className={`w-3.5 h-3.5 ${isDanger ? "text-rose-600" : isWarning ? "text-amber-600" : "text-slate-500"}`} />
             <div className="flex flex-col text-left">
-              <span className="text-[9px] font-sans uppercase font-bold text-slate-400 leading-none">Time Left</span>
+              <span className="text-[8.5px] font-sans uppercase font-bold text-slate-400 leading-none">Time Left</span>
               <span className="tracking-wider text-xs sm:text-sm">{formatTime(remainingSeconds)}</span>
             </div>
           </div>
@@ -172,7 +172,7 @@ export const TestHeader: React.FC<TestHeaderProps> = ({
             type="button"
             onClick={onSubmitClick}
             disabled={isSubmitting}
-            className="flex items-center space-x-1.5 bg-exam-danger hover:bg-rose-700 text-white text-xs sm:text-sm font-black px-4 py-2 rounded-xl shadow-xs transition transform active:scale-98 disabled:opacity-50"
+            className="flex items-center space-x-1.5 bg-exam-danger hover:bg-rose-700 text-white text-xs sm:text-sm font-black px-3.5 py-1.5 rounded-xl shadow-xs transition transform active:scale-98 disabled:opacity-50"
           >
             <Send className="w-3.5 h-3.5" />
             <span className="hidden xs:inline">Submit Test</span>

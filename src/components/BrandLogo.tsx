@@ -14,7 +14,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   showSubtitle = true,
   clickable = true,
   href = "/dashboard",
-  theme = "dark",
+  theme = "light",
 }) => {
   const iconSizes = {
     sm: "w-8 h-8",
