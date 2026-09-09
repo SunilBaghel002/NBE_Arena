@@ -1,35 +1,38 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Navbar } from "@/components/Navbar";
 import { DashboardSkeleton } from "@/components/ui/DashboardSkeleton";
 import {
-  BookOpen,
-  Award,
-  Clock,
-  ArrowRight,
-  ShieldCheck,
   PlusCircle,
-  History,
-  Database,
-  CheckCircle2,
-  AlertCircle,
-  Loader2,
   Play,
   UserCheck,
-  TrendingUp,
-  Target,
-  FileCheck,
-  BarChart2,
-  Sparkles,
-  Zap,
   Search,
+  Sparkles,
+  ArrowRight,
+  AlertCircle,
+  Loader2,
+  Brain,
 } from "lucide-react";
-import { MultiMockReportCard } from "@/components/MultiMockReportCard";
-import { BankStats, MockTest, Attempt, SectionType } from "@/types";
+import { BankStats, MockTest, Attempt } from "@/types";
+import { computeKpiMetrics } from "@/lib/analytics-helpers";
+
+// Dashboard Modules (A through K)
+import { EnhancedKpiRow } from "@/components/dashboard/EnhancedKpiRow";
+import { ScoreTrajectoryChart } from "@/components/dashboard/ScoreTrajectoryChart";
+import { SectionalMasteryCharts } from "@/components/dashboard/SectionalMasteryCharts";
+import { StrengthWeaknessPanel } from "@/components/dashboard/StrengthWeaknessPanel";
+import { TimeAnalyticsChart } from "@/components/dashboard/TimeAnalyticsChart";
+import { NegativeMarkingLeakageCard } from "@/components/dashboard/NegativeMarkingLeakageCard";
+import { TopicHeatmap } from "@/components/dashboard/TopicHeatmap";
+import { ImprovementTrendBadge } from "@/components/dashboard/ImprovementTrendBadge";
+import { CountdownGoalWidget } from "@/components/dashboard/CountdownGoalWidget";
+import { RecentAttemptsTable } from "@/components/dashboard/RecentAttemptsTable";
+import { DashboardEmptyState } from "@/components/dashboard/DashboardEmptyState";
+import { MultiMockReportModal } from "@/components/dashboard/MultiMockReportModal";
 
 export default function StudentDashboard() {
   const router = useRouter();
@@ -42,6 +45,7 @@ export default function StudentDashboard() {
   const [generating, setGenerating] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [mockSearch, setMockSearch] = useState("");
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
   // If unauthenticated, redirect to /login
   useEffect(() => {
@@ -118,251 +122,187 @@ export default function StudentDashboard() {
     }
   };
 
-  const formatSeconds = (sec: number) => {
-    const m = Math.floor(sec / 60);
-    const s = sec % 60;
-    return `${m}m ${s}s`;
-  };
-
-  // Calculate Candidate Performance Summary
-  const attemptsWithScores = attempts.filter((a) => a.score);
-  const totalCompleted = attemptsWithScores.length;
-
-  const averageScore =
-    totalCompleted > 0
-      ? Number(
-          (
-            attemptsWithScores.reduce((acc, curr) => acc + (curr.score?.netScore || 0), 0) /
-            totalCompleted
-          ).toFixed(2)
-        )
-      : 0;
-
-  const highestScore =
-    totalCompleted > 0
-      ? Math.max(...attemptsWithScores.map((a) => a.score?.netScore || 0))
-      : 0;
-
-  const averageAccuracy =
-    totalCompleted > 0
-      ? Number(
-          (
-            attemptsWithScores.reduce(
-              (acc, curr) => acc + (curr.score?.accuracyPercentage || 0),
-              0
-            ) / totalCompleted
-          ).toFixed(1)
-        )
-      : 0;
-
-  // Section historical accuracy averages
-  const sectionAverages: Record<SectionType, { avgNet: number; accuracy: number }> = {
-    REASONING: { avgNet: 0, accuracy: 0 },
-    GA: { avgNet: 0, accuracy: 0 },
-    QUANT: { avgNet: 0, accuracy: 0 },
-    ENGLISH: { avgNet: 0, accuracy: 0 },
-  };
-
-  if (totalCompleted > 0) {
-    for (const secKey of ["REASONING", "GA", "QUANT", "ENGLISH"] as SectionType[]) {
-      let sumNet = 0;
-      let sumAcc = 0;
-      for (const a of attemptsWithScores) {
-        const s = a.score?.bySection?.[secKey];
-        if (s) {
-          sumNet += s.netScore || 0;
-          sumAcc += s.accuracyPercentage || 0;
-        }
-      }
-      sectionAverages[secKey] = {
-        avgNet: Number((sumNet / totalCompleted).toFixed(1)),
-        accuracy: Number((sumAcc / totalCompleted).toFixed(1)),
-      };
-    }
-  }
-
   // Filtered Mocks
-  const filteredMocks = mocks.filter((m) =>
-    m.title.toLowerCase().includes(mockSearch.toLowerCase())
-  );
+  const filteredMocks = useMemo(() => {
+    return mocks.filter((m) =>
+      m.title.toLowerCase().includes(mockSearch.toLowerCase())
+    );
+  }, [mocks, mockSearch]);
+
+  // Calculate Metrics
+  const kpiMetrics = useMemo(() => {
+    return computeKpiMetrics(attempts);
+  }, [attempts]);
 
   const userName = session?.user?.name || "Candidate";
+  const userRole = (session?.user as any)?.role || "student";
+  const totalCompleted = kpiMetrics.totalCompleted;
 
   return (
     <div className="min-h-screen bg-exam-bg flex flex-col justify-between">
-      {/* Top Universal Navbar */}
+      {/* Top Universal Navbar matching Landing Page */}
       <Navbar />
 
       {/* Main Container */}
       {status === "loading" || loading ? (
         <DashboardSkeleton />
       ) : (
-        <main className="max-w-[1700px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-8 flex-1 space-y-8 animate-in fade-in duration-200">
-          {/* Welcome & Exam Hero Banner */}
-          <div className="bg-white rounded-2xl shadow-sm border border-exam-border p-6 sm:p-8">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6 mb-6">
+        <main className="max-w-[1700px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-6 sm:py-8 flex-1 space-y-8 animate-in fade-in duration-200">
+          {/* Top Hero & Goal Strip */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Left 2 Cols: Welcome Banner & Primary Exam Action Controls */}
+            <div className="lg:col-span-2 bg-white rounded-3xl shadow-sm border border-slate-200/90 p-6 sm:p-8 flex flex-col justify-between">
               <div>
-                <div className="inline-flex items-center gap-1.5 bg-blue-50 text-exam-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 border border-blue-200">
-                  <UserCheck className="w-3.5 h-3.5" /> Candidate Portal · {userName}
-                </div>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                  NBE Junior Assistant Examination Series
-                </h2>
-                <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                  200 Questions · 180 Minutes · 4 Sections × 50 · Marking: +1.00 Correct, −0.25 Wrong
-                </p>
-              </div>
+                <div className="flex flex-wrap items-center gap-2 mb-3">
+                  <div className="inline-flex items-center gap-1.5 bg-blue-50 text-exam-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border border-blue-200">
+                    <UserCheck className="w-3.5 h-3.5" /> Candidate Portal · {userName}
+                  </div>
 
-              {/* Primary Action Button */}
-              <button
-                type="button"
-                onClick={handleGenerateMock}
-                disabled={generating || !canGenerateMock}
-                className="inline-flex items-center justify-center gap-2 bg-exam-primary hover:bg-exam-primaryHover text-white font-black text-sm px-6 py-3.5 rounded-xl shadow-md hover:shadow-lg transition transform active:scale-95 disabled:opacity-50"
-              >
-                {generating ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Generating Mock...</span>
-                  </>
-                ) : (
-                  <>
-                    <PlusCircle className="w-4 h-4" />
-                    <span>Generate New Mock Test</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </>
-                )}
-              </button>
-            </div>
+                  {/* Module H: Improvement Trend Badge */}
+                  <ImprovementTrendBadge attempts={attempts} />
 
-            {/* Candidate Performance Summary Metrics */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                <span className="text-[11px] font-bold uppercase text-slate-500 block">Tests Completed</span>
-                <span className="text-2xl font-black text-slate-900">{totalCompleted}</span>
-                <span className="text-[11px] text-slate-500 block mt-0.5">Attempted sessions</span>
-              </div>
-
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                <span className="text-[11px] font-bold uppercase text-slate-500 block">Average Net Score</span>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-2xl font-black text-exam-primary">{averageScore}</span>
-                  <span className="text-xs text-slate-400 font-bold">/ 200</span>
-                </div>
-                <span className="text-[11px] text-slate-500 block mt-0.5">Target: 150 Qualifying</span>
-              </div>
-
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                <span className="text-[11px] font-bold uppercase text-slate-500 block">Highest Net Score</span>
-                <span className="text-2xl font-black text-emerald-700">{highestScore}</span>
-                <span className="text-[11px] text-emerald-800 font-semibold block mt-0.5">Personal best</span>
-              </div>
-
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                <span className="text-[11px] font-bold uppercase text-slate-500 block">Average Accuracy</span>
-                <span className="text-2xl font-black text-slate-900">{averageAccuracy}%</span>
-                <span className="text-[11px] text-slate-500 block mt-0.5">Correct vs Attempted</span>
-              </div>
-            </div>
-          </div>
-
-          {/* AI Candidate Multi-Mock Diagnostic Report (Studies all completed attempts) */}
-          <MultiMockReportCard candidateName={userName} totalAttempts={totalCompleted} />
-
-          {/* Visual Progress & Section Strength Analysis */}
-          {totalCompleted > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Score Trajectory Chart */}
-              <div className="bg-white rounded-2xl shadow-sm border border-exam-border p-6">
-                <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
-                  <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
-                    <TrendingUp className="w-4 h-4 text-exam-primary" /> Net Score Trajectory
-                  </h3>
-                  <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
-                    Target: 150/200
+                  <span className="text-[11px] font-semibold text-slate-500 uppercase px-2.5 py-1 bg-slate-100 rounded-full">
+                    Role: {userRole}
                   </span>
                 </div>
 
-                <div className="space-y-3 pt-2">
-                  {attemptsWithScores.slice(0, 5).map((att, idx) => {
-                    const s = att.score?.netScore || 0;
-                    const pct = Math.min(100, Math.max(0, (s / 200) * 100));
-                    const isQual = s >= 150;
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                  NBEMS Junior Assistant Examination Series
+                </h1>
 
-                    return (
-                      <div key={att.id} className="space-y-1">
-                        <div className="flex justify-between text-xs font-semibold text-slate-700">
-                          <span className="truncate max-w-[180px]">{att.mockTitle || `Attempt #${idx + 1}`}</span>
-                          <span className="font-bold font-tabular">
-                            {s} / 200 marks ({pct.toFixed(0)}%)
-                          </span>
-                        </div>
-                        <div className="h-3.5 bg-slate-100 rounded-full overflow-hidden relative">
-                          <div
-                            className="absolute top-0 bottom-0 w-0.5 bg-rose-400 z-10"
-                            style={{ left: "75%" }}
-                            title="150 Marks Target Benchmark"
-                          />
-                          <div
-                            className={`h-full rounded-full transition-all duration-500 ${
-                              isQual ? "bg-emerald-500" : "bg-exam-primary"
-                            }`}
-                            style={{ width: `${pct}%` }}
-                          />
-                        </div>
-                      </div>
-                    );
-                  })}
+                <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                  200 Questions · 180 Minutes Continuous Countdown · 4 Sections × 50 · Marking: +1.00 Correct, −0.25 Wrong
+                </p>
+              </div>
+
+              {/* Action Bar: Generate Mock Button on the Right */}
+              <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-4">
+                <div className="text-xs text-slate-500">
+                  <span className="font-semibold text-slate-700">Practice Goal:</span> Maintain{" "}
+                  <strong className="text-emerald-700 font-bold">150+ / 200 Net Marks</strong> (75% qualifying benchmark)
+                </div>
+
+                <div className="flex items-center gap-2.5">
+                  {/* Primary Mock Generator Button */}
+                  <button
+                    type="button"
+                    onClick={handleGenerateMock}
+                    disabled={generating || !canGenerateMock}
+                    className="inline-flex items-center justify-center gap-2 bg-exam-primary hover:bg-exam-primaryHover text-white font-black text-xs sm:text-sm px-5 py-3 rounded-xl shadow-md hover:shadow-lg transition transform active:scale-95 disabled:opacity-50 shrink-0"
+                  >
+                    {generating ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Generating Mock...</span>
+                      </>
+                    ) : (
+                      <>
+                        <PlusCircle className="w-4 h-4" />
+                        <span>Generate New Mock</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </>
+                    )}
+                  </button>
                 </div>
               </div>
 
-              {/* Sectional Strengths */}
-              <div className="bg-white rounded-2xl shadow-sm border border-exam-border p-6">
-                <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
-                  <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
-                    <BarChart2 className="w-4 h-4 text-exam-primary" /> Sectional Mastery & Accuracy
-                  </h3>
-                  <span className="text-xs text-slate-500 font-medium">50 Qs per section</span>
+              {errorMsg && (
+                <div className="mt-3 p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 shrink-0" />
+                  <span>{errorMsg}</span>
                 </div>
-
-                <div className="grid grid-cols-2 gap-3 pt-1">
-                  {(
-                    [
-                      { key: "REASONING", name: "Reasoning" },
-                      { key: "GA", name: "General Awareness" },
-                      { key: "QUANT", name: "Quantitative" },
-                      { key: "ENGLISH", name: "English" },
-                    ] as const
-                  ).map((sec) => {
-                    const data = sectionAverages[sec.key];
-                    return (
-                      <div key={sec.key} className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-                        <span className="text-xs font-bold text-slate-700 block">{sec.name}</span>
-                        <div className="flex items-baseline gap-1 mt-1 font-tabular">
-                          <span className="text-xl font-black text-slate-900">{data.avgNet}</span>
-                          <span className="text-[10px] text-slate-400 font-bold">/ 50 avg</span>
-                        </div>
-                        <span className="text-[11px] text-slate-500 block mt-0.5 font-medium">
-                          Accuracy: {data.accuracy}%
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
+              )}
             </div>
+
+            {/* Right 1 Col: Module I Countdown / Goal Setting Widget + AI Strategic Audit Trigger */}
+            <div className="flex flex-col gap-3.5">
+              <CountdownGoalWidget averageScore={kpiMetrics.averageScore} />
+
+              {/* AI Strategic Audit Trigger Placed Directly Below Exam Countdown */}
+              <button
+                type="button"
+                onClick={() => setIsReportModalOpen(true)}
+                disabled={totalCompleted === 0}
+                className="w-full flex items-center justify-between p-4 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-700 hover:from-blue-700 hover:via-indigo-700 hover:to-indigo-800 text-white shadow-md hover:shadow-lg transition transform active:scale-[0.99] disabled:opacity-40 border border-blue-400/20 group"
+                title={
+                  totalCompleted === 0
+                    ? "Complete at least 1 mock test to unlock longitudinal AI audit"
+                    : "Open AI Multi-Mock Strategic Audit"
+                }
+              >
+                <div className="flex items-center gap-3 text-left">
+                  <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center text-amber-300 group-hover:scale-110 transition shrink-0 shadow-xs">
+                    <Sparkles className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-black tracking-tight text-white">
+                        AI Strategic Audit
+                      </span>
+                      {totalCompleted > 0 && (
+                        <span className="bg-white/20 text-white text-[10px] px-2 py-0.5 rounded-full font-mono font-bold">
+                          {totalCompleted} Mocks
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-[11px] text-blue-100/80 font-medium">
+                      Multi-mock diagnostic, score leaks & recovery sprint
+                    </p>
+                  </div>
+                </div>
+
+                <ArrowRight className="w-4 h-4 text-blue-200 group-hover:translate-x-1 transition shrink-0 ml-2" />
+              </button>
+            </div>
+          </div>
+
+          {/* Module A: Enhanced KPI Summary Row */}
+          <EnhancedKpiRow metrics={kpiMetrics} />
+
+          {/* Conditional Display: Empty State vs 11 Analytics Modules */}
+          {totalCompleted === 0 ? (
+            /* Empty State for Fresh Candidates */
+            <DashboardEmptyState
+              userName={userName}
+              onStartFirstMock={handleGenerateMock}
+              isGenerating={generating}
+            />
+          ) : (
+            /* Active Analytics Grid for Candidates with Completed Mocks */
+            <>
+              {/* Row 1: Module B (Score Trajectory) + Module C (GitHub 4-Pillar Sectional Mastery) */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <ScoreTrajectoryChart attempts={attempts} />
+                <SectionalMasteryCharts attempts={attempts} />
+              </div>
+
+              {/* Row 2: Module D (Strength & Weakness) + Module E (Time Analytics) */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <StrengthWeaknessPanel attempts={attempts} />
+                <TimeAnalyticsChart attempts={attempts} />
+              </div>
+
+              {/* Row 3: Module F (Negative Marking Leakage) + Module G (Official NBEMS Syllabus Heatmap) */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <NegativeMarkingLeakageCard attempts={attempts} />
+                <TopicHeatmap attempts={attempts} />
+              </div>
+            </>
           )}
 
-          {/* Available Mock Papers & Personal Attempt History */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Available Mock Papers */}
-            <div className="bg-white rounded-2xl shadow-sm border border-exam-border p-6 flex flex-col justify-between">
+          {/* Row 4: Available Mock Papers + Module K (Recent Attempts Table) */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Available Mock Papers Card */}
+            <div className="bg-white rounded-3xl shadow-sm border border-slate-200/90 p-6 flex flex-col justify-between hover:shadow-md transition duration-200">
               <div>
-                <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
-                  <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
-                    <Play className="w-4 h-4 text-exam-primary" /> Available Mock Papers
+                <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
+                  <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                    <Play className="w-4 h-4 text-exam-primary" />
+                    <span>Available Full-Length Mock Papers</span>
                   </h3>
-                  <span className="text-xs text-slate-500 font-semibold">{mocks.length} papers</span>
+                  <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">
+                    {mocks.length} {mocks.length === 1 ? "Paper" : "Papers"}
+                  </span>
                 </div>
 
                 {mocks.length > 4 && (
@@ -372,35 +312,37 @@ export default function StudentDashboard() {
                       type="text"
                       value={mockSearch}
                       onChange={(e) => setMockSearch(e.target.value)}
-                      placeholder="Search mock paper..."
+                      placeholder="Filter mock tests..."
                       className="w-full text-xs pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:ring-1 focus:ring-exam-primary font-medium"
                     />
                   </div>
                 )}
 
                 {filteredMocks.length === 0 ? (
-                  <div className="text-center py-10 text-xs text-slate-400">
-                    No mock papers found. Click &quot;Generate New Mock Test&quot; above to create one.
+                  <div className="text-center py-12 text-xs text-slate-400">
+                    No mock papers found. Click &quot;Generate New Mock&quot; above to create one.
                   </div>
                 ) : (
                   <div className="space-y-3 max-h-96 overflow-y-auto pr-1">
                     {filteredMocks.map((mock) => (
                       <div
                         key={mock.id}
-                        className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 flex items-center justify-between transition"
+                        className="p-4 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-300 flex items-center justify-between transition group"
                       >
                         <div>
-                          <p className="font-bold text-sm text-slate-800">{mock.title}</p>
+                          <p className="font-bold text-sm text-slate-900 group-hover:text-exam-primary transition">
+                            {mock.title}
+                          </p>
                           <p className="text-xs text-slate-500 mt-0.5">
-                            200 Qs · 180 Mins · 4 Sections × 50
+                            200 Questions · 180 Minutes · 4 Sections × 50
                           </p>
                         </div>
 
                         <Link
                           href={`/test/${mock.id}/instructions`}
-                          className="flex items-center gap-1.5 bg-exam-primary hover:bg-exam-primaryHover text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-sm transition"
+                          className="flex items-center gap-1.5 bg-exam-primary hover:bg-exam-primaryHover text-white text-xs font-bold px-4 py-2 rounded-lg shadow-sm transition transform active:scale-95 shrink-0"
                         >
-                          <Play className="w-3.5 h-3.5" />
+                          <Play className="w-3.5 h-3.5 fill-current" />
                           <span>Start Mock</span>
                         </Link>
                       </div>
@@ -408,81 +350,30 @@ export default function StudentDashboard() {
                   </div>
                 )}
               </div>
-            </div>
 
-            {/* Personal Attempt History */}
-            <div className="bg-white rounded-2xl shadow-sm border border-exam-border p-6 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
-                  <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
-                    <History className="w-4 h-4 text-exam-primary" /> Your Attempt History
-                  </h3>
-                  <span className="text-xs text-slate-500 font-semibold">{attempts.length} attempts</span>
-                </div>
-
-                {attempts.length === 0 ? (
-                  <div className="text-center py-10 text-xs text-slate-400">
-                    You have not attempted any tests yet. Click &quot;Start Mock&quot; to begin your first practice session.
-                  </div>
-                ) : (
-                  <div className="space-y-3 max-h-96 overflow-y-auto pr-1">
-                    {attempts.map((att) => {
-                      const score = att.score;
-                      if (!score) return null;
-
-                      return (
-                        <div
-                          key={att.id}
-                          className="p-3.5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 flex items-center justify-between transition"
-                        >
-                          <div>
-                            <p className="font-bold text-xs sm:text-sm text-slate-800 truncate max-w-[160px] sm:max-w-[200px]">
-                              {att.mockTitle || "NBE Full Mock"}
-                            </p>
-                            <p className="text-[11px] text-slate-500 mt-0.5">
-                              {new Date(att.submittedAt || att.startedAt).toLocaleDateString()} · Time:{" "}
-                              {formatSeconds(att.timeTakenSeconds)} · Accuracy: {score.accuracyPercentage}%
-                            </p>
-                          </div>
-
-                          <div className="flex items-center space-x-3">
-                            <div className="text-right">
-                              <span className="text-base font-black text-slate-900 block leading-tight font-tabular">
-                                {score.netScore} / 200
-                              </span>
-                              <span
-                                className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${
-                                  score.qualifyingCleared
-                                    ? "bg-emerald-100 text-emerald-800"
-                                    : "bg-rose-100 text-rose-800"
-                                }`}
-                              >
-                                {score.qualifyingCleared ? "QUALIFIED" : "BELOW TARGET"}
-                              </span>
-                            </div>
-
-                            <Link
-                              href={`/results/${att.id}`}
-                              className="p-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition"
-                              title="View Scorecard & Review"
-                            >
-                              <ArrowRight className="w-4 h-4" />
-                            </Link>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
+              <div className="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-400 flex items-center justify-between">
+                <span>Mandatory pre-exam rules screen on start</span>
+                <span>Auto-save enabled</span>
               </div>
             </div>
+
+            {/* Module K: Recent Attempts Table */}
+            <RecentAttemptsTable attempts={attempts} />
           </div>
         </main>
       )}
 
+      {/* Module J: AI Multi-Mock Strategic Audit Modal */}
+      <MultiMockReportModal
+        isOpen={isReportModalOpen}
+        onClose={() => setIsReportModalOpen(false)}
+        candidateName={userName}
+        totalAttempts={totalCompleted}
+      />
+
       {/* Footer */}
-      <footer className="bg-white border-t border-exam-border py-4 text-center text-xs text-slate-400">
-        NBE Arena — National Board of Examinations in Medical Sciences CBT Simulation Platform
+      <footer className="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-400">
+        NBE Arena — National Board of Examinations in Medical Sciences CBT Simulation Platform · Standardized +1.00 / −0.25 Marking Scheme
       </footer>
     </div>
   );

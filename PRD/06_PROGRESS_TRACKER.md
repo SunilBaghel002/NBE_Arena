@@ -17,7 +17,7 @@
 | **3** | Multi-Candidate Engine | 6+ full mocks generated, personal progress tracking, review mode | `[x] Done` |
 | **4** | Vercel Deployment & Polish | Vercel production build, performance, candidate handoff | `[x] Done` |
 | **5** | Public Landing Page | High-converting marketing landing at `/` with auto-redirect for logged-in users | `[x] Complete & Verified` |
-| **6** | Advanced Dashboard Analytics | Comprehensive 11-module analytics overhaul with Recharts & empty states | `[ ] Pending` |
+| **6** | Advanced Dashboard Analytics | Comprehensive 11-module analytics overhaul with Recharts & empty states | `[x] Complete & Verified` |
 | **7** | UI/Design System Upgrade | Cohesive Tailwind tokens, typography scale, elevated cards, skeleton loaders | `[ ] Pending` |
 | **8** | Login & Activity Tracking | `LoginSession` model, 60s client heartbeat, admin activity audit feed | `[ ] Pending` |
 
@@ -217,25 +217,25 @@
 ---
 
 ## STAGE 6 — Advanced Dashboard Analytics (Analytics Overhaul)
-**Status:** `[ ] Pending`
+**Status:** `[x] Complete & Verified`
 
 > **Goal:** Overhaul the candidate `/dashboard` into an executive-grade analytical command center with 11 specialized modules (A through K) powered by Recharts and MongoDB Atlas attempt data.
 
 ### Tasks
-- [ ] Create `src/lib/analytics-helpers.ts` for server-side metric aggregations
-- [ ] Implement Module A: Enhanced KPI Row (`EnhancedKpiRow.tsx` — Tests, avg score, highest, accuracy, practice hours, target gap)
-- [ ] Implement Module B: Score Trajectory (`ScoreTrajectoryChart.tsx` — LineChart, 150 ref line, Last 5/10/All toggle)
-- [ ] Implement Module C: Sectional Mastery (`SectionalMasteryCharts.tsx` — RadarChart + horizontal BarChart, best green, weakest red)
-- [ ] Implement Module D: Strength & Weakness Panel (`StrengthWeaknessPanel.tsx` — Top 2, bottom 2, wrong rate, unattempted rate)
-- [ ] Implement Module E: Time Analytics (`TimeAnalyticsChart.tsx` — Time per section, time per question, overrun alert)
-- [ ] Implement Module F: Negative Marking Leakage Card (`NegativeMarkingLeakageCard.tsx` — Total penalty marks lost, stacked bar)
-- [ ] Implement Module G: Topic Heatmap (`TopicHeatmap.tsx` — Topic accuracy grid; gracefully hides if tags absent)
-- [ ] Implement Module H: Improvement Trend (`ImprovementTrendBadge.tsx` — Rolling 3-attempt comparison badge)
-- [ ] Implement Module I: Countdown / Goal Widget (`CountdownGoalWidget.tsx` — Exam countdown + customizable target date/score)
-- [ ] Integrate Module J: Multi-Mock Strategic Audit Card
-- [ ] Implement Module K: Recent Attempts Table (`RecentAttemptsTable.tsx` — Zebra rows, Net score, accuracy, time taken, scorecard CTA)
-- [ ] Build Empty State (`DashboardEmptyState.tsx` — Welcoming onboarding state for users with 0 attempts)
-- [ ] Build Skeleton Loading Shimmer (`DashboardSkeleton.tsx`)
+- [x] Create `src/lib/analytics-helpers.ts` for server-side metric aggregations
+- [x] Implement Module A: Enhanced KPI Row (`EnhancedKpiRow.tsx` — Tests, avg score, highest, accuracy, practice hours, target gap)
+- [x] Implement Module B: Score Trajectory (`ScoreTrajectoryChart.tsx` — LineChart, 150 ref line, Last 5/10/All toggle)
+- [x] Implement Module C: Sectional Mastery (`SectionalMasteryCharts.tsx` — RadarChart + horizontal BarChart, best green, weakest red)
+- [x] Implement Module D: Strength & Weakness Panel (`StrengthWeaknessPanel.tsx` — Top 2, bottom 2, wrong rate, unattempted rate)
+- [x] Implement Module E: Time Analytics (`TimeAnalyticsChart.tsx` — Time per section, time per question, overrun alert)
+- [x] Implement Module F: Negative Marking Leakage Card (`NegativeMarkingLeakageCard.tsx` — Total penalty marks lost, stacked bar)
+- [x] Implement Module G: Topic Heatmap (`TopicHeatmap.tsx` — Topic accuracy grid; gracefully hides if tags absent)
+- [x] Implement Module H: Improvement Trend (`ImprovementTrendBadge.tsx` — Rolling 3-attempt comparison badge)
+- [x] Implement Module I: Countdown / Goal Widget (`CountdownGoalWidget.tsx` — Exam countdown + customizable target date/score)
+- [x] Integrate Module J: Multi-Mock Strategic Audit Card
+- [x] Implement Module K: Recent Attempts Table (`RecentAttemptsTable.tsx` — Zebra rows, Net score, accuracy, time taken, scorecard CTA)
+- [x] Build Empty State (`DashboardEmptyState.tsx` — Welcoming onboarding state for users with 0 attempts)
+- [x] Build Skeleton Loading Shimmer (`DashboardSkeleton.tsx`)
 
 ### Files Touched
 - `src/app/dashboard/page.tsx`
@@ -254,10 +254,10 @@
 - `src/types/analytics.ts`
 
 ### Exit Criteria
-- [ ] All new widgets render with real user data
-- [ ] Charts responsive and readable
-- [ ] Empty state works for a user with 0 attempts
-- [ ] No regression in existing KPI/trajectory/section widgets
+- [x] All new widgets render with real user data
+- [x] Charts responsive and readable
+- [x] Empty state works for a user with 0 attempts
+- [x] No regression in existing KPI/trajectory/section widgets
 
 ### Demo Script
 1. Log in as a candidate with past test attempts. Verify all 11 modules render with accurate calculations from MongoDB Atlas.
