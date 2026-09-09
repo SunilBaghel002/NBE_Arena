@@ -37,6 +37,8 @@ import {
   Play,
   FileText,
   AlertTriangle,
+  Activity,
+  Radio,
 } from "lucide-react";
 import { BankStats, Attempt } from "@/types";
 
@@ -70,6 +72,11 @@ export default function AdminPage() {
   const [stats, setStats] = useState<BankStats | null>(null);
   const [users, setUsers] = useState<UserAdminData[]>([]);
   const [allAttempts, setAllAttempts] = useState<Attempt[]>([]);
+  const [activitySummary, setActivitySummary] = useState<{
+    activeUsersNow: number;
+    loginsToday: number;
+    totalSessions: number;
+  } | null>(null);
   const [loading, setLoading] = useState(true);
   const [expandedUserId, setExpandedUserId] = useState<string | null>(null);
 
@@ -117,10 +124,11 @@ export default function AdminPage() {
     try {
       setLoading(true);
       setActionMessage(null);
-      const [bankRes, usersRes, pyqRes] = await Promise.all([
+      const [bankRes, usersRes, pyqRes, actRes] = await Promise.all([
         fetch("/api/bank-stats"),
         fetch("/api/admin/users"),
         fetch("/api/pyq-list"),
+        fetch("/api/admin/activity"),
       ]);
 
       if (bankRes.ok) {
@@ -132,6 +140,17 @@ export default function AdminPage() {
         const uData = await usersRes.json();
         setUsers(uData.users || []);
         setAllAttempts(uData.attempts || []);
+      }
+
+      if (actRes.ok) {
+        const aData = await actRes.json();
+        if (aData?.summary) {
+          setActivitySummary({
+            activeUsersNow: aData.summary.activeUsersNow || 0,
+            loginsToday: aData.summary.loginsToday || 0,
+            totalSessions: aData.summary.totalSessions || 0,
+          });
+        }
       }
 
       if (pyqRes.ok) {
@@ -413,6 +432,32 @@ export default function AdminPage() {
           </div>
         )}
 
+        {/* Active Candidates Live Telemetry Banner */}
+        <div className="bg-gradient-to-r from-slate-900 via-slate-900 to-indigo-950 text-white rounded-2xl p-4 sm:p-5 border border-slate-800 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+              <Radio className="w-5 h-5 animate-pulse" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-black uppercase tracking-wider text-emerald-400">Live Heartbeat Telemetry</span>
+                <span className="text-[10px] text-slate-400">· 60s Client Intervals</span>
+              </div>
+              <p className="text-sm font-bold text-white mt-0.5">
+                <span className="text-emerald-400 font-tabular font-black">{activitySummary?.activeUsersNow ?? 0} Candidate(s)</span> Active Right Now · {activitySummary?.loginsToday ?? 0} Logins Today
+              </p>
+            </div>
+          </div>
+
+          <Link
+            href="/admin/activity"
+            className="inline-flex items-center gap-2 bg-exam-primary hover:bg-exam-primaryHover text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-xs transition self-start sm:self-auto"
+          >
+            <Activity className="w-4 h-4" />
+            <span>Open Activity Audit Feed →</span>
+          </Link>
+        </div>
+
         {/* Tab Switcher */}
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-exam-border pb-4">
           <div className="flex space-x-2 bg-slate-200/70 p-1 rounded-xl">
@@ -439,6 +484,13 @@ export default function AdminPage() {
             >
               <Users className="w-4 h-4 text-exam-primary" /> Credentials Editor
             </button>
+
+            <Link
+              href="/admin/activity"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 transition"
+            >
+              <Activity className="w-4 h-4 text-emerald-600" /> Activity Tracker
+            </Link>
 
             <button
               type="button"
