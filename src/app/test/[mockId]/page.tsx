@@ -11,8 +11,9 @@ import { InstructionsModal } from "@/components/test/InstructionsModal";
 import { QuestionPaperModal } from "@/components/test/QuestionPaperModal";
 import { HydratedMockTest } from "@/types";
 import { TestSkeleton } from "@/components/ui/TestSkeleton";
-import { AlertTriangle, ArrowLeft, X } from "lucide-react";
+import { AlertTriangle, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { MobilePaletteDrawer } from "@/components/test/MobilePaletteDrawer";
 
 export default function LiveTestPage() {
   const params = useParams();
@@ -202,33 +203,10 @@ export default function LiveTestPage() {
       </footer>
 
       {/* Mobile Question Palette Bottom Sheet Drawer */}
-      {isMobilePaletteOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden flex flex-col justify-end bg-slate-900/60 backdrop-blur-xs transition-opacity animate-in fade-in duration-150">
-          <div
-            className="flex-1 w-full"
-            onClick={() => setIsMobilePaletteOpen(false)}
-            aria-label="Close palette overlay"
-          />
-          <div className="bg-white rounded-t-3xl shadow-2xl border-t border-slate-300 flex flex-col max-h-[82vh] h-[75vh] w-full overflow-hidden animate-in slide-in-from-bottom duration-200">
-            <div className="flex items-center justify-between px-4 py-2.5 border-b border-slate-200 bg-slate-50 flex-shrink-0">
-              <span className="font-bold text-slate-800 text-xs sm:text-sm">
-                Question Palette & Candidate Console
-              </span>
-              <button
-                type="button"
-                onClick={() => setIsMobilePaletteOpen(false)}
-                className="p-1 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-200 transition"
-                aria-label="Close"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <div className="flex-1 min-h-0 overflow-hidden">
-              <QuestionPalette onQuestionSelected={() => setIsMobilePaletteOpen(false)} />
-            </div>
-          </div>
-        </div>
-      )}
+      <MobilePaletteDrawer
+        isOpen={isMobilePaletteOpen}
+        onClose={() => setIsMobilePaletteOpen(false)}
+      />
 
       {/* Confirmation Modal before Submit */}
       <SubmitModal
