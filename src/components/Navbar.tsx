@@ -62,6 +62,23 @@ export const Navbar: React.FC = () => {
     setMobileMenuOpen(false);
   }, [pathname]);
 
+  const handleSignOut = async () => {
+    setDropdownOpen(false);
+    setMobileMenuOpen(false);
+    try {
+      const sid = (session?.user as unknown as { sessionId?: string })?.sessionId;
+      await fetch("/api/session/logout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sessionId: sid }),
+      });
+    } catch {
+      // ignore network errors
+    }
+    await signOut({ redirect: false });
+    window.location.href = "/login";
+  };
+
   const navLinks = [
     {
       label: "Dashboard",
@@ -243,20 +260,7 @@ export const Navbar: React.FC = () => {
                     <div className="pt-1.5 mt-1 border-t border-slate-100">
                       <button
                         type="button"
-                        onClick={async () => {
-                          setDropdownOpen(false);
-                          try {
-                            const sid = (session?.user as unknown as { sessionId?: string })?.sessionId;
-                            await fetch("/api/session/logout", {
-                              method: "POST",
-                              headers: { "Content-Type": "application/json" },
-                              body: JSON.stringify({ sessionId: sid }),
-                            });
-                          } catch {
-                            // ignore network errors
-                          }
-                          signOut({ callbackUrl: "/login" });
-                        }}
+                        onClick={handleSignOut}
                         className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 transition"
                       >
                         <LogOut className="w-4 h-4" />
@@ -309,6 +313,17 @@ export const Navbar: React.FC = () => {
                 </Link>
               );
             })}
+
+            <div className="pt-2 mt-2 border-t border-slate-100">
+              <button
+                type="button"
+                onClick={handleSignOut}
+                className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 transition"
+              >
+                <LogOut className="w-4 h-4" />
+                <span>Sign Out of Portal</span>
+              </button>
+            </div>
           </div>
         )}
       </div>
