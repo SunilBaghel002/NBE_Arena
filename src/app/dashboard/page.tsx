@@ -134,6 +134,19 @@ export default function StudentDashboard() {
     return computeKpiMetrics(attempts);
   }, [attempts]);
 
+  const attemptDates = useMemo(() => {
+    return attempts
+      .map((a) => {
+        try {
+          const rawDate = a.submittedAt || a.startedAt;
+          return rawDate ? new Date(rawDate).toISOString().split("T")[0] : "";
+        } catch {
+          return "";
+        }
+      })
+      .filter(Boolean);
+  }, [attempts]);
+
   const userName = session?.user?.name || "Candidate";
   const userRole = (session?.user as any)?.role || "student";
   const totalCompleted = kpiMetrics.totalCompleted;
@@ -151,7 +164,7 @@ export default function StudentDashboard() {
           {/* Top Hero & Goal Strip */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Left 2 Cols: Welcome Banner & Primary Exam Action Controls */}
-            <div className="lg:col-span-2 bg-white rounded-3xl shadow-sm border border-slate-200/90 p-6 sm:p-8 flex flex-col justify-between">
+            <div className="lg:col-span-2 bg-white rounded-3xl shadow-card hover:shadow-card-hover transition-shadow duration-200 border border-slate-200/90 p-6 sm:p-8 flex flex-col justify-between">
               <div>
                 <div className="flex flex-wrap items-center gap-2 mb-3">
                   <div className="inline-flex items-center gap-1.5 bg-blue-50 text-exam-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border border-blue-200">
@@ -216,7 +229,10 @@ export default function StudentDashboard() {
 
             {/* Right 1 Col: Module I Countdown / Goal Setting Widget + AI Strategic Audit Trigger */}
             <div className="flex flex-col gap-3.5">
-              <CountdownGoalWidget averageScore={kpiMetrics.averageScore} />
+              <CountdownGoalWidget
+                averageScore={kpiMetrics.averageScore}
+                attemptDates={attemptDates}
+              />
 
               {/* AI Strategic Audit Trigger Placed Directly Below Exam Countdown */}
               <button
@@ -293,14 +309,17 @@ export default function StudentDashboard() {
           {/* Row 4: Available Mock Papers + Module K (Recent Attempts Table) */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Available Mock Papers Card */}
-            <div className="bg-white rounded-3xl shadow-sm border border-slate-200/90 p-6 flex flex-col justify-between hover:shadow-md transition duration-200">
+            <div className="bg-white rounded-3xl shadow-card hover:shadow-card-hover transition-shadow duration-200 border border-slate-200/90 p-6 sm:p-7 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
-                  <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                    <Play className="w-4 h-4 text-exam-primary" />
-                    <span>Available Full-Length Mock Papers</span>
-                  </h3>
-                  <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">
+                  <div>
+                    <span className="text-eyebrow block mb-1">Exam Hall Inventory</span>
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+                      <Play className="w-4 h-4 text-exam-primary" />
+                      <span>Available Full-Length Mock Papers</span>
+                    </h3>
+                  </div>
+                  <span className="text-xs font-bold text-slate-600 bg-slate-100/90 border border-slate-200/80 px-3 py-1 rounded-full shadow-xs">
                     {mocks.length} {mocks.length === 1 ? "Paper" : "Papers"}
                   </span>
                 </div>

@@ -54,11 +54,18 @@ export default function LoginPage() {
         <div className="bg-slate-900 px-4 py-2 rounded-2xl shadow-sm">
           <BrandLogo size="md" href="/" />
         </div>
+
+        <a
+          href="/"
+          className="text-xs font-bold text-slate-600 hover:text-slate-900 bg-white hover:bg-slate-100 px-3.5 py-2 rounded-xl border border-slate-200 transition shadow-xs"
+        >
+          ← Back to Home
+        </a>
       </header>
 
       {/* Main Login Form Box (Light Theme) */}
       <div className="max-w-md mx-auto w-full my-auto z-10">
-        <div className="bg-white rounded-2xl shadow-xl border border-slate-200/80 overflow-hidden">
+        <div className="bg-white rounded-3xl shadow-card border border-slate-200/90 overflow-hidden">
           {/* Header Banner */}
           <div className="bg-gradient-to-b from-slate-900 to-slate-950 p-6 text-white text-center border-b border-slate-800">
             <div className="w-12 h-12 bg-white/10 rounded-2xl mx-auto flex items-center justify-center mb-3 border border-white/20 shadow-inner">

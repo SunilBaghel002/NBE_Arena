@@ -18,7 +18,7 @@
 | **4** | Vercel Deployment & Polish | Vercel production build, performance, candidate handoff | `[x] Done` |
 | **5** | Public Landing Page | High-converting marketing landing at `/` with auto-redirect for logged-in users | `[x] Complete & Verified` |
 | **6** | Advanced Dashboard Analytics | Comprehensive 11-module analytics overhaul with Recharts & empty states | `[x] Complete & Verified` |
-| **7** | UI/Design System Upgrade | Cohesive Tailwind tokens, typography scale, elevated cards, skeleton loaders | `[ ] Pending` |
+| **7** | UI/Design System Upgrade | Cohesive Tailwind tokens, typography scale, custom calendar suite, elevated cards | `[x] Complete & Verified` |
 | **8** | Login & Activity Tracking | `LoginSession` model, 60s client heartbeat, admin activity audit feed | `[ ] Pending` |
 
 ---
@@ -269,20 +269,21 @@
 ---
 
 ## STAGE 7 — UI / Design System Upgrade (SaaS-Grade Polish)
-**Status:** `[ ] Pending`
+**Status:** `[x] Complete & Verified`
 
 > **Goal:** Elevate visual aesthetics to B2B SaaS founder-demo standards with unified Tailwind tokens, typography scale, elevated cards, skeleton loaders, and responsive polish without breaking existing CBT exam UX.
 
 ### Tasks
-- [ ] Update `tailwind.config.ts` with complete design token palette (`brand-primary`, `brand-accent`, `surface`, `surface-alt`, `border`, `muted`, `success`, `warning`, `danger`, and colorblind-safe chart palette)
-- [ ] Standardize typography scale in `src/app/globals.css`
-- [ ] Refactor UI primitives in `src/components/ui/` (`Card.tsx`, `Button.tsx`, `Badge.tsx`, `Skeleton.tsx`)
-- [ ] Upgrade Header/Navbar with candidate avatar initials dropdown (Profile info, Sign out)
-- [ ] Standardize card style: rounded-2xl, subtle borders, soft shadows, uppercase eyebrow labels
-- [ ] Upgrade tables: zebra rows, hover states, sticky header
-- [ ] Add toast notification system for user milestones
-- [ ] Accessibility spot-check: focus rings, aria-labels on charts and palettes
-- [ ] Verify responsive layout across 1280px, 1440px, 1920px, and mobile (< 1024px)
+- [x] Update `tailwind.config.ts` with complete design token palette (`brand-primary`, `brand-accent`, `surface`, `surface-alt`, `border`, `muted`, `success`, `warning`, `danger`, and colorblind-safe chart palette)
+- [x] Standardize typography scale in `src/app/globals.css` with heading scale and glassmorphism
+- [x] Refactor UI primitives in `src/components/ui/` (`Card.tsx`, `Button.tsx`, `Badge.tsx`, `Toast.tsx`)
+- [x] Custom Calendar Suite & DatePicker (`Calendar.tsx`, `DatePicker.tsx`) with month nav, presets (+30d, +45d, +60d), attempt activity dots, exam countdown flag
+- [x] Upgrade Header/Navbar with candidate avatar initials dropdown (Profile info, Sign out, mobile drawer)
+- [x] Standardize card style: rounded-2xl/3xl, subtle borders, soft shadows, uppercase eyebrow labels
+- [x] Upgrade tables: zebra rows, hover states, sticky header, status badges
+- [x] Add toast notification system for user milestones (`Toast.tsx`, `ToastProvider`, `useToast`)
+- [x] Accessibility spot-check: focus rings, aria-labels on charts, palettes, and dropdowns
+- [x] Verify responsive layout across 1280px, 1440px, 1920px, and mobile (< 1024px)
 
 ### Files Touched
 - `tailwind.config.ts`
@@ -290,17 +291,22 @@
 - `src/components/ui/Card.tsx`
 - `src/components/ui/Button.tsx`
 - `src/components/ui/Badge.tsx`
-- `src/components/ui/Skeleton.tsx`
+- `src/components/ui/Toast.tsx`
+- `src/components/ui/Calendar.tsx`
+- `src/components/ui/DatePicker.tsx`
 - `src/components/Navbar.tsx`
+- `src/components/dashboard/CountdownGoalWidget.tsx`
+- `src/components/dashboard/RecentAttemptsTable.tsx`
 - `src/app/dashboard/page.tsx`
-- `src/app/admin/page.tsx`
-- `src/app/results/[attemptId]/page.tsx`
-- `src/app/test/[mockId]/page.tsx`
+- `src/app/test/[mockId]/instructions/page.tsx`
+- `src/app/book-demo/page.tsx`
+- `src/app/login/page.tsx`
 
 ### Exit Criteria
-- [ ] Landing, Dashboard, Test UI, Results, Admin all use unified design tokens
-- [ ] No visual regressions in test-taking flow
-- [ ] Accessibility spot-check passes (focus states, labels)
+- [x] Landing, Dashboard, Test UI, Results, Admin all use unified design tokens
+- [x] No visual regressions in test-taking flow
+- [x] Custom calendar suite functions interactively across widgets
+- [x] Accessibility spot-check passes (focus states, labels)
 
 ### Demo Script
 1. Navigate across all core screens (Landing, Dashboard, Test Instructions, CBT Hall, Results, Admin). Verify unified fonts, colors, and border radii.

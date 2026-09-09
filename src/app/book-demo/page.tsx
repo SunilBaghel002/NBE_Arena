@@ -18,6 +18,7 @@ import {
   Sparkles,
   Layers,
 } from "lucide-react";
+import { DatePicker } from "@/components/ui/DatePicker";
 
 function BookDemoContent() {
   const searchParams = useSearchParams();
@@ -33,6 +34,7 @@ function BookDemoContent() {
     "NBEMS Junior Assistant",
     "SSC CHSL / CGL",
   ]);
+  const [preferredDate, setPreferredDate] = useState("");
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submittedLead, setSubmittedLead] = useState<{ id?: string; message?: string } | null>(null);
@@ -69,7 +71,9 @@ function BookDemoContent() {
           batchSize,
           targetExams: selectedExams,
           tier,
-          message,
+          message: preferredDate
+            ? `${message ? `${message}\n` : ""}Preferred Walkthrough Date: ${preferredDate}`
+            : message,
         }),
       });
 
@@ -346,6 +350,20 @@ function BookDemoContent() {
                       );
                     })}
                   </div>
+                </div>
+
+                {/* Preferred Walkthrough Date */}
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700">
+                    Preferred Walkthrough Date (Optional)
+                  </label>
+                  <DatePicker
+                    value={preferredDate}
+                    onChange={(d) => setPreferredDate(d)}
+                    placeholder="Choose preferred demo date from calendar..."
+                    minDate={new Date().toISOString().split("T")[0]}
+                    showPresets={true}
+                  />
                 </div>
 
                 {/* Requirements / PYQ PDF */}

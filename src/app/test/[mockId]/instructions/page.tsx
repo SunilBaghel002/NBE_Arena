@@ -84,7 +84,7 @@ export default function InstructionsPage() {
         /* Main Instructions Body */
         <main className="max-w-4xl mx-auto px-4 py-8 flex-1 w-full space-y-6 animate-in fade-in duration-150">
           {/* Exam Structure Hero Box */}
-          <div className="bg-white rounded-2xl shadow-sm border border-exam-border p-6 sm:p-8">
+          <div className="bg-white rounded-3xl shadow-card border border-slate-200/90 p-6 sm:p-8">
             <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-exam-primary mb-3">
               <ShieldCheck className="w-4 h-4 text-emerald-600" /> National Board of Examinations in Medical Sciences
             </div>
@@ -98,25 +98,25 @@ export default function InstructionsPage() {
 
             {/* Quick Metrics Bar */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 mb-8">
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-xs">
                 <span className="text-[11px] font-bold uppercase text-slate-500 block">Total Questions</span>
                 <span className="text-2xl font-black text-slate-900">200 Qs</span>
                 <span className="text-[11px] text-slate-500 block mt-0.5">50 × 4 Sections</span>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-xs">
                 <span className="text-[11px] font-bold uppercase text-slate-500 block">Total Duration</span>
                 <span className="text-2xl font-black text-slate-900">180 Mins</span>
                 <span className="text-[11px] text-slate-500 block mt-0.5">3.0 Hours Continuous</span>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-xs">
                 <span className="text-[11px] font-bold uppercase text-slate-500 block">Marking Scheme</span>
                 <span className="text-2xl font-black text-exam-danger">-0.25</span>
                 <span className="text-[11px] text-emerald-700 font-bold block mt-0.5">+1.00 for Correct</span>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-xs">
                 <span className="text-[11px] font-bold uppercase text-slate-500 block">Qualifying Target</span>
                 <span className="text-2xl font-black text-exam-success">150 / 200</span>
                 <span className="text-[11px] text-slate-500 block mt-0.5">75% Net Benchmark</span>
