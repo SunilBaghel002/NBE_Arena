@@ -149,18 +149,6 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({ onPaletteClick }) =>
               A++
             </button>
           </div>
-
-          {/* Mobile Quick Palette Button */}
-          {onPaletteClick && (
-            <button
-              type="button"
-              onClick={onPaletteClick}
-              className="lg:hidden flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 border border-blue-200 font-bold text-[11px] active:scale-95 transition"
-            >
-              <LayoutGrid className="w-3 h-3" />
-              <span>Palette</span>
-            </button>
-          )}
         </div>
       </div>
 

@@ -7,6 +7,7 @@ interface BrandLogoProps {
   clickable?: boolean;
   href?: string;
   theme?: "dark" | "light";
+  compactOnMobile?: boolean;
 }
 
 export const BrandLogo: React.FC<BrandLogoProps> = ({
@@ -15,6 +16,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   clickable = true,
   href = "/dashboard",
   theme = "light",
+  compactOnMobile = false,
 }) => {
   const iconSizes = {
     sm: "w-8 h-8",
@@ -105,17 +107,19 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       </div>
 
       {/* Typography */}
-      <div>
+      <div className={compactOnMobile ? "hidden xs:block" : ""}>
         <div className="flex items-center gap-1.5 leading-none">
           <span
             className={`font-black tracking-tight ${
               theme === "light" ? "text-slate-900" : "text-white"
             } ${titleSizes[size]}`}
           >
-            NBE <span className={theme === "light" ? "text-amber-600" : "text-amber-400"}>ARENA</span>
+            NBE <span className={`${theme === "light" ? "text-amber-600" : "text-amber-400"} ${compactOnMobile ? "hidden sm:inline" : ""}`}>ARENA</span>
           </span>
           <span
             className={`text-[9px] font-black uppercase px-1.5 py-0.5 rounded border ${
+              compactOnMobile ? "hidden sm:inline-block" : ""
+            } ${
               theme === "light"
                 ? "bg-amber-100 text-amber-800 border-amber-300"
                 : "bg-amber-400/20 text-amber-300 border-amber-400/30"
