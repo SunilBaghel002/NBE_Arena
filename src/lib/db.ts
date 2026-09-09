@@ -6,6 +6,7 @@ import { MockTestModel } from "@/models/MockTest";
 import { AttemptModel } from "@/models/Attempt";
 import { UserModel } from "@/models/User";
 import { Question, MockTest, Attempt, BankStats, SectionType } from "@/types";
+import { sanitizeQuestion } from "./clean-question";
 
 // Auto-seed questions into MongoDB if collection is empty
 async function ensureSeedQuestions() {
@@ -38,12 +39,18 @@ const EMPTY_OPTIONS = { a: "", b: "", c: "", d: "" };
  * questions become unanswerable.
  */
 function toQuestion(doc: Record<string, any>): Question {
+  const rawOptions = doc.options || EMPTY_OPTIONS;
+  const cleaned = sanitizeQuestion({
+    questionText: doc.questionText || "",
+    options: rawOptions,
+  });
+
   return {
     id: doc.id,
     contentHash: doc.contentHash,
     section: doc.section as SectionType,
-    questionText: doc.questionText,
-    options: doc.options,
+    questionText: cleaned.questionText,
+    options: cleaned.options as Question["options"],
     correctOption: doc.correctOption as Question["correctOption"],
     answerConfidence: doc.answerConfidence as Question["answerConfidence"],
     explanation: doc.explanation,

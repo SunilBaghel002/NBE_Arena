@@ -8,6 +8,7 @@ import { visionExtractor } from "./vision-extract";
 import { classifySectionFallback } from "./section-classifier";
 import { generateQuestionHash } from "./dedupe";
 import { ExtractedQuestion, ExtractionPageResult } from "./providers/types";
+import { sanitizeQuestion } from "./clean-question";
 
 export interface PipelineOptions {
   sourceExam?: string;
@@ -140,23 +141,26 @@ export async function processPdfExtraction(
 
         totalExtracted++;
 
+        // Sanitize stem and options from response-sheet metadata and headers
+        const sanitized = sanitizeQuestion({
+          questionText: q.questionText,
+          options: {
+            a: String(q.options.a || "").trim(),
+            b: String(q.options.b || "").trim(),
+            c: String(q.options.c || "").trim(),
+            d: String(q.options.d || "").trim(),
+          },
+        });
+
         // Classify section with fallback heuristic
         const section = classifySectionFallback(
-          q.questionText,
-          `${q.options.a} ${q.options.b} ${q.options.c || ""} ${q.options.d || ""}`,
+          sanitized.questionText,
+          `${sanitized.options.a} ${sanitized.options.b} ${sanitized.options.c || ""} ${sanitized.options.d || ""}`,
           q.section
         );
 
-        // Normalize options
-        const normalizedOptions = {
-          a: String(q.options.a || "").trim(),
-          b: String(q.options.b || "").trim(),
-          c: String(q.options.c || "").trim(),
-          d: String(q.options.d || "").trim(),
-        };
-
         // Generate SHA-256 hash
-        const contentHash = generateQuestionHash(q.questionText, normalizedOptions);
+        const contentHash = generateQuestionHash(sanitized.questionText, sanitized.options);
 
         // Check if duplicate in MongoDB Atlas
         const existing = await QuestionModel.findOne({ contentHash }).lean();
@@ -171,8 +175,8 @@ export async function processPdfExtraction(
             id: customId,
             contentHash,
             section,
-            questionText: q.questionText.trim(),
-            options: normalizedOptions,
+            questionText: sanitized.questionText,
+            options: sanitized.options,
             correctOption: q.correctOption || null,
             explanation: q.explanation || "",
             hasImage: Boolean(q.hasImage),

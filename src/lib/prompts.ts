@@ -31,7 +31,9 @@ QUALITY RULES:
 - Convert math formulas to clean unicode/text (e.g. x^2 + 5x + 6 = 0, sqrt(64), 3/4).
 - If the question relies on an inline diagram/figure that cannot be transcribed to text, set "hasImage": true.
 - If the correct answer key is marked or highlighted on the page, populate "correctOption" with "a", "b", "c", or "d". If not visible, set null.
-- If options are indexed as 1, 2, 3, 4, map them to a, b, c, d respectively.`;
+- If options are indexed as 1, 2, 3, 4, map them to a, b, c, d respectively.
+- DO NOT include candidate response-sheet metadata (such as "Question ID : ...", "Status : ...", "Chosen Option : ...") in option text. Options must contain ONLY the actual answer choice text.
+- DO NOT include exam paper headers or section banners (such as "SSC CHSL ... Question Paper with Answers Section : English Language") in questionText. questionText must begin directly with the question sentence.`;
 
 export const TEXT_EXTRACTION_USER_PROMPT = (pageText: string) => `Extract all MCQs from the following exam page text:
 
