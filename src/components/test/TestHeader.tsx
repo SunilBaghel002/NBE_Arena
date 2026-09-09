@@ -11,6 +11,7 @@ import {
   HelpCircle,
   FileText,
   ShieldCheck,
+  LayoutGrid,
 } from "lucide-react";
 import { SectionType } from "@/types";
 
@@ -18,6 +19,7 @@ interface TestHeaderProps {
   onSubmitClick: () => void;
   onInstructionsClick?: () => void;
   onQuestionPaperClick?: () => void;
+  onPaletteClick?: () => void;
 }
 
 const SECTION_LABELS: Record<SectionType, string> = {
@@ -31,6 +33,7 @@ export const TestHeader: React.FC<TestHeaderProps> = ({
   onSubmitClick,
   onInstructionsClick,
   onQuestionPaperClick,
+  onPaletteClick,
 }) => {
   const {
     mockTitle,
@@ -117,13 +120,26 @@ export const TestHeader: React.FC<TestHeaderProps> = ({
         </div>
 
         {/* Right: Tools + Timer + Submit CTA */}
-        <div className="flex items-center space-x-2 sm:space-x-2.5">
+        <div className="flex items-center space-x-1.5 sm:space-x-2.5">
+          {/* Mobile Question Palette Toggle Button (Visible only on mobile < lg) */}
+          {onPaletteClick && (
+            <button
+              type="button"
+              onClick={onPaletteClick}
+              className="lg:hidden inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 text-xs font-bold font-mono transition shadow-2xs shrink-0"
+              title="Open Question Palette Grid"
+            >
+              <LayoutGrid className="w-3.5 h-3.5 text-blue-600" />
+              <span>Palette</span>
+            </button>
+          )}
+
           {/* Question Paper Overview Modal CTA */}
           {onQuestionPaperClick && (
             <button
               type="button"
               onClick={onQuestionPaperClick}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 text-xs font-bold transition shadow-2xs"
+              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 text-xs font-bold transition shadow-2xs"
               title="View Complete Question Paper"
             >
               <FileText className="w-3.5 h-3.5 text-blue-600" />
@@ -136,7 +152,7 @@ export const TestHeader: React.FC<TestHeaderProps> = ({
             <button
               type="button"
               onClick={onInstructionsClick}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-slate-900 border border-slate-200 text-xs font-bold transition shadow-2xs"
+              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-slate-900 border border-slate-200 text-xs font-bold transition shadow-2xs"
               title="Review Examination Instructions"
             >
               <HelpCircle className="w-3.5 h-3.5 text-slate-500" />
@@ -148,7 +164,7 @@ export const TestHeader: React.FC<TestHeaderProps> = ({
           <button
             type="button"
             onClick={toggleFullscreen}
-            className="p-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition border border-slate-200 shadow-2xs"
+            className="hidden sm:inline-flex p-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition border border-slate-200 shadow-2xs"
             title={isFullscreen ? "Exit Fullscreen" : "Enter Distraction-Free Fullscreen CBT Mode"}
           >
             {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -156,13 +172,13 @@ export const TestHeader: React.FC<TestHeaderProps> = ({
 
           {/* Official Countdown Timer Pill */}
           <div
-            className={`flex items-center space-x-2 px-3 py-1.5 rounded-xl border font-mono text-xs sm:text-sm font-bold shadow-2xs transition-colors select-none ${timerStyles}`}
+            className={`flex items-center space-x-1.5 sm:space-x-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl border font-mono text-xs sm:text-sm font-bold shadow-2xs transition-colors select-none shrink-0 ${timerStyles}`}
             aria-live="polite"
             title="Remaining Examination Countdown Timer"
           >
             <Clock className={`w-3.5 h-3.5 ${isDanger ? "text-rose-600" : isWarning ? "text-amber-600" : "text-slate-500"}`} />
             <div className="flex flex-col text-left">
-              <span className="text-[8.5px] font-sans uppercase font-bold text-slate-400 leading-none">Time Left</span>
+              <span className="text-[8px] sm:text-[8.5px] font-sans uppercase font-bold text-slate-400 leading-none hidden xs:block">Time Left</span>
               <span className="tracking-wider text-xs sm:text-sm">{formatTime(remainingSeconds)}</span>
             </div>
           </div>
@@ -172,17 +188,18 @@ export const TestHeader: React.FC<TestHeaderProps> = ({
             type="button"
             onClick={onSubmitClick}
             disabled={isSubmitting}
-            className="flex items-center space-x-1.5 bg-exam-danger hover:bg-rose-700 text-white text-xs sm:text-sm font-black px-3.5 py-1.5 rounded-xl shadow-xs transition transform active:scale-98 disabled:opacity-50"
+            className="flex items-center space-x-1.5 bg-exam-danger hover:bg-rose-700 text-white text-xs sm:text-sm font-black px-2.5 sm:px-3.5 py-1.5 rounded-xl shadow-xs transition transform active:scale-98 disabled:opacity-50 shrink-0"
           >
             <Send className="w-3.5 h-3.5" />
-            <span className="hidden xs:inline">Submit Test</span>
+            <span>Submit</span>
+            <span className="hidden sm:inline"> Test</span>
           </button>
         </div>
       </div>
 
       {/* Section Navigation Tabs Bar (Clean Light SaaS Theme) */}
-      <div className="bg-slate-50/90 border-b border-slate-200 px-4 sm:px-6 lg:px-10">
-        <div className="max-w-[1700px] w-full mx-auto flex overflow-x-auto space-x-2 py-2 text-xs no-scrollbar">
+      <div className="bg-slate-50/90 border-b border-slate-200 px-3 sm:px-6 lg:px-10">
+        <div className="max-w-[1700px] w-full mx-auto flex overflow-x-auto space-x-1.5 sm:space-x-2 py-1.5 sm:py-2 text-xs no-scrollbar">
           {(["REASONING", "GA", "QUANT", "ENGLISH"] as SectionType[]).map((sec, idx) => {
             const isActive = currentSection === sec;
             const answeredCount = getAnsweredCount(sec);
@@ -193,16 +210,17 @@ export const TestHeader: React.FC<TestHeaderProps> = ({
                 key={sec}
                 type="button"
                 onClick={() => changeSection(sec)}
-                className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-bold transition whitespace-nowrap select-none ${
+                className={`flex items-center space-x-1.5 sm:space-x-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-xl font-bold transition whitespace-nowrap select-none shrink-0 ${
                   isActive
                     ? "bg-exam-primary text-white shadow-xs font-black"
                     : "bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                 }`}
               >
-                <span className="text-[11px] text-slate-400 font-mono">Sec {idx + 1}:</span>
-                <span>{SECTION_LABELS[sec]}</span>
+                <span className="text-[10px] sm:text-[11px] text-slate-400 font-mono">Sec {idx + 1}:</span>
+                <span className="hidden sm:inline">{SECTION_LABELS[sec]}</span>
+                <span className="sm:hidden">{sec === "REASONING" ? "Reasoning" : sec === "GA" ? "GA" : sec === "QUANT" ? "Quant" : "English"}</span>
                 <span
-                  className={`px-2 py-0.5 rounded-full text-[10px] font-black font-mono ${
+                  className={`px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] font-black font-mono ${
                     isActive
                       ? "bg-blue-800 text-white"
                       : "bg-slate-100 text-slate-600 border border-slate-200"

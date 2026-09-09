@@ -13,6 +13,7 @@ import { HydratedMockTest } from "@/types";
 import { TestSkeleton } from "@/components/ui/TestSkeleton";
 import { AlertTriangle, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { MobilePaletteDrawer } from "@/components/test/MobilePaletteDrawer";
 
 export default function LiveTestPage() {
   const params = useParams();
@@ -39,6 +40,7 @@ export default function LiveTestPage() {
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [isInstructionsModalOpen, setIsInstructionsModalOpen] = useState(false);
   const [isQuestionPaperModalOpen, setIsQuestionPaperModalOpen] = useState(false);
+  const [isMobilePaletteOpen, setIsMobilePaletteOpen] = useState(false);
 
   const autoSubmittedRef = useRef(false);
 
@@ -168,25 +170,26 @@ export default function LiveTestPage() {
         onSubmitClick={() => setIsSubmitModalOpen(true)}
         onInstructionsClick={() => setIsInstructionsModalOpen(true)}
         onQuestionPaperClick={() => setIsQuestionPaperModalOpen(true)}
+        onPaletteClick={() => setIsMobilePaletteOpen(true)}
       />
 
       {/* Main Examination Workspace: Locked 100vh viewport without page scroll */}
-      <main className="max-w-[1700px] w-full mx-auto px-3 sm:px-5 lg:px-8 py-2.5 flex-1 min-h-0 overflow-hidden">
+      <main className="max-w-[1700px] w-full mx-auto px-2 sm:px-5 lg:px-8 py-1.5 sm:py-2.5 flex-1 min-h-0 overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 h-full items-stretch">
-          {/* Question Display & Options (9 Columns on XL Desktop) */}
-          <div className="lg:col-span-8 xl:col-span-9 h-full min-h-0 flex flex-col">
-            <QuestionCard />
+          {/* Question Display & Options (Full width on mobile, 8-9 columns on desktop) */}
+          <div className="col-span-1 lg:col-span-8 xl:col-span-9 h-full min-h-0 flex flex-col">
+            <QuestionCard onPaletteClick={() => setIsMobilePaletteOpen(true)} />
           </div>
 
-          {/* Question Status Palette & Candidate Console (3 Columns on XL Desktop) */}
-          <div className="lg:col-span-4 xl:col-span-3 h-full min-h-0 flex flex-col">
+          {/* Question Status Palette & Candidate Console (Hidden on mobile, 4-3 columns on desktop) */}
+          <div className="hidden lg:flex lg:col-span-4 xl:col-span-3 h-full min-h-0 flex-col">
             <QuestionPalette />
           </div>
         </div>
       </main>
 
-      {/* CBT Status Bar Footer (Slim 1-line SaaS Theme) */}
-      <footer className="flex-shrink-0 bg-white border-t border-slate-200 py-1.5 px-3 sm:px-5 lg:px-8 text-[11px] text-slate-500 flex flex-wrap items-center justify-between gap-2 max-w-[1700px] mx-auto w-full">
+      {/* CBT Status Bar Footer (Slim 1-line SaaS Theme, hidden on small phones to maximize question viewport) */}
+      <footer className="hidden sm:flex flex-shrink-0 bg-white border-t border-slate-200 py-1.5 px-3 sm:px-5 lg:px-8 text-[11px] text-slate-500 flex-wrap items-center justify-between gap-2 max-w-[1700px] mx-auto w-full">
         <span className="font-bold text-slate-700">
           NBEMS Junior Assistant CBT Examination 2024 · Standardized Simulation Engine
         </span>
@@ -198,6 +201,12 @@ export default function LiveTestPage() {
           <span>Encrypted CBT Session · Server Latency: 14ms</span>
         </span>
       </footer>
+
+      {/* Mobile Question Palette Bottom Sheet Drawer */}
+      <MobilePaletteDrawer
+        isOpen={isMobilePaletteOpen}
+        onClose={() => setIsMobilePaletteOpen(false)}
+      />
 
       {/* Confirmation Modal before Submit */}
       <SubmitModal

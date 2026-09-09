@@ -6,7 +6,11 @@ import { SectionType, QuestionStatus } from "@/types";
 import { useSession } from "next-auth/react";
 import { LayoutGrid } from "lucide-react";
 
-export const QuestionPalette: React.FC = () => {
+interface QuestionPaletteProps {
+  onQuestionSelected?: () => void;
+}
+
+export const QuestionPalette: React.FC<QuestionPaletteProps> = ({ onQuestionSelected }) => {
   const { data: session } = useSession();
   const {
     currentSection,
@@ -159,7 +163,10 @@ export const QuestionPalette: React.FC = () => {
                 <button
                   key={qId}
                   type="button"
-                  onClick={() => jumpToQuestion(currentSection, index)}
+                  onClick={() => {
+                    jumpToQuestion(currentSection, index);
+                    onQuestionSelected?.();
+                  }}
                   aria-label={`Question ${index + 1}, ${status}`}
                   className={getButtonStyles(status, isCurrent)}
                 >
