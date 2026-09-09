@@ -3,50 +3,76 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { connectToDatabase } from "./mongodb";
 import { UserModel } from "@/models/User";
+import { createLoginSession, getClientIp, getApproxLocation } from "./session-tracker";
 
 let defaultUsersEnsured = false;
 
-// Auto-seed default candidate accounts if User collection is empty
+// Auto-seed default candidate accounts if missing in User collection
 export async function ensureDefaultUsers() {
   if (defaultUsersEnsured) return;
   await connectToDatabase();
-  const userCount = await UserModel.countDocuments();
 
-  if (userCount === 0) {
-    const salt = await bcrypt.genSalt(10);
-    const defaultPasswordHash = await bcrypt.hash("nbe2026", salt);
-    const adminPasswordHash = await bcrypt.hash("admin123", salt);
+  const salt = await bcrypt.genSalt(10);
+  const defaultPasswordHash = await bcrypt.hash("nbe2026", salt);
+  const adminPasswordHash = await bcrypt.hash("admin123", salt);
 
-    const defaultUsers = [
-      {
-        username: "admin",
-        passwordHash: adminPasswordHash,
-        name: "Exam Administrator",
-        role: "admin",
-      },
-      {
-        username: "sunil",
-        passwordHash: defaultPasswordHash,
-        name: "Sunil Baghel",
-        role: "admin",
-      },
-      {
-        username: "candidate1",
-        passwordHash: defaultPasswordHash,
-        name: "Candidate 1",
-        role: "student",
-      },
-      {
-        username: "candidate2",
-        passwordHash: defaultPasswordHash,
-        name: "Candidate 2",
-        role: "student",
-      },
-    ];
+  const defaultUsers: {
+    username: string;
+    passwordHash: string;
+    name: string;
+    role: "admin" | "student";
+  }[] = [
+    {
+      username: "admin",
+      passwordHash: adminPasswordHash,
+      name: "Exam Administrator",
+      role: "admin",
+    },
+    {
+      username: "sunil",
+      passwordHash: defaultPasswordHash,
+      name: "Sunil Baghel",
+      role: "admin",
+    },
+    {
+      username: "karishma",
+      passwordHash: defaultPasswordHash,
+      name: "Karishma",
+      role: "student",
+    },
+    {
+      username: "prachii",
+      passwordHash: defaultPasswordHash,
+      name: "Prachii",
+      role: "student",
+    },
+    {
+      username: "demobot",
+      passwordHash: defaultPasswordHash,
+      name: "Demo Institute Bot",
+      role: "student",
+    },
+    {
+      username: "candidate1",
+      passwordHash: defaultPasswordHash,
+      name: "Candidate 1",
+      role: "student",
+    },
+    {
+      username: "candidate2",
+      passwordHash: defaultPasswordHash,
+      name: "Candidate 2",
+      role: "student",
+    },
+  ];
 
-    await UserModel.insertMany(defaultUsers);
-    console.log("Initialized default candidate accounts in MongoDB Atlas.");
+  for (const u of defaultUsers) {
+    const exists = await UserModel.findOne({ username: u.username }).lean();
+    if (!exists) {
+      await UserModel.create(u);
+    }
   }
+
   defaultUsersEnsured = true;
 }
 
@@ -67,7 +93,7 @@ export const authOptions: NextAuthOptions = {
         username: { label: "Username", type: "text", placeholder: "e.g. sunil" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         if (!credentials?.username || !credentials?.password) {
           throw new Error("Please enter both username and password");
         }
@@ -87,11 +113,49 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid username or password");
         }
 
+        // Extract IP, userAgent, and approxLocation from request headers
+        let ipAddress: string | null = null;
+        let userAgent: string | null = null;
+        let approxLocation: string | null = null;
+
+        try {
+          // Dynamic import of next/headers for Next.js App Router
+          const { headers } = await import("next/headers");
+          const headerList = headers();
+          ipAddress = getClientIp(headerList);
+          userAgent = headerList.get("user-agent");
+          approxLocation = getApproxLocation(headerList, ipAddress);
+        } catch {
+          // Fallback to req headers if next/headers is not accessible in context
+          if (req?.headers) {
+            ipAddress = getClientIp(req.headers);
+            const rawUa = (req.headers as any)["user-agent"] || (req.headers as any).get?.("user-agent");
+            userAgent = typeof rawUa === "string" ? rawUa : null;
+            approxLocation = getApproxLocation(req.headers, ipAddress);
+          }
+        }
+
+        // Create persistent LoginSession in MongoDB Atlas
+        let sessionId = "";
+        try {
+          sessionId = await createLoginSession({
+            userId: user._id,
+            username: user.username,
+            ipAddress,
+            userAgent,
+            approxLocation,
+            initialPage: "/dashboard",
+          });
+        } catch (err) {
+          console.error("Failed to create login session record:", err);
+        }
+
         return {
           id: user._id.toString(),
           username: user.username,
           name: user.name,
           role: user.role,
+          sessionId,
         };
       },
     }),
@@ -102,6 +166,7 @@ export const authOptions: NextAuthOptions = {
         token.id = user.id;
         token.username = (user as unknown as { username: string }).username;
         token.role = (user as unknown as { role: string }).role;
+        token.sessionId = (user as unknown as { sessionId: string }).sessionId;
       }
       return token;
     },
@@ -110,6 +175,7 @@ export const authOptions: NextAuthOptions = {
         (session.user as unknown as { id: string }).id = token.id as string;
         (session.user as unknown as { username: string }).username = token.username as string;
         (session.user as unknown as { role: string }).role = token.role as string;
+        (session.user as unknown as { sessionId: string }).sessionId = token.sessionId as string;
       }
       return session;
     },

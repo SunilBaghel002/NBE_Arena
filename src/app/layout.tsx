@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AuthProvider } from "@/components/providers/AuthProvider";
+import { SessionHeartbeat } from "@/components/SessionHeartbeat";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -52,7 +53,10 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body className="min-h-screen bg-exam-bg text-exam-text antialiased selection:bg-exam-primary/20">
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <SessionHeartbeat />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

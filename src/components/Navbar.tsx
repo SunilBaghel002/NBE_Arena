@@ -77,6 +77,12 @@ export const Navbar: React.FC = () => {
             icon: Database,
             active: pathname === "/admin",
           },
+          {
+            label: "Activity Audit",
+            href: "/admin/activity",
+            icon: Sparkles,
+            active: pathname === "/admin/activity",
+          },
         ]
       : []),
   ];
@@ -202,14 +208,25 @@ export const Navbar: React.FC = () => {
                       </Link>
 
                       {userRole === "admin" && (
-                        <Link
-                          href="/admin"
-                          onClick={() => setDropdownOpen(false)}
-                          className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-slate-900 hover:bg-slate-50 transition"
-                        >
-                          <Database className="w-4 h-4 text-amber-600" />
-                          <span>Admin Control Center</span>
-                        </Link>
+                        <>
+                          <Link
+                            href="/admin"
+                            onClick={() => setDropdownOpen(false)}
+                            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-slate-900 hover:bg-slate-50 transition"
+                          >
+                            <Database className="w-4 h-4 text-amber-600" />
+                            <span>Admin Control Center</span>
+                          </Link>
+
+                          <Link
+                            href="/admin/activity"
+                            onClick={() => setDropdownOpen(false)}
+                            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-slate-900 hover:bg-slate-50 transition"
+                          >
+                            <Sparkles className="w-4 h-4 text-emerald-600" />
+                            <span>Candidate Activity Audit</span>
+                          </Link>
+                        </>
                       )}
 
                       <Link
@@ -226,8 +243,18 @@ export const Navbar: React.FC = () => {
                     <div className="pt-1.5 mt-1 border-t border-slate-100">
                       <button
                         type="button"
-                        onClick={() => {
+                        onClick={async () => {
                           setDropdownOpen(false);
+                          try {
+                            const sid = (session?.user as unknown as { sessionId?: string })?.sessionId;
+                            await fetch("/api/session/logout", {
+                              method: "POST",
+                              headers: { "Content-Type": "application/json" },
+                              body: JSON.stringify({ sessionId: sid }),
+                            });
+                          } catch {
+                            // ignore network errors
+                          }
                           signOut({ callbackUrl: "/login" });
                         }}
                         className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 transition"

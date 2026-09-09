@@ -19,7 +19,7 @@
 | **5** | Public Landing Page | High-converting marketing landing at `/` with auto-redirect for logged-in users | `[x] Complete & Verified` |
 | **6** | Advanced Dashboard Analytics | Comprehensive 11-module analytics overhaul with Recharts & empty states | `[x] Complete & Verified` |
 | **7** | UI/Design System Upgrade | Cohesive Tailwind tokens, typography scale, custom calendar suite, elevated cards | `[x] Complete & Verified` |
-| **8** | Login & Activity Tracking | `LoginSession` model, 60s client heartbeat, admin activity audit feed | `[ ] Pending` |
+| **8** | Login & Activity Tracking | `LoginSession` model, 60s client heartbeat, admin activity audit feed | `[x] Complete & Verified` |
 
 ---
 
@@ -317,26 +317,26 @@
 ---
 
 ## STAGE 8 — User Login & Activity Tracking + Admin Visibility
-**Status:** `[ ] Pending`
+**Status:** `[x] Complete & Verified`
 
 > **Goal:** Track exact usage across the 5 controlled users (sisters, friend, founder, test user, demo bot) with a `LoginSession` model, 60-second client heartbeat, and an administrative activity dashboard at `/admin/activity`.
 
 ### Tasks
-- [ ] Create Mongoose `LoginSession` model in `src/models/LoginSession.ts`
-- [ ] Wire NextAuth signIn event to create `LoginSession` (recording userId, username, ipAddress, userAgent, device, approxLocation)
-- [ ] Implement client heartbeat component `src/components/SessionHeartbeat.tsx` (60s interval to `/api/session/ping`)
-- [ ] Build API endpoints:
-  - [ ] `POST /api/session/ping`: Debounced heartbeat update to `lastActivityAt` and `pagesVisited`
-  - [ ] `POST /api/session/logout`: Explicit logout closer calculating `sessionDurationSeconds`
-  - [ ] `GET /api/admin/activity`: Admin-only session statistics and timeline
-- [ ] Build Admin Activity Page `src/app/admin/activity/page.tsx`:
-  - [ ] Overall stats: Logins today, this week, this month, active users now
-  - [ ] Per-user summary table: Username, sessions, time spent, last login, device, IP, location
-  - [ ] Chronological session timeline: Latest 50 sessions
-  - [ ] User and date range filters
-  - [ ] Export CSV button
-- [ ] Add "Active Users Right Now" card on `/admin/page.tsx` with quick link to `/admin/activity`
-- [ ] Enforce RBAC security: Non-admin users attempting to access `/admin/activity` receive HTTP 403 Forbidden
+- [x] Create Mongoose `LoginSession` model in `src/models/LoginSession.ts`
+- [x] Wire NextAuth signIn event to create `LoginSession` (recording userId, username, ipAddress, userAgent, device, approxLocation)
+- [x] Implement client heartbeat component `src/components/SessionHeartbeat.tsx` (60s interval to `/api/session/ping`)
+- [x] Build API endpoints:
+  - [x] `POST /api/session/ping`: Debounced heartbeat update to `lastActivityAt` and `pagesVisited`
+  - [x] `POST /api/session/logout`: Explicit logout closer calculating `sessionDurationSeconds`
+  - [x] `GET /api/admin/activity`: Admin-only session statistics and timeline
+- [x] Build Admin Activity Page `src/app/admin/activity/page.tsx`:
+  - [x] Overall stats: Logins today, this week, this month, active users now
+  - [x] Per-user summary table: Username, sessions, time spent, last login, device, IP, location
+  - [x] Chronological session timeline: Latest 50 sessions
+  - [x] User and date range filters
+  - [x] Export CSV button
+- [x] Add "Active Users Right Now" card on `/admin/page.tsx` with quick link to `/admin/activity`
+- [x] Enforce RBAC security: Non-admin users attempting to access `/admin/activity` receive HTTP 403 Forbidden
 
 ### Files Touched
 - `src/models/LoginSession.ts`
@@ -353,12 +353,12 @@
 - `src/components/admin/activity/SessionTimeline.tsx`
 
 ### Exit Criteria
-- [ ] Every login creates a LoginSession
-- [ ] Explicit logout closes the session correctly
-- [ ] Inactivity closes session within 30 minutes
-- [ ] Admin can see all 5 users' sessions, durations, devices, IPs, approx location
-- [ ] Non-admin users are blocked from `/admin/activity`
-- [ ] "Active Now" count updates in near real-time
+- [x] Every login creates a LoginSession
+- [x] Explicit logout closes the session correctly
+- [x] Inactivity closes session within 30 minutes
+- [x] Admin can see all 5 users' sessions, durations, devices, IPs, approx location
+- [x] Non-admin users are blocked from `/admin/activity`
+- [x] "Active Now" count updates in near real-time
 
 ### Demo Script
 1. Log in as candidate user in Chrome. Verify `LoginSession` document is created in MongoDB Atlas.
